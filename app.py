@@ -474,6 +474,16 @@ def api_data():
         except Exception as exc:
             homework_error = str(exc)
 
+            # Une erreur d'authentification ED ne doit pas être renvoyée en HTTP 200 :
+            # le frontend doit pouvoir détecter le refus et redemander les identifiants.
+            if "Échec de connexion ED (505)" in homework_error:
+                return jsonify({
+                    "success": False,
+                    "error": homework_error,
+                    "error_type": "ecoledirecte_authentication",
+                    "generated_at": datetime.now().isoformat(),
+                }), 401
+
     merged_hw = merge_homeworks(api_homeworks, local_hw)
     
     # Mettre à jour l'horodatage si l'appel API a réussi
