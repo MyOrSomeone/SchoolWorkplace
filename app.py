@@ -43,19 +43,30 @@ _ed_services = {}
 
 
 def get_req_credentials():
-    """Extraction des identifiants depuis les en-têtes, le JSON ou les paramètres."""
-    username = request.headers.get("X-ED-Username") or request.headers.get("X-Username")
-    password = request.headers.get("X-ED-Password") or request.headers.get("X-Password")
+    """Extraction des identifiants.
 
-    if not username or not password:
-        payload = request.get_json(silent=True) if request.is_json else {}
-        if isinstance(payload, dict):
-            username = username or payload.get("username") or payload.get("identifiant")
-            password = password or payload.get("password") or payload.get("motdepasse")
+    Pour les requêtes JSON, le body est prioritaire aux headers afin que le
+    mot de passe soit transmis sans perte de caractères Unicode.
+    """
+    username = None
+    password = None
+
+    payload = request.get_json(silent=True) if request.is_json else None
+    if isinstance(payload, dict):
+        username = payload.get("username") or payload.get("identifiant")
+        password = payload.get("password") or payload.get("motdepasse")
+
+    username = username or request.headers.get("X-ED-Username") or request.headers.get("X-Username")
+    password = password or request.headers.get("X-ED-Password") or request.headers.get("X-Password")
 
     if not username or not password:
         username = username or request.args.get("username")
         password = password or request.args.get("password")
+
+    if username is not None:
+        username = str(username).strip()
+    if password is not None:
+        password = str(password)
 
     return username, password
 
@@ -73,12 +84,8 @@ def get_ed_service(username=None, password=None, force_login=False):
     with _ed_lock:
         service = _ed_services.get(username)
 
-        # Important : un même identifiant peut être testé avec plusieurs mots
-        # de passe pendant une session. L'ancien code réutilisait alors le
-        # service créé avec l'ancien mot de passe, même si le frontend venait
-        # d'envoyer le bon. On recrée donc le service dès que le mot de passe
-        # change (ou lorsqu'une reconnexion forcée est demandée).
-        password_changed = service is not None and service.password != password
+        # Ne jamais réutiliser un service construit avec un autre mot de passe.
+        password_changed = service is not None and getattr(service, "password", None) != password
 
         if service is None or force_login or password_changed:
             service = EcoleDirecteService(username, password)
@@ -450,7 +457,7 @@ def home():
     return "Erreur : fichier index.html introuvable.", 404
 
 
-@app.route("/api/data", methods=["GET"])
+@app.route("/api/data", methods=["GET", "POST"])
 def api_data():
     username, password = get_req_credentials()
     
