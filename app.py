@@ -72,10 +72,19 @@ def get_ed_service(username=None, password=None, force_login=False):
 
     with _ed_lock:
         service = _ed_services.get(username)
-        if service is None or force_login:
+
+        # Important : un même identifiant peut être testé avec plusieurs mots
+        # de passe pendant une session. L'ancien code réutilisait alors le
+        # service créé avec l'ancien mot de passe, même si le frontend venait
+        # d'envoyer le bon. On recrée donc le service dès que le mot de passe
+        # change (ou lorsqu'une reconnexion forcée est demandée).
+        password_changed = service is not None and service.password != password
+
+        if service is None or force_login or password_changed:
             service = EcoleDirecteService(username, password)
             service.login()
             _ed_services[username] = service
+
         return service
 
 
