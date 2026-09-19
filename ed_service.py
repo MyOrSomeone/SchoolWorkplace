@@ -61,9 +61,18 @@ class EcoleDirecteService:
         return gtk
 
     def login(self, ignore_saved_tokens=False):
+        # L'ordre des tentatives est volontairement explicite : cela permet
+        # de distinguer un problème de cn/cv d'un vrai refus des identifiants.
+        attempts = []
+
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT})
-        self._fetch_gtk()
+        gtk = self._fetch_gtk()
+        print(
+            f"[ED AUTH] GTK={'OK' if gtk else 'MISSING'} | "
+            f"api_version={API_VERSION} | password_received={'YES' if self.password else 'NO'} | "
+            f"password_length={len(self.password or '')}"
+        )
 
         payload = {
             "identifiant": self.username,
@@ -74,10 +83,16 @@ class EcoleDirecteService:
             "fa": [],
         }
 
-        if not ignore_saved_tokens and self.cn and self.cv:
+        used_saved_tokens = bool(not ignore_saved_tokens and self.cn and self.cv)
+        if used_saved_tokens:
             payload["cn"] = self.cn
             payload["cv"] = self.cv
             payload["fa"] = [{"cn": self.cn, "cv": self.cv}]
+
+        print(
+            f"[ED AUTH] login attempt | saved_tokens={'YES' if used_saved_tokens else 'NO'} | "
+            f"cn_len={len(str(self.cn)) if self.cn else 0} | cv_len={len(str(self.cv)) if self.cv else 0}"
+        )
 
         url = f"{BASE_URL}/login.awp?v={API_VERSION}"
         response = self.session.post(
@@ -86,8 +101,17 @@ class EcoleDirecteService:
             timeout=30,
         )
         data = response.json()
+        code = data.get("code")
+        message = data.get("message", "")
+        attempts.append((code, message, used_saved_tokens))
+        print(
+            f"[ED AUTH] response | code={code} | message={message!r} | "
+            f"saved_tokens={'YES' if used_saved_tokens else 'NO'} | "
+            f"response_cookies={list(response.cookies.keys())}"
+        )
 
-        if data.get("code") == 505 and (self.cn or self.cv):
+        if code == 505 and used_saved_tokens:
+            print("[ED AUTH] 505 avec tokens sauvegardés -> suppression et retry SANS tokens")
             self.cn = self.cv = None
             try:
                 os.remove(self.token_file)
@@ -95,9 +119,14 @@ class EcoleDirecteService:
                 pass
             return self.login(ignore_saved_tokens=True)
 
-        if data.get("code") == 250:
+        if code == 250:
             temp_token = data.get("token") or response.headers.get("x-token")
             two_fa = response.headers.get("2fa-token") or response.headers.get("2FA-Token")
+
+            print(
+                f"[ED AUTH] 2FA | temp_token={'YES' if temp_token else 'NO'} | "
+                f"two_fa_token={'YES' if two_fa else 'NO'}"
+            )
 
             self.session.headers.pop("X-GTK", None)
             if temp_token:
@@ -106,6 +135,7 @@ class EcoleDirecteService:
                 self.session.headers.update({"2fa-Token": two_fa})
 
             self.cn, self.cv = self._solve_qcm()
+            print("[ED AUTH] QCM OK | new cn/cv received=YES")
             self._save_tokens()
 
             self._fetch_gtk()
@@ -119,10 +149,24 @@ class EcoleDirecteService:
                 timeout=30,
             )
             data = response.json()
+            code = data.get("code")
+            message = data.get("message", "")
+            attempts.append((code, message, False))
+            print(
+                f"[ED AUTH] post-QCM response | code={code} | message={message!r} | "
+                f"cn/cv=YES"
+            )
 
-        if data.get("code") != 200:
+        if code != 200:
+            attempt_text = "; ".join(
+                f"#{i + 1} code={a_code} message={a_msg!r} tokens={'YES' if a_tokens else 'NO'}"
+                for i, (a_code, a_msg, a_tokens) in enumerate(attempts)
+            )
             raise RuntimeError(
-                f"Échec de connexion ED ({data.get('code')}) : {data.get('message', '')}"
+                f"Échec de connexion ED ({code}) : {message} "
+                f"[diagnostic: {attempt_text}; api_version={API_VERSION}; "
+                f"gtk={'present' if self.session.headers.get('X-GTK') else 'absent'}; "
+                f"password_length={len(self.password or '')}]"
             )
 
         self.token = data.get("token") or response.headers.get("x-token") or response.headers.get("X-Token")
