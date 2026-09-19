@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import hashlib
 import re
 import threading
 from datetime import datetime, timedelta
@@ -33,6 +34,12 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 
 app = Flask(__name__, template_folder=str(TEMPLATES_DIR) if TEMPLATES_DIR.exists() else None)
 CORS(app)  # Autorise les appels cross-origin (ex: index.html local -> Render)
+
+def password_fingerprint(password):
+    if password is None:
+        return "NONE"
+    return hashlib.sha256(str(password).encode("utf-8")).hexdigest()[:16]
+
 
 # ---------------------------------------------------------------------------
 # GESTION DES IDENTIFIANTS VIA LES REQUÊTES HTTP
@@ -68,6 +75,7 @@ def get_req_credentials():
     if password is not None:
         password = str(password)
 
+    print(f"[ED TRANSPORT] credentials | username_present={bool(username)} | password_length={len(password or '')} | password_sha256_prefix={password_fingerprint(password)}")
     return username, password
 
 
