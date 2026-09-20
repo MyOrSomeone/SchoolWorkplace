@@ -37,14 +37,21 @@ class EcoleDirecteService:
     # ------------------------------------------------------------------
 
     def _load_tokens(self):
-        # Reprend exactement le comportement historique (tokens.json),
-        # avec un secours optionnel par variables d'environnement Render.
+        # Sur Render, les tokens viennent des variables d'environnement.
+        env_cn = os.getenv("ECOLEDIRECTE_CN")
+        env_cv = os.getenv("ECOLEDIRECTE_CV")
+    
+        if env_cn and env_cv:
+            self.cn = env_cn
+            self.cv = env_cv
+            return
+    
+        # Sinon, fonctionnement local avec tokens.json.
         try:
             with open(self.token_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
             self.cn = data.get("cn")
             self.cv = data.get("cv")
-            return
         except (FileNotFoundError, json.JSONDecodeError, OSError):
             pass
 
@@ -116,12 +123,14 @@ class EcoleDirecteService:
         data = response.json()
 
         if data.get("code") == 505 and (self.cn or self.cv):
-            self.cn = self.cv = None
-            try:
-                os.remove(self.token_file)
-            except OSError:
-                pass
-            return self.login(ignore_saved_tokens=True)
+            # Ne pas supprimer les tokens fournis par Render.
+            if not (os.getenv("ECOLEDIRECTE_CN") and os.getenv("ECOLEDIRECTE_CV")):
+                self.cn = self.cv = None
+                try:
+                    os.remove(self.token_file)
+                except OSError:
+                    pass
+                return self.login(ignore_saved_tokens=True)
 
         if data.get("code") == 250:
             temp_token = data.get("token") or response.headers.get("x-token")
