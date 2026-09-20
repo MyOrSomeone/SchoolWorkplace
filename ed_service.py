@@ -67,7 +67,8 @@ class EcoleDirecteService:
         print(
             f"[ED][TOKENS] Source={source} | "
             f"CN présent={bool(self.cn)} (longueur={len(self.cn) if self.cn else 0}) | "
-            f"CV présent={bool(self.cv)} (longueur={len(self.cv) if self.cv else 0})"
+            f"CV présent={bool(self.cv)} (longueur={len(self.cv) if self.cv else 0})",
+            flush=True
         )
 
     def _save_tokens(self):
