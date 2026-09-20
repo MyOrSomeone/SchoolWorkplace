@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import time
 from datetime import date, timedelta
 
 import requests
@@ -18,11 +19,112 @@ QCM_ANSWERS = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Stockage des tokens cn/cv
+# ---------------------------------------------------------------------------
+# IMPORTANT : sur Render (offre gratuite, sans disque persistant), le système
+# de fichiers est réinitialisé à chaque mise en veille/redémarrage du service.
+# Un FileTokenStore seul ne survit donc PAS aux redémarrages sur Render.
+# EcoleDirecteService accepte n'importe quel objet exposant load()/save()/
+# clear() : app.py peut donc brancher un stockage réellement persistant
+# (Firestore, voir FirestoreTokenStore ci-dessous) sans toucher à la logique
+# de connexion.
+
+class FileTokenStore:
+    """Stockage local (tokens.json). Persiste en local, mais PAS sur Render
+    sans disque persistant payant."""
+
+    def __init__(self, path="tokens.json"):
+        self.path = path
+
+    def load(self):
+        try:
+            with open(self.path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return data.get("cn"), data.get("cv")
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            return None, None
+
+    def save(self, cn, cv):
+        if cn and cv:
+            with open(self.path, "w", encoding="utf-8") as f:
+                json.dump({"cn": cn, "cv": cv}, f)
+
+    def clear(self):
+        try:
+            os.remove(self.path)
+        except OSError:
+            pass
+
+
+class FirestoreTokenStore:
+    """Stockage dans Firestore : survit aux redémarrages/mises en veille
+    Render. Construit via build_default_token_store()."""
+
+    def __init__(self, doc_ref):
+        self._doc_ref = doc_ref
+
+    def load(self):
+        snap = self._doc_ref.get()
+        if not snap.exists:
+            return None, None
+        data = snap.to_dict() or {}
+        return data.get("cn"), data.get("cv")
+
+    def save(self, cn, cv):
+        if cn and cv:
+            self._doc_ref.set({"cn": cn, "cv": cv, "updated_at": time.time()})
+
+    def clear(self):
+        try:
+            self._doc_ref.delete()
+        except Exception:
+            pass
+
+
+def build_default_token_store(username, token_file="tokens.json"):
+    """Utilise Firestore si un compte de service Firebase est configuré
+    (FIREBASE_SERVICE_ACCOUNT_JSON ou FIREBASE_SERVICE_ACCOUNT_FILE), sinon
+    retombe sur un fichier local (comportement historique)."""
+    try:
+        store = _build_firestore_store(username)
+        if store is not None:
+            return store
+    except Exception as exc:
+        print(f"[ED][TOKENS] Firestore indisponible, retour au fichier local : {exc}")
+    return FileTokenStore(token_file)
+
+
+def _build_firestore_store(username):
+    service_account_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
+    service_account_file = os.getenv("FIREBASE_SERVICE_ACCOUNT_FILE")
+    if not service_account_json and not service_account_file:
+        return None
+
+    import firebase_admin
+    from firebase_admin import credentials, firestore
+
+    try:
+        firebase_admin.get_app()
+    except ValueError:
+        if service_account_json:
+            cred = credentials.Certificate(json.loads(service_account_json))
+        else:
+            cred = credentials.Certificate(service_account_file)
+        firebase_admin.initialize_app(cred)
+
+    client = firestore.client()
+    doc_id = "".join(ch for ch in str(username) if ch.isalnum()) or "default"
+    doc_ref = client.collection("sessions").document(f"ecoledirecte_{doc_id}")
+    return FirestoreTokenStore(doc_ref)
+
+
 class EcoleDirecteService:
-    def __init__(self, username, password, token_file="tokens.json"):
+    def __init__(self, username, password, token_file="tokens.json", token_store=None):
         self.username = username
         self.password = password
         self.token_file = token_file
+        self.token_store = token_store or FileTokenStore(token_file)
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT})
         self.token = None
@@ -30,6 +132,10 @@ class EcoleDirecteService:
         self.cv = None
         self.last_login_data = None
         self.student_id = None
+        # Secours de dernier recours (valeurs figées au moment du déploiement,
+        # utiles seulement tant qu'ÉcoleDirecte ne les a pas invalidées).
+        self._env_cn = os.getenv("ECOLEDIRECTE_CN") or os.getenv("ED_CN") or None
+        self._env_cv = os.getenv("ECOLEDIRECTE_CV") or os.getenv("ED_CV") or None
         self._load_tokens()
 
     # ------------------------------------------------------------------
@@ -37,44 +143,18 @@ class EcoleDirecteService:
     # ------------------------------------------------------------------
 
     def _load_tokens(self):
-        """
-        Charge les tokens cn/cv depuis tokens.json ou depuis les variables
-        d'environnement Render en nettoyant systématiquement les caractères parasites (\r, \n, espaces).
-        """
-        loaded_from_file = False
-        try:
-            with open(self.token_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            cn = data.get("cn")
-            cv = data.get("cv")
-            if cn and cv:
-                self.cn = str(cn).strip()
-                self.cv = str(cv).strip()
-                loaded_from_file = True
-        except (FileNotFoundError, json.JSONDecodeError, OSError):
-            pass
-    
-        # Si aucun token valide n'a été trouvé dans le fichier local, on lit l'environnement Render
-        if not (self.cn and self.cv):
-            cn_env = os.getenv("ECOLEDIRECTE_CN") or os.getenv("ED_CN")
-            cv_env = os.getenv("ECOLEDIRECTE_CV") or os.getenv("ED_CV")
-            if cn_env:
-                self.cn = str(cn_env).strip()
-            if cv_env:
-                self.cv = str(cv_env).strip()
-    
-        source = "tokens.json" if loaded_from_file else ("variables Render" if (self.cn and self.cv) else "aucune")
-        print(
-            f"[ED][TOKENS] Source={source} | "
-            f"CN présent={bool(self.cn)} (longueur={len(self.cn) if self.cn else 0}) | "
-            f"CV présent={bool(self.cv)} (longueur={len(self.cv) if self.cv else 0})",
-            flush=True
-        )
+        cn, cv = self.token_store.load()
+        if cn and cv:
+            self.cn, self.cv = cn, cv
+            return
+        self.cn, self.cv = self._env_cn, self._env_cv
 
     def _save_tokens(self):
         if self.cn and self.cv:
-            with open(self.token_file, "w", encoding="utf-8") as f:
-                json.dump({"cn": self.cn, "cv": self.cv}, f)
+            try:
+                self.token_store.save(self.cn, self.cv)
+            except Exception as exc:
+                print(f"[ED][TOKENS] échec de sauvegarde : {exc}")
 
     def _fetch_gtk(self):
         response = self.session.get(
@@ -134,14 +214,12 @@ class EcoleDirecteService:
         data = response.json()
 
         if data.get("code") == 505 and (self.cn or self.cv):
-            # Ne pas supprimer les tokens fournis par Render.
-            if not (os.getenv("ECOLEDIRECTE_CN") and os.getenv("ECOLEDIRECTE_CV")):
-                self.cn = self.cv = None
-                try:
-                    os.remove(self.token_file)
-                except OSError:
-                    pass
-                return self.login(ignore_saved_tokens=True)
+            self.cn = self.cv = None
+            try:
+                self.token_store.clear()
+            except Exception:
+                pass
+            return self.login(ignore_saved_tokens=True)
 
         if data.get("code") == 250:
             temp_token = data.get("token") or response.headers.get("x-token")

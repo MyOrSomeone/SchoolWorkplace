@@ -3,6 +3,7 @@ import json
 import os
 import re
 import threading
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -17,7 +18,7 @@ except ImportError:
 from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 
-from ed_service import EcoleDirecteService
+from ed_service import EcoleDirecteService, build_default_token_store
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -43,6 +44,53 @@ CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=False)
 
 _ed_lock = threading.RLock()
 _ed_services = {}
+
+# ---------------------------------------------------------------------------
+# Anti-rafale : si ÉcoleDirecte refuse plusieurs connexions d'affilée pour un
+# même compte, on arrête de retenter pendant un moment au lieu de renvoyer
+# une nouvelle requête à chaque appel entrant. Marteler /login.awp pendant
+# qu'un blocage de sécurité est actif ne fait que l'aggraver/le prolonger.
+# ---------------------------------------------------------------------------
+
+LOGIN_COOLDOWN_SECONDS = 180
+LOGIN_FAILURE_THRESHOLD = 2
+
+_login_failures = {}  # username -> {"count": int, "last_ts": float, "message": str}
+
+
+class EcoleDirecteCooldownError(RuntimeError):
+    """Levée quand on refuse volontairement de retenter une connexion ED
+    pour ne pas aggraver un blocage de sécurité côté ÉcoleDirecte."""
+
+
+def _record_login_failure(username, message):
+    with _ed_lock:
+        entry = _login_failures.get(username, {"count": 0, "last_ts": 0.0, "message": ""})
+        entry["count"] += 1
+        entry["last_ts"] = time.time()
+        entry["message"] = message
+        _login_failures[username] = entry
+
+
+def _record_login_success(username):
+    with _ed_lock:
+        _login_failures.pop(username, None)
+
+
+def _check_login_cooldown(username):
+    with _ed_lock:
+        entry = _login_failures.get(username)
+    if not entry:
+        return
+    elapsed = time.time() - entry["last_ts"]
+    if entry["count"] >= LOGIN_FAILURE_THRESHOLD and elapsed < LOGIN_COOLDOWN_SECONDS:
+        remaining = int(LOGIN_COOLDOWN_SECONDS - elapsed)
+        raise EcoleDirecteCooldownError(
+            f"ÉcoleDirecte a refusé {entry['count']} connexions d'affilée "
+            f"({entry['message']}). Pour éviter d'aggraver un éventuel "
+            f"blocage de sécurité côté ÉcoleDirecte, nouvel essai dans "
+            f"{remaining}s."
+        )
 
 
 def get_req_credentials():
@@ -113,16 +161,30 @@ def get_ed_service(username=None, password=None, force_login=False):
         entry = _ed_services.get(key)
         service = entry[0] if entry else None
         old_signature = entry[1] if entry else None
+        needs_login = service is None or old_signature != signature or force_login
 
-        if service is None or old_signature != signature:
-            service = EcoleDirecteService(username, password, token_file=_token_file_for_user(username))
-            service.login()
-            _ed_services[key] = (service, signature)
-        elif force_login:
-            service.login()
-            _ed_services[key] = (service, signature)
-
+    if not needs_login:
         return service
+
+    # On ne retente une connexion ÉcoleDirecte que si le coupe-circuit
+    # anti-rafale l'autorise (voir _check_login_cooldown ci-dessus).
+    _check_login_cooldown(key)
+
+    if service is None or old_signature != signature:
+        token_store = build_default_token_store(username, _token_file_for_user(username))
+        service = EcoleDirecteService(username, password, token_store=token_store)
+
+    try:
+        service.login()
+    except Exception as exc:
+        _record_login_failure(key, str(exc))
+        raise
+
+    _record_login_success(key)
+    with _ed_lock:
+        _ed_services[key] = (service, signature)
+
+    return service
 
 
 def ed_call(method_name, *args, **kwargs):
@@ -1415,6 +1477,13 @@ def api_data():
         })
     except Exception as exc:
         message = str(exc)
+        if isinstance(exc, EcoleDirecteCooldownError):
+            return jsonify({
+                "success": False,
+                "error_type": "ecoledirecte_cooldown",
+                "error": message,
+                "generated_at": datetime.now().isoformat(),
+            }), 429
         auth_like = any(token in message for token in (
             "(505)", "code=505", "Mot de passe invalide",
             "Identifiant et/ou mot de passe invalide", "Identifiants ÉcoleDirecte"
