@@ -37,28 +37,38 @@ class EcoleDirecteService:
     # ------------------------------------------------------------------
 
     def _load_tokens(self):
-        # Sur Render, les tokens viennent des variables d'environnement.
-        env_cn = os.getenv("ECOLEDIRECTE_CN")
-        env_cv = os.getenv("ECOLEDIRECTE_CV")
-    
-        if env_cn and env_cv:
-            self.cn = env_cn
-            self.cv = env_cv
-            return
-    
-        # Sinon, fonctionnement local avec tokens.json.
+        """
+        Charge les tokens cn/cv depuis tokens.json ou depuis les variables
+        d'environnement Render en nettoyant systématiquement les caractères parasites (\r, \n, espaces).
+        """
+        loaded_from_file = False
         try:
             with open(self.token_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            self.cn = data.get("cn")
-            self.cv = data.get("cv")
+            cn = data.get("cn")
+            cv = data.get("cv")
+            if cn and cv:
+                self.cn = str(cn).strip()
+                self.cv = str(cv).strip()
+                loaded_from_file = True
         except (FileNotFoundError, json.JSONDecodeError, OSError):
             pass
-
-        # Optionnel : permet à Render de démarrer avec les mêmes cn/cv
-        # qu'une session fonctionnelle sans les mettre dans GitHub.
-        self.cn = os.getenv("ECOLEDIRECTE_CN") or os.getenv("ED_CN") or None
-        self.cv = os.getenv("ECOLEDIRECTE_CV") or os.getenv("ED_CV") or None
+    
+        # Si aucun token valide n'a été trouvé dans le fichier local, on lit l'environnement Render
+        if not (self.cn and self.cv):
+            cn_env = os.getenv("ECOLEDIRECTE_CN") or os.getenv("ED_CN")
+            cv_env = os.getenv("ECOLEDIRECTE_CV") or os.getenv("ED_CV")
+            if cn_env:
+                self.cn = str(cn_env).strip()
+            if cv_env:
+                self.cv = str(cv_env).strip()
+    
+        source = "tokens.json" if loaded_from_file else ("variables Render" if (self.cn and self.cv) else "aucune")
+        print(
+            f"[ED][TOKENS] Source={source} | "
+            f"CN présent={bool(self.cn)} (longueur={len(self.cn) if self.cn else 0}) | "
+            f"CV présent={bool(self.cv)} (longueur={len(self.cv) if self.cv else 0})"
+        )
 
     def _save_tokens(self):
         if self.cn and self.cv:
