@@ -1,19 +1,13 @@
 import base64
-import hashlib
 import json
 import os
-import re
-from datetime import date
+from datetime import date, timedelta
 
 import requests
 
 BASE_URL = "https://api.ecoledirecte.com/v3"
-API_VERSION = "4.100.4"
+API_VERSION = "4.91.0"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-
-
-def _sha256_prefix(value):
-    return hashlib.sha256(str(value).encode("utf-8")).hexdigest()[:16]
 
 QCM_ANSWERS = {
     "Quelle est votre année de naissance ?": "2009",
@@ -25,7 +19,7 @@ QCM_ANSWERS = {
 
 
 class EcoleDirecteService:
-    def __init__(self, username, password, token_file="/tmp/tokens.json"):
+    def __init__(self, username, password, token_file="tokens.json"):
         self.username = username
         self.password = password
         self.token_file = token_file
@@ -38,22 +32,31 @@ class EcoleDirecteService:
         self.student_id = None
         self._load_tokens()
 
+    # ------------------------------------------------------------------
+    # Session / login
+    # ------------------------------------------------------------------
+
     def _load_tokens(self):
+        # Reprend exactement le comportement historique (tokens.json),
+        # avec un secours optionnel par variables d'environnement Render.
         try:
             with open(self.token_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
             self.cn = data.get("cn")
             self.cv = data.get("cv")
+            return
         except (FileNotFoundError, json.JSONDecodeError, OSError):
             pass
 
+        # Optionnel : permet à Render de démarrer avec les mêmes cn/cv
+        # qu'une session fonctionnelle sans les mettre dans GitHub.
+        self.cn = os.getenv("ECOLEDIRECTE_CN") or os.getenv("ED_CN") or None
+        self.cv = os.getenv("ECOLEDIRECTE_CV") or os.getenv("ED_CV") or None
+
     def _save_tokens(self):
         if self.cn and self.cv:
-            try:
-                with open(self.token_file, "w", encoding="utf-8") as f:
-                    json.dump({"cn": self.cn, "cv": self.cv}, f)
-            except OSError:
-                pass
+            with open(self.token_file, "w", encoding="utf-8") as f:
+                json.dump({"cn": self.cn, "cv": self.cv}, f)
 
     def _fetch_gtk(self):
         response = self.session.get(
@@ -65,57 +68,54 @@ class EcoleDirecteService:
             self.session.headers.update({"X-GTK": gtk})
         return gtk
 
+    @staticmethod
+    def _decode_smart(value):
+        if not value:
+            return ""
+        text = str(value).strip()
+        for _ in range(3):
+            compact = __import__("re").sub(r"\s+", "", text)
+            compact += "=" * (-len(compact) % 4)
+            try:
+                decoded = base64.b64decode(compact, validate=False).decode("utf-8")
+            except Exception:
+                break
+            printable = sum(ch.isprintable() or ch in "\n\r\t" for ch in decoded)
+            if printable < max(8, int(len(decoded) * 0.90)):
+                break
+            text = decoded
+            if not __import__("re").fullmatch(r"[A-Za-z0-9+/=_\-]+", __import__("re").sub(r"\s+", "", text)):
+                break
+        return text
+
     def login(self, ignore_saved_tokens=False):
-        # Toujours repartir d'une session fraîche pour le diagnostic d'authentification.
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT})
+        self._fetch_gtk()
 
-        gtk = self._fetch_gtk()
-        print(
-            f"[ED AUTH] prelogin | version={API_VERSION} | gtk={'OK' if gtk else 'MISSING'} "
-            f"| username_sha256_prefix={_sha256_prefix(self.username)} "
-            f"| username_length={len(str(self.username))} "
-            f"| password_sha256_prefix={_sha256_prefix(self.password)} "
-            f"| password_length={len(str(self.password))}",
-            flush=True,
-        )
-
-        # Payload minimal conforme à la documentation publique.
         payload = {
             "identifiant": self.username,
             "motdepasse": self.password,
             "isRelogin": False,
             "uuid": "",
+            "sesouvenirdemoi": True,
+            "fa": [],
         }
 
-        # Les cn/cv sauvegardés ne sont utilisés que si explicitement autorisés.
         if not ignore_saved_tokens and self.cn and self.cv:
+            payload["cn"] = self.cn
+            payload["cv"] = self.cv
             payload["fa"] = [{"cn": self.cn, "cv": self.cv}]
 
         url = f"{BASE_URL}/login.awp?v={API_VERSION}"
-        print(
-            f"[ED AUTH] login attempt | version={API_VERSION} | saved_tokens={'YES' if self.cn and self.cv else 'NO'} "
-            f"| payload_keys={sorted(payload.keys())}",
-            flush=True,
-        )
-
         response = self.session.post(
             url,
-            data={"data": json.dumps(payload, ensure_ascii=False, separators=(",", ":"))},
+            data={"data": json.dumps(payload)},
             timeout=30,
         )
         data = response.json()
-        code = data.get("code")
-        message = str(data.get("message") or "")
-        print(
-            f"[ED AUTH] response | version={API_VERSION} | code={code} | message={message!r} "
-            f"| response_token={'YES' if bool(data.get('token')) else 'NO'} | cookies={list(self.session.cookies.keys())}",
-            flush=True,
-        )
 
-        # Si les anciens cn/cv provoquent un 505, les effacer et refaire un vrai login.
-        if code == 505 and (self.cn or self.cv) and not ignore_saved_tokens:
-            print("[ED AUTH] 505 avec fa/cn/cv -> suppression des tokens et nouvel essai SANS tokens", flush=True)
+        if data.get("code") == 505 and (self.cn or self.cv):
             self.cn = self.cv = None
             try:
                 os.remove(self.token_file)
@@ -123,15 +123,9 @@ class EcoleDirecteService:
                 pass
             return self.login(ignore_saved_tokens=True)
 
-        # Nouveau dispositif de double authentification.
-        if code == 250:
+        if data.get("code") == 250:
             temp_token = data.get("token") or response.headers.get("x-token")
             two_fa = response.headers.get("2fa-token") or response.headers.get("2FA-Token")
-            print(
-                f"[ED AUTH] 2FA required | temp_token={'YES' if temp_token else 'NO'} "
-                f"| 2fa_token={'YES' if two_fa else 'NO'}",
-                flush=True,
-            )
 
             self.session.headers.pop("X-GTK", None)
             if temp_token:
@@ -142,41 +136,21 @@ class EcoleDirecteService:
             self.cn, self.cv = self._solve_qcm()
             self._save_tokens()
 
-            # Refaire le login avec les valeurs cn/cv retournées par le QCM.
             self._fetch_gtk()
-            payload = {
-                "identifiant": self.username,
-                "motdepasse": self.password,
-                "isRelogin": False,
-                "uuid": "",
-                "fa": [{"cn": self.cn, "cv": self.cv}],
-            }
+            payload["cn"] = self.cn
+            payload["cv"] = self.cv
+            payload["fa"] = [{"cn": self.cn, "cv": self.cv}]
 
-            print(
-                f"[ED AUTH] login after QCM | version={API_VERSION} | saved_tokens=NEW "
-                f"| payload_keys={sorted(payload.keys())}",
-                flush=True,
-            )
             response = self.session.post(
                 url,
-                data={"data": json.dumps(payload, ensure_ascii=False, separators=(",", ":"))},
+                data={"data": json.dumps(payload)},
                 timeout=30,
             )
             data = response.json()
-            print(
-                f"[ED AUTH] response after QCM | version={API_VERSION} | code={data.get('code')} "
-                f"| message={str(data.get('message') or '')!r} | response_token={'YES' if bool(data.get('token')) else 'NO'}",
-                flush=True,
-            )
 
         if data.get("code") != 200:
             raise RuntimeError(
-                f"Échec de connexion ED ({data.get('code')}) : {data.get('message', '')} "
-                f"[auth-debug version={API_VERSION}; username_length={len(str(self.username))}; "
-                f"username_sha256_prefix={_sha256_prefix(self.username)}; "
-                f"password_length={len(str(self.password))}; "
-                f"password_sha256_prefix={_sha256_prefix(self.password)}; "
-                f"tokens={'YES' if self.cn and self.cv else 'NO'}]"
+                f"Échec de connexion ED ({data.get('code')}) : {data.get('message', '')}"
             )
 
         self.token = data.get("token") or response.headers.get("x-token") or response.headers.get("X-Token")
@@ -188,11 +162,6 @@ class EcoleDirecteService:
             self.student_id = accounts[0].get("id")
 
         self.last_login_data = data
-        print(
-            f"[ED AUTH] success | version={API_VERSION} | student_id={'YES' if self.student_id else 'NO'} "
-            f"| token={'YES' if self.token else 'NO'}",
-            flush=True,
-        )
         return data
 
     def _solve_qcm(self):
@@ -200,6 +169,10 @@ class EcoleDirecteService:
         response = self.session.post(get_url, data={"data": "{}"}, timeout=30)
         qcm = response.json()
 
+        # La double-auth peut renvoyer les propositions sous forme Base64,
+        # même lorsqu'elles ne contiennent qu'une valeur très simple (ex. "21").
+        # Pour le QCM, on fait donc un décodage Base64 explicite d'une seule couche
+        # au lieu d'utiliser _decode_smart(), qui est volontairement heuristique.
         def decode_qcm_value(value):
             if value is None:
                 return ""
@@ -212,21 +185,73 @@ class EcoleDirecteService:
             except Exception:
                 return text
 
+        import re
         question = decode_qcm_value(qcm["data"]["question"])
         propositions_b64 = qcm["data"]["propositions"]
         propositions = [decode_qcm_value(p) for p in propositions_b64]
 
-        answer = QCM_ANSWERS.get(question)
+        # ÉcoleDirecte peut varier légèrement la ponctuation, les espaces ou
+        # l'encodage de la question. On normalise donc avant la recherche.
+        import re
+        import unicodedata
+
+        def norm_text(value):
+            value = unicodedata.normalize("NFKD", str(value or ""))
+            value = "".join(ch for ch in value if not unicodedata.combining(ch))
+            return re.sub(r"\s+", " ", value).strip().casefold()
+
+        answers = {norm_text(k): v for k, v in QCM_ANSWERS.items()}
+        nquestion = norm_text(question)
+        answer = answers.get(nquestion)
+
+        # Fallback tolérant : certaines installations renvoient une question
+        # avec une petite variation de formulation.
+        if answer is None:
+            for key, value in answers.items():
+                if key in nquestion or nquestion in key:
+                    answer = value
+                    break
+
         chosen = None
 
+        def answer_matches(expected, proposition):
+            expected_n = norm_text(expected)
+            prop_n = norm_text(proposition)
+            if expected_n == prop_n or expected_n in prop_n:
+                return True
+            try:
+                if expected_n.isdigit():
+                    n = int(expected_n)
+                    if prop_n.isdigit() and n == int(prop_n):
+                        return True
+                    months = [
+                        "janvier", "fevrier", "mars", "avril", "mai", "juin",
+                        "juillet", "aout", "septembre", "octobre", "novembre", "decembre"
+                    ]
+                    if 1 <= n <= 12 and norm_text(months[n - 1]) == prop_n:
+                        return True
+                    if n in (1, 21, 2009) and prop_n.isdigit() and n == int(prop_n):
+                        return True
+            except Exception:
+                pass
+            return False
+
         if answer:
-            for idx, prop in enumerate(propositions):
-                if answer in prop or prop in answer:
+            for idx, proposition in enumerate(propositions):
+                if answer_matches(answer, proposition):
                     chosen = propositions_b64[idx]
                     break
 
+        if not answer:
+            raise RuntimeError(
+                f"Question 2FA inconnue : {question!r}. Ajoute sa réponse à QCM_ANSWERS."
+            )
         if not chosen:
-            raise RuntimeError(f"Impossible de résoudre la 2FA pour la question : {question}")
+            raise RuntimeError(
+                f"Réponse 2FA configurée mais proposition introuvable pour {question!r}. "
+                f"Réponse configurée={answer!r}, propositions_decoded={propositions!r}, "
+                f"propositions_brutes={propositions_b64!r}"
+            )
 
         post_url = f"{BASE_URL}/connexion/doubleauth.awp?verbe=post&v={API_VERSION}"
         result = self.session.post(
@@ -239,6 +264,10 @@ class EcoleDirecteService:
             raise RuntimeError(f"Échec validation QCM : {result}")
 
         return result["data"]["cn"], result["data"]["cv"]
+
+    # ------------------------------------------------------------------
+    # Requête générique
+    # ------------------------------------------------------------------
 
     def _post(self, url, payload, retry=True):
         response = self.session.post(
@@ -253,38 +282,115 @@ class EcoleDirecteService:
             self.token = new_token
             self.session.headers.update({"X-Token": new_token})
 
+        # Important : 403 n'est PAS traité comme une expiration de token.
         if data.get("code") in (520, 525) and retry:
             self.login()
             return self._post(url, payload, retry=False)
 
         return data
 
+    # ------------------------------------------------------------------
+    # Emploi du temps
+    # ------------------------------------------------------------------
+
+    def get_schedule_range(self, start_date, end_date):
+        if not self.student_id:
+            raise RuntimeError("student_id absent : connecte-toi d'abord.")
+
+        payload = {
+            "dateDebut": start_date,
+            "dateFin": end_date,
+            "avecTrous": False,
+            "isCalDAV": False,
+        }
+
+        url = (
+            f"{BASE_URL}/E/{self.student_id}/emploidutemps.awp"
+            f"?verbe=get&v={API_VERSION}"
+        )
+        return self._post(url, payload)
+
+    # ------------------------------------------------------------------
+    # Devoirs
+    # ------------------------------------------------------------------
+
     def get_homework_overview(self):
         if not self.student_id:
             raise RuntimeError("student_id absent.")
-        url = f"{BASE_URL}/Eleves/{self.student_id}/cahierdetexte.awp?verbe=get&v={API_VERSION}"
-        return self._post(url, {})
+
+        url = (
+            f"{BASE_URL}/Eleves/{self.student_id}/cahierdetexte.awp"
+            f"?verbe=get&v={API_VERSION}"
+        )
+        result = self._post(url, {})
+        print(f"[ED][HOMEWORK] overview -> code={result.get('code')} data_type={type(result.get('data')).__name__}")
+        return result
 
     def get_homework_detail(self, date_str):
         if not self.student_id:
             raise RuntimeError("student_id absent.")
-        url = f"{BASE_URL}/Eleves/{self.student_id}/cahierdetexte/{date_str}.awp?verbe=get&v={API_VERSION}"
-        return self._post(url, {})
+
+        url = (
+            f"{BASE_URL}/Eleves/{self.student_id}/"
+            f"cahierdetexte/{date_str}.awp"
+            f"?verbe=get&v={API_VERSION}"
+        )
+        result = self._post(url, {})
+        print(f"[ED][HOMEWORK] detail {date_str} -> code={result.get('code')} data_type={type(result.get('data')).__name__}")
+        return result
+
 
     def set_homework_status(self, completed_ids=None, uncompleted_ids=None):
+        """Marque les devoirs indiqués comme faits / non faits côté ÉcoleDirecte."""
         if not self.student_id:
             raise RuntimeError("student_id absent.")
+
         payload = {
             "idDevoirsEffectues": [int(x) for x in (completed_ids or [])],
             "idDevoirsNonEffectues": [int(x) for x in (uncompleted_ids or [])],
         }
-        url = f"{BASE_URL}/Eleves/{self.student_id}/cahierdetexte.awp?verbe=put&v={API_VERSION}"
+        url = (
+            f"{BASE_URL}/Eleves/{self.student_id}/cahierdetexte.awp"
+            f"?verbe=put&v={API_VERSION}"
+        )
         return self._post(url, payload)
+
+    # ------------------------------------------------------------------
+    # Messagerie
+    # ------------------------------------------------------------------
 
     def get_messages_list(self):
         if not self.student_id:
             raise RuntimeError("student_id absent.")
-        school_year = f"{date.today().year}-{date.today().year + 1}" if date.today().month >= 8 else f"{date.today().year - 1}-{date.today().year}"
+
+        school_year = (
+            f"{date.today().year}-{date.today().year + 1}"
+            if date.today().month >= 8
+            else f"{date.today().year - 1}-{date.today().year}"
+        )
         payload = {"anneeMessages": school_year}
-        url = f"{BASE_URL}/eleves/{self.student_id}/messages.awp?verbe=getall&typeRecuperation=received&orderBy=date&order=desc&page=0&itemsPerPage=30&onlyReceived=true&v={API_VERSION}"
+
+        url = (
+            f"{BASE_URL}/eleves/{self.student_id}/messages.awp"
+            f"?verbe=getall&typeRecuperation=received&orderBy=date"
+            f"&order=desc&page=0&itemsPerPage=30&onlyReceived=true"
+            f"&v={API_VERSION}"
+        )
+        return self._post(url, payload)
+
+    def get_message_content(self, message_id):
+        if not self.student_id:
+            raise RuntimeError("student_id absent.")
+
+        school_year = (
+            f"{date.today().year}-{date.today().year + 1}"
+            if date.today().month >= 8
+            else f"{date.today().year - 1}-{date.today().year}"
+        )
+        payload = {"anneeMessages": school_year}
+
+        url = (
+            f"{BASE_URL}/eleves/{self.student_id}/messages/{message_id}.awp"
+            f"?verbe=get&mode=destinataire&v={API_VERSION}"
+        )
         return self._post(url, payload)
