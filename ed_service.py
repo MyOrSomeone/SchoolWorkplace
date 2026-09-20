@@ -1,7 +1,6 @@
 import base64
 import json
 import os
-import time
 from datetime import date, timedelta
 
 import requests
@@ -19,112 +18,18 @@ QCM_ANSWERS = {
 }
 
 
-# ---------------------------------------------------------------------------
-# Stockage des tokens cn/cv
-# ---------------------------------------------------------------------------
-# IMPORTANT : sur Render (offre gratuite, sans disque persistant), le système
-# de fichiers est réinitialisé à chaque mise en veille/redémarrage du service.
-# Un FileTokenStore seul ne survit donc PAS aux redémarrages sur Render.
-# EcoleDirecteService accepte n'importe quel objet exposant load()/save()/
-# clear() : app.py peut donc brancher un stockage réellement persistant
-# (Firestore, voir FirestoreTokenStore ci-dessous) sans toucher à la logique
-# de connexion.
-
-class FileTokenStore:
-    """Stockage local (tokens.json). Persiste en local, mais PAS sur Render
-    sans disque persistant payant."""
-
-    def __init__(self, path="tokens.json"):
-        self.path = path
-
-    def load(self):
-        try:
-            with open(self.path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            return data.get("cn"), data.get("cv")
-        except (FileNotFoundError, json.JSONDecodeError, OSError):
-            return None, None
-
-    def save(self, cn, cv):
-        if cn and cv:
-            with open(self.path, "w", encoding="utf-8") as f:
-                json.dump({"cn": cn, "cv": cv}, f)
-
-    def clear(self):
-        try:
-            os.remove(self.path)
-        except OSError:
-            pass
-
-
-class FirestoreTokenStore:
-    """Stockage dans Firestore : survit aux redémarrages/mises en veille
-    Render. Construit via build_default_token_store()."""
-
-    def __init__(self, doc_ref):
-        self._doc_ref = doc_ref
-
-    def load(self):
-        snap = self._doc_ref.get()
-        if not snap.exists:
-            return None, None
-        data = snap.to_dict() or {}
-        return data.get("cn"), data.get("cv")
-
-    def save(self, cn, cv):
-        if cn and cv:
-            self._doc_ref.set({"cn": cn, "cv": cv, "updated_at": time.time()})
-
-    def clear(self):
-        try:
-            self._doc_ref.delete()
-        except Exception:
-            pass
-
-
-def build_default_token_store(username, token_file="tokens.json"):
-    """Utilise Firestore si un compte de service Firebase est configuré
-    (FIREBASE_SERVICE_ACCOUNT_JSON ou FIREBASE_SERVICE_ACCOUNT_FILE), sinon
-    retombe sur un fichier local (comportement historique)."""
-    try:
-        store = _build_firestore_store(username)
-        if store is not None:
-            return store
-    except Exception as exc:
-        print(f"[ED][TOKENS] Firestore indisponible, retour au fichier local : {exc}")
-    return FileTokenStore(token_file)
-
-
-def _build_firestore_store(username):
-    service_account_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
-    service_account_file = os.getenv("FIREBASE_SERVICE_ACCOUNT_FILE")
-    if not service_account_json and not service_account_file:
-        return None
-
-    import firebase_admin
-    from firebase_admin import credentials, firestore
-
-    try:
-        firebase_admin.get_app()
-    except ValueError:
-        if service_account_json:
-            cred = credentials.Certificate(json.loads(service_account_json))
-        else:
-            cred = credentials.Certificate(service_account_file)
-        firebase_admin.initialize_app(cred)
-
-    client = firestore.client()
-    doc_id = "".join(ch for ch in str(username) if ch.isalnum()) or "default"
-    doc_ref = client.collection("sessions").document(f"ecoledirecte_{doc_id}")
-    return FirestoreTokenStore(doc_ref)
+def _mask(value, keep=3):
+    text = str(value or "")
+    if len(text) <= keep:
+        return "*" * len(text)
+    return text[:keep] + "…" + f"({len(text)} car.)"
 
 
 class EcoleDirecteService:
-    def __init__(self, username, password, token_file="tokens.json", token_store=None):
+    def __init__(self, username, password, token_file="tokens.json"):
         self.username = username
         self.password = password
         self.token_file = token_file
-        self.token_store = token_store or FileTokenStore(token_file)
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT})
         self.token = None
@@ -132,10 +37,7 @@ class EcoleDirecteService:
         self.cv = None
         self.last_login_data = None
         self.student_id = None
-        # Secours de dernier recours (valeurs figées au moment du déploiement,
-        # utiles seulement tant qu'ÉcoleDirecte ne les a pas invalidées).
-        self._env_cn = os.getenv("ECOLEDIRECTE_CN") or os.getenv("ED_CN") or None
-        self._env_cv = os.getenv("ECOLEDIRECTE_CV") or os.getenv("ED_CV") or None
+        print(f"[ED] service créé pour identifiant={_mask(username)}", flush=True)
         self._load_tokens()
 
     # ------------------------------------------------------------------
@@ -143,18 +45,20 @@ class EcoleDirecteService:
     # ------------------------------------------------------------------
 
     def _load_tokens(self):
-        cn, cv = self.token_store.load()
-        if cn and cv:
-            self.cn, self.cv = cn, cv
-            return
-        self.cn, self.cv = self._env_cn, self._env_cv
+        try:
+            with open(self.token_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self.cn = data.get("cn")
+            self.cv = data.get("cv")
+            print(f"[ED] tokens.json trouvé (cn={_mask(self.cn)}, cv={_mask(self.cv)})", flush=True)
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            print("[ED] pas de tokens.json valide : connexion à froid (nouvel appareil).", flush=True)
 
     def _save_tokens(self):
         if self.cn and self.cv:
-            try:
-                self.token_store.save(self.cn, self.cv)
-            except Exception as exc:
-                print(f"[ED][TOKENS] échec de sauvegarde : {exc}")
+            with open(self.token_file, "w", encoding="utf-8") as f:
+                json.dump({"cn": self.cn, "cv": self.cv}, f)
+            print(f"[ED] tokens sauvegardés dans {self.token_file} (valables tant que le service ne redémarre pas).", flush=True)
 
     def _fetch_gtk(self):
         response = self.session.get(
@@ -164,6 +68,7 @@ class EcoleDirecteService:
         gtk = response.cookies.get("GTK")
         if gtk:
             self.session.headers.update({"X-GTK": gtk})
+        print(f"[ED] GTK {'obtenu' if gtk else 'ABSENT (HTTP ' + str(response.status_code) + ')'}", flush=True)
         return gtk
 
     @staticmethod
@@ -187,6 +92,7 @@ class EcoleDirecteService:
         return text
 
     def login(self, ignore_saved_tokens=False):
+        print(f"[ED][LOGIN] tentative (ignore_saved_tokens={ignore_saved_tokens}, cn/cv présents={bool(self.cn and self.cv)})", flush=True)
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT})
         self._fetch_gtk()
@@ -212,16 +118,19 @@ class EcoleDirecteService:
             timeout=30,
         )
         data = response.json()
+        print(f"[ED][LOGIN] réponse HTTP {response.status_code}, code ED={data.get('code')}, message={data.get('message')!r}", flush=True)
 
         if data.get("code") == 505 and (self.cn or self.cv):
+            print("[ED][LOGIN] 505 avec cn/cv présents -> tokens rejetés, on efface et on retente à froid (sans cn/cv).", flush=True)
             self.cn = self.cv = None
             try:
-                self.token_store.clear()
-            except Exception:
+                os.remove(self.token_file)
+            except OSError:
                 pass
             return self.login(ignore_saved_tokens=True)
 
         if data.get("code") == 250:
+            print("[ED][LOGIN] code 250 : nouvel appareil détecté, résolution du QCM de double authentification...", flush=True)
             temp_token = data.get("token") or response.headers.get("x-token")
             two_fa = response.headers.get("2fa-token") or response.headers.get("2FA-Token")
 
@@ -245,8 +154,10 @@ class EcoleDirecteService:
                 timeout=30,
             )
             data = response.json()
+            print(f"[ED][LOGIN] après QCM, réponse HTTP {response.status_code}, code ED={data.get('code')}, message={data.get('message')!r}", flush=True)
 
         if data.get("code") != 200:
+            print(f"[ED][LOGIN] ÉCHEC FINAL : code={data.get('code')} message={data.get('message')!r}", flush=True)
             raise RuntimeError(
                 f"Échec de connexion ED ({data.get('code')}) : {data.get('message', '')}"
             )
@@ -259,6 +170,7 @@ class EcoleDirecteService:
         if accounts:
             self.student_id = accounts[0].get("id")
 
+        print(f"[ED][LOGIN] SUCCÈS, student_id={self.student_id}", flush=True)
         self.last_login_data = data
         return data
 
@@ -287,6 +199,7 @@ class EcoleDirecteService:
         question = decode_qcm_value(qcm["data"]["question"])
         propositions_b64 = qcm["data"]["propositions"]
         propositions = [decode_qcm_value(p) for p in propositions_b64]
+        print(f"[ED][QCM] question reçue : {question!r} ({len(propositions)} proposition(s))", flush=True)
 
         # ÉcoleDirecte peut varier légèrement la ponctuation, les espaces ou
         # l'encodage de la question. On normalise donc avant la recherche.
@@ -341,15 +254,18 @@ class EcoleDirecteService:
                     break
 
         if not answer:
+            print(f"[ED][QCM] AUCUNE réponse configurée pour la question {question!r}.", flush=True)
             raise RuntimeError(
                 f"Question 2FA inconnue : {question!r}. Ajoute sa réponse à QCM_ANSWERS."
             )
         if not chosen:
+            print(f"[ED][QCM] réponse configurée mais aucune proposition ne correspond (propositions={propositions!r}).", flush=True)
             raise RuntimeError(
                 f"Réponse 2FA configurée mais proposition introuvable pour {question!r}. "
                 f"Réponse configurée={answer!r}, propositions_decoded={propositions!r}, "
                 f"propositions_brutes={propositions_b64!r}"
             )
+        print(f"[ED][QCM] réponse trouvée, proposition choisie à l'index {propositions_b64.index(chosen)}.", flush=True)
 
         post_url = f"{BASE_URL}/connexion/doubleauth.awp?verbe=post&v={API_VERSION}"
         result = self.session.post(
@@ -359,8 +275,10 @@ class EcoleDirecteService:
         ).json()
 
         if result.get("code") != 200:
+            print(f"[ED][QCM] validation refusée : code={result.get('code')} message={result.get('message')!r}", flush=True)
             raise RuntimeError(f"Échec validation QCM : {result}")
 
+        print("[ED][QCM] validé, nouveaux cn/cv obtenus.", flush=True)
         return result["data"]["cn"], result["data"]["cv"]
 
     # ------------------------------------------------------------------
@@ -368,12 +286,14 @@ class EcoleDirecteService:
     # ------------------------------------------------------------------
 
     def _post(self, url, payload, retry=True):
+        endpoint = url.split(f"{BASE_URL}/", 1)[-1].split("?", 1)[0]
         response = self.session.post(
             url,
             data={"data": json.dumps(payload)},
             timeout=30,
         )
         data = response.json()
+        print(f"[ED][POST] {endpoint} -> HTTP {response.status_code}, code ED={data.get('code')}", flush=True)
 
         new_token = data.get("token") or response.headers.get("x-token") or response.headers.get("X-Token")
         if new_token:
@@ -382,6 +302,7 @@ class EcoleDirecteService:
 
         # Important : 403 n'est PAS traité comme une expiration de token.
         if data.get("code") in (520, 525) and retry:
+            print(f"[ED][POST] {endpoint} : code {data.get('code')}, reconnexion puis nouvel essai.", flush=True)
             self.login()
             return self._post(url, payload, retry=False)
 

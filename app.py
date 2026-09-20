@@ -18,7 +18,7 @@ except ImportError:
 from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 
-from ed_service import EcoleDirecteService, build_default_token_store
+from ed_service import EcoleDirecteService
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -33,68 +33,20 @@ AI_WORKFLOW_FILE = DATA_DIR / "ai_workflow.txt"
 TEMPLATES_DIR = BASE_DIR / "templates"
 
 app = Flask(__name__, template_folder=str(TEMPLATES_DIR) if TEMPLATES_DIR.exists() else None)
+# Le frontend est ouvert en local (file:// ou un autre serveur statique) et
+# appelle Render depuis une autre origine : CORS est nécessaire sur /api/*.
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=False)
 
 # ---------------------------------------------------------------------------
 # IDENTIFIANTS ÉCOLEDIRECTE
 # ---------------------------------------------------------------------------
-# Le frontend local envoie les identifiants dans chaque requête. Pour conserver
-# la compatibilité avec l'ancien backend fonctionnel, on accepte aussi des
-# variables d'environnement Render ou credentials.py.
-
-_ed_lock = threading.RLock()
-_ed_services = {}
-
-# ---------------------------------------------------------------------------
-# Anti-rafale : si ÉcoleDirecte refuse plusieurs connexions d'affilée pour un
-# même compte, on arrête de retenter pendant un moment au lieu de renvoyer
-# une nouvelle requête à chaque appel entrant. Marteler /login.awp pendant
-# qu'un blocage de sécurité est actif ne fait que l'aggraver/le prolonger.
-# ---------------------------------------------------------------------------
-
-LOGIN_COOLDOWN_SECONDS = 180
-LOGIN_FAILURE_THRESHOLD = 2
-
-_login_failures = {}  # username -> {"count": int, "last_ts": float, "message": str}
-
-
-class EcoleDirecteCooldownError(RuntimeError):
-    """Levée quand on refuse volontairement de retenter une connexion ED
-    pour ne pas aggraver un blocage de sécurité côté ÉcoleDirecte."""
-
-
-def _record_login_failure(username, message):
-    with _ed_lock:
-        entry = _login_failures.get(username, {"count": 0, "last_ts": 0.0, "message": ""})
-        entry["count"] += 1
-        entry["last_ts"] = time.time()
-        entry["message"] = message
-        _login_failures[username] = entry
-
-
-def _record_login_success(username):
-    with _ed_lock:
-        _login_failures.pop(username, None)
-
-
-def _check_login_cooldown(username):
-    with _ed_lock:
-        entry = _login_failures.get(username)
-    if not entry:
-        return
-    elapsed = time.time() - entry["last_ts"]
-    if entry["count"] >= LOGIN_FAILURE_THRESHOLD and elapsed < LOGIN_COOLDOWN_SECONDS:
-        remaining = int(LOGIN_COOLDOWN_SECONDS - elapsed)
-        raise EcoleDirecteCooldownError(
-            f"ÉcoleDirecte a refusé {entry['count']} connexions d'affilée "
-            f"({entry['message']}). Pour éviter d'aggraver un éventuel "
-            f"blocage de sécurité côté ÉcoleDirecte, nouvel essai dans "
-            f"{remaining}s."
-        )
-
+# Le frontend local envoie les identifiants à chaque requête (header ou JSON).
+# On garde aussi la compatibilité avec les variables d'environnement Render
+# et avec un fichier credentials.py local, pour pouvoir tester sans rien
+# taper depuis le navigateur.
 
 def get_req_credentials():
-    """Récupère les identifiants depuis headers, JSON ou paramètres."""
+    """Récupère les identifiants depuis les headers, le JSON ou la query string."""
     username = request.headers.get("X-ED-Username") or request.headers.get("X-Username")
     password = request.headers.get("X-ED-Password") or request.headers.get("X-Password")
 
@@ -110,7 +62,7 @@ def get_req_credentials():
 
 
 def _fallback_credentials():
-    """Compatibilité avec l'ancien credentials.py local si présent."""
+    """Compatibilité avec l'ancien credentials.py local si présent (dev only)."""
     for module_name in ("credentials", "credential"):
         try:
             module = __import__(module_name)
@@ -140,10 +92,55 @@ def _credentials_for_request():
     return _fallback_credentials()
 
 
-def _token_file_for_user(username):
-    # On conserve tokens.json pour être compatible avec la version qui fonctionne.
-    # L'environnement Render est actuellement mono-compte.
-    return "tokens.json"
+# ---------------------------------------------------------------------------
+# ÉCOLEDIRECTE : session conservée entre les requêtes
+# ---------------------------------------------------------------------------
+
+_ed_lock = threading.RLock()
+_ed_services = {}  # username -> (service, (username, password))
+
+# Anti-rafale minimal (sans base de données ni Firebase) : si ÉcoleDirecte
+# refuse plusieurs connexions d'affilée pour un compte, on arrête de
+# retenter pendant un moment plutôt que de renvoyer une requête à chaque
+# appel entrant — marteler /login.awp pendant un blocage ne peut qu'aggraver
+# les choses. Purement en mémoire : redémarrer le service le réinitialise.
+LOGIN_COOLDOWN_SECONDS = 120
+LOGIN_FAILURE_THRESHOLD = 2
+_login_failures = {}  # username -> {"count": int, "last_ts": float, "message": str}
+
+
+def _record_login_failure(username, message):
+    with _ed_lock:
+        entry = _login_failures.get(username, {"count": 0, "last_ts": 0.0, "message": ""})
+        entry["count"] += 1
+        entry["last_ts"] = time.time()
+        entry["message"] = message
+        _login_failures[username] = entry
+    print(f"[APP][ED] échec de connexion #{entry['count']} pour {username!r} : {message}", flush=True)
+
+
+def _record_login_success(username):
+    with _ed_lock:
+        had_failures = username in _login_failures
+        _login_failures.pop(username, None)
+    if had_failures:
+        print(f"[APP][ED] connexion réussie pour {username!r}, compteur d'échecs réinitialisé.", flush=True)
+
+
+def _check_login_cooldown(username):
+    with _ed_lock:
+        entry = _login_failures.get(username)
+    if not entry:
+        return
+    elapsed = time.time() - entry["last_ts"]
+    if entry["count"] >= LOGIN_FAILURE_THRESHOLD and elapsed < LOGIN_COOLDOWN_SECONDS:
+        remaining = int(LOGIN_COOLDOWN_SECONDS - elapsed)
+        print(f"[APP][ED] coupe-circuit actif pour {username!r}, encore {remaining}s avant nouvel essai.", flush=True)
+        raise RuntimeError(
+            f"ÉcoleDirecte a refusé {entry['count']} connexions d'affilée "
+            f"({entry['message']}). Nouvel essai dans {remaining}s pour éviter "
+            f"d'aggraver un éventuel blocage de sécurité."
+        )
 
 
 def get_ed_service(username=None, password=None, force_login=False):
@@ -166,13 +163,11 @@ def get_ed_service(username=None, password=None, force_login=False):
     if not needs_login:
         return service
 
-    # On ne retente une connexion ÉcoleDirecte que si le coupe-circuit
-    # anti-rafale l'autorise (voir _check_login_cooldown ci-dessus).
     _check_login_cooldown(key)
 
     if service is None or old_signature != signature:
-        token_store = build_default_token_store(username, _token_file_for_user(username))
-        service = EcoleDirecteService(username, password, token_store=token_store)
+        print(f"[APP][ED] nouvelle instance EcoleDirecteService pour {key!r}.", flush=True)
+        service = EcoleDirecteService(username, password)
 
     try:
         service.login()
@@ -197,10 +192,13 @@ def ed_call(method_name, *args, **kwargs):
         service = get_ed_service(username, password)
         return getattr(service, method_name)(*args, **kwargs)
     except Exception as first_error:
-        # On ne masque pas un échec d'authentification 505 en bouclant inutilement.
+        # On ne masque pas un échec d'authentification (505/mot de passe) en
+        # bouclant inutilement dessus — ça ne ferait qu'ajouter une tentative
+        # de connexion ratée de plus.
         message = str(first_error)
-        if "(505)" in message or "code=505" in message or "Mot de passe invalide" in message or "Identifiant et/ou mot de passe invalide" in message:
+        if any(token in message for token in ("(505)", "code=505", "Mot de passe invalide", "Identifiant et/ou mot de passe invalide")):
             raise
+        print(f"[APP][ED] {method_name} a échoué ({message!r}), reconnexion forcée...", flush=True)
         with _ed_lock:
             _ed_services.pop(str(username), None)
         service = get_ed_service(username, password, force_login=True)
@@ -865,7 +863,9 @@ def merge_homeworks(api_items, local_state):
 
 
 # ---------------------------------------------------------------------------
-# EMPLOI DU TEMPS : API ÉcoleDirecte uniquement côté backend
+# EMPLOI DU TEMPS : API ÉcoleDirecte côté backend uniquement.
+# Le planning par défaut (data/schedule_default.js) et les surcharges
+# (Firestore) sont gérés côté frontend, pas par Render.
 # ---------------------------------------------------------------------------
 
 def get_schedule_payload():
@@ -875,6 +875,7 @@ def get_schedule_payload():
 
     try:
         service = get_ed_service()
+        # On récupère une fenêtre assez large pour couvrir la navigation de l'UI.
         today = datetime.now().date()
         monday = today - timedelta(days=today.weekday())
         end = monday + timedelta(days=34)
@@ -883,8 +884,10 @@ def get_schedule_payload():
             raise RuntimeError(raw.get("message") or f"ÉcoleDirecte code {raw.get('code')}")
         api_schedule = api_schedule_to_dates(raw)
         api_ok = True
+        print(f"[APP][SCHEDULE] OK, {len(api_schedule)} date(s) récupérée(s).", flush=True)
     except Exception as exc:
         api_error = str(exc)
+        print(f"[APP][SCHEDULE] échec : {api_error}", flush=True)
 
     return {
         "default": {},
@@ -1437,7 +1440,10 @@ def serve_data(filename):
 @app.route("/api/data", methods=["GET", "POST"])
 def api_data():
     username, password = _credentials_for_request()
+    print(f"[APP][/api/data] appel reçu pour identifiant={username!r}", flush=True)
+
     if not username or not password:
+        print("[APP][/api/data] identifiants manquants dans la requête.", flush=True)
         return jsonify({
             "success": False,
             "error_type": "credentials_missing",
@@ -1446,10 +1452,11 @@ def api_data():
         }), 401
 
     try:
-        # Un seul service ED est créé/réutilisé pour toute la requête.
+        # Un seul login est déclenché ici ; les appels suivants réutilisent
+        # la session déjà ouverte tant qu'elle reste valide.
         service = get_ed_service(username, password)
+        print("[APP][/api/data] connexion ED OK, récupération des données...", flush=True)
 
-        # L'authentification doit être valide avant de demander les données.
         api_homeworks = fetch_homeworks_from_ed()
         messages = get_messages()
         schedule = get_schedule_payload()
@@ -1457,6 +1464,8 @@ def api_data():
         login_data = service.last_login_data or {}
         accounts = login_data.get("data", {}).get("accounts", [])
         account = accounts[0] if accounts else {}
+
+        print(f"[APP][/api/data] succès : {len(api_homeworks)} devoir(s), {len(messages)} message(s).", flush=True)
 
         return jsonify({
             "success": True,
@@ -1477,23 +1486,27 @@ def api_data():
         })
     except Exception as exc:
         message = str(exc)
-        if isinstance(exc, EcoleDirecteCooldownError):
-            return jsonify({
-                "success": False,
-                "error_type": "ecoledirecte_cooldown",
-                "error": message,
-                "generated_at": datetime.now().isoformat(),
-            }), 429
+        print(f"[APP][/api/data] ÉCHEC : {message}", flush=True)
+
+        cooldown_like = "blocage de sécurité" in message or "connexions d'affilée" in message
         auth_like = any(token in message for token in (
             "(505)", "code=505", "Mot de passe invalide",
             "Identifiant et/ou mot de passe invalide", "Identifiants ÉcoleDirecte"
         ))
+
+        if cooldown_like:
+            status, error_type = 429, "ecoledirecte_cooldown"
+        elif auth_like:
+            status, error_type = 401, "ecoledirecte_authentication"
+        else:
+            status, error_type = 502, "backend_error"
+
         return jsonify({
             "success": False,
-            "error_type": "ecoledirecte_authentication" if auth_like else "backend_error",
+            "error_type": error_type,
             "error": message,
             "generated_at": datetime.now().isoformat(),
-        }), (401 if auth_like else 502)
+        }), status
 
 
 @app.route("/api/schedule_changes", methods=["GET", "POST"])

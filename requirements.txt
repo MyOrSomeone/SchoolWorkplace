@@ -3,4 +3,3 @@ flask-cors
 gunicorn
 requests
 bleach
-firebase-admin
