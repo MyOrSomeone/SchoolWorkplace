@@ -109,6 +109,8 @@ class EcoleDirecteService:
         })
         self._fetch_gtk()
 
+        print(f"[ED][DEBUG MDP] Longueur MDP = {len(self.password)} | Début = {self.password[:2]!r} | Fin = {self.password[-2:]!r}", flush=True)
+        
         payload = {
             "identifiant": self.username,
             "motdepasse": self.password,
