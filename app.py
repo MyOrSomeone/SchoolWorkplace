@@ -26,8 +26,11 @@ if not DATA_DIR.exists():
     DATA_DIR = BASE_DIR
 
 SCHEDULE_DEFAULT_FILE = DATA_DIR / "schedule_default.json"
+
+#TODO : suppr ca (tt tournera sur firebase)
 SCHEDULE_CHANGES_FILE = DATA_DIR / "schedule_changes.json"
 HOMEWORK_LOCAL_FILE = DATA_DIR / "homework_local.json"
+#TODO ca ca peut aller sur le pc
 AI_WORKFLOW_FILE = DATA_DIR / "ai_workflow.txt"
 
 TEMPLATES_DIR = BASE_DIR / "templates"
@@ -44,6 +47,8 @@ CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=False)
 # On garde aussi la compatibilité avec les variables d'environnement Render
 # et avec un fichier credentials.py local, pour pouvoir tester sans rien
 # taper depuis le navigateur.
+
+print(f"[Debug] Environment Variable Test={os.getenv("TEST")}", flush=True)
 
 def get_req_credentials():
     """Récupère les identifiants depuis les headers, le JSON ou la query string."""

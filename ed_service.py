@@ -31,7 +31,13 @@ class EcoleDirecteService:
         self.password = password
         self.token_file = token_file
         self.session = requests.Session()
-        self.session.headers.update({"User-Agent": USER_AGENT})
+        self.session.headers.update({
+            "User-Agent": USER_AGENT,
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Origin": "https://www.ecoledirecte.com",
+            "Referer": "https://www.ecoledirecte.com/",
+        })
         self.token = None
         self.cn = None
         self.cv = None
@@ -94,7 +100,13 @@ class EcoleDirecteService:
     def login(self, ignore_saved_tokens=False):
         print(f"[ED][LOGIN] tentative (ignore_saved_tokens={ignore_saved_tokens}, cn/cv présents={bool(self.cn and self.cv)})", flush=True)
         self.session = requests.Session()
-        self.session.headers.update({"User-Agent": USER_AGENT})
+        self.session.headers.update({
+            "User-Agent": USER_AGENT,
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Origin": "https://www.ecoledirecte.com",
+            "Referer": "https://www.ecoledirecte.com/",
+        })
         self._fetch_gtk()
 
         payload = {
@@ -117,9 +129,21 @@ class EcoleDirecteService:
             data={"data": json.dumps(payload)},
             timeout=30,
         )
-        data = response.json()
-        print(f"[ED][LOGIN] réponse HTTP {response.status_code}, code ED={data.get('code')}, message={data.get('message')!r}", flush=True)
 
+        # ------------------------------------------------------------------
+        # >>> PRINT DE VÉRIFICATION À AJOUTER ICI <<<
+        # ------------------------------------------------------------------
+        print(f"[ED][DEBUG BRUT] Status HTTP: {response.status_code} | Contenu: {response.text[:300]!r}", flush=True)
+
+        try:
+            data = response.json()
+        except Exception as e:
+            print(f"[ED][LOGIN] ERREUR : La réponse n'est pas du JSON (blocage Cloudflare/IP probable) !", flush=True)
+            raise RuntimeError(f"Réponse ED non-JSON (HTTP {response.status_code}) : {response.text[:200]}")
+
+        print(f"[ED][LOGIN] réponse HTTP {response.status_code}, code ED={data.get('code')}, message={data.get('message')!r}", flush=True)
+        # fin
+        
         if data.get("code") == 505 and (self.cn or self.cv):
             print("[ED][LOGIN] 505 avec cn/cv présents -> tokens rejetés, on efface et on retente à froid (sans cn/cv).", flush=True)
             self.cn = self.cv = None
