@@ -1,0 +1,365 @@
+/* notebooks.css — style commun à tous les cahiers de cours.
+   L'IA doit réutiliser ces classes plutôt qu'en réinventer à chaque page. */
+
+:root {
+    --nb-gold: #b8905a;
+    --nb-gold-soft: rgba(184, 144, 90, 0.12);
+    --nb-gold-glow: rgba(184, 144, 90, 0.25);
+    --nb-bg: #e2e0dc /*#faf6ef*/;
+    --nb-bg-card: #ffffff;
+    --nb-bg-dark: #1c1a17;
+    --nb-text: #2c2620;
+    --nb-text-muted: #6b6257;
+    --nb-text-dark: #ede6da;
+    --nb-border: rgba(184, 144, 90, 0.25);
+    --nb-accent-blue: #3b82f6;
+    --nb-accent-emerald: #10b981;
+    --nb-accent-purple: #8b5cf6;
+    --nb-accent-amber: #d97706;
+}
+
+html.dark { 
+    --nb-bg: var(--nb-bg-dark); 
+    --nb-bg-card: #25221d;
+    --nb-text: var(--nb-text-dark); 
+    --nb-text-muted: #a89f91;
+    --nb-gold-soft: rgba(184, 144, 90, 0.2);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body.notebook-body {
+    background: var(--nb-bg);
+    color: var(--nb-text);
+    font-family: "Comfortaa", "Georgia", "Iowan Old Style", serif;
+    line-height: 1.65;
+    padding: 0 0 4rem;
+}
+
+/* .own_thoughts{
+    border: 3px dashed var(--nb-gold) !important;
+    margin: 1rem !important;
+} */
+.own_thoughts{
+    outline: 3px dashed var(--nb-gold); 
+    outline-offset: 1rem;
+    margin: 2.5rem 1rem !important;
+}
+.own_thoughts::before {
+  /* 1. Appels de Font Awesome */
+  content: "\f5d2"; /* Remplace par le code Unicode de ton icône */
+  font-family: "Font Awesome 6 Free";
+  font-size: 1.9rem;
+  font-weight: 800; /* Obligatoire pour les icônes 'Solid' */
+
+  /* 2. Création du cercle */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--nb-bg); /* Couleur du cercle */
+  border: 3px solid var(--nb-gold);
+  color: var(--nb-gold); /* Couleur de l'icône */
+
+  position: absolute;
+  transform: translate(-4rem, -4rem);
+}
+
+
+.notebook-header {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--nb-border);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.notebook-header h1 { margin: 0; font-size: 1.4rem; color: var(--nb-gold); }
+.notebook-content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+.notebook-content p { margin: 0 0 1rem; }
+
+/* Titres de sections élégants */
+.section-hero {
+    background: linear-gradient(135deg, rgba(184, 144, 90, 0.15) 0%, rgba(184, 144, 90, 0.03) 100%);
+    border: 1px solid var(--nb-border);
+    border-radius: 1rem;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+.section-hero h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    color: var(--nb-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.section-hero p.subtitle {
+    margin: 0;
+    font-style: italic;
+    color: var(--nb-text-muted);
+}
+
+/* Encadrés (théorème / exemple / attention / formule) */
+.nb-box {
+    border: 1px solid var(--nb-border);
+    border-left-width: 4px;
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0 !important;
+    background: var(--nb-gold-soft);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nb-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.nb-box > .nb-box-title { 
+    font-weight: 700; 
+    color: var(--nb-gold); 
+    margin-bottom: 0.5rem; 
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.nb-box.theoreme { border-left-color: #4d7cc7; }
+.nb-box.exemple { border-left-color: #4a9d6e; }
+.nb-box.attention { border-left-color: #c65d5d; }
+.nb-box.formule { border-left-color: var(--nb-gold); }
+
+/* Définitions interactives */
+.def-term {
+    color: var(--nb-gold);
+    border-bottom: 1.5px dashed var(--nb-gold);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+.def-term:hover {
+    background-color: var(--nb-gold-soft);
+}
+.def-tooltip {
+    position: fixed;
+    z-index: 80;
+    max-width: 280px;
+    background: var(--nb-bg-card);
+    border: 1px solid var(--nb-gold);
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    animation: fadeInTooltip 0.15s ease-out;
+}
+@keyframes fadeInTooltip {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.def-tooltip strong { color: var(--nb-gold); display: block; margin-bottom: 0.3rem; }
+
+/* Onglets comparatifs */
+.nb-tabs {
+    border: 1px solid var(--nb-border);
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    background: var(--nb-bg-card);
+}
+.nb-tab-buttons {
+    display: flex;
+    background: var(--nb-gold-soft);
+    border-bottom: 1px solid var(--nb-border);
+    overflow-x: auto;
+}
+.nb-tab-btn {
+    flex: 1;
+    min-width: 130px;
+    padding: 0.8rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--nb-text-muted);
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    text-align: center;
+}
+.nb-tab-btn:hover {
+    background: rgba(184, 144, 90, 0.15);
+    color: var(--nb-gold);
+}
+.nb-tab-btn.active {
+    background: var(--nb-bg-card);
+    color: var(--nb-gold);
+    border-bottom-color: var(--nb-gold);
+}
+.nb-tab-panel {
+    display: none;
+    padding: 1.25rem;
+    animation: fadeInTab 0.25s ease-out;
+}
+.nb-tab-panel.active {
+    display: block;
+}
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accordéons / Blocs dépliables */
+.nb-details {
+    border: 1px solid var(--nb-border);
+    border-radius: 0.75rem;
+    margin: 1.25rem 0;
+    background: var(--nb-bg-card);
+    overflow: hidden;
+    transition: all 0.25s ease;
+}
+.nb-details[open] {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+.nb-details summary {
+    padding: 0.9rem 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--nb-gold-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    transition: background-color 0.2s;
+    list-style: none;
+}
+.nb-details summary::-webkit-details-marker { display: none; }
+.nb-details summary::after {
+    content: "↓";
+    color: var(--nb-gold);
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+.nb-details[open] summary::after {
+    transform: rotate(180deg);
+}
+.nb-details summary:hover {
+    background: rgba(184, 144, 90, 0.2);
+}
+.nb-details-content {
+    padding: 1.15rem;
+    line-height: 1.6;
+}
+
+/* Cartes visuelles de concepts */
+.nb-concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+}
+.nb-concept-card {
+    background: var(--nb-bg-card);
+    border: 1px solid var(--nb-border);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+.nb-concept-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: var(--nb-gold);
+}
+.nb-concept-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+.nb-concept-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--nb-gold-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--nb-gold);
+}
+.nb-concept-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--nb-text);
+}
+.nb-quote-bubble {
+    background: var(--nb-gold-soft);
+    border-left: 3px solid var(--nb-gold);
+    padding: 0.6rem 0.85rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-style: italic;
+    margin: 0.75rem 0;
+    font-size: 0.95rem;
+}
+
+/* Frise chronologique */
+.nb-timeline {
+    position: relative;
+    padding: 1.5rem 0 1.5rem 2rem;
+    margin: 1.5rem 0;
+}
+.nb-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 8px;
+    width: 2px;
+    background: var(--nb-gold);
+}
+.nb-timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.nb-timeline-item:last-child {
+    margin-bottom: 0;
+}
+.nb-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0.35rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--nb-bg-card);
+    border: 3px solid var(--nb-gold);
+    transform: translateX(2px);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+.nb-timeline-item:hover::before {
+    background: var(--nb-gold);
+    transform: translateX(2px) scale(1.25);
+}
+.nb-timeline-date {
+    font-weight: 700;
+    color: var(--nb-gold);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
