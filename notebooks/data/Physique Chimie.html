@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Physique Chimie</title>
+<link rel="stylesheet" href="../notebooks.css" />
+<script>
+  window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+<script src="../notebooks.js" defer></script>
+</head>
+<body class="notebook-body">
+<header class="notebook-header"><h1>Physique Chimie</h1></header>
+<main id="notebook-content" class="notebook-content">
+<!-- CONTENU_START -->
+
+<div class="section-hero">
+    <h2><i class="fas fa-flask"></i> Transformations Acide-Base</h2>
+    <p class="subtitle">Exploration de la chimie du proton : des échanges aux équilibres chimiques.</p>
+</div>
+
+<div class="nb-box theoreme">
+    <span class="nb-box-title"><i class="fas fa-microscope"></i> Théorie de Brönsted</span>
+    <p>Au cœur des transformations acide-base, nous trouvons le transfert d'un <span class="def-term" data-def="proton">proton H<sup>+</sup></span>.</p>
+    <div class="nb-concept-grid">
+        <div class="nb-concept-card">
+            <div class="nb-concept-header">
+                <div class="nb-concept-icon"><i class="fas fa-minus-circle"></i></div>
+                <h3 class="nb-concept-title">Un Acide</h3>
+            </div>
+            <p>Espèce chimique susceptible de <strong>céder</strong> un proton \(H^+\).</p>
+        </div>
+        <div class="nb-concept-card">
+            <div class="nb-concept-header">
+                <div class="nb-concept-icon"><i class="fas fa-plus-circle"></i></div>
+                <h3 class="nb-concept-title">Une Base</h3>
+            </div>
+            <p>Espèce chimique susceptible de <strong>capter</strong> un proton \(H^+\).</p>
+        </div>
+    </div>
+</div>
+
+<details class="nb-details">
+    <summary>Le cas de l'eau : une espèce particulière</summary>
+    <div class="nb-details-content">
+        <p>L'eau est une espèce <span class="def-term" data-def="amphotere">amphotère</span> (ou ampholytes), elle peut jouer deux rôles :</p>
+        <ul>
+            <li>Acide dans le couple \(H_3O^+ / H_2O\)</li>
+            <li>Base dans le couple \(H_2O / HO^-\)</li>
+        </ul>
+        <p>Elle est donc capable de réagir sur elle-même, c'est l'<strong>autoprotolyse de l'eau</strong> :</p>
+        <p style="text-align: center; font-size: 1.2rem; margin: 1rem 0;">\(2 H_2O_{(l)} \rightleftharpoons H_3O^+_{(aq)} + HO^-_{(aq)}\)</p>
+    </div>
+</details>
+
+<div class="nb-box formule">
+    <span class="nb-box-title"><i class="fas fa-calculator"></i> La mesure du pH</span>
+    <p>Le \(pH\) mesure la concentration des ions oxonium \(H_3O^+\) en solution :</p>
+    <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="text-align: center;">
+            <p>\(pH = -\log\left(\frac{[H_3O^+]}{c^\circ}\right)\)</p>
+            <p style="font-size: 0.8rem; color: var(--nb-text-muted);">(avec \(c^\circ = 1 \, mol/L\))</p>
+        </div>
+        <div style="font-size: 1.5rem; color: var(--nb-gold);">⇔</div>
+        <div style="text-align: center;">
+            <p>\([H_3O^+] = c^\circ \cdot 10^{-pH}\)</p>
+        </div>
+    </div>
+</div>
+
+<div class="nb-tabs">
+    <div class="nb-tab-buttons">
+        <button class="nb-tab-btn active">Acides/Bases Fortes</button>
+        <button class="nb-tab-btn">Acides/Bases Faibles</button>
+    </div>
+    <div class="nb-tab-panel active">
+        <p>Réaction <strong>quasi-totale</strong> avec l'eau. Tout l'acide (ou la base) est consommé.</p>
+        <p><em>Exemple :</em> \(HCl + H_2O \rightarrow H_3O^+ + Cl^-\)</p>
+    </div>
+    <div class="nb-tab-panel">
+        <p>Réaction <strong>limitée</strong>, il s'agit d'un <strong>équilibre chimique</strong> (\(\rightleftharpoons\)).</p>
+        <p>Les espèces réagissantes et les produits coexistent en solution.</p>
+    </div>
+</div>
+
+<!-- CONTENU_END -->
+</main>
+</body>
+</html>
