@@ -126,5 +126,159 @@
         initNotebook();
     }
 
+        // <!-- SCRIPTS DE COMPORTEMENT INTERACTIF DE CARTE MENTALE INTéRACTIVE (PAN, ZOOM & SVG) -->
+
+    (function() {
+      let scale = 1;
+      let panX = 0;
+      let panY = 0;
+      let isDragging = false;
+      let startX, startY;
+
+      const viewport = document.getElementById('mm-viewport');
+      const canvas = document.getElementById('mm-canvas');
+      const svg = document.getElementById('mm-svg');
+      const centerNode = document.getElementById('mm-node-center');
+
+      // Mettre à jour la transformation CSS du Canvas
+      function updateTransform() {
+        canvas.style.transform = `translate(calc(-50% + ${panX}px), calc(-50% + ${panY}px)) scale(${scale})`;
+        drawConnections();
+      }
+
+      // Tracer les lignes SVG incurvées reliées au centre
+      function drawConnections() {
+        const centerRect = centerNode.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        
+        // Centre relatif au canvas
+        const cX = (centerRect.left + centerRect.width / 2 - canvasRect.left) / scale;
+        const cY = (centerRect.top + centerRect.height / 2 - canvasRect.top) / scale;
+
+        const branches = document.querySelectorAll('.mm-branch');
+        let svgHtml = '';
+
+        const colors = {
+          '1': '#ef4444',
+          '2': '#3b82f6',
+          '3': '#10b981',
+          '4': '#f59e0b',
+          '5': '#a855f7'
+        };
+
+        branches.forEach(branch => {
+          const id = branch.getAttribute('data-node');
+          const bRect = branch.getBoundingClientRect();
+          const bX = (bRect.left + bRect.width / 2 - canvasRect.left) / scale;
+          const bY = (bRect.top + bRect.height / 2 - canvasRect.top) / scale;
+
+          // Courbe Bezier fluide
+          const deltaX = bX - cX;
+          const deltaY = bY - cY;
+          const cpX1 = cX + deltaX * 0.5;
+          const cpY1 = cY;
+          const cpX2 = cX + deltaX * 0.5;
+          const cpY2 = bY;
+
+          const pathColor = colors[id] || '#b8905a';
+
+          svgHtml += `<path d="M ${cX} ${cY} C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${bX} ${bY}" 
+                            fill="none" 
+                            stroke="${pathColor}" 
+                            stroke-width="3" 
+                            stroke-dasharray="6,4" 
+                            opacity="0.6"/>`;
+        });
+
+        svg.innerHTML = svgHtml;
+      }
+
+      // --- Gestion du Drag / Pan ---
+      viewport.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('.mm-branch-header') || e.target.closest('#mm-node-center')) return;
+        isDragging = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+        viewport.setPointerCapture(e.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        updateTransform();
+      });
+
+      viewport.addEventListener('pointerup', (e) => {
+        isDragging = false;
+        try { viewport.releasePointerCapture(e.pointerId); } catch(err) {}
+      });
+
+      // --- Gestion du Zoom Molette ---
+      viewport.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+        scale = Math.min(Math.max(0.5, scale * zoomFactor), 2.2);
+        updateTransform();
+      }, { passive: false });
+
+      // --- Boutons de contrôle ---
+      document.getElementById('mm-zoom-in').onclick = () => { scale = Math.min(2.2, scale * 1.25); updateTransform(); };
+      document.getElementById('mm-zoom-out').onclick = () => { scale = Math.max(0.5, scale / 1.25); updateTransform(); };
+      document.getElementById('mm-reset').onclick = () => { scale = 1; panX = 0; panY = 0; updateTransform(); };
+
+      // --- Replier / Déplier Branche ---
+      window.toggleBranch = function(id) {
+        const branch = document.querySelector(`.mm-branch[data-node="${id}"]`);
+        const body = branch.querySelector('.mm-branch-body');
+        const icon = branch.querySelector(`.mm-icon-${id}`);
+
+        if (body.classList.contains('hidden')) {
+          body.classList.remove('hidden');
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          body.classList.add('hidden');
+          icon.style.transform = 'rotate(0deg)';
+        }
+        setTimeout(drawConnections, 100);
+      };
+
+      // --- Basculer Tout ---
+      let allOpen = false;
+      const toggleAllBtn = document.getElementById('mm-toggle-all');
+      
+      function toggleAll() {
+        allOpen = !allOpen;
+        document.querySelectorAll('.mm-branch').forEach(branch => {
+          const id = branch.getAttribute('data-node');
+          const body = branch.querySelector('.mm-branch-body');
+          const icon = branch.querySelector(`.mm-icon-${id}`);
+          if (allOpen) {
+            body.classList.remove('hidden');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          } else {
+            body.classList.add('hidden');
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          }
+        });
+        toggleAllBtn.innerHTML = allOpen 
+          ? '<i class="fas fa-compress-alt mr-1"></i> Fold All' 
+          : '<i class="fas fa-layer-group mr-1"></i> Unfold All';
+        setTimeout(drawConnections, 120);
+      }
+
+      toggleAllBtn.onclick = toggleAll;
+      centerNode.onclick = toggleAll;
+
+      // Initialisation au chargement
+      setTimeout(() => {
+        updateTransform();
+        drawConnections();
+      }, 200);
+
+      window.addEventListener('resize', drawConnections);
+    })();
+
+
     window.SCHOOLWORKSPACE_NOTEBOOK_REINIT = initNotebook;
 })();

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Histoire-géo</title>
-<link rel="stylesheet" href="../notebooks.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script>
-window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
-<script src="../notebooks.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Histoire-géo</title>
+  <link rel="stylesheet" href="../notebooks.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+  <script src="../notebooks.js" defer></script>
 <style>
 /* ---------- Mise en page ---------- */
 .notebook-content{max-width:1120px;}
@@ -107,7 +112,7 @@ html.dark .map-image{filter:brightness(.78) saturate(.8);}
 .map-zone{fill:rgba(77,124,199,.08);stroke:#4d7cc7;stroke-width:2;stroke-dasharray:6 7;}
 .map-zone-line{opacity:.45;}
 @keyframes routeFlow{to{stroke-dashoffset:-500;}}
-.map-label{font-family:system-ui,sans-serif;font-size:11px;font-weight:700;fill:#2c2620;paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round;}
+.map-label{font-family:Comfortaa,system-ui,sans-serif;font-size:11px;font-weight:700;fill:#2c2620;paint-order:stroke;stroke:#fff;stroke-width:4;stroke-linejoin:round;}
 .map-marker{cursor:pointer;outline:none;}
 .map-marker circle{stroke:#fff;stroke-width:2;transition:transform .15s ease;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 2px 3px rgba(0,0,0,.22));}
 .map-marker:hover circle,.map-marker:focus circle{transform:scale(1.35);}
@@ -281,7 +286,7 @@ html.dark .map-image{filter:brightness(.78) saturate(.8);}
       <h3 class="part-heading"><span class="num">I.</span> Le conteneur, coffre au trésor de la mondialisation</h3>
       <p class="lead"><strong>90&nbsp;%</strong> des échanges mondiaux transitent par la voie maritime. La <span class="def-term" data-def="conteneurisation">conteneurisation</span> permet de déplacer une grande variété de marchandises dans des boîtes standardisées.</p>
       <div class="data-row">
-        <div class="data-card"><span class="value">6&nbsp;000 Mt</span><span class="label">Commerce maritime — 1970</span></div>
+        <div class="data-card"><span class="value">2&nbsp;600 Mt</span><span class="label">Commerce maritime — 1970</span></div>
         <div class="data-card"><span class="value">11&nbsp;000 Mt</span><span class="label">Commerce maritime — 2021</span></div>
         <div class="data-card"><span class="value">250&nbsp;m</span><span class="label">Porte-conteneurs — 1970</span></div>
         <div class="data-card"><span class="value">400&nbsp;m</span><span class="label">Porte-conteneurs — 2021</span></div>
@@ -297,10 +302,10 @@ html.dark .map-image{filter:brightness(.78) saturate(.8);}
         <div class="nb-chart">
           <h4><i class="fas fa-chart-column"></i> Croissance du commerce maritime</h4>
           <div class="bar-list">
-            <div class="bar-row"><span>1970</span><div class="bar-track"><div class="bar-fill" style="width:54.5%"></div></div><span class="bar-value">6&nbsp;000 Mt</span></div>
+            <div class="bar-row"><span>1970</span><div class="bar-track"><div class="bar-fill" style="width:23.6%"></div></div><span class="bar-value">2&nbsp;600 Mt</span></div>
             <div class="bar-row"><span>2021</span><div class="bar-track"><div class="bar-fill blue" style="width:100%"></div></div><span class="bar-value">11&nbsp;000 Mt</span></div>
           </div>
-          <p class="chart-caption">Le volume est presque doublé entre ces deux repères du cours ; les dimensions des navires augmentent elles aussi.</p>
+          <p class="chart-caption">Le volume est presque quadruplé entre ces deux repères du cours ; les dimensions des navires augmentent elles aussi.</p>
         </div>
       </div>
       <div class="inline-points">
@@ -368,7 +373,7 @@ html.dark .map-image{filter:brightness(.78) saturate(.8);}
       <p class="lead">La pêche actuelle est massive&nbsp;: elle apporte des ressources mais participe aussi à la destruction de l’environnement marin.</p>
       <div class="chart-grid">
         <div class="nb-chart"><h4><i class="fas fa-chart-pie"></i> État des ressources</h4><div class="bar-list"><div class="bar-row"><span>Durable max.</span><div class="bar-track"><div class="bar-fill green" style="width:75%"></div></div><span class="bar-value">75&nbsp;%</span></div><div class="bar-row"><span>Surexploitation</span><div class="bar-track"><div class="bar-fill red" style="width:25%"></div></div><span class="bar-value">25&nbsp;%</span></div></div></div>
-        <div class="nb-chart"><h4><i class="fas fa-fish"></i> Destination des prises</h4><div class="donut-wrap"><div class="donut" style="background:conic-gradient(var(--nb-accent-emerald) 0 80%,var(--nb-accent-blue) 80% 100%)"><div class="donut-center">80&nbsp;%<br><small>conso.</small></div></div><div class="legend-list"><div class="legend-item"><span class="legend-left"><i class="legend-dot" style="background:var(--nb-accent-emerald)"></i>Consommation</span><strong>80&nbsp;%</strong></div><div class="legend-item"><span class="legend-left"><i class="legend-dot" style="background:var(--nb-accent-blue)"></i>Autres usages</span><strong>20&nbsp;%</strong></div></div></div><p class="chart-caption">Dans tes notes, environ 60&nbsp;% sont associés à une consommation rapide.</p></div>
+        <div class="nb-chart"><h4><i class="fas fa-fish"></i> Destination des prises</h4><div class="donut-wrap"><div class="donut" style="background:conic-gradient(var(--nb-accent-emerald) 0 86%,var(--nb-accent-blue) 86% 100%)"><div class="donut-center">86&nbsp;%<br><small>conso.</small></div></div><div class="legend-list"><div class="legend-item"><span class="legend-left"><i class="legend-dot" style="background:var(--nb-accent-emerald)"></i>Consommation</span><strong>80&nbsp;%</strong></div><div class="legend-item"><span class="legend-left"><i class="legend-dot" style="background:var(--nb-accent-blue)"></i>Autres usages</span><strong>20&nbsp;%</strong></div></div></div><p class="chart-caption">Dans tes notes, environ 40&nbsp;% sont associés à une consommation rapide.</p></div>
       </div>
       <div class="inline-points"><div class="inline-point"><h4><i class="fas fa-people-group"></i> Depuis 1950</h4><p>La population mondiale a doublé et les besoins en nourriture ont augmenté fortement, notamment pour le poisson.</p></div><div class="inline-point"><h4><i class="fas fa-water"></i> Pêche et aquaculture</h4><p>Le chalutage et l’essor de l’aquaculture augmentent la pression sur les milieux et les ressources.</p></div></div>
     </section>
@@ -380,7 +385,7 @@ html.dark .map-image{filter:brightness(.78) saturate(.8);}
     </section>
 
     <section class="part" id="s2-3"><h3 class="part-heading"><span class="num">III.</span> Les ressources de la mer de Chine méridionale</h3>
-      <div class="data-row"><div class="data-card"><span class="value">10&nbsp;Mt</span><span class="label">Nodules polymétalliques — chiffre noté</span></div><div class="data-card"><span class="value">≈ 7,3&nbsp;Md</span><span class="label">Barils de pétrole — chiffre noté</span></div><div class="data-card"><span class="value">≈ 2,5&nbsp;B m³</span><span class="label">Gaz naturel — chiffre noté</span></div><div class="data-card"><span class="value">0,5&nbsp;% / 10,4&nbsp;%</span><span class="label">Parts mondiales notées</span></div></div>
+      <div class="data-row"><div class="data-card"><span class="value">10&nbsp;Mt</span><span class="label">Nodules polymétalliques — chiffre noté</span></div><div class="data-card"><span class="value">≈ 7,7&nbsp;Md</span><span class="label">Barils de pétrole — chiffre noté</span></div><div class="data-card"><span class="value">≈ 2,5&nbsp;B m³</span><span class="label">Gaz naturel — chiffre noté</span></div><div class="data-card"><span class="value">0,5&nbsp;% / 13,4&nbsp;%</span><span class="label">Parts mondiales notées</span></div></div>
       <p>Les ressources renforcent la valeur stratégique des ZEE et expliquent une partie des convoitises autour de cet espace.</p>
       <div class="inline-points compact-3">
         <div class="inline-point"><h4><i class="fas fa-scale-balanced"></i> De jure</h4><p>En théorie, conformément au droit et aux règles juridiques.</p></div>
