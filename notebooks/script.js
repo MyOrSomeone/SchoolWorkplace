@@ -105,7 +105,7 @@ async function selectNotebook(course) {
 
     const iframe = document.getElementById("notebook-iframe");
     if (iframe) {
-        iframe.src = `${getBaseUrl()}notebooks/data/${encodeURIComponent(course)}.html`;
+        iframe.src = `${getBaseUrl()}data/${encodeURIComponent(course)}.html`;
     }
 
     document.getElementById("notebook-selection-view")?.classList.add("hidden");
