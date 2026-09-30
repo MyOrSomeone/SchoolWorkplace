@@ -1837,377 +1837,199 @@ function switchTab(evt, tabId) {
 
     
     <!-- CARTE MENTALE INTERACTIVE & EXPLORABLE -->
-<div class="my-10 max-w-6xl mx-auto px-2">
+    <div class="my-10 max-w-6xl mx-auto px-2">
 
-  <!-- Barre d'outils / En-tête -->
-  <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-3 bg-[var(--nb-gold-soft)] p-4 rounded-xl border border-[var(--nb-border)]">
-    <div>
-      <h2 class="text-xl font-bold text-[var(--nb-gold)] flex items-center gap-2">
-        <i class="fas fa-brain"></i> Carte Mentale Interactive : La Conscience
-      </h2>
-      <p class="text-xs text-[var(--nb-text-muted)] mt-0.5">
-        Glisse avec ton doigt pour te déplacer | Pince ou utilise + / - pour zoomer
-      </p>
+      <!-- Barre d'outils / En-tête -->
+      <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-3 bg-[var(--nb-gold-soft)] p-4 rounded-xl border border-[var(--nb-border)]">
+        <div>
+          <h2 class="text-xl font-bold text-[var(--nb-gold)] flex items-center gap-2">
+            <i class="fas fa-brain"></i> Carte Mentale Interactive : La Conscience
+          </h2>
+          <p class="text-xs text-[var(--nb-text-muted)] mt-0.5">
+            Glisse avec ton doigt pour te déplacer | Pince ou utilise + / - pour zoomer
+          </p>
+        </div>
+        
+        <!-- Boutons de contrôle Zoom & Pan -->
+        <div class="flex items-center gap-1 bg-[var(--nb-bg-card)] p-1.5 rounded-lg border border-[var(--nb-border)] shadow-sm">
+          <button id="mm-zoom-in" class="px-2.5 py-1 text-xs font-bold rounded hover:bg-[var(--nb-gold-soft)] text-[var(--nb-gold)] transition" title="Zoomer">
+            <i class="fas fa-search-plus"></i>
+          </button>
+          <button id="mm-zoom-out" class="px-2.5 py-1 text-xs font-bold rounded hover:bg-[var(--nb-gold-soft)] text-[var(--nb-gold)] transition" title="Dézoomer">
+            <i class="fas fa-search-minus"></i>
+          </button>
+          <button id="mm-reset" class="px-2.5 py-1 text-xs font-bold rounded hover:bg-[var(--nb-gold-soft)] text-[var(--nb-gold)] transition" title="Réinitialiser la vue">
+            <i class="fas fa-compress-arrows-alt"></i>
+          </button>
+          <div class="w-[1px] h-4 bg-[var(--nb-border)] mx-1"></div>
+          <button id="mm-toggle-all" class="px-3 py-1 text-xs font-semibold rounded bg-[var(--nb-gold)] text-white hover:opacity-90 transition">
+            <i class="fas fa-layer-group mr-1"></i> Unfold All
+          </button>
+        </div>
+      </div>
+
+      <!-- Zone d'affichage interactive (Bloque le scroll de la page sur mobile grâce à touch-none) -->
+      <div id="mm-viewport" class="relative h-[580px] sm:h-[680px] overflow-hidden rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-bg-card)] cursor-grab active:cursor-grabbing select-none shadow-inner touch-none overscroll-none" style="margin-inline: clamp(-20rem, calc((60rem - 100vw) / 2), 0rem);">
+        
+        <!-- Quadrillage décoratif en arrière-plan -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(var(--nb-gold) 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+        <!-- Conteneur Transformable (Canvas) -->
+        <div id="mm-canvas" class="absolute left-1/2 top-1/2 w-[1100px] h-[850px] origin-center will-change-transform" style="transform: translate3d(-50%, -50%, 0) scale(1);">
+          
+          <!-- Lignes de connexions SVG dynamiques -->
+          <svg id="mm-svg" class="absolute inset-0 w-full h-full pointer-events-none z-0">
+            <!-- Généré dynamiquement en JS -->
+          </svg>
+
+          <!-- NOEUD CENTRAL (HUB) -->
+          <div id="mm-node-center" class="absolute left-[420px] top-[340px] z-20 cursor-pointer group">
+            <div class="relative bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 text-white px-8 py-5 rounded-3xl shadow-2xl border-4 border-[var(--nb-bg-card)] text-center transform group-hover:scale-105 transition-all duration-300 w-64">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-300 text-amber-950 text-[10px] font-black px-3 py-0.5 rounded-full uppercase tracking-widest shadow-md">
+                Thème Central
+              </div>
+              <i class="fas fa-sun text-2xl text-amber-200 mb-1 animate-pulse"></i>
+              <h3 class="text-xl font-black tracking-wider">LA CONSCIENCE</h3>
+              <p class="text-[11px] text-amber-100 italic mt-0.5">L'expérience de soi, du monde et du temps</p>
+              <span class="inline-block mt-2 text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-sans font-semibold">Clique pour tout basculer</span>
+            </div>
+          </div>
+
+          <!-- BRANCHE 1 : Instinct vs Conscience -->
+          <div class="mm-branch absolute left-[60px] top-[40px] z-10 w-[310px]" data-node="1">
+            <div class="bg-[var(--nb-bg-card)] border-2 border-red-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
+              <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(1)">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-red-500/15 text-red-500 flex items-center justify-center font-bold text-base">
+                    <i class="fas fa-paw"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-red-500 uppercase tracking-wide">Axe 1</span>
+                    <h4 class="font-bold text-sm text-[var(--nb-text)]">Instinct <span class="text-red-500">≠</span> Conscience</h4>
+                  </div>
+                </div>
+                <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-1"></i>
+              </div>
+
+              <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
+                <p><i class="fas fa-angle-right text-red-500 mr-1"></i> <strong>Différence de nature :</strong> Rupture biologique irréductible entre l'homme et l'animal.</p>
+                <div class="bg-[var(--nb-gold-soft)] p-2 rounded-lg italic border-l-2 border-red-500 my-1">
+                  <strong>Kant :</strong> Posséder le « Je » élève l'homme infiniment au-dessus des animaux.
+                </div>
+                <p><i class="fas fa-angle-right text-red-500 mr-1"></i> <strong>Différence de degré :</strong></p>
+                <ul class="ml-4 space-y-1 text-[11px] text-[var(--nb-text-muted)]">
+                  <li>• <em>Conscience spontanée :</em> perception immédiate du monde.</li>
+                  <li>• <em>Conscience réflexive :</em> retour critique sur soi.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- BRANCHE 2 : Descartes & Le Cogito -->
+          <div class="mm-branch absolute right-[60px] top-[40px] z-10 w-[310px]" data-node="2">
+            <div class="bg-[var(--nb-bg-card)] border-2 border-blue-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
+              <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(2)">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-blue-500/15 text-blue-500 flex items-center justify-center font-bold text-base">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-blue-500 uppercase tracking-wide">Axe 2</span>
+                    <h4 class="font-bold text-sm text-[var(--nb-text)]">Descartes (Le Cogito)</h4>
+                  </div>
+                </div>
+                <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-2"></i>
+              </div>
+
+              <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
+                <p><i class="fas fa-angle-right text-blue-500 mr-1"></i> <strong>Doute hyperbolique :</strong> Rejeter tout l'incertain pour trouver le fondement de la connaissance.</p>
+                <p><i class="fas fa-angle-right text-blue-500 mr-1"></i> <strong>Évidence intuitive :</strong> <q>Je pense, donc je suis</q> &rArr; <q>Je suis, j'existe</q>.</p>
+                <p><i class="fas fa-angle-right text-blue-500 mr-1"></i> <strong>Pure intériorité :</strong> L'esprit est entièrement transparent à lui-même.</p>
+                <div class="bg-blue-500/10 p-2 rounded-lg text-[11px] text-blue-600 dark:text-blue-300 border border-blue-500/20">
+                  <i class="fas fa-link mr-1"></i> <strong>Transition :</strong> <em>"Pour penser quelque chose, il faut un monde"</em> (Critique d'Hegel).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BRANCHE 3 : Hegel & La Pratique -->
+          <div class="mm-branch absolute right-[20px] top-[370px] z-10 w-[310px]" data-node="3">
+            <div class="bg-[var(--nb-bg-card)] border-2 border-emerald-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
+              <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(3)">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center font-bold text-base">
+                    <i class="fas fa-tools"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-wide">Axe 3</span>
+                    <h4 class="font-bold text-sm text-[var(--nb-text)]">Hegel (Conscience Pratique)</h4>
+                  </div>
+                </div>
+                <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-3"></i>
+              </div>
+
+              <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
+                <p><i class="fas fa-angle-right text-emerald-500 mr-1"></i> <strong>Prise de conscience pratique :</strong> L'intériorité théorique est insuffisante.</p>
+                <p><i class="fas fa-angle-right text-emerald-500 mr-1"></i> <strong>Transformation du monde :</strong> C'est par l'action, l'art et le travail que la conscience contemple son esprit inscrit dans le réel.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BRANCHE 4 : Sartre & La Liberté -->
+          <div class="mm-branch absolute left-[390px] bottom-[30px] z-10 w-[320px]" data-node="4">
+            <div class="bg-[var(--nb-bg-card)] border-2 border-amber-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
+              <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(4)">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base">
+                    <i class="fas fa-feather-alt"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-amber-500 uppercase tracking-wide">Axe 4</span>
+                    <h4 class="font-bold text-sm text-[var(--nb-text)]">Sartre (La Liberté Humaine)</h4>
+                  </div>
+                </div>
+                <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-4"></i>
+              </div>
+
+              <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
+                <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Délaissement :</strong> Absence de Dieu &rArr; pas de valeurs préétablies.</p>
+                <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Choix responsable :</strong> L'homme est condamné à être libre.</p>
+                <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Angoisse & Mauvaise foi :</strong> Fuir sa responsabilité en inventant des excuses.</p>
+                <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Projet / Engagement :</strong> L'homme est la somme de ses actes [Désespoir].</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BRANCHE 5 : Identité Personnelle -->
+          <div class="mm-branch absolute left-[20px] top-[370px] z-10 w-[310px]" data-node="5">
+            <div class="bg-[var(--nb-bg-card)] border-2 border-purple-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
+              <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(5)">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-purple-500/15 text-purple-500 flex items-center justify-center font-bold text-base">
+                    <i class="fas fa-id-card"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-purple-500 uppercase tracking-wide">Axe 5</span>
+                    <h4 class="font-bold text-sm text-[var(--nb-text)]">Identité Personnelle</h4>
+                  </div>
+                </div>
+                <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-5"></i>
+              </div>
+
+              <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
+                <p><i class="fas fa-angle-right text-purple-500 mr-1"></i> <strong>Distinction essentielle :</strong> Homme (biologique) <span class="text-purple-500 font-bold">≠</span> Personne (sujet moral et juridique).</p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-300 text-[10px] font-semibold">Épistémologique</span>
+                  <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-300 text-[10px] font-semibold">Existentiel</span>
+                  <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-300 text-[10px] font-semibold">Moral</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-    
-    <!-- Boutons de contrôle Zoom & Pan -->
-    <div class="flex items-center gap-1 bg-[var(--nb-bg-card)] p-1.5 rounded-lg border border-[var(--nb-border)] shadow-sm">
-      <button id="mm-zoom-in" class="px-2.5 py-1 text-xs font-bold rounded hover:bg-[var(--nb-gold-soft)] text-[var(--nb-gold)] transition" title="Zoomer">
-        <i class="fas fa-search-plus"></i>
-      </button>
-      <button id="mm-zoom-out" class="px-2.5 py-1 text-xs font-bold rounded hover:bg-[var(--nb-gold-soft)] text-[var(--nb-gold)] transition" title="Dézoomer">
-        <i class="fas fa-search-minus"></i>
-      </button>
-      <button id="mm-reset" class="px-2.5 py-1 text-xs font-bold rounded hover:bg-[var(--nb-gold-soft)] text-[var(--nb-gold)] transition" title="Réinitialiser la vue">
-        <i class="fas fa-compress-arrows-alt"></i>
-      </button>
-      <div class="w-[1px] h-4 bg-[var(--nb-border)] mx-1"></div>
-      <button id="mm-toggle-all" class="px-3 py-1 text-xs font-semibold rounded bg-[var(--nb-gold)] text-white hover:opacity-90 transition">
-        <i class="fas fa-layer-group mr-1"></i> Tout Déplier
-      </button>
-    </div>
-  </div>
-
-  <!-- Zone d'affichage interactive (Bloque le scroll de la page sur mobile grâce à touch-none) -->
-  <div id="mm-viewport" class="relative w-full h-[580px] sm:h-[680px] overflow-hidden rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-bg-card)] cursor-grab active:cursor-grabbing select-none shadow-inner touch-none overscroll-none">
-    
-    <!-- Quadrillage décoratif en arrière-plan -->
-    <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(var(--nb-gold) 1px, transparent 1px); background-size: 24px 24px;"></div>
-
-    <!-- Conteneur Transformable (Canvas) -->
-    <div id="mm-canvas" class="absolute left-1/2 top-1/2 w-[1100px] h-[850px] origin-center will-change-transform" style="transform: translate3d(-50%, -50%, 0) scale(1);">
-      
-      <!-- Lignes de connexions SVG dynamiques -->
-      <svg id="mm-svg" class="absolute inset-0 w-full h-full pointer-events-none z-0">
-        <!-- Généré dynamiquement en JS -->
-      </svg>
-
-      <!-- NOEUD CENTRAL (HUB) -->
-      <div id="mm-node-center" class="absolute left-[420px] top-[340px] z-20 cursor-pointer group">
-        <div class="relative bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 text-white px-8 py-5 rounded-3xl shadow-2xl border-4 border-[var(--nb-bg-card)] text-center transform group-hover:scale-105 transition-all duration-300 w-64">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-300 text-amber-950 text-[10px] font-black px-3 py-0.5 rounded-full uppercase tracking-widest shadow-md">
-            Thème Central
-          </div>
-          <i class="fas fa-sun text-2xl text-amber-200 mb-1 animate-pulse"></i>
-          <h3 class="text-xl font-black tracking-wider">LA CONSCIENCE</h3>
-          <p class="text-[11px] text-amber-100 italic mt-0.5">L'expérience de soi, du monde et du temps</p>
-          <span class="inline-block mt-2 text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-sans font-semibold">Clique pour tout basculer</span>
-        </div>
-      </div>
-
-      <!-- BRANCHE 1 : Instinct vs Conscience -->
-      <div class="mm-branch absolute left-[60px] top-[40px] z-10 w-[310px]" data-node="1">
-        <div class="bg-[var(--nb-bg-card)] border-2 border-red-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
-          <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(1)">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-red-500/15 text-red-500 flex items-center justify-center font-bold text-base">
-                <i class="fas fa-paw"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-bold text-red-500 uppercase tracking-wide">Axe 1</span>
-                <h4 class="font-bold text-sm text-[var(--nb-text)]">Instinct <span class="text-red-500">≠</span> Conscience</h4>
-              </div>
-            </div>
-            <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-1"></i>
-          </div>
-
-          <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
-            <p><i class="fas fa-angle-right text-red-500 mr-1"></i> <strong>Différence de nature :</strong> Rupture biologique irréductible entre l'homme et l'animal.</p>
-            <div class="bg-[var(--nb-gold-soft)] p-2 rounded-lg italic border-l-2 border-red-500 my-1">
-              <strong>Kant :</strong> Posséder le « Je » élève l'homme infiniment au-dessus des animaux.
-            </div>
-            <p><i class="fas fa-angle-right text-red-500 mr-1"></i> <strong>Différence de degré :</strong></p>
-            <ul class="ml-4 space-y-1 text-[11px] text-[var(--nb-text-muted)]">
-              <li>• <em>Conscience spontanée :</em> perception immédiate du monde.</li>
-              <li>• <em>Conscience réflexive :</em> retour critique sur soi.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BRANCHE 2 : Descartes & Le Cogito -->
-      <div class="mm-branch absolute right-[60px] top-[40px] z-10 w-[310px]" data-node="2">
-        <div class="bg-[var(--nb-bg-card)] border-2 border-blue-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
-          <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(2)">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-blue-500/15 text-blue-500 flex items-center justify-center font-bold text-base">
-                <i class="fas fa-lightbulb"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-bold text-blue-500 uppercase tracking-wide">Axe 2</span>
-                <h4 class="font-bold text-sm text-[var(--nb-text)]">Descartes (Le Cogito)</h4>
-              </div>
-            </div>
-            <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-2"></i>
-          </div>
-
-          <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
-            <p><i class="fas fa-angle-right text-blue-500 mr-1"></i> <strong>Doute hyperbolique :</strong> Rejeter tout l'incertain pour trouver le fondement de la connaissance.</p>
-            <p><i class="fas fa-angle-right text-blue-500 mr-1"></i> <strong>Évidence intuitive :</strong> <q>Je pense, donc je suis</q> &rArr; <q>Je suis, j'existe</q>.</p>
-            <p><i class="fas fa-angle-right text-blue-500 mr-1"></i> <strong>Pure intériorité :</strong> L'esprit est entièrement transparent à lui-même.</p>
-            <div class="bg-blue-500/10 p-2 rounded-lg text-[11px] text-blue-600 dark:text-blue-300 border border-blue-500/20">
-              <i class="fas fa-link mr-1"></i> <strong>Transition :</strong> <em>"Pour penser quelque chose, il faut un monde"</em> (Critique d'Hegel).
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BRANCHE 3 : Hegel & La Pratique -->
-      <div class="mm-branch absolute right-[20px] top-[370px] z-10 w-[310px]" data-node="3">
-        <div class="bg-[var(--nb-bg-card)] border-2 border-emerald-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
-          <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(3)">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center font-bold text-base">
-                <i class="fas fa-tools"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-wide">Axe 3</span>
-                <h4 class="font-bold text-sm text-[var(--nb-text)]">Hegel (Conscience Pratique)</h4>
-              </div>
-            </div>
-            <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-3"></i>
-          </div>
-
-          <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
-            <p><i class="fas fa-angle-right text-emerald-500 mr-1"></i> <strong>Prise de conscience pratique :</strong> L'intériorité théorique est insuffisante.</p>
-            <p><i class="fas fa-angle-right text-emerald-500 mr-1"></i> <strong>Transformation du monde :</strong> C'est par l'action, l'art et le travail que la conscience contemple son esprit inscrit dans le réel.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- BRANCHE 4 : Sartre & La Liberté -->
-      <div class="mm-branch absolute left-[390px] bottom-[30px] z-10 w-[320px]" data-node="4">
-        <div class="bg-[var(--nb-bg-card)] border-2 border-amber-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
-          <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(4)">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base">
-                <i class="fas fa-feather-alt"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-bold text-amber-500 uppercase tracking-wide">Axe 4</span>
-                <h4 class="font-bold text-sm text-[var(--nb-text)]">Sartre (La Liberté Humaine)</h4>
-              </div>
-            </div>
-            <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-4"></i>
-          </div>
-
-          <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
-            <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Délaissement :</strong> Absence de Dieu &rArr; pas de valeurs préétablies.</p>
-            <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Choix responsable :</strong> L'homme est condamné à être libre.</p>
-            <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Angoisse & Mauvaise foi :</strong> Fuir sa responsabilité en inventant des excuses.</p>
-            <p><i class="fas fa-angle-right text-amber-500 mr-1"></i> <strong>Projet / Engagement :</strong> L'homme est la somme de ses actes [Désespoir].</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- BRANCHE 5 : Identité Personnelle -->
-      <div class="mm-branch absolute left-[20px] top-[370px] z-10 w-[310px]" data-node="5">
-        <div class="bg-[var(--nb-bg-card)] border-2 border-purple-500/40 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
-          <div class="mm-branch-header flex items-center justify-between cursor-pointer" onclick="toggleBranch(5)">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-purple-500/15 text-purple-500 flex items-center justify-center font-bold text-base">
-                <i class="fas fa-id-card"></i>
-              </div>
-              <div>
-                <span class="text-[10px] font-bold text-purple-500 uppercase tracking-wide">Axe 5</span>
-                <h4 class="font-bold text-sm text-[var(--nb-text)]">Identité Personnelle</h4>
-              </div>
-            </div>
-            <i class="fas fa-chevron-down text-xs text-[var(--nb-text-muted)] transition-transform duration-300 mm-icon-5"></i>
-          </div>
-
-          <div class="mm-branch-body hidden mt-3 pt-3 border-t border-[var(--nb-border)] text-xs space-y-2 text-[var(--nb-text)]">
-            <p><i class="fas fa-angle-right text-purple-500 mr-1"></i> <strong>Distinction essentielle :</strong> Homme (biologique) <span class="text-purple-500 font-bold">≠</span> Personne (sujet moral et juridique).</p>
-            <div class="flex flex-wrap gap-1 mt-2">
-              <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-300 text-[10px] font-semibold">Épistémologique</span>
-              <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-300 text-[10px] font-semibold">Existentiel</span>
-              <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-300 text-[10px] font-semibold">Moral</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- SCRIPTS HAUTEMENT OPTIMISÉS POUR MOBILE -->
-<script>
-(function() {
-  let scale = 0.9;
-  let panX = 0;
-  let panY = 0;
-  let isDragging = false;
-  let startX = 0, startY = 0;
-  
-  // Pour le pincement (pinch-to-zoom) sur tactile
-  let initialPinchDistance = null;
-  let initialScale = scale;
-
-  const viewport = document.getElementById('mm-viewport');
-  const canvas = document.getElementById('mm-canvas');
-  const svg = document.getElementById('mm-svg');
-  const centerNode = document.getElementById('mm-node-center');
-
-  // Mise à jour fluide uniquement par Transform3D
-  function updateTransform() {
-    canvas.style.transform = `translate3d(calc(-50% + ${panX}px), calc(-50% + ${panY}px), 0) scale(${scale})`;
-  }
-
-  // Calcul unique des connexions SVG (ne s'exécute PAS pendant le glissement)
-  function drawConnections() {
-    const cX = centerNode.offsetLeft + centerNode.offsetWidth / 2;
-    const cY = centerNode.offsetTop + centerNode.offsetHeight / 2;
-
-    const branches = document.querySelectorAll('.mm-branch');
-    let svgHtml = '';
-
-    const colors = {
-      '1': '#ef4444',
-      '2': '#3b82f6',
-      '3': '#10b981',
-      '4': '#f59e0b',
-      '5': '#a855f7'
-    };
-
-    branches.forEach(branch => {
-      const id = branch.getAttribute('data-node');
-      const bX = branch.offsetLeft + branch.offsetWidth / 2;
-      const bY = branch.offsetTop + branch.offsetHeight / 2;
-
-      const deltaX = bX - cX;
-      const cpX1 = cX + deltaX * 0.5;
-      const cpY1 = cY;
-      const cpX2 = cX + deltaX * 0.5;
-      const cpY2 = bY;
-
-      const pathColor = colors[id] || '#b8905a';
-
-      svgHtml += `<path d="M ${cX} ${cY} C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${bX} ${bY}" 
-                        fill="none" 
-                        stroke="${pathColor}" 
-                        stroke-width="3" 
-                        stroke-dasharray="6,4" 
-                        opacity="0.6"/>`;
-    });
-
-    svg.innerHTML = svgHtml;
-  }
-
-  // --- Gestion du Glissement (Pan) & Bloqueur de Scroll ---
-  viewport.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('.mm-branch-header') || e.target.closest('#mm-node-center')) return;
-    isDragging = true;
-    startX = e.clientX - panX;
-    startY = e.clientY - panY;
-    viewport.setPointerCapture(e.pointerId);
-  });
-
-  viewport.addEventListener('pointermove', (e) => {
-    if (!isDragging) return;
-    e.preventDefault(); // Bloque le scroll de la page web
-    panX = e.clientX - startX;
-    panY = e.clientY - startY;
-    requestAnimationFrame(updateTransform);
-  });
-
-  viewport.addEventListener('pointerup', (e) => {
-    isDragging = false;
-    try { viewport.releasePointerCapture(e.pointerId); } catch(err) {}
-  });
-
-  viewport.addEventListener('pointercancel', () => { isDragging = false; });
-
-  // --- Support du Pinch-to-Zoom Tactile sur Mobile ---
-  viewport.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 2) {
-      isDragging = false;
-      initialPinchDistance = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      initialScale = scale;
-    }
-  }, { passive: true });
-
-  viewport.addEventListener('touchmove', (e) => {
-    if (e.touches.length === 2 && initialPinchDistance) {
-      e.preventDefault();
-      const currentDistance = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      const zoomFactor = currentDistance / initialPinchDistance;
-      scale = Math.min(Math.max(0.4, initialScale * zoomFactor), 2.0);
-      requestAnimationFrame(updateTransform);
-    }
-  }, { passive: false });
-
-  viewport.addEventListener('touchend', () => { initialPinchDistance = null; });
-
-  // --- Zoom à la molette ---
-  viewport.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
-    scale = Math.min(Math.max(0.4, scale * zoomFactor), 2.0);
-    requestAnimationFrame(updateTransform);
-  }, { passive: false });
-
-  // --- Boutons de contrôle ---
-  document.getElementById('mm-zoom-in').onclick = () => { scale = Math.min(2.0, scale * 1.25); updateTransform(); };
-  document.getElementById('mm-zoom-out').onclick = () => { scale = Math.max(0.4, scale / 1.25); updateTransform(); };
-  document.getElementById('mm-reset').onclick = () => { scale = 0.9; panX = 0; panY = 0; updateTransform(); };
-
-  // --- Déplier / Replier avec mise à jour contrôlée des lignes SVG ---
-  window.toggleBranch = function(id) {
-    const branch = document.querySelector(`.mm-branch[data-node="${id}"]`);
-    const body = branch.querySelector('.mm-branch-body');
-    const icon = branch.querySelector(`.mm-icon-${id}`);
-
-    if (body.classList.contains('hidden')) {
-      body.classList.remove('hidden');
-      icon.style.transform = 'rotate(180deg)';
-    } else {
-      body.classList.add('hidden');
-      icon.style.transform = 'rotate(0deg)';
-    }
-    setTimeout(drawConnections, 60);
-  };
-
-  let allOpen = false;
-  const toggleAllBtn = document.getElementById('mm-toggle-all');
-  
-  function toggleAll() {
-    allOpen = !allOpen;
-    document.querySelectorAll('.mm-branch').forEach(branch => {
-      const id = branch.getAttribute('data-node');
-      const body = branch.querySelector('.mm-branch-body');
-      const icon = branch.querySelector(`.mm-icon-${id}`);
-      if (allOpen) {
-        body.classList.remove('hidden');
-        if (icon) icon.style.transform = 'rotate(180deg)';
-      } else {
-        body.classList.add('hidden');
-        if (icon) icon.style.transform = 'rotate(0deg)';
-      }
-    });
-    toggleAllBtn.innerHTML = allOpen 
-      ? '<i class="fas fa-compress-alt mr-1"></i> Tout Replier' 
-      : '<i class="fas fa-layer-group mr-1"></i> Tout Déplier';
-    setTimeout(drawConnections, 60);
-  }
-
-  toggleAllBtn.onclick = toggleAll;
-  centerNode.onclick = toggleAll;
-
-  // Initialisation
-  setTimeout(() => {
-    updateTransform();
-    drawConnections();
-  }, 100);
-
-})();
-</script>
 
   </div>
 </div>
