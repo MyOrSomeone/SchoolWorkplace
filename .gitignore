@@ -24,6 +24,7 @@ backup.html
 notebooks/*
 !notebooks/*notebooks.css
 !notebooks/*notebooks.js
+!notebooks/*index.html
 
 !notebooks/data
 !notebooks/data/*.html

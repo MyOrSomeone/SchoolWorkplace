@@ -1,0 +1,33 @@
+<div id="pages"></div>
+
+<script>
+const owner = "MyOrSomeone";
+const repo = "SchoolWorkplace";
+const folder = "data";
+
+async function loadPages() {
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/notebooks/${folder}`;
+
+    const response = await fetch(url);
+    const files = await response.json();
+
+    const htmlFiles = files.filter(file =>
+        file.type === "file" &&
+        file.name.endsWith(".html")
+    );
+
+    const container = document.getElementById("pages");
+
+    for (const file of htmlFiles) {
+        const link = document.createElement("a");
+
+        link.href = `${folder}/${file.name}`;
+        link.textContent = file.name;
+
+        container.appendChild(link);
+        container.appendChild(document.createElement("br"));
+    }
+}
+
+loadPages();
+</script>
