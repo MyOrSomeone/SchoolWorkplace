@@ -1,33 +1,361 @@
-<div id="pages"></div>
+<!doctype html>
+<html lang="fr" class="h-full overflow-hidden">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SchoolWorkspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            DEFAULT: "#EFECE6",
+                            dark: "#121211",
+                            gold: "#C5A059",
+                            border: "#D3C9B8",
+                            borderDark: "#2C2B28",
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+    <!-- Cahiers de cours IA : rendu LaTeX (maths + chimie via mhchem) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/mhchem.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            touch-action: manipulation;
+        }
+    </style>
+
+</head>
+<body class="bg-cream dark:bg-cream-dark flex h-full select-none flex-col font-sans text-stone-900 antialiased transition-colors duration-300 dark:text-stone-100">
+    <header class="border-cream-gold/30 dark:border-cream-borderDark bg-cream dark:bg-cream-dark z-40 grid w-full shrink-0 grid-flow-col items-center border-b px-6 py-3 backdrop-blur">
+        <div class="flex items-center gap-2.5">
+            <div class="bg-cream-gold flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-sm">
+                <i class="fa-solid fa-feather text-base"></i>
+            </div>
+            <span class="text-base font-bold tracking-wide">School Workspace</span>
+        </div>
+
+        <div class="justify-self-end flex items-center gap-2 relative">
+            <button onclick="toggleTheme()" class="border-cream-border dark:border-cream-borderDark flex h-8 w-8 items-center justify-center rounded-xl border transition hover:bg-stone-200 dark:hover:bg-stone-800">
+                <i id="theme-icon" class="fa-solid fa-moon text-xs"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Modal Cahiers Numériques (Plein écran avec boutons flottants) -->
+    <div id="notebook-modal" class="relative inset-0 z-50 bg-cream dark:bg-cream-dark p-3 sm:p-5 w-screen h-screen overflow-hidden">
+
+        <h2 id="notebook-note" class="note text-center text-sm text-stone-500 mt-2 mb-1">Note : Tous les cahiers ne sont pas encore disponibles, certains sont incomplets.</br>Celui de Philosophie est souvent à jour. Pour l'instant celui d'Histoire est presque complet sur la séquence 1.</h2>
+
+
+        <!-- Boutons Flottants : Haut Gauche (Navigation) -->
+        <div id="notebook-floating-left" class="absolute top-4 left-4 z-20 flex items-center gap-2">
+            <button id="notebook-back-btn" onclick="backToNotebookList()" class="hidden bg-white/80 dark:bg-stone-900/80 text-cream-gold border border-cream-border dark:border-cream-borderDark hover:scale-105 shadow-lg flex h-10 w-10 items-center justify-center rounded-xl backdrop-blur-md transition" title="Retour aux cours">
+                <i class="fa-solid fa-arrow-left text-sm"></i>
+            </button>
+            <div id="notebook-modal-title" class="hidden sm:flex bg-white/80 dark:bg-stone-900/80 border border-cream-border dark:border-cream-borderDark text-cream-gold px-3.5 py-2 rounded-xl text-xs font-bold shadow-lg backdrop-blur-md items-center gap-2">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <span>Cahiers Numériques</span>
+            </div>
+        </div>
+
+        <!-- Boutons Flottants : Haut Droite (Thème, Panneau IA, Fermer) -->
+
+        <!-- VUE 1 : Galerie des Cours -->
+        <div id="notebook-selection-view" class="h-full w-full pt-16 flex flex-col max-w-5xl mx-auto overflow-y-auto">
+            <div class="mb-4 flex items-center justify-between">
+                <h2 class="text-base font-bold text-cream-gold">Cours disponibles :</h2>
+            </div>
+            <div id="notebook-tabs" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                <span class="text-xs text-stone-500">Chargement…</span>
+            </div>
+        </div>
+
+        <!-- VUE 2 : Espace de Travail (Bloc Cours + Bloc Création Séparés) -->
+        <div id="notebook-workspace-view" class="hidden h-full w-full pt-14 pb-2 flex flex-col md:flex-row gap-4 min-h-0 overflow-hidden relative">
+            
+            <!-- Bloc 1 : Le Cours dans son bloc indépendant avec coins arrondis -->
+            <div id="notebook-preview-container" class="flex-1 h-full rounded-2xl shadow-xl border border-cream-border dark:border-cream-borderDark bg-white dark:bg-stone-900 overflow-hidden relative">
+                <iframe id="notebook-iframe" onload="syncIframeTheme()" class="w-full h-full border-0" title="Prévisualisation du cours"></iframe>
+            </div>
+        </div>
+    </div>
 
 <script>
 const owner = "MyOrSomeone";
 const repo = "SchoolWorkplace";
-const folder = "data";
+const folder = "notebooks/data";
 
-async function loadPages() {
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/notebooks/${folder}`;
 
-    const response = await fetch(url);
-    const files = await response.json();
+function escapeHtmlNb(s) {
+    return String(s || "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    }[c]));
+}
 
-    const htmlFiles = files.filter(file =>
-        file.type === "file" &&
-        file.name.endsWith(".html")
-    );
+function setCreationPanelVisible(visible) {
+    const panel = document.getElementById("notebook-creation-panel");
+    const icon = document.getElementById("notebook-toggle-icon");
 
-    const container = document.getElementById("pages");
+    if (!panel) return;
 
-    for (const file of htmlFiles) {
-        const link = document.createElement("a");
-
-        link.href = `${folder}/${file.name}`;
-        link.textContent = file.name;
-
-        container.appendChild(link);
-        container.appendChild(document.createElement("br"));
+    if (visible) {
+        panel.classList.remove("hidden");
+        if (icon) icon.className = "fa-solid fa-sidebar-flip text-sm";
+    } else {
+        panel.classList.add("hidden");
+        if (icon) icon.className = "fa-solid fa-wand-magic-sparkles text-sm";
     }
 }
 
-loadPages();
+async function loadNotebookSources() {
+    const listEl = document.getElementById("notebook-sources-list");
+
+    if (!listEl) return;
+
+    listEl.innerHTML = '<p class="text-stone-500">Chargement…</p>';
+
+    try {
+        const res = await fetch(
+            `/api/notebooks/${encodeURIComponent(currentCourse)}/sources`
+        );
+
+        const data = await res.json();
+
+        if (!data.success) {
+            throw new Error(data.error || "Erreur inconnue");
+        }
+
+        notebookSourcesState = {};
+
+        (data.sources || [])
+            .sort((a, b) => (a.ordre || 0) - (b.ordre || 0))
+            .forEach(s => {
+                notebookSourcesState[s.id] = {
+                    ...s,
+                    selected: false
+                };
+            });
+
+        renderNotebookSources();
+
+    } catch (e) {
+        listEl.innerHTML =
+            '<p class="text-red-500">Erreur : ' +
+            escapeHtmlNb(e.message) +
+            '</p>';
+    }
+}
+
+
+async function selectNotebook(course) {
+    currentCourse = course;
+
+    // 1. Titre dans le header
+    const titleSpan =
+        document.getElementById("notebook-modal-title")
+            ?.querySelector("span");
+
+    if (titleSpan) {
+        titleSpan.textContent = course;
+    }
+
+    // 2. Charger le cours dans l'iframe
+    const iframe = document.getElementById("notebook-iframe");
+
+    if (iframe) {
+        iframe.src =
+            `/notebooks/data/${encodeURIComponent(course)}.html`;
+    }
+
+    // 3. Basculer l'affichage
+    document
+        .getElementById("notebook-selection-view")
+        ?.classList.add("hidden");
+
+    document
+        .getElementById("notebook-note")
+        ?.classList.add("hidden");
+
+    const workspace =
+        document.getElementById("notebook-workspace-view");
+
+    if (workspace) {
+        workspace.classList.remove("hidden");
+        workspace.classList.add("flex");
+    }
+
+    // 4. Afficher les boutons d'action
+    document
+        .getElementById("notebook-back-btn")
+        ?.classList.remove("hidden");
+
+    document
+        .getElementById("notebook-toggle-panel-btn")
+        ?.classList.remove("hidden");
+
+    // 5. Masquer le panneau IA
+    setCreationPanelVisible(false);
+
+    // 6. Charger les sources
+    await loadNotebookSources();
+}
+
+
+async function refreshNotebookTabs() {
+    const tabsEl = document.getElementById("notebook-tabs");
+
+    if (!tabsEl) return;
+
+    const url =
+        `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+
+    tabsEl.innerHTML =
+        '<span class="text-[11px] text-stone-500">Chargement…</span>';
+
+    try {
+        const res = await fetch(url);
+
+        if (!res.ok) {
+            throw new Error(
+                `GitHub API : ${res.status} ${res.statusText}`
+            );
+        }
+
+        // L'API GitHub renvoie directement un tableau
+        const data = await res.json();
+
+        if (!Array.isArray(data)) {
+            throw new Error("La réponse GitHub n'est pas une liste de fichiers.");
+        }
+
+        // Garder uniquement les fichiers HTML
+        const notebooks = data.filter(file =>
+            file.type === "file" &&
+            file.name.toLowerCase().endsWith(".html")
+        );
+
+        tabsEl.innerHTML = "";
+
+        const emptyState =
+            document.getElementById("notebook-empty-state");
+
+        if (!notebooks.length) {
+            emptyState?.classList.remove("hidden");
+            return;
+        }
+
+        emptyState?.classList.add("hidden");
+
+        notebooks.forEach(nb => {
+
+            const course =
+                nb.name.replace(/\.html$/i, "");
+
+            const card =
+                document.createElement("button");
+
+            card.className =
+                "flex flex-col items-start p-3 rounded-xl " +
+                "border border-cream-gold/40 " +
+                "hover:border-cream-gold " +
+                "hover:bg-cream-gold/10 " +
+                "transition text-left w-full";
+
+            card.onclick = () => selectNotebook(course);
+
+            card.innerHTML = `
+                <div class="font-bold text-xs text-cream-gold flex items-center gap-2">
+                    <i class="fa-solid fa-book"></i>
+                    ${escapeHtmlNb(course)}
+                </div>
+            `;
+
+            tabsEl.appendChild(card);
+        });
+
+    } catch (e) {
+        console.error("Erreur lors du chargement GitHub :", e);
+
+        tabsEl.innerHTML =
+            '<span class="text-[11px] text-red-500">' +
+            'Cours indisponibles (' +
+            escapeHtmlNb(e.message) +
+            ')</span>';
+    }
+}
+
+
+function backToNotebookList() {
+    currentCourse = null;
+    const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
+    if (titleSpan) titleSpan.textContent = "Cahiers Numériques";
+    
+    const workspace = document.getElementById("notebook-workspace-view");
+    if (workspace) {
+        workspace.classList.add("hidden");
+        workspace.classList.remove("flex");
+    }
+    
+    document.getElementById("notebook-selection-view")?.classList.remove("hidden");
+    document.getElementById("notebook-note")?.classList.remove("hidden");
+    document.getElementById("notebook-back-btn")?.classList.add("hidden");
+    document.getElementById("notebook-toggle-panel-btn")?.classList.add("hidden");
+    
+    
+    refreshNotebookTabs();
+}
+
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.getElementById("theme-icon");
+    if (html.classList.contains("dark")) {
+        html.classList.remove("dark");
+        icon.className = "fa-solid fa-moon text-xs";
+    } else {
+        html.classList.add("dark");
+        icon.className = "fa-solid fa-sun text-xs text-amber-400";
+    }
+    syncIframeTheme()
+}
+
+function syncIframeTheme() {
+    const iframe = document.getElementById("notebook-iframe");
+    if (!iframe || !iframe.contentDocument || !iframe.contentDocument.documentElement) return;
+    
+    const isDark = document.documentElement.classList.contains("dark");
+    if (isDark) {
+        iframe.contentDocument.documentElement.classList.add("dark");
+    } else {
+        iframe.contentDocument.documentElement.classList.remove("dark");
+    }
+}
+
+
+refreshNotebookTabs();
 </script>
+
+</html>
