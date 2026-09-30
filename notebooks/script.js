@@ -1,6 +1,5 @@
 // Configuration Tailwind
-window.tailwind = window.tailwind || {};
-window.tailwind.config = {
+window.tailwind = {
     darkMode: "class",
     theme: {
         extend: {
@@ -21,6 +20,18 @@ const owner = "MyOrSomeone";
 const repo = "SchoolWorkplace";
 const folder = "notebooks/data";
 let currentCourse = null;
+
+function getBaseUrl() {
+    let path = window.location.pathname;
+    if (!path.endsWith('/')) {
+        if (path.endsWith('.html')) {
+            path = path.substring(0, path.lastIndexOf('/') + 1);
+        } else {
+            path += '/';
+        }
+    }
+    return window.location.origin + path;
+}
 
 function escapeHtmlNb(s) {
     return String(s || "").replace(/[&<>"']/g, c => ({
@@ -94,8 +105,7 @@ async function selectNotebook(course) {
 
     const iframe = document.getElementById("notebook-iframe");
     if (iframe) {
-        // Chemin relatif corrigé
-        iframe.src = `./notebooks/data/${encodeURIComponent(course)}.html`;
+        iframe.src = `${getBaseUrl()}notebooks/data/${encodeURIComponent(course)}.html`;
     }
 
     document.getElementById("notebook-selection-view")?.classList.add("hidden");
@@ -111,7 +121,6 @@ async function selectNotebook(course) {
     document.getElementById("notebook-toggle-panel-btn")?.classList.remove("hidden");
 
     setCreationPanelVisible(false);
-    await loadNotebookSources();
 }
 
 async function refreshNotebookTabs() {
@@ -241,14 +250,20 @@ function syncIframeTheme() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initApp() {
     document.getElementById("theme-toggle-btn")?.addEventListener("click", toggleTheme);
     document.getElementById("notebook-back-btn")?.addEventListener("click", backToNotebookList);
-    
+
     const iframe = document.getElementById("notebook-iframe");
     if (iframe) {
         iframe.addEventListener("load", syncIframeTheme);
     }
 
     refreshNotebookTabs();
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+} else {
+    initApp();
+}
