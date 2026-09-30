@@ -4,30 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>SchoolWorkspace</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        cream: {
-                            DEFAULT: "#EFECE6",
-                            dark: "#121211",
-                            gold: "#C5A059",
-                            border: "#D3C9B8",
-                            borderDark: "#2C2B28",
-                        },
-                    },
-                },
-            },
-        };
-    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
-    <!-- Cahiers de cours IA : rendu LaTeX (maths + chimie via mhchem) -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/mhchem.min.js"></script>
@@ -37,14 +20,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 
-    <script src="./script.js"></script>
+    <!-- Chargement de script.js avec defer pour être sûr que le DOM soit prêt -->
+    <script src="./script.js" defer></script>
 
     <style>
         body {
             touch-action: manipulation;
         }
     </style>
-
 </head>
 <body class="bg-cream dark:bg-cream-dark flex h-full select-none flex-col font-sans text-stone-900 antialiased transition-colors duration-300 dark:text-stone-100">
     <header class="border-cream-gold/30 dark:border-cream-borderDark bg-cream dark:bg-cream-dark z-40 grid w-full shrink-0 grid-flow-col items-center border-b px-6 py-3 backdrop-blur">
@@ -56,21 +39,19 @@
         </div>
 
         <div class="justify-self-end flex items-center gap-2 relative">
-            <button onclick="toggleTheme()" class="border-cream-border dark:border-cream-borderDark flex h-8 w-8 items-center justify-center rounded-xl border transition hover:bg-stone-200 dark:hover:bg-stone-800">
+            <button id="theme-toggle-btn" class="border-cream-border dark:border-cream-borderDark flex h-8 w-8 items-center justify-center rounded-xl border transition hover:bg-stone-200 dark:hover:bg-stone-800">
                 <i id="theme-icon" class="fa-solid fa-moon text-xs"></i>
             </button>
         </div>
     </header>
 
-    <!-- Modal Cahiers Numériques (Plein écran avec boutons flottants) -->
     <div id="notebook-modal" class="relative inset-0 z-50 bg-cream dark:bg-cream-dark p-3 sm:p-5 w-screen h-screen overflow-hidden">
+        <h2 id="notebook-note" class="note text-center text-sm text-stone-500 mt-2 mb-1">
+            Note : Tous les cahiers ne sont pas encore disponibles, certains sont incomplets.<br>Celui de Philosophie est souvent à jour. Pour l'instant celui d'Histoire est presque complet sur la séquence 1.
+        </h2>
 
-        <h2 id="notebook-note" class="note text-center text-sm text-stone-500 mt-2 mb-1">Note : Tous les cahiers ne sont pas encore disponibles, certains sont incomplets.</br>Celui de Philosophie est souvent à jour. Pour l'instant celui d'Histoire est presque complet sur la séquence 1.</h2>
-
-
-        <!-- Boutons Flottants : Haut Gauche (Navigation) -->
         <div id="notebook-floating-left" class="absolute top-4 left-4 z-20 flex items-center gap-2">
-            <button id="notebook-back-btn" onclick="backToNotebookList()" class="hidden bg-white/80 dark:bg-stone-900/80 text-cream-gold border border-cream-border dark:border-cream-borderDark hover:scale-105 shadow-lg flex h-10 w-10 items-center justify-center rounded-xl backdrop-blur-md transition" title="Retour aux cours">
+            <button id="notebook-back-btn" class="hidden bg-white/80 dark:bg-stone-900/80 text-cream-gold border border-cream-border dark:border-cream-borderDark hover:scale-105 shadow-lg flex h-10 w-10 items-center justify-center rounded-xl backdrop-blur-md transition" title="Retour aux cours">
                 <i class="fa-solid fa-arrow-left text-sm"></i>
             </button>
             <div id="notebook-modal-title" class="hidden sm:flex bg-white/80 dark:bg-stone-900/80 border border-cream-border dark:border-cream-borderDark text-cream-gold px-3.5 py-2 rounded-xl text-xs font-bold shadow-lg backdrop-blur-md items-center gap-2">
@@ -79,9 +60,6 @@
             </div>
         </div>
 
-        <!-- Boutons Flottants : Haut Droite (Thème, Panneau IA, Fermer) -->
-
-        <!-- VUE 1 : Galerie des Cours -->
         <div id="notebook-selection-view" class="h-full w-full pt-16 flex flex-col max-w-5xl mx-auto overflow-y-auto">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-base font-bold text-cream-gold">Cours disponibles :</h2>
@@ -91,13 +69,11 @@
             </div>
         </div>
 
-        <!-- VUE 2 : Espace de Travail (Bloc Cours + Bloc Création Séparés) -->
         <div id="notebook-workspace-view" class="hidden h-full w-full pt-14 pb-2 flex flex-col md:flex-row gap-4 min-h-0 overflow-hidden relative">
-            
-            <!-- Bloc 1 : Le Cours dans son bloc indépendant avec coins arrondis -->
             <div id="notebook-preview-container" class="flex-1 h-full rounded-2xl shadow-xl border border-cream-border dark:border-cream-borderDark bg-white dark:bg-stone-900 overflow-hidden relative">
-                <iframe id="notebook-iframe" onload="syncIframeTheme()" class="w-full h-full border-0" title="Prévisualisation du cours"></iframe>
+                <iframe id="notebook-iframe" class="w-full h-full border-0" title="Prévisualisation du cours"></iframe>
             </div>
         </div>
     </div>
+</body>
 </html>

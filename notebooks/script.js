@@ -1,7 +1,26 @@
+// Configuration Tailwind
+window.tailwind = window.tailwind || {};
+window.tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                cream: {
+                    DEFAULT: "#EFECE6",
+                    dark: "#121211",
+                    gold: "#C5A059",
+                    border: "#D3C9B8",
+                    borderDark: "#2C2B28",
+                },
+            },
+        },
+    },
+};
+
 const owner = "MyOrSomeone";
 const repo = "SchoolWorkplace";
 const folder = "notebooks/data";
-
+let currentCourse = null;
 
 function escapeHtmlNb(s) {
     return String(s || "").replace(/[&<>"']/g, c => ({
@@ -67,60 +86,33 @@ async function loadNotebookSources() {
     }
 }
 
-
 async function selectNotebook(course) {
     currentCourse = course;
 
-    // 1. Titre dans le header
-    const titleSpan =
-        document.getElementById("notebook-modal-title")
-            ?.querySelector("span");
+    const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
+    if (titleSpan) titleSpan.textContent = course;
 
-    if (titleSpan) {
-        titleSpan.textContent = course;
-    }
-
-    // 2. Charger le cours dans l'iframe
     const iframe = document.getElementById("notebook-iframe");
-
     if (iframe) {
-        iframe.src =
-            `/notebooks/data/${encodeURIComponent(course)}.html`;
+        // Chemin relatif corrigé
+        iframe.src = `./notebooks/data/${encodeURIComponent(course)}.html`;
     }
 
-    // 3. Basculer l'affichage
-    document
-        .getElementById("notebook-selection-view")
-        ?.classList.add("hidden");
+    document.getElementById("notebook-selection-view")?.classList.add("hidden");
+    document.getElementById("notebook-note")?.classList.add("hidden");
 
-    document
-        .getElementById("notebook-note")
-        ?.classList.add("hidden");
-
-    const workspace =
-        document.getElementById("notebook-workspace-view");
-
+    const workspace = document.getElementById("notebook-workspace-view");
     if (workspace) {
         workspace.classList.remove("hidden");
         workspace.classList.add("flex");
     }
 
-    // 4. Afficher les boutons d'action
-    document
-        .getElementById("notebook-back-btn")
-        ?.classList.remove("hidden");
+    document.getElementById("notebook-back-btn")?.classList.remove("hidden");
+    document.getElementById("notebook-toggle-panel-btn")?.classList.remove("hidden");
 
-    document
-        .getElementById("notebook-toggle-panel-btn")
-        ?.classList.remove("hidden");
-
-    // 5. Masquer le panneau IA
     setCreationPanelVisible(false);
-
-    // 6. Charger les sources
     await loadNotebookSources();
 }
-
 
 async function refreshNotebookTabs() {
     const tabsEl = document.getElementById("notebook-tabs");
@@ -205,7 +197,6 @@ async function refreshNotebookTabs() {
     }
 }
 
-
 function backToNotebookList() {
     currentCourse = null;
     const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
@@ -222,10 +213,8 @@ function backToNotebookList() {
     document.getElementById("notebook-back-btn")?.classList.add("hidden");
     document.getElementById("notebook-toggle-panel-btn")?.classList.add("hidden");
     
-    
     refreshNotebookTabs();
 }
-
 
 function toggleTheme() {
     const html = document.documentElement;
@@ -252,5 +241,14 @@ function syncIframeTheme() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("theme-toggle-btn")?.addEventListener("click", toggleTheme);
+    document.getElementById("notebook-back-btn")?.addEventListener("click", backToNotebookList);
+    
+    const iframe = document.getElementById("notebook-iframe");
+    if (iframe) {
+        iframe.addEventListener("load", syncIframeTheme);
+    }
 
-refreshNotebookTabs();
+    refreshNotebookTabs();
+});
