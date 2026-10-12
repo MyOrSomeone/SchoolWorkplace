@@ -16,10 +16,9 @@ window.tailwind = {
     },
 };
 
-const owner = "MyOrSomeone";
-const repo = "SchoolWorkplace";
-const folder = "notebooks/data";
-let currentCourse = null;
+let currentCourse = null;   // matière
+let currentChapter = null;  // slug du chapitre ouvert
+let notebookSourcesState = {};
 
 function getBaseUrl() {
     let path = window.location.pathname;
@@ -97,15 +96,18 @@ async function loadNotebookSources() {
     }
 }
 
-async function selectNotebook(course) {
-    currentCourse = course;
+async function selectNotebook(matiere, chapterSlug, url) {
+    currentCourse = matiere;
+    currentChapter = chapterSlug || null;
 
     const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
-    if (titleSpan) titleSpan.textContent = course;
+    if (titleSpan) titleSpan.textContent = matiere;
 
     const iframe = document.getElementById("notebook-iframe");
     if (iframe) {
-        iframe.src = `${getBaseUrl()}data/${encodeURIComponent(course)}.html`;
+        // url vient de data/library.json (ex: "Philosophie/01-intro.html") ; sans chapitre -> sommaire
+        const target = url || `${encodeURIComponent(matiere)}/index.html`;
+        iframe.src = `${getBaseUrl()}data/${target.split("/").map(encodeURIComponent).join("/")}`;
     }
 
     document.getElementById("notebook-selection-view")?.classList.add("hidden");
@@ -125,89 +127,62 @@ async function selectNotebook(course) {
 
 async function refreshNotebookTabs() {
     const tabsEl = document.getElementById("notebook-tabs");
-
     if (!tabsEl) return;
 
-    const url =
-        `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
-
-    tabsEl.innerHTML =
-        '<span class="text-[11px] text-stone-500">Chargement…</span>';
+    tabsEl.innerHTML = '<span class="text-[11px] text-stone-500">Chargement…</span>';
 
     try {
-        const res = await fetch(url);
+        // library.json est GÉNÉRÉ par le script Python (plus d'API GitHub, plus de limite de requêtes)
+        const res = await fetch(`${getBaseUrl()}data/library.json?t=${Date.now()}`);
+        if (!res.ok) throw new Error(`library.json : ${res.status} ${res.statusText}`);
+        const lib = await res.json();
 
-        if (!res.ok) {
-            throw new Error(
-                `GitHub API : ${res.status} ${res.statusText}`
-            );
-        }
-
-        // L'API GitHub renvoie directement un tableau
-        const data = await res.json();
-
-        if (!Array.isArray(data)) {
-            throw new Error("La réponse GitHub n'est pas une liste de fichiers.");
-        }
-
-        // Garder uniquement les fichiers HTML
-        const notebooks = data.filter(file =>
-            file.type === "file" &&
-            file.name.toLowerCase().endsWith(".html")
-        );
-
+        const emptyState = document.getElementById("notebook-empty-state");
+        const matieres = lib.matieres || [];
         tabsEl.innerHTML = "";
 
-        const emptyState =
-            document.getElementById("notebook-empty-state");
-
-        if (!notebooks.length) {
+        if (!matieres.length) {
             emptyState?.classList.remove("hidden");
             return;
         }
-
         emptyState?.classList.add("hidden");
 
-        notebooks.forEach(nb => {
+        matieres.forEach(m => {
+            const block = document.createElement("div");
+            block.className = "w-full mb-3";
 
-            const course =
-                nb.name.replace(/\.html$/i, "");
+            const head = document.createElement("button");
+            head.className = "w-full text-left font-bold text-xs text-cream-gold flex items-center gap-2 mb-2";
+            head.innerHTML = `<i class="fa-solid fa-book"></i> ${escapeHtmlNb(m.matiere)}
+                <span class="text-[10px] opacity-60">sommaire</span>`;
+            head.onclick = () => selectNotebook(m.matiere, null, m.index);
+            block.appendChild(head);
 
-            const card =
-                document.createElement("button");
-
-            card.className =
-                "flex flex-col items-start p-3 rounded-xl " +
-                "border border-cream-gold/40 " +
-                "hover:border-cream-gold " +
-                "hover:bg-cream-gold/10 " +
-                "transition text-left w-full";
-
-            card.onclick = () => selectNotebook(course);
-
-            card.innerHTML = `
-                <div class="font-bold text-xs text-cream-gold flex items-center gap-2">
-                    <i class="fa-solid fa-book"></i>
-                    ${escapeHtmlNb(course)}
-                </div>
-            `;
-
-            tabsEl.appendChild(card);
+            const list = document.createElement("div");
+            list.className = "grid gap-2";
+            (m.chapters || []).forEach(c => {
+                const card = document.createElement("button");
+                card.className =
+                    "flex flex-col items-start p-3 rounded-xl border border-cream-gold/40 " +
+                    "hover:border-cream-gold hover:bg-cream-gold/10 transition text-left w-full";
+                card.innerHTML = `<div class="font-bold text-xs">${escapeHtmlNb(c.title)}</div>
+                    <div class="text-[10px] opacity-60">${c.n_parts} partie(s)</div>`;
+                card.onclick = () => selectNotebook(m.matiere, c.slug, c.url);
+                list.appendChild(card);
+            });
+            block.appendChild(list);
+            tabsEl.appendChild(block);
         });
-
     } catch (e) {
-        console.error("Erreur lors du chargement GitHub :", e);
-
-        tabsEl.innerHTML =
-            '<span class="text-[11px] text-red-500">' +
-            'Cours indisponibles (' +
-            escapeHtmlNb(e.message) +
-            ')</span>';
+        console.error("Erreur chargement library.json :", e);
+        tabsEl.innerHTML = '<span class="text-[11px] text-red-500">Cours indisponibles (' +
+            escapeHtmlNb(e.message) + ')</span>';
     }
 }
 
 function backToNotebookList() {
     currentCourse = null;
+    currentChapter = null;
     const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
     if (titleSpan) titleSpan.textContent = "Cahiers Numériques";
     

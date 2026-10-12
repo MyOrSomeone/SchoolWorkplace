@@ -96,10 +96,13 @@
 
     <!-- Script Inline de Gestion de l'Application -->
     <script>
-        const owner = "MyOrSomeone";
-        const repo = "SchoolWorkplace";
-        const folder = "notebooks/data";
-        let currentCourse = null;
+        let currentCourse = null;   // matière
+        let currentChapter = "";    // slug du chapitre ouvert ("" = sommaire)
+
+        // Préfixe vers data/ : fonctionne en local (/notebooks/...) comme sur GitHub Pages
+        function dataBase() {
+            return window.location.pathname.includes('/notebooks/') ? "data/" : "notebooks/data/";
+        }
 
         function escapeHtmlNb(s) {
             return String(s || "").replace(/[&<>"']/g, c => ({
@@ -126,60 +129,16 @@
             }
         }
 
-        async function loadNotebookSources() {
-            const listEl = document.getElementById("notebook-sources-list");
-
-            if (!listEl) return;
-
-            listEl.innerHTML = '<p class="text-stone-500">Chargement…</p>';
-
-            try {
-                const res = await fetch(
-                    `/api/notebooks/${encodeURIComponent(currentCourse)}/sources`
-                );
-
-                const data = await res.json();
-
-                if (!data.success) {
-                    throw new Error(data.error || "Erreur inconnue");
-                }
-
-                notebookSourcesState = {};
-
-                (data.sources || [])
-                    .sort((a, b) => (a.ordre || 0) - (b.ordre || 0))
-                    .forEach(s => {
-                        notebookSourcesState[s.id] = {
-                            ...s,
-                            selected: false
-                        };
-                    });
-
-                renderNotebookSources();
-
-            } catch (e) {
-                listEl.innerHTML =
-                    '<p class="text-red-500">Erreur : ' +
-                    escapeHtmlNb(e.message) +
-                    '</p>';
-            }
-        }
-
-        async function selectNotebook(course) {
-            currentCourse = course;
+        async function selectNotebook(matiere, slug) {
+            currentCourse = matiere;
+            currentChapter = slug || "";
 
             const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
-            if (titleSpan) titleSpan.textContent = course;
+            if (titleSpan) titleSpan.textContent = matiere;
 
             const iframe = document.getElementById("notebook-iframe");
             if (iframe) {
-                // Détection dynamique pour éviter la duplication /notebooks/notebooks/
-                const isInsideNotebooksFolder = window.location.pathname.includes('/notebooks/');
-                const relativePath = isInsideNotebooksFolder 
-                    ? `data/${encodeURIComponent(course)}.html`
-                    : `notebooks/data/${encodeURIComponent(course)}.html`;
-
-                iframe.src = relativePath;
+                iframe.src = `${dataBase()}${encodeURIComponent(matiere)}/${slug ? encodeURIComponent(slug) : "index"}.html`;
             }
 
             document.getElementById("notebook-selection-view")?.classList.add("hidden");
@@ -192,79 +151,62 @@
             }
 
             document.getElementById("notebook-back-btn")?.classList.remove("hidden");
-            document.getElementById("notebook-toggle-panel-btn")?.classList.remove("hidden");
-
-            setCreationPanelVisible(false);
         }
 
         async function refreshNotebookTabs() {
             const tabsEl = document.getElementById("notebook-tabs");
             if (!tabsEl) return;
 
-            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
             tabsEl.innerHTML = '<span class="text-[11px] text-stone-500">Chargement…</span>';
 
             try {
-                const res = await fetch(url);
-                if (!res.ok) {
-                    throw new Error(`GitHub API : ${res.status} ${res.statusText}`);
-                }
-
-                const data = await res.json();
-                if (!Array.isArray(data)) {
-                    throw new Error("La réponse GitHub n'est pas une liste de fichiers.");
-                }
-
-                const notebooks = data.filter(file =>
-                    file.type === "file" &&
-                    file.name.toLowerCase().endsWith(".html")
-                );
+                // library.json est généré par le script Python à chaque modification
+                // (plus d'API GitHub : pas de limite de requêtes, pas de nom de dépôt à configurer)
+                const res = await fetch(`${dataBase()}library.json?t=${Date.now()}`);
+                if (!res.ok) throw new Error(`library.json : ${res.status} ${res.statusText}`);
+                const lib = await res.json();
+                const matieres = lib.matieres || [];
 
                 tabsEl.innerHTML = "";
                 const emptyState = document.getElementById("notebook-empty-state");
-
-                if (!notebooks.length) {
+                if (!matieres.length) {
                     emptyState?.classList.remove("hidden");
                     return;
                 }
-
                 emptyState?.classList.add("hidden");
 
-                notebooks.forEach(nb => {
-                    const course = nb.name.replace(/\.html$/i, "");
-                    const card = document.createElement("button");
+                matieres.forEach(m => {
+                    const card = document.createElement("div");
+                    card.className = "flex flex-col gap-2 p-3 rounded-xl border border-cream-gold/40";
 
-                    card.className =
-                        "flex flex-col items-start p-3 rounded-xl " +
-                        "border border-cream-gold/40 " +
-                        "hover:border-cream-gold " +
-                        "hover:bg-cream-gold/10 " +
-                        "transition text-left w-full";
+                    const head = document.createElement("button");
+                    head.className = "font-bold text-xs text-cream-gold flex items-center gap-2 text-left hover:opacity-80";
+                    head.innerHTML = `<i class="fa-solid fa-book"></i> ${escapeHtmlNb(m.matiere)}
+                        <span class="text-[10px] font-normal text-stone-500">sommaire</span>`;
+                    head.onclick = () => selectNotebook(m.matiere, "");
+                    card.appendChild(head);
 
-                    card.onclick = () => selectNotebook(course);
-
-                    card.innerHTML = `
-                        <div class="font-bold text-xs text-cream-gold flex items-center gap-2">
-                            <i class="fa-solid fa-book"></i>
-                            ${escapeHtmlNb(course)}
-                        </div>
-                    `;
-
+                    (m.chapters || []).forEach(c => {
+                        const btn = document.createElement("button");
+                        btn.className = "flex items-center justify-between rounded-lg px-2 py-1.5 text-left text-[11px] hover:bg-cream-gold/10 transition";
+                        btn.innerHTML = `<span class="truncate">${escapeHtmlNb(c.title)}</span>
+                            <span class="ml-2 shrink-0 text-[10px] text-stone-500">${c.n_parts} partie(s)</span>`;
+                        btn.onclick = () => selectNotebook(m.matiere, c.slug);
+                        card.appendChild(btn);
+                    });
                     tabsEl.appendChild(card);
                 });
 
             } catch (e) {
-                console.error("Erreur lors du chargement GitHub :", e);
-                tabsEl.innerHTML =
-                    '<span class="text-[11px] text-red-500">' +
-                    'Cours indisponibles (' +
-                    escapeHtmlNb(e.message) +
-                    ')</span>';
+                console.error("Erreur lors du chargement de library.json :", e);
+                tabsEl.innerHTML = '<span class="text-[11px] text-red-500">Cours indisponibles (' +
+                    escapeHtmlNb(e.message) + ')</span>';
             }
         }
 
         function backToNotebookList() {
             currentCourse = null;
+            currentChapter = "";
             const titleSpan = document.getElementById("notebook-modal-title")?.querySelector("span");
             if (titleSpan) titleSpan.textContent = "Cahiers Numériques";
 
@@ -277,8 +219,6 @@
             document.getElementById("notebook-selection-view")?.classList.remove("hidden");
             document.getElementById("notebook-note")?.classList.remove("hidden");
             document.getElementById("notebook-back-btn")?.classList.add("hidden");
-            document.getElementById("notebook-toggle-panel-btn")?.classList.add("hidden");
-
             refreshNotebookTabs();
         }
 
