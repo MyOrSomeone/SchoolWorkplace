@@ -1,0 +1,22 @@
+{
+  "slug": "01-sequence-1-introduction-et-carte",
+  "title": "Séquence 1 — Introduction et carte",
+  "group": "",
+  "status": "done",
+  "summary": "Introduction de la séquence : fil directeur, carte mondiale interactive.",
+  "parts": [
+    {
+      "id": "p01-theme-1-mers-et-oceans-a",
+      "title": "Thème 1 : Mers et océans au cœur de la mondialisation",
+      "level": 1,
+      "summary": "Fil directeur de la séquence : axes de circulation, ressources, conflits, appropriation et protection ; repère central des 90 % du fret par la mer."
+    },
+    {
+      "id": "p02-carte-mondiale-interacti",
+      "title": "Carte mondiale interactive",
+      "level": 1,
+      "summary": "Carte interactive : filtres (passages, flux, tensions, hubs), fiches des détroits, canaux, hubs et zones de tension, plein écran."
+    }
+  ],
+  "created_at": "2026-10-11T09:55:41"
+}

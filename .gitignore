@@ -22,10 +22,9 @@ backup.html
 !notebooks/
 
 notebooks/*
+!notebooks/data/
+!notebooks/data/**
 !notebooks/*notebooks.css
 !notebooks/*notebooks.js
 !notebooks/*index.html
 !notebooks/*script.js
-
-!notebooks/data
-!notebooks/data/*.html

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Le Bonheur — Philosophie</title>
+<link rel="stylesheet" href="../../notebooks.css" />
+
+<script>window.tailwind = window.tailwind || {}; tailwind.config = { darkMode: 'class' };</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet" />
+
+
+<style>
+.nbn-bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;
+ background:rgba(239,236,230,.92);backdrop-filter:blur(8px);border-bottom:1px solid #D3C9B8;font-family:Comfortaa,sans-serif}
+.dark .nbn-bar{background:rgba(18,18,17,.92);border-color:#2C2B28;color:#EFECE6}
+.nbn-bar a,.nbn-bar button{border:0;background:transparent;color:inherit;cursor:pointer;padding:.4rem .6rem;border-radius:.6rem;text-decoration:none;font-weight:700}
+.nbn-bar a:hover,.nbn-bar button:hover{background:rgba(197,160,89,.2)}
+.nbn-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+.nbn-toc{position:fixed;top:3.2rem;left:0;bottom:0;width:min(86vw,320px);overflow:auto;padding:1rem;z-index:40;
+ transform:translateX(-105%);transition:transform .25s;background:#EFECE6;border-right:1px solid #D3C9B8;font-family:Comfortaa,sans-serif}
+.dark .nbn-toc{background:#121211;border-color:#2C2B28;color:#EFECE6}
+.nbn-toc.open{transform:none;box-shadow:0 0 40px rgba(0,0,0,.25)}
+.nbn-toc a{display:block;padding:.45rem .6rem;border-radius:.5rem;color:inherit;text-decoration:none;font-size:.85rem}
+.nbn-toc a.l2{margin-left:1.1rem;font-size:.8rem;opacity:.85}
+.nbn-toc a.active{background:rgba(197,160,89,.25);font-weight:700}
+.nbn-pager{display:flex;gap:.8rem;justify-content:space-between;padding:2rem 1rem 4rem;flex-wrap:wrap}
+.nbn-pager a{flex:1;min-width:150px;padding:1rem 1.2rem;border:1px solid #C5A059;border-radius:1rem;text-decoration:none;color:inherit;font-family:Comfortaa,sans-serif;font-weight:700}
+.nbn-pager a:hover{background:rgba(197,160,89,.15)}
+.nb-part{scroll-margin-top:4rem;padding:1.2rem .6rem}
+.nbn-cards{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));padding:1rem}
+.nbn-card{display:block;padding:1.2rem;border:1px solid #C5A059;border-radius:1rem;text-decoration:none;color:inherit;font-family:Comfortaa,sans-serif;transition:transform .15s}
+.nbn-card:hover{transform:translateY(-3px);background:rgba(197,160,89,.12)}
+</style>
+
+<script>window.NB_DEFINITIONS = {"philosophie": "Étymologiquement « amour de la sagesse » : l'art de penser rigoureusement le monde, en nous et hors de nous, en cherchant le vrai et en refusant les préjugés.", "rhetorique": "Art de bien parler pour persuader un auditoire (tribunal, assemblée). Les sophistes l'enseignent : elle vise l'efficacité du discours plus que la vérité.", "sophiste": "Enseignant itinérant de l'Athènes du Ve siècle av. J.-C., payé pour former à la rhétorique et à l'art de convaincre.", "protagoras": "Sophiste grec du Ve siècle av. J.-C., auteur de la formule « L'homme est la mesure de toute chose » : fondateur du relativisme.", "relativisme": "Position selon laquelle il n'existe pas de vérité absolue : le vrai et le bien dépendent de chaque individu, société ou époque.", "gorgias": "Sophiste grec, maître de rhétorique, défenseur d'un scepticisme radical : la vérité serait inexistante, inaccessible ou incommunicable.", "scepticisme": "Position qui doute qu'on puisse atteindre une vérité certaine et suspend son jugement.", "opinion": "Jugement immédiat, subjectif et instable, qui ne repose sur aucune preuve rationnelle (doxa).", "prejuge": "Opinion acquise par habitude ou conformisme, admise sans examen critique.", "ironie-socratique": "Méthode de Socrate : feindre l'ignorance et poser des questions naïves pour amener l'interlocuteur à découvrir ses propres contradictions.", "ignorance-ignorante": "Croire savoir alors qu'on ne sait pas : l'illusion qui bloque toute recherche de vérité.", "ignorance-savante": "Savoir que l'on ne sait pas (« je sais que je ne sais rien ») : le point de départ du désir de philosopher.", "maieutique": "Méthode par laquelle Socrate aide son interlocuteur à « accoucher » lui-même de la vérité (maieutikê : art de la sage-femme).", "induction": "Raisonnement qui part de cas concrets pour en dégager une définition ou une règle générale.", "conscience": "Connaissance directe, sentiment intime qu'a le sujet de ses propres états, pensées et actions ; elle peut être spontanée ou réflexive.", "metacognition": "Capacité de savoir si l'on sait ou si l'on ignore quelque chose : penser sa propre pensée.", "dignite": "Valeur propre à la personne humaine, être conscient et responsable, qui ne peut être traité comme un simple moyen.", "doute_hyperbolique": "Doute poussé à l'extrême (Descartes) : rejeter comme faux tout ce qui prête au moindre doute pour trouver une certitude indubitable.", "malin_genie": "Hypothèse de Descartes d'un être puissant et rusé qui emploierait toute son industrie à nous tromper, même dans les calculs.", "res-cogitans": "« Chose pensante » (Descartes) : l'esprit, défini par l'activité de penser (douter, imaginer, ressentir).", "en-soi": "Chez Hegel, l'être tel qu'il est naturellement, comme une chose de la nature.", "pour-soi": "Chez Hegel, l'être qui se prend lui-même pour objet de pensée : la conscience de soi.", "identite-personnelle": "Ce qui fait que je reste le même moi à travers le temps et les changements.", "identite-narrative": "Notion de Paul Ricœur : l'identité se construit en racontant sa propre vie ; nous sommes les auteurs du récit de notre existence.", "souverain-bien": "Fin ultime de l'existence humaine, valeur suprême à laquelle toutes les autres sont subordonnées (souvent identifiée au bonheur).", "syllogisme": "Raisonnement logique déductif rigoureux où deux propositions posées comme vraies (prémisses) entraînent nécessairement une conclusion.", "ataraxie": "État de tranquillité et de paix profonde de l'âme, libérée de tout trouble, crainte ou agitation passionnelle.", "apathie-stoicienne": "Dans le stoïcisme (apatheia) : libération vis-à-vis des passions aveuglantes et destructrices par la souveraineté de la raison.", "bonheur": "État durable et stable de satisfaction complète, de sérénité et d'accord avec soi-même.", "plaisir": "Sensation agréable immédiate, corporelle ou sensible, par nature transitoire et liée à la satisfaction d'un besoin ponctuel.", "joie": "Émotion vive, intense et expansive liée au sentiment d'une victoire, d'un progrès ou d'une augmentation de notre puissance d'agir.", "beatitude": "Contentement absolu, parfait et inébranlable résultant d'un accord total et lucide avec l'ordre de la nature ou du monde."};</script>
+<script>
+  window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+<script src="../../notebooks.js" defer></script>
+</head>
+<body class="notebook-body">
+<div class="nbn-bar"><a href="index.html" title="Sommaire"><i class="fa-solid fa-house"></i></a><button id="nbn-toc-btn" title="Parties"><i class="fa-solid fa-list"></i></button><span class="nbn-title">Le Bonheur</span><a href="02-chapitre-1-la-conscience.html" title="Précédent"><i class="fa-solid fa-chevron-left"></i></a></div><aside id="nbn-toc" class="nbn-toc"><a class="l1" href="#p09-le-bonheur-epicurisme-et">Le Bonheur : Épicurisme et Stoïcisme comme arts de vivre</a><a class="l1" href="#p10-qu-est-ce-que-le-bonheur">Qu&#x27;est-ce que le bonheur ? Plaisir, joie, béatitude</a></aside><main id="notebook-content" class="notebook-content">
+<h1 class="nb-chapter-title">Le Bonheur</h1>
+<section class="nb-part" id="p09-le-bonheur-epicurisme-et" data-level="1">
+<div class="section-hero hero-gold mb-8">
+  <div class="hero-head">
+    <div class="icon-hero"><i class="fas fa-sun"></i></div>
+    <div>
+      <span class="hero-eyebrow">Philosophie Antique • Sagesse & Pratique</span>
+      <h2 class="text-2xl font-bold text-gray-900">La quête du Bonheur : la philosophie comme art de vivre</h2>
+    </div>
+  </div>
+  <p class="subtitle c-muted leading-relaxed">
+    Dans l'Antiquité, la <span class="def-term" data-term="philosophie">philosophie</span> n'est pas une simple théorie abstraite : c'est un véritable <strong>art de vivre</strong> destiné à soigner l'âme humaine, à aligner sa vie sur le Bien, le Bon et le Beau, et à atteindre le <span class="def-term" data-term="souverain-bien" data-def="Fin ultime de l'existence humaine, valeur suprême à laquelle toutes les autres sont subordonnées (souvent identifiée au bonheur).">Souverain Bien</span>.
+  </p>
+</div>
+
+<!-- Outil logique préalable : le syllogisme -->
+<div class="nb-box theoreme mb-8">
+  <span class="nb-box-title"><i class="fas fa-brain mr-2 text-indigo-500"></i>L'outil de la pensée : Le Syllogisme</span>
+  <p class="text-sm text-gray-600 mb-3">
+    Pour raisonner rigoureusement sans tomber dans l'<span class="def-term" data-term="opinion">opinion</span>, la philosophie antique formalise le <span class="def-term" data-term="syllogisme" data-def="Raisonnement logique déductif rigoureux où deux propositions posées comme vraies (prémisses) entraînent nécessairement une conclusion.">syllogisme</span>, une déduction logique implacable en trois étapes :
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+    <div class="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+      <span class="text-xs uppercase tracking-wider font-bold text-indigo-700 dark:text-indigo-400">1. Prémisse majeure</span>
+      <p class="text-sm font-semibold text-gray-800 dark:text-gray-100 mt-1">« Tous les hommes sont mortels »</p>
+    </div>
+    <div class="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+      <span class="text-xs uppercase tracking-wider font-bold text-blue-700 dark:text-blue-400">2. Prémisse mineure</span>
+      <p class="text-sm font-semibold text-gray-800 dark:text-gray-100 mt-1">« Socrate est un homme »</p>
+    </div>
+    <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg border border-indigo-300 dark:border-indigo-800 shadow-sm">
+      <span class="text-xs uppercase tracking-wider font-bold text-purple-700 dark:text-purple-400">3. Conclusion nécessaire</span>
+      <p class="text-sm font-bold text-indigo-900 dark:text-indigo-100 mt-1">« Donc Socrate est mortel »</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Deux voies vers la paix de l'âme : Onglets comparatifs -->
+<div class="mb-4">
+  <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2 mb-2">
+    <i class="fas fa-balance-scale text-amber-500"></i> Deux grandes écoles face à l'angoisse de l'existence
+  </h3>
+  <p class="text-sm text-gray-600">
+    Toutes deux recherchent l'<span class="def-term" data-term="ataraxie" data-def="État de tranquillité et de paix profonde de l'âme, libérée de tout trouble, crainte ou agitation passionnelle.">ataraxie</span> (la paix de l'âme), mais par deux chemins résolument opposés :
+  </p>
+</div>
+
+<div class="nb-tabs mb-8" data-tabs="philo-schools">
+  <div class="nb-tab-buttons">
+    <button class="nb-tab-btn active"><i class="fas fa-seedling mr-2 text-emerald-500"></i>L'Épicurisme (Le Jardin)</button>
+    <button class="nb-tab-btn"><i class="fas fa-landmark mr-2 text-blue-500"></i>Le Stoïcisme (Le Portique)</button>
+  </div>
+
+  <!-- PANNEAU 1 : ÉPICURISME -->
+  <div class="nb-tab-panel active">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="fun-card bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 p-5 rounded-xl border">
+        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4 text-xl">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2">Idée reçue vs Vérité philosophique</h4>
+        <p class="text-sm text-gray-600 mb-3">
+          <strong class="text-emerald-700 dark:text-emerald-400">Sens moderne déformé :</strong> « Épicurien » désigne aujourd'hui un bon vivant qui accumule les plaisirs sensuels sans retenue.
+        </p>
+        <p class="text-sm text-gray-600">
+          <strong class="text-emerald-700 dark:text-emerald-400">Doctrine antique d'Épicure :</strong> Le souverain bien est l'absence de douleur physique (<em>aponie</em>) et la tranquillité de l'esprit (<span class="def-term" data-term="ataraxie">ataraxie</span>). Elle repose sur la <strong>modération absolue</strong> et le calcul des plaisirs.
+        </p>
+      </div>
+
+      <div class="fun-card bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 p-5 rounded-xl border">
+        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4 text-xl">
+          <i class="fas fa-users-slash"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2">Les piliers du Jardin</h4>
+        <ul class="text-sm text-gray-600 space-y-2">
+          <li class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-500 mt-1"></i>
+            <span><strong>« Vivre caché » (<em>Lathe biosas</em>) :</strong> Se retirer des honneurs et de la politique pour vivre en paix entre amis dans « Le Jardin ».</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-500 mt-1"></i>
+            <span><strong>Maîtrise des désirs :</strong> Supprimer le superflu qui engendre la frustration ; limiter ses désirs au naturel et nécessaire (boire de l'eau, manger du pain).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-500 mt-1"></i>
+            <span><strong>Délivrance de la peur :</strong> Les dieux sont indifférents aux affaires humaines ; le monde est fruit du hasard atomique. Nul besoin de craindre la colère divine ou la mort.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANNEAU 2 : STOÏCISME -->
+  <div class="nb-tab-panel">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="fun-card bg-blue-50/50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 p-5 rounded-xl border">
+        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 text-xl">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2">L'Apathie et le devoir moral</h4>
+        <p class="text-sm text-gray-600 mb-3">
+          Le <span class="def-term" data-term="souverain-bien">Souverain Bien</span> réside dans l'exercice héroïque de la <strong>vertu</strong> et l'accomplissement loyal de son rôle moral au sein de la cité.
+        </p>
+        <p class="text-sm text-gray-600">
+          La paix intérieure découle de l'<span class="def-term" data-term="apathie-stoicienne" data-def="Dans le stoïcisme (apatheia) : libération vis-à-vis des passions aveuglantes et destructrices par la souveraineté de la raison.">apathie</span> (<em>apatheia</em>), c'est-à-dire l'extinction des passions perturbatrices pour ne jamais être l'esclave des émotions incontrôlées.
+        </p>
+      </div>
+
+      <div class="fun-card bg-blue-50/50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 p-5 rounded-xl border">
+        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 text-xl">
+          <i class="fas fa-compass"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2">Ce qui dépend de nous vs le Destin</h4>
+        <ul class="text-sm text-gray-600 space-y-2">
+          <li class="flex items-start gap-2">
+            <i class="fas fa-check text-blue-500 mt-1"></i>
+            <span><strong>La grande distinction d'Épictète :</strong> Ce qui dépend de nous (nos jugements, nos désirs, nos vertus) vs ce qui n'en dépend pas (la maladie, la mort, l'opinion des autres).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fas fa-check text-blue-500 mt-1"></i>
+            <span><strong>Providence & Destin :</strong> L'univers est ordonné par une Raison cosmique. Tout arrive par nécessité : il faut vouloir le cours des choses au lieu de s'en révolter.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fas fa-check text-blue-500 mt-1"></i>
+            <span><strong>Engagement citoyen :</strong> Contrairement aux épicuriens, le stoïcien reste pleinement engagé dans la vie sociale et politique, assumant ses devoirs civiques.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Synthèse en tableau de confrontation -->
+<div class="nb-box exemple mb-8">
+  <span class="nb-box-title"><i class="fas fa-table mr-2 text-amber-500"></i>Tableau comparatif : Deux visions de l'existence</span>
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-sm border-collapse">
+      <thead>
+        <tr class="border-b border-gray-300 dark:border-gray-700 text-gray-800">
+          <th class="py-2.5 px-3 font-bold">Critère d'analyse</th>
+          <th class="py-2.5 px-3 font-bold text-emerald-700 dark:text-emerald-400"><i class="fas fa-leaf mr-1"></i> Épicurisme</th>
+          <th class="py-2.5 px-3 font-bold text-blue-700 dark:text-blue-400"><i class="fas fa-monument mr-1"></i> Stoïcisme</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-gray-600">
+        <tr>
+          <td class="py-2.5 px-3 font-semibold text-gray-700">Définition du Bonheur</td>
+          <td class="py-2.5 px-3">Repos de l'âme et absence de douleur corporelle par la mesure.</td>
+          <td class="py-2.5 px-3">Pratique rigoureuse de la vertu et conformité à la raison universelle.</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 px-3 font-semibold text-gray-700">Vie en Société</td>
+          <td class="py-2.5 px-3"><strong>Retrait :</strong> fuir les intrigues politiques (« vivre caché »), cultiver l'amitié sincère.</td>
+          <td class="py-2.5 px-3"><strong>Engagement :</strong> tenir son rôle citoyen, assumer ses responsabilités dans la cité.</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 px-3 font-semibold text-gray-700">Rapport aux Dieux & Destin</td>
+          <td class="py-2.5 px-3">Les dieux n'interviennent pas ; le monde dépend du <strong>hasard</strong>. Aucune crainte à avoir.</td>
+          <td class="py-2.5 px-3">L'univers est guidé par le <strong>Destin</strong> divin. Il faut acquiescer et s'y soumettre avec dignité.</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 px-3 font-semibold text-gray-700">Levier de libération</td>
+          <td class="py-2.5 px-3">Modérer ses désirs et s'entourer d'amis fidèles.</td>
+          <td class="py-2.5 px-3">Distinguer ce qui dépend de nous de ce qui n'en dépend pas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Conclusion réflexive -->
+<div class="fun-card bg-amber-50/60 dark:bg-amber-950/20 border-amber-300 dark:border-amber-700 p-5 rounded-xl border">
+  <div class="flex items-start gap-4">
+    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex-shrink-0 flex items-center justify-center text-xl">
+      <i class="fas fa-heart"></i>
+    </div>
+    <div>
+      <h4 class="text-base font-bold text-gray-900 mb-1">Bilan : La philosophie comme thérapie de l'existence</h4>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        Qu'elle emprunte la voie de la mesure épicurienne ou celle de la fermeté stoïcienne, la philosophie gréco-romaine partage un même postulat : la pensée n'a de valeur que si elle transforme concrètement le sujet, l'élevant au-dessus de ses peurs irrationnelles pour faire de son existence une œuvre guidée par la sagesse, le <strong>Bien</strong>, le <strong>Bon</strong> et le <strong>Beau</strong>.
+      </p>
+    </div>
+  </div>
+</div>
+
+</section>
+<section class="nb-part" id="p10-qu-est-ce-que-le-bonheur" data-level="1">
+<div class="nb-wide mb-8">
+  <div class="section-hero hero-amber">
+    <div class="hero-head">
+      <span class="hero-eyebrow"><i class="fas fa-compass mr-1"></i> Philosophie morale &amp; politique</span>
+      <span class="hero-chips">Notion : Le Bonheur</span>
+    </div>
+    <div class="flex items-center gap-4 mt-2">
+      <div class="icon-hero">
+        <i class="fas fa-sun"></i>
+      </div>
+      <div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900">Le Bonheur : une simple somme de plaisirs ?</h2>
+        <p class="subtitle c-muted mt-1">Dénouer l'illusion marchande : de la sensation fugitive à la sérénité durable</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LE PARADOXE MODERNE -->
+<div class="mb-10">
+  <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+    <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">1</span>
+    Le paradoxe contemporain du bonheur
+  </h3>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+    <div class="fun-card border-l-4 border-amber-500 bg-amber-50/40 dark:bg-amber-950/20">
+      <div class="w-12 h-12 bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 rounded-2xl flex items-center justify-center mb-3 text-xl">
+        <i class="fas fa-bullhorn"></i>
+      </div>
+      <h4 class="font-bold text-gray-800 mb-2">L'injonction marchande au "bien-être"</h4>
+      <p class="text-sm text-gray-600 leading-relaxed mb-3">
+        La société individualiste et capitaliste fait de la félicité un impératif continu :
+      </p>
+      <ul class="text-sm text-gray-600 space-y-2">
+        <li class="flex items-start gap-2">
+          <i class="fas fa-check-circle text-amber-600 mt-1"></i>
+          <span>Multiplication des « recettes » : pensée positive, injonctions à <em>« voir la vie du bon côté »</em>.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fas fa-shopping-cart text-amber-600 mt-1"></i>
+          <span>Marchandisation : promesse que la <strong>consommation</strong> de biens apporte la plénitude.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="fun-card border-l-4 border-rose-500 bg-rose-50/40 dark:bg-rose-950/20">
+      <div class="w-12 h-12 bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 rounded-2xl flex items-center justify-center mb-3 text-xl">
+        <i class="fas fa-pills"></i>
+      </div>
+      <h4 class="font-bold text-gray-800 mb-2">Le constat paradoxal</h4>
+      <p class="text-sm text-gray-600 leading-relaxed mb-3">
+        Alors même que l'offre de divertissements et de confort matériel atteint un sommet historique :
+      </p>
+      <div class="p-3 bg-white dark:bg-gray-800 rounded-xl border border-rose-200 dark:border-rose-900/40">
+        <span class="text-xs uppercase font-bold tracking-wider text-rose-600 dark:text-rose-400 block mb-1">Fait social</span>
+        <p class="text-xs text-rose-300">
+          Les pays occidentaux (notamment la France) figurent parmi les plus gros consommateurs d'<strong>antidépresseurs</strong> et d'anxiolytiques.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nb-box theoreme">
+    <span class="nb-box-title">Problématique philosophique</span>
+    <p class="text-gray-800 leading-relaxed">
+      D'où provient cette fracture entre la promesse d'euphorie et le mal-être réel ? D'une <strong>confusion conceptuelle</strong> majeure : en confondant l'accumulation de sensations agréables immédiates avec un état d'âme durable, notre époque réduit le <span class="def-term" data-term="bonheur" data-def="État durable et stable de satisfaction complète, de sérénité et d'accord avec soi-même.">bonheur</span> à une fuite en avant.
+    </p>
+  </div>
+</div>
+
+<!-- LES 4 NOTIONS CLÉS : ÉCHELLE TEMPORELLE ET INTENSITÉ -->
+<div class="mb-10">
+  <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+    <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">2</span>
+    Distinguer les formes de la satisfaction
+  </h3>
+
+  <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+    Pour ne plus être dupes de cette illusion, la rigueur philosophique impose de dissocier les affects <strong>fugitifs</strong> (le passage) des états <strong>durables</strong> (la structure de l'esprit).
+  </p>
+
+  <div class="nb-tabs">
+    <div class="nb-tab-buttons">
+      <button class="nb-tab-btn active"><i class="fas fa-cookie-bite mr-2"></i>1. Plaisir</button>
+      <button class="nb-tab-btn"><i class="fas fa-bolt mr-2"></i>2. Joie</button>
+      <button class="nb-tab-btn"><i class="fas fa-leaf mr-2"></i>3. Bonheur</button>
+      <button class="nb-tab-btn"><i class="fas fa-infinity mr-2"></i>4. Béatitude</button>
+    </div>
+
+    <!-- 1. PLAISIR -->
+    <div class="nb-tab-panel active">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="md:col-span-1 text-center p-4 bg-orange-50 dark:bg-orange-950/30 rounded-2xl border border-orange-200 dark:border-orange-900/50">
+          <div class="w-16 h-16 mx-auto bg-orange-500 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+            <i class="fas fa-ice-cream"></i>
+          </div>
+          <span class="badge-tag badge-amber">Passager • Sensible</span>
+          <h4 class="font-extrabold text-lg text-gray-800 mt-2">Le Plaisir</h4>
+        </div>
+        <div class="md:col-span-2 text-sm text-gray-700 space-y-2">
+          <p>
+            <span class="def-term" data-term="plaisir" data-def="Sensation agréable immédiate, corporelle ou sensible, par nature transitoire et liée à la satisfaction d'un besoin ponctuel.">Plaisir</span> : Sensation agréable, immédiate et essentiellement corporelle ou sensible (ex : manger, boire, s'abriter).
+          </p>
+          <ul class="space-y-1 text-xs text-gray-600">
+            <li><i class="fas fa-stopwatch text-orange-500 mr-2"></i><strong>Caractère :</strong> Éphémère, s'éteint dès que le besoin est assouvi.</li>
+            <li><i class="fas fa-exclamation-triangle text-amber-500 mr-2"></i><strong>Risque :</strong> Dépendance et insatisfaction perpétuelle s'il est pris pour une fin ultime.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. JOIE -->
+    <div class="nb-tab-panel">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="md:col-span-1 text-center p-4 bg-yellow-50 dark:bg-yellow-950/30 rounded-2xl border border-yellow-200 dark:border-yellow-900/50">
+          <div class="w-16 h-16 mx-auto bg-yellow-500 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+            <i class="fas fa-fire-alt"></i>
+          </div>
+          <span class="badge-tag badge-purple">Dynamique • Émotion</span>
+          <h4 class="font-extrabold text-lg text-gray-800 mt-2">La Joie</h4>
+        </div>
+        <div class="md:col-span-2 text-sm text-gray-700 space-y-2">
+          <p>
+            <span class="def-term" data-term="joie" data-def="Émotion vive, intense et expansive liée au sentiment d'une victoire, d'un progrès ou d'une augmentation de notre puissance d'agir.">Joie</span> : Émotion vive, dynamique et expansive qui emporte l'individu.
+          </p>
+          <ul class="space-y-1 text-xs text-gray-600">
+            <li><i class="fas fa-trophy text-yellow-500 mr-2"></i><strong>Sens philosophique :</strong> Souvent liée à l'accomplissement d'une <em>victoire</em> ou d'une création (Bergson, Spinoza).</li>
+            <li><i class="fas fa-dna text-yellow-600 mr-2"></i><strong>Point de vue biologique :</strong> Pic d'activation lié à la dopamine et au dépassement d'un obstacle.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. BONHEUR -->
+    <div class="nb-tab-panel">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="md:col-span-1 text-center p-4 bg-emerald-50 dark:bg-emerald-950/30 rounded-2xl border border-emerald-200 dark:border-emerald-900/50">
+          <div class="w-16 h-16 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+            <i class="fas fa-mountain"></i>
+          </div>
+          <span class="badge-tag badge-emerald">État durable • Plénitude</span>
+          <h4 class="font-extrabold text-lg text-gray-800 mt-2">Le Bonheur</h4>
+        </div>
+        <div class="md:col-span-2 text-sm text-gray-700 space-y-2">
+          <p>
+            <span class="def-term" data-term="bonheur">Bonheur</span> : Non pas un pic ponctuel, mais un <strong>état global</strong> de satisfaction équilibrée, de plénitude et de paix intérieure.
+          </p>
+          <ul class="space-y-1 text-xs text-gray-600">
+            <li><i class="fas fa-hourglass-half text-emerald-500 mr-2"></i><strong>Temporalité :</strong> S'inscrit dans la durée de l'existence.</li>
+            <li><i class="fas fa-spa text-emerald-600 mr-2"></i><strong>Discipline :</strong> Ne s'achète pas : il se cultive activement par la raison, la maîtrise des désirs et la sagesse.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. BÉATITUDE -->
+    <div class="nb-tab-panel">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="md:col-span-1 text-center p-4 bg-indigo-50 dark:bg-indigo-950/30 rounded-2xl border border-indigo-200 dark:border-indigo-900/50">
+          <div class="w-16 h-16 mx-auto bg-indigo-600 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+            <i class="fas fa-water"></i>
+          </div>
+          <span class="badge-tag badge-blue">Absolu • Constant</span>
+          <h4 class="font-extrabold text-lg text-gray-800 mt-2">La Béatitude</h4>
+        </div>
+        <div class="md:col-span-2 text-sm text-gray-700 space-y-2">
+          <p>
+            <span class="def-term" data-term="beatitude" data-def="Contentement absolu, parfait et inébranlable résultant d'un accord total et lucide avec l'ordre de la nature ou du monde.">Béatitude</span> : Forme suprême et inébranlable du contentement ; perfection absolue où plus aucun manque ne subsiste.
+          </p>
+          <ul class="space-y-1 text-xs text-gray-600">
+            <li><i class="fas fa-globe text-indigo-500 mr-2"></i><strong>Harmonie :</strong> Accord total de l'esprit avec le Tout et le cosmos.</li>
+            <li><i class="fas fa-gem text-indigo-600 mr-2"></i><strong>Constance :</strong> État immuable préservé des tempêtes émotionnelles du monde.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLEAU SYNTHÉTIQUE -->
+<div class="mb-8">
+  <h4 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
+    <i class="fas fa-arrows-alt-h text-amber-600"></i>
+    Tableau comparatif : Temporalité et Nature
+  </h4>
+
+  <div class="overflow-x-auto">
+    <table class="inline-block compare-table w-full min-w-[640px] text-sm ">
+      <thead>
+        <tr>
+          <th>Notion</th>
+          <th>Temporalité</th>
+          <th>Siège</th>
+          <th>Source première</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong class="text-orange-600 dark:text-orange-400">Plaisir</strong></td>
+          <td>Instantané, fugitif</td>
+          <td>Corps / Sensibilité</td>
+          <td>Satisfaction d'un besoin ponctuel</td>
+        </tr>
+        <tr>
+          <td><strong class="text-yellow-600 dark:text-yellow-400">Joie</strong></td>
+          <td>Émotion brève, intense</td>
+          <td>Psyché dynamique</td>
+          <td>Sentiment d'un succès ou accomplissement</td>
+        </tr>
+        <tr>
+          <td><strong class="text-emerald-600 dark:text-emerald-400">Bonheur</strong></td>
+          <td>Durable, en continuité</td>
+          <td>Conscience réflexive</td>
+          <td>Équilibre de vie, maîtrise de soi</td>
+        </tr>
+        <tr>
+          <td><strong class="text-indigo-600 dark:text-indigo-400">Béatitude</strong></td>
+          <td>Constant, atemporel</td>
+          <td>Esprit / Raison unie au Tout</td>
+          <td>Accord métaphysique absolu avec le monde</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RÉFLEXION À MÉDITER -->
+<div class="nb-box formule mb-8">
+  <span class="nb-box-title"><i class="fas fa-pen-nib"></i> Réflexion à méditer</span>
+  <p class="text-sm text-gray-700 leading-relaxed mb-0">
+    Si le plaisir n'est qu'un moment qui s'évanouit dès sa consommation, courir après lui sans relâche ne condamne-t-il pas l'individu à un tonneau des Danaïdes perpétuel ? Pourquoi la société moderne cherche-t-elle à nous vendre des <em>plaisirs</em> sous l'étiquette de <em>bonheur</em> ?
+  </p>
+</div>
+</section>
+</main><nav class="nbn-pager"><a href="02-chapitre-1-la-conscience.html"><i class="fa-solid fa-arrow-left"></i> Chapitre 1 — La Conscience</a></nav>
+
+<script>
+(function(){
+ var k='nb-scroll:'+location.pathname;
+ try{var y=localStorage.getItem(k);if(y&&!location.hash)window.addEventListener('load',function(){window.scrollTo(0,+y)});}catch(e){}
+ var t;window.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){try{localStorage.setItem(k,String(window.scrollY))}catch(e){}},300)});
+ var links=[].slice.call(document.querySelectorAll('.nbn-toc a'));
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('.nb-part').forEach(function(s){io.observe(s)});
+ }
+ var btn=document.getElementById('nbn-toc-btn'),toc=document.getElementById('nbn-toc');
+ if(btn&&toc){btn.addEventListener('click',function(){toc.classList.toggle('open')});links.forEach(function(a){a.addEventListener('click',function(){toc.classList.remove('open')})});}
+})();
+</script>
+
+</body>
+</html>

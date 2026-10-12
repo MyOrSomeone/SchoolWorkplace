@@ -1,0 +1,22 @@
+{
+  "slug": "01-introduction",
+  "title": "Introduction",
+  "group": "",
+  "status": "done",
+  "summary": "Origine de la philosophie à Athènes contre les sophistes ; méthode de Socrate.",
+  "parts": [
+    {
+      "id": "p01-qu-est-ce-que-la-philoso",
+      "title": "Qu'est-ce que la philosophie ?",
+      "level": 1,
+      "summary": "Étymologie et définition, carte mentale, démocratie athénienne et rhétorique, sophistes (Protagoras, Gorgias), relativisme vs scepticisme, philosophie vs sophistique."
+    },
+    {
+      "id": "p02-socrate-contre-l-illusio",
+      "title": "Socrate : contre l'illusion du savoir",
+      "level": 1,
+      "summary": "Opinion vs préjugé, ironie socratique et maïeutique, ignorance ignorante vs savante, induction et essence, les trois piliers de la philosophie."
+    }
+  ],
+  "created_at": "2026-10-11T09:55:41"
+}

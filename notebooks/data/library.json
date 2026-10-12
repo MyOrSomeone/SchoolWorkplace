@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-10-12T19:58:36",
+  "matieres": [
+    {
+      "matiere": "Histoire-géo",
+      "index": "Histoire-géo/index.html",
+      "chapters": [
+        {
+          "slug": "01-sequence-1-introduction-et-carte",
+          "title": "Séquence 1 — Introduction et carte",
+          "group": "",
+          "status": "done",
+          "n_parts": 2,
+          "url": "Histoire-géo/01-sequence-1-introduction-et-carte.html"
+        },
+        {
+          "slug": "02-seance-1-les-grands-axes-du-commerce-mar",
+          "title": "Séance 1 — Les grands axes du commerce maritime",
+          "group": "",
+          "status": "done",
+          "n_parts": 4,
+          "url": "Histoire-géo/02-seance-1-les-grands-axes-du-commerce-mar.html"
+        },
+        {
+          "slug": "03-seance-2-les-ressources-des-oceans",
+          "title": "Séance 2 — Les ressources des océans",
+          "group": "",
+          "status": "done",
+          "n_parts": 4,
+          "url": "Histoire-géo/03-seance-2-les-ressources-des-oceans.html"
+        },
+        {
+          "slug": "04-seance-3-exploitation-et-conflits",
+          "title": "Séance 3 — Exploitation et conflits",
+          "group": "",
+          "status": "done",
+          "n_parts": 4,
+          "url": "Histoire-géo/04-seance-3-exploitation-et-conflits.html"
+        },
+        {
+          "slug": "05-seance-4-appropriation-protection-et-lib",
+          "title": "Séance 4 — Appropriation, protection et liberté de circulation",
+          "group": "",
+          "status": "done",
+          "n_parts": 5,
+          "url": "Histoire-géo/05-seance-4-appropriation-protection-et-lib.html"
+        }
+      ]
+    },
+    {
+      "matiere": "Philosophie",
+      "index": "Philosophie/index.html",
+      "chapters": [
+        {
+          "slug": "01-introduction",
+          "title": "Introduction",
+          "group": "",
+          "status": "done",
+          "n_parts": 2,
+          "url": "Philosophie/01-introduction.html"
+        },
+        {
+          "slug": "02-chapitre-1-la-conscience",
+          "title": "Chapitre 1 — La Conscience",
+          "group": "",
+          "status": "done",
+          "n_parts": 8,
+          "url": "Philosophie/02-chapitre-1-la-conscience.html"
+        },
+        {
+          "slug": "03-le-bonheur",
+          "title": "Le Bonheur",
+          "group": "",
+          "status": "in_progress",
+          "n_parts": 2,
+          "url": "Philosophie/03-le-bonheur.html"
+        }
+      ]
+    }
+  ]
+}

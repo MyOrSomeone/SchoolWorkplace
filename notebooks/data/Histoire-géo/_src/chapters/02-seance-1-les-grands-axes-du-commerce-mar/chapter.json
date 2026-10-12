@@ -1,0 +1,34 @@
+{
+  "slug": "02-seance-1-les-grands-axes-du-commerce-mar",
+  "title": "Séance 1 — Les grands axes du commerce maritime",
+  "group": "",
+  "status": "done",
+  "summary": "Conteneurisation, grands axes et passages stratégiques, courbe du sourire et mondialisation.",
+  "parts": [
+    {
+      "id": "p01-seance-1-problematique",
+      "title": "Séance 1 · Problématique",
+      "level": 1,
+      "summary": "Titre de séance et problématique."
+    },
+    {
+      "id": "p02-i-le-conteneur-coffre-au",
+      "title": "I. Le conteneur, coffre au trésor de la mondialisation",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p03-ii-les-acteurs-vitaux-du",
+      "title": "II. Les acteurs vitaux du commerce mondial",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p04-iii-la-mer-de-chine-meri",
+      "title": "III. La mer de Chine méridionale, un espace géostratégique",
+      "level": 1,
+      "summary": ""
+    }
+  ],
+  "created_at": "2026-10-11T09:55:41"
+}
