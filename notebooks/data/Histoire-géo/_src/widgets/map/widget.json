@@ -1,0 +1,10 @@
+{
+  "id": "map",
+  "kind": "map",
+  "title": "Carte du monde",
+  "icon": "fa-puzzle-piece",
+  "description": "Planisphère et globe : pays, drapeaux, océans, lieux et routes du cours.",
+  "wide": true,
+  "order": 1,
+  "updated_at": "2026-10-14T10:36:50"
+}

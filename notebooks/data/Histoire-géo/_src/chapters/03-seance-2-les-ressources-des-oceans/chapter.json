@@ -2,14 +2,15 @@
   "slug": "03-seance-2-les-ressources-des-oceans",
   "title": "Séance 2 — Les ressources des océans",
   "group": "",
+  "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
   "status": "done",
-  "summary": "Ressources halieutiques, minières et énergétiques ; convoitises en mer de Chine méridionale.",
+  "summary": "Ressources halieutiques, minières et énergétiques ; ressources de la mer de Chine méridionale.",
   "parts": [
     {
       "id": "p01-seance-2-problematique",
       "title": "Séance 2 · Problématique",
       "level": 1,
-      "summary": "Titre de séance et problématique."
+      "summary": "Titre de la séance et problématique."
     },
     {
       "id": "p02-i-les-ressources-halieut",
@@ -30,5 +31,5 @@
       "summary": ""
     }
   ],
-  "created_at": "2026-10-11T09:55:41"
+  "created_at": "2026-10-14T10:36:50"
 }

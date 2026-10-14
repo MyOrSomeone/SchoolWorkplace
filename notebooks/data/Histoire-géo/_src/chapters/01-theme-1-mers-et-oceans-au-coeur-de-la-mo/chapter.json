@@ -1,0 +1,17 @@
+{
+  "slug": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
+  "title": "Thème 1 — Mers et océans au cœur de la mondialisation",
+  "group": "",
+  "parent": "",
+  "status": "done",
+  "summary": "Fil directeur de la séquence 1 : circulation, ressources, conflits, appropriation et protection des espaces maritimes ; 90 % du fret passe par la mer.",
+  "parts": [
+    {
+      "id": "p01-sequence-1-mers-et-ocean",
+      "title": "Séquence 1 : mers et océans, des espaces d’opportunités et de conflits",
+      "level": 1,
+      "summary": "Fil directeur et repère central (90 % du fret mondial par la mer)."
+    }
+  ],
+  "created_at": "2026-10-14T10:36:50"
+}

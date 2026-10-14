@@ -1,0 +1,1243 @@
+{
+  "categories": [
+    {
+      "id": "passages",
+      "label": "Canaux et détroits",
+      "color": "#ef4444",
+      "icon": "fa-route"
+    },
+    {
+      "id": "hubs",
+      "label": "Hubs portuaires",
+      "color": "#3b82f6",
+      "icon": "fa-anchor"
+    },
+    {
+      "id": "flux",
+      "label": "Routes maritimes",
+      "color": "#10b981",
+      "icon": "fa-ship"
+    },
+    {
+      "id": "tensions",
+      "label": "Tensions et conflits",
+      "color": "#f59e0b",
+      "icon": "fa-triangle-exclamation"
+    },
+    {
+      "id": "puissance",
+      "label": "Puissance et militarisation",
+      "color": "#e11d48",
+      "icon": "fa-shield-halved"
+    },
+    {
+      "id": "arctique",
+      "label": "Arctique",
+      "color": "#06b6d4",
+      "icon": "fa-snowflake"
+    },
+    {
+      "id": "protection",
+      "label": "Espaces protégés (France)",
+      "color": "#22c55e",
+      "icon": "fa-leaf"
+    }
+  ],
+  "items": [
+    {
+      "id": "panama",
+      "cat": "passages",
+      "type": "point",
+      "title": "Canal de Panama",
+      "short": "Canal artificiel",
+      "lat": 9.1,
+      "lon": -79.7,
+      "desc": "Passage majeur entre l’Atlantique et le Pacifique. Son agrandissement permet le passage des navires Neopanamax.",
+      "countries": [
+        "PA"
+      ],
+      "facts": [
+        "Écluses Panamax : chambre de 304,8 m × 33,5 m (jusqu’à 5 000 EVP)",
+        "Écluses Neopanamax : chambre de 427 m × 55 m (plus de 14 000 EVP)"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "suez",
+      "cat": "passages",
+      "type": "point",
+      "title": "Canal de Suez",
+      "short": "Canal artificiel",
+      "lat": 30.46,
+      "lon": 32.35,
+      "desc": "Passage entre la Méditerranée et la mer Rouge, essentiel à la route Europe–Asie.",
+      "countries": [
+        "EG"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "gibraltar",
+      "cat": "passages",
+      "type": "point",
+      "title": "Détroit de Gibraltar",
+      "short": "Détroit naturel",
+      "lat": 35.96,
+      "lon": -5.6,
+      "desc": "Passage entre l’océan Atlantique et la Méditerranée, entre l’Europe et l’Afrique.",
+      "countries": [
+        "ES",
+        "MA"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "bab",
+      "cat": "passages",
+      "type": "point",
+      "title": "Bab-el-Mandeb",
+      "short": "Détroit naturel",
+      "lat": 12.58,
+      "lon": 43.33,
+      "desc": "Passage entre la mer Rouge et le golfe d’Aden, directement lié à la route de Suez.",
+      "countries": [
+        "YE",
+        "DJ",
+        "ER"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "ormuz",
+      "cat": "passages",
+      "type": "point",
+      "title": "Détroit d’Ormuz",
+      "short": "Détroit naturel",
+      "lat": 26.57,
+      "lon": 56.25,
+      "desc": "Passage stratégique entre le golfe Persique et le golfe d’Oman, important pour les flux énergétiques.",
+      "countries": [
+        "IR",
+        "OM",
+        "AE"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "malacca",
+      "cat": "passages",
+      "type": "point",
+      "title": "Détroit de Malacca",
+      "short": "Détroit naturel",
+      "lat": 2.5,
+      "lon": 101.3,
+      "desc": "Passage majeur entre l’océan Indien et les espaces maritimes d’Asie orientale.",
+      "countries": [
+        "MY",
+        "ID",
+        "SG"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "bering",
+      "cat": "passages",
+      "type": "point",
+      "title": "Détroit de Béring",
+      "short": "Détroit naturel",
+      "lat": 65.8,
+      "lon": -169.0,
+      "desc": "Passage entre l’Alaska et l’Extrême-Orient russe ; il ouvre vers les espaces arctiques.",
+      "countries": [
+        "US",
+        "RU"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "rotterdam",
+      "cat": "hubs",
+      "type": "point",
+      "title": "Rotterdam",
+      "short": "Hub / façade",
+      "lat": 51.95,
+      "lon": 4.14,
+      "desc": "Exemple de grand hub portuaire de la façade de l’Europe de l’Ouest.",
+      "countries": [
+        "NL"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "singapour",
+      "cat": "hubs",
+      "type": "point",
+      "title": "Singapour",
+      "short": "Hub / façade",
+      "lat": 1.26,
+      "lon": 103.82,
+      "desc": "Grand hub asiatique situé près du détroit de Malacca.",
+      "countries": [
+        "SG"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "shanghai",
+      "cat": "hubs",
+      "type": "point",
+      "title": "Shanghai",
+      "short": "Hub / façade",
+      "lat": 31.23,
+      "lon": 121.47,
+      "desc": "Grand port d’Asie de l’Est, au cœur des flux manufacturiers.",
+      "countries": [
+        "CN"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "new-york",
+      "cat": "hubs",
+      "type": "point",
+      "title": "New York",
+      "short": "Hub / façade",
+      "lat": 40.67,
+      "lon": -74.04,
+      "desc": "Repère de la façade nord-américaine sur l’Atlantique.",
+      "countries": [
+        "US"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "los-angeles",
+      "cat": "hubs",
+      "type": "point",
+      "title": "Los Angeles",
+      "short": "Hub / façade",
+      "lat": 33.73,
+      "lon": -118.26,
+      "desc": "Repère de la façade pacifique nord-américaine.",
+      "countries": [
+        "US"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "tokyo",
+      "cat": "hubs",
+      "type": "point",
+      "title": "Tokyo",
+      "short": "Hub / façade",
+      "lat": 35.62,
+      "lon": 139.78,
+      "desc": "Repère de la façade d’Asie de l’Est.",
+      "countries": [
+        "JP"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "scs",
+      "cat": "tensions",
+      "type": "zone",
+      "title": "Mer de Chine méridionale",
+      "short": "Zone de tensions",
+      "polygon": [
+        [
+          21,
+          108
+        ],
+        [
+          23,
+          116
+        ],
+        [
+          19,
+          121.5
+        ],
+        [
+          10,
+          119.5
+        ],
+        [
+          5.5,
+          115.5
+        ],
+        [
+          1.5,
+          109
+        ],
+        [
+          3.5,
+          105
+        ],
+        [
+          9,
+          103.5
+        ],
+        [
+          12.5,
+          109
+        ],
+        [
+          17.5,
+          107.5
+        ]
+      ],
+      "desc": "Espace où se superposent routes commerciales majeures, ressources énergétiques et minières, et revendications maritimes qui se chevauchent entre les pays riverains.",
+      "facts": [
+        "Riverains : Chine, Vietnam, Philippines, Malaisie, Brunei, Taïwan",
+        "Pétrole : ≈ 7,7 Md de barils",
+        "Gaz naturel : ≈ 2,5 B m³",
+        "Nodules polymétalliques : ≈ 10 Mt",
+        "Parts mondiales : 0,5 % / 13,4 %"
+      ],
+      "countries": [
+        "CN",
+        "VN",
+        "PH",
+        "MY",
+        "BN",
+        "TW"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p04-iii-la-mer-de-chine-meri"
+      }
+    },
+    {
+      "id": "spratleys",
+      "cat": "tensions",
+      "type": "point",
+      "title": "Îles Spratleys",
+      "short": "Îlots disputés",
+      "lat": 10.0,
+      "lon": 114.0,
+      "desc": "Archipel dont les îlots disputés et les aménagements peuvent servir de points d’appui et renforcer la présence des États dans la mer de Chine méridionale.",
+      "ref": {
+        "chapter": "04-seance-3-exploitation-et-conflits",
+        "part": "p03-ii-la-mer-de-chine-merid"
+      }
+    },
+    {
+      "id": "paracels",
+      "cat": "tensions",
+      "type": "point",
+      "title": "Îles Paracels",
+      "short": "Îlots disputés",
+      "lat": 16.5,
+      "lon": 112.0,
+      "desc": "Archipel de la mer de Chine méridionale : îlots disputés dont les aménagements servent de points d’appui.",
+      "ref": {
+        "chapter": "04-seance-3-exploitation-et-conflits",
+        "part": "p03-ii-la-mer-de-chine-merid"
+      }
+    },
+    {
+      "id": "taiwan",
+      "cat": "tensions",
+      "type": "point",
+      "title": "Taïwan",
+      "short": "Objectif stratégique",
+      "lat": 23.7,
+      "lon": 121.0,
+      "desc": "Taïwan est aussi un objectif stratégique dans les rivalités de puissance de la région.",
+      "countries": [
+        "TW"
+      ],
+      "ref": {
+        "chapter": "04-seance-3-exploitation-et-conflits",
+        "part": "p03-ii-la-mer-de-chine-merid"
+      }
+    },
+    {
+      "id": "somalie",
+      "cat": "tensions",
+      "type": "zone",
+      "title": "Corne de l’Afrique",
+      "short": "Conflit asymétrique",
+      "circle": {
+        "lat": 9,
+        "lon": 51,
+        "radius_km": 950
+      },
+      "desc": "La Somalie illustre la faiblesse étatique et la piraterie dans un espace proche d’une grande route maritime (golfe d’Aden – Bab-el-Mandeb).",
+      "countries": [
+        "SO"
+      ],
+      "ref": {
+        "chapter": "04-seance-3-exploitation-et-conflits",
+        "part": "p04-iii-les-conflits-maritim"
+      }
+    },
+    {
+      "id": "guinee",
+      "cat": "tensions",
+      "type": "zone",
+      "title": "Golfe de Guinée",
+      "short": "Zone de tension",
+      "circle": {
+        "lat": 3,
+        "lon": 3,
+        "radius_km": 950
+      },
+      "desc": "Repère de sécurité maritime et de ressources sur la façade atlantique africaine.",
+      "ref": {
+        "chapter": "04-seance-3-exploitation-et-conflits",
+        "part": "p04-iii-les-conflits-maritim"
+      }
+    },
+    {
+      "id": "collier-de-perles",
+      "cat": "puissance",
+      "type": "route",
+      "title": "Collier de perles",
+      "short": "Stratégie de la Chine",
+      "animated": false,
+      "points": [
+        [
+          18.2,
+          109.5
+        ],
+        [
+          4,
+          106
+        ],
+        [
+          1.2,
+          103.9
+        ],
+        [
+          2.5,
+          101.2
+        ],
+        [
+          6,
+          95
+        ],
+        [
+          6.0,
+          81.2
+        ],
+        [
+          15,
+          70
+        ],
+        [
+          25.0,
+          62.4
+        ],
+        [
+          13,
+          50
+        ],
+        [
+          11.6,
+          43.2
+        ]
+      ],
+      "desc": "Stratégie associée à des investissements et à des points d’appui portuaires de la Chine sur les routes de l’océan Indien.",
+      "facts": [
+        "Repères souvent cités : Hambantota (Sri Lanka), Gwadar (Pakistan), Djibouti"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "ref": {
+        "chapter": "04-seance-3-exploitation-et-conflits",
+        "part": "p03-ii-la-mer-de-chine-merid"
+      }
+    },
+    {
+      "id": "arctique",
+      "cat": "arctique",
+      "type": "zone",
+      "title": "Océan Arctique",
+      "short": "Espace de convoitises",
+      "circle": {
+        "lat": 89,
+        "lon": 0,
+        "radius_km": 2300
+      },
+      "desc": "Espace polaire où se croisent ressources naturelles, enjeux militaires et routes commerciales nouvelles, avec les revendications des États riverains.",
+      "facts": [
+        "Six États : Canada, Danemark (Groenland), Norvège, Russie, États-Unis (Alaska), Islande"
+      ],
+      "countries": [
+        "RU",
+        "CA",
+        "US",
+        "NO",
+        "DK",
+        "GL",
+        "IS"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p03-ii-sapproprier-les-espac"
+      }
+    },
+    {
+      "id": "passage-nord-est",
+      "cat": "arctique",
+      "type": "route",
+      "title": "Passage du Nord-Est",
+      "short": "Route arctique · Russie",
+      "points": [
+        [
+          69.0,
+          33.1
+        ],
+        [
+          70.8,
+          45
+        ],
+        [
+          71.2,
+          58
+        ],
+        [
+          72.5,
+          68
+        ],
+        [
+          76,
+          85
+        ],
+        [
+          77.9,
+          104
+        ],
+        [
+          76.5,
+          120
+        ],
+        [
+          74,
+          140
+        ],
+        [
+          73.2,
+          160
+        ],
+        [
+          70.8,
+          175
+        ],
+        [
+          66.5,
+          -170
+        ],
+        [
+          65.8,
+          -168.9
+        ]
+      ],
+      "desc": "Itinéraire le long des côtes russes, que le réchauffement rend saisonnièrement accessible. Tracé schématique.",
+      "countries": [
+        "RU"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p03-ii-sapproprier-les-espac"
+      }
+    },
+    {
+      "id": "passage-nord-ouest",
+      "cat": "arctique",
+      "type": "route",
+      "title": "Passage du Nord-Ouest",
+      "short": "Route arctique · Canada",
+      "points": [
+        [
+          65.8,
+          -168.9
+        ],
+        [
+          71.5,
+          -156.5
+        ],
+        [
+          71.3,
+          -130
+        ],
+        [
+          70,
+          -115
+        ],
+        [
+          74.5,
+          -100
+        ],
+        [
+          74.2,
+          -85
+        ],
+        [
+          72,
+          -72
+        ],
+        [
+          65,
+          -58
+        ],
+        [
+          60,
+          -50
+        ]
+      ],
+      "desc": "Itinéraire à travers l’archipel arctique canadien, saisonnièrement accessible. Tracé schématique.",
+      "countries": [
+        "CA"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p03-ii-sapproprier-les-espac"
+      }
+    },
+    {
+      "id": "murmansk",
+      "cat": "arctique",
+      "type": "point",
+      "title": "Murmansk",
+      "short": "Passage du Nord-Est",
+      "lat": 68.97,
+      "lon": 33.08,
+      "desc": "Repère russe du passage du Nord-Est, le long des côtes de la Russie.",
+      "countries": [
+        "RU"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p03-ii-sapproprier-les-espac"
+      }
+    },
+    {
+      "id": "nome",
+      "cat": "arctique",
+      "type": "point",
+      "title": "Nome (Alaska)",
+      "short": "Passage du Nord-Ouest",
+      "lat": 64.5,
+      "lon": -165.4,
+      "desc": "Repère américain des itinéraires arctiques.",
+      "countries": [
+        "US"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p03-ii-sapproprier-les-espac"
+      }
+    },
+    {
+      "id": "iroise",
+      "cat": "protection",
+      "type": "point",
+      "title": "Parc naturel marin d’Iroise",
+      "short": "Parc naturel marin",
+      "lat": 48.35,
+      "lon": -5.05,
+      "desc": "Parc naturel marin : créé par décret de l’État, il protège et gère durablement le milieu marin en intégrant les activités humaines.",
+      "countries": [
+        "FR"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p04-iii-patrimonialiser-les"
+      }
+    },
+    {
+      "id": "mayotte",
+      "cat": "protection",
+      "type": "point",
+      "title": "Parc naturel marin de Mayotte",
+      "short": "Parc naturel marin",
+      "lat": -12.8,
+      "lon": 45.15,
+      "desc": "Exemple de parc naturel marin, géré avec l’Office français de la biodiversité.",
+      "countries": [
+        "FR"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p04-iii-patrimonialiser-les"
+      }
+    },
+    {
+      "id": "ecrins",
+      "cat": "protection",
+      "type": "point",
+      "title": "Parc national des Écrins",
+      "short": "Parc national",
+      "lat": 44.9,
+      "lon": 6.35,
+      "desc": "Parc national : site de haute valeur écologique créé par décret d’État, avec un cœur (protection renforcée) et une aire d’adhésion.",
+      "countries": [
+        "FR"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p04-iii-patrimonialiser-les"
+      }
+    },
+    {
+      "id": "vanoise",
+      "cat": "protection",
+      "type": "point",
+      "title": "Parc national de la Vanoise",
+      "short": "Parc national",
+      "lat": 45.4,
+      "lon": 6.85,
+      "desc": "Parc national : préserver la biodiversité, les paysages et le patrimoine naturel et culturel.",
+      "countries": [
+        "FR"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p04-iii-patrimonialiser-les"
+      }
+    },
+    {
+      "id": "vercors",
+      "cat": "protection",
+      "type": "point",
+      "title": "Parc naturel régional du Vercors",
+      "short": "Parc naturel régional",
+      "lat": 45.05,
+      "lon": 5.5,
+      "desc": "PNR : label de 15 ans, initiative régionale et gestion par un syndicat mixte.",
+      "countries": [
+        "FR"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p04-iii-patrimonialiser-les"
+      }
+    },
+    {
+      "id": "morvan",
+      "cat": "protection",
+      "type": "point",
+      "title": "Parc naturel régional du Morvan",
+      "short": "Parc naturel régional",
+      "lat": 47.1,
+      "lon": 4.0,
+      "desc": "PNR : protéger et valoriser paysages et patrimoine tout en soutenant un développement local durable.",
+      "countries": [
+        "FR"
+      ],
+      "ref": {
+        "chapter": "05-seance-4-appropriation-protection-et-lib",
+        "part": "p04-iii-patrimonialiser-les"
+      }
+    },
+    {
+      "id": "route-suez",
+      "cat": "flux",
+      "type": "route",
+      "title": "Route Europe–Asie par Suez",
+      "short": "Axe majeur Est–Ouest",
+      "points": [
+        [
+          51.95,
+          4.1
+        ],
+        [
+          51,
+          1.5
+        ],
+        [
+          48.6,
+          -5.6
+        ],
+        [
+          43.5,
+          -10
+        ],
+        [
+          36.8,
+          -9.5
+        ],
+        [
+          35.95,
+          -5.6
+        ],
+        [
+          36.9,
+          0
+        ],
+        [
+          37.5,
+          10.5
+        ],
+        [
+          35.5,
+          22
+        ],
+        [
+          31.4,
+          32.3
+        ],
+        [
+          29.9,
+          32.55
+        ],
+        [
+          27.5,
+          34
+        ],
+        [
+          20,
+          38.5
+        ],
+        [
+          12.6,
+          43.3
+        ],
+        [
+          12,
+          50
+        ],
+        [
+          8,
+          60
+        ],
+        [
+          5.8,
+          80
+        ],
+        [
+          6,
+          92
+        ],
+        [
+          5.5,
+          97
+        ],
+        [
+          3,
+          100.5
+        ],
+        [
+          1.2,
+          103.9
+        ],
+        [
+          6,
+          108.5
+        ],
+        [
+          15,
+          112
+        ],
+        [
+          22,
+          115.5
+        ],
+        [
+          25.5,
+          123
+        ],
+        [
+          30.6,
+          122.1
+        ]
+      ],
+      "desc": "Principale route reliant l’Europe de l’Ouest à l’Asie de l’Est par Gibraltar, Suez, Bab-el-Mandeb et Malacca. Tracé schématique.",
+      "countries": [
+        "NL",
+        "EG",
+        "SG",
+        "CN"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "route-atlantique",
+      "cat": "flux",
+      "type": "route",
+      "title": "Atlantique Nord",
+      "short": "Façades de la Triade",
+      "points": [
+        [
+          51.95,
+          4.1
+        ],
+        [
+          51,
+          1.5
+        ],
+        [
+          50,
+          -2
+        ],
+        [
+          49.5,
+          -6
+        ],
+        [
+          47,
+          -25
+        ],
+        [
+          43,
+          -50
+        ],
+        [
+          40.5,
+          -70
+        ],
+        [
+          40.5,
+          -73.9
+        ]
+      ],
+      "desc": "Route reliant les façades d’Europe de l’Ouest et d’Amérique du Nord, deux pôles de la Triade. Tracé schématique.",
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "route-pacifique",
+      "cat": "flux",
+      "type": "route",
+      "title": "Route transpacifique",
+      "short": "Asie – Amérique du Nord",
+      "points": [
+        [
+          30.6,
+          122.1
+        ],
+        [
+          31.5,
+          130
+        ],
+        [
+          33.5,
+          141.5
+        ],
+        [
+          40,
+          170
+        ],
+        [
+          47,
+          -170
+        ],
+        [
+          48,
+          -140
+        ],
+        [
+          37,
+          -125.5
+        ],
+        [
+          33.7,
+          -118.3
+        ]
+      ],
+      "desc": "Route reliant les façades d’Asie de l’Est et la façade pacifique nord-américaine. Tracé schématique.",
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "route-panama",
+      "cat": "flux",
+      "type": "route",
+      "title": "Route par le canal de Panama",
+      "short": "Atlantique – Pacifique",
+      "points": [
+        [
+          40.5,
+          -73.9
+        ],
+        [
+          32,
+          -72
+        ],
+        [
+          26,
+          -74
+        ],
+        [
+          20,
+          -73.8
+        ],
+        [
+          15,
+          -76
+        ],
+        [
+          10.5,
+          -79.9
+        ],
+        [
+          9.38,
+          -79.9
+        ],
+        [
+          8.95,
+          -79.55
+        ],
+        [
+          12,
+          -100
+        ],
+        [
+          20,
+          -140
+        ],
+        [
+          28,
+          -170
+        ],
+        [
+          33,
+          160
+        ],
+        [
+          34,
+          142
+        ],
+        [
+          35.3,
+          139.8
+        ]
+      ],
+      "desc": "Le canal de Panama raccourcit les routes entre l’Atlantique et le Pacifique ; il a été agrandi pour accueillir des navires plus grands. Tracé schématique.",
+      "countries": [
+        "PA"
+      ],
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    },
+    {
+      "id": "route-cap",
+      "cat": "flux",
+      "type": "route",
+      "title": "Route du cap de Bonne-Espérance",
+      "short": "Alternative à Suez",
+      "points": [
+        [
+          51.95,
+          4.1
+        ],
+        [
+          51,
+          1.5
+        ],
+        [
+          48.6,
+          -5.6
+        ],
+        [
+          43.5,
+          -10
+        ],
+        [
+          28,
+          -17
+        ],
+        [
+          14,
+          -19
+        ],
+        [
+          0,
+          -3
+        ],
+        [
+          -20,
+          5
+        ],
+        [
+          -35.5,
+          19
+        ],
+        [
+          -30,
+          35
+        ],
+        [
+          -20,
+          55
+        ],
+        [
+          -5,
+          85
+        ],
+        [
+          3,
+          95
+        ],
+        [
+          3,
+          100.5
+        ],
+        [
+          1.2,
+          103.9
+        ]
+      ],
+      "desc": "Itinéraire alternatif contournant l’Afrique, utilisé quand la route de Suez est évitée. Tracé schématique.",
+      "animated": true,
+      "ref": {
+        "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
+        "part": "p03-ii-les-acteurs-vitaux-du"
+      }
+    }
+  ],
+  "highlights": [
+    {
+      "id": "scs-riverains",
+      "title": "Riverains de la mer de Chine méridionale",
+      "color": "#f59e0b",
+      "countries": [
+        "CN",
+        "VN",
+        "PH",
+        "MY",
+        "BN",
+        "TW"
+      ],
+      "desc": "Pays dont les revendications maritimes se chevauchent en mer de Chine méridionale."
+    },
+    {
+      "id": "arctic-states",
+      "title": "États riverains de l’Arctique",
+      "color": "#06b6d4",
+      "countries": [
+        "CA",
+        "DK",
+        "GL",
+        "NO",
+        "RU",
+        "US",
+        "IS"
+      ],
+      "desc": "Six États cités dans le cours : Canada, Danemark (Groenland), Norvège, Russie, États-Unis (Alaska), Islande."
+    },
+    {
+      "id": "triade",
+      "title": "Triade (repère indicatif)",
+      "color": "#3b82f6",
+      "countries": [
+        "US",
+        "CA",
+        "FR",
+        "DE",
+        "GB",
+        "NL",
+        "BE",
+        "ES",
+        "IT",
+        "PT",
+        "IE",
+        "CH",
+        "AT",
+        "DK",
+        "JP",
+        "KR",
+        "CN",
+        "TW"
+      ],
+      "desc": "Pôles de la mondialisation : Amérique du Nord, Europe de l’Ouest et Asie de l’Est."
+    }
+  ],
+  "labels": [],
+  "countryNotes": {
+    "CN": {
+      "desc": "Acteur central de la mer de Chine méridionale et de la route Europe–Asie.",
+      "facts": [
+        "Dépenses militaires : +316 % entre 2000 et 2015",
+        "Stratégie du collier de perles dans l’océan Indien"
+      ]
+    },
+    "US": {
+      "desc": "Façades atlantique (New York) et pacifique (Los Angeles), État riverain de l’Arctique par l’Alaska.",
+      "facts": [
+        "Dépenses militaires : +44 % entre 2000 et 2015",
+        "Rôle de « gendarme des mers et océans » depuis la Seconde Guerre mondiale"
+      ]
+    },
+    "RU": {
+      "desc": "Le passage du Nord-Est longe ses côtes ; elle est l’un des six États riverains de l’Arctique."
+    },
+    "CA": {
+      "desc": "Le passage du Nord-Ouest traverse son archipel arctique ; elle est l’un des six États riverains de l’Arctique."
+    },
+    "FR": {
+      "desc": "Parcs naturels marins (Iroise, Mayotte), parcs nationaux (Écrins, Vanoise), parcs naturels régionaux (Vercors, Morvan) et loi Littoral (1986)."
+    },
+    "SO": {
+      "desc": "Exemple de faiblesse étatique et de piraterie à proximité d’une grande route maritime."
+    },
+    "TW": {
+      "desc": "Riverain de la mer de Chine méridionale et objectif stratégique dans les rivalités de puissance."
+    },
+    "PA": {
+      "desc": "Son canal relie l’Atlantique et le Pacifique ; agrandi pour les navires Neopanamax."
+    },
+    "EG": {
+      "desc": "Le canal de Suez relie la Méditerranée et la mer Rouge : maillon essentiel de la route Europe–Asie."
+    },
+    "SG": {
+      "desc": "Grand hub portuaire asiatique, près du détroit de Malacca."
+    }
+  },
+  "view": {
+    "lat": 22,
+    "lon": 30,
+    "k": 1
+  }
+}

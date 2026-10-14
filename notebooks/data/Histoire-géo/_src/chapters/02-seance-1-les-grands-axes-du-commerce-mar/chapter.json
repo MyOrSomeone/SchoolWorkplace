@@ -2,14 +2,15 @@
   "slug": "02-seance-1-les-grands-axes-du-commerce-mar",
   "title": "Séance 1 — Les grands axes du commerce maritime",
   "group": "",
+  "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
   "status": "done",
-  "summary": "Conteneurisation, grands axes et passages stratégiques, courbe du sourire et mondialisation.",
+  "summary": "Conteneurisation, canaux et détroits, courbe du sourire, mer de Chine méridionale et UNCLOS.",
   "parts": [
     {
       "id": "p01-seance-1-problematique",
       "title": "Séance 1 · Problématique",
       "level": 1,
-      "summary": "Titre de séance et problématique."
+      "summary": "Titre de la séance et problématique."
     },
     {
       "id": "p02-i-le-conteneur-coffre-au",
@@ -30,5 +31,5 @@
       "summary": ""
     }
   ],
-  "created_at": "2026-10-11T09:55:41"
+  "created_at": "2026-10-14T10:36:50"
 }

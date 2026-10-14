@@ -694,6 +694,74 @@ html.dark .map-image { filter:brightness(.78) saturate(.8); }
 .unclos-ruler-labels { display:grid; grid-template-columns:12fr 12fr 176fr 150fr; gap:3px; font-size:.68rem; color:var(--nb-text-muted); text-align:center; }
 /* @endblock nb-widgets */
 
+/* @block nb-nav */
+/* Barre de navigation, fil d'Ariane, sommaire en arbre, boutons précédent/suivant */
+.nbn-bar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: .4rem; padding: .5rem .8rem;
+    background: color-mix(in srgb, var(--nb-bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--nb-border); }
+.nbn-bar a, .nbn-bar button { display: inline-flex; align-items: center; gap: .4rem; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit;
+    padding: .5rem .65rem; border-radius: .7rem; text-decoration: none; font-weight: 700; min-height: 40px; }
+.nbn-bar a:hover, .nbn-bar button:hover { background: var(--nb-gold-soft); }
+.nbn-menu { background: var(--nb-gold) !important; color: #fff !important; }
+.nbn-ttl { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.2; padding: 0 .3rem; }
+.nbn-ttl small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--nb-text-muted); font-size: .72rem; }
+.nbn-ttl small a { padding: 0; min-height: 0; font-weight: 600; display: inline; }
+.nbn-ttl b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nbn-pager { display: flex; gap: .8rem; justify-content: space-between; padding: 2rem 1rem 4rem; flex-wrap: wrap; max-width: 820px; margin: 0 auto; }
+.nbn-pager a { flex: 1; min-width: 150px; padding: 1rem 1.2rem; border: 1px solid var(--nb-gold); border-radius: 1rem; text-decoration: none; color: inherit; font-weight: 700; }
+.nbn-pager a:hover { background: var(--nb-gold-soft); }
+.nb-part { scroll-margin-top: 4.5rem; padding: 1.2rem .6rem; }
+.nbn-empty { text-align: center; color: var(--nb-text-muted); padding: 3rem 0; }
+.nbn-kids-title { color: var(--nb-gold); font-size: 1.3rem; margin: 0 0 .8rem; }
+.nbn-cards, .nbn-tree { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); padding: 1rem 0; }
+.nbn-card { display: block; padding: 1.1rem; border: 1px solid var(--nb-gold); border-radius: 1rem; text-decoration: none; color: inherit; transition: transform .15s, background .15s; background: var(--nb-bg-card); }
+.nbn-card:hover { transform: translateY(-3px); background: var(--nb-gold-soft); }
+.nbn-card p { font-size: .8rem; margin: .4rem 0; color: var(--nb-text-muted); }
+.nbn-card small { color: var(--nb-gold); font-weight: 700; }
+.nbn-d1 { margin-left: 1.2rem; border-style: dashed; } .nbn-d2, .nbn-d3 { margin-left: 2.4rem; border-style: dotted; }
+.nbn-group { grid-column: 1 / -1; font-weight: 700; margin: .6rem 0 0; }
+.nbn-gloss { margin: 1.5rem 0; } .nbn-gloss dl { padding: 1rem 1.2rem; } .nbn-gloss dd { margin: 0 0 .7rem 1rem; }
+.nbw-main { max-width: 900px; margin: 0 auto; padding: 1rem; }
+/* @endblock nb-nav */
+
+/* @block nb-menu */
+/* Menu à widgets (bouton « Menu » de chaque page) : Plan, Définitions, widgets */
+.nbm { position: fixed; inset: 0; z-index: 100; }
+.nbm[hidden] { display: none; }
+.nbm-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.45); animation: nbFadeUp .2s ease both; }
+.nbm-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(100vw, 460px); display: flex; flex-direction: column;
+    background: var(--nb-bg); color: var(--nb-text); box-shadow: -12px 0 40px rgba(0,0,0,.35); transition: width .2s; }
+.nbm.expanded .nbm-panel { width: 100vw; }
+.nbm-head { display: flex; align-items: center; gap: .3rem; padding: .5rem; border-bottom: 1px solid var(--nb-border); }
+.nbm-tabs { flex: 1; display: flex; gap: .4rem; overflow-x: auto; scrollbar-width: none; padding: .1rem; }
+.nbm-tab { flex: none; display: inline-flex; align-items: center; gap: .45rem; min-height: 40px; padding: 0 .9rem; border-radius: 999px; border: 1px solid var(--nb-border);
+    background: transparent; color: inherit; font: inherit; font-weight: 700; font-size: .85rem; cursor: pointer; white-space: nowrap; }
+.nbm-tab small { opacity: .65; }
+.nbm-tab.on { background: var(--nb-gold); border-color: var(--nb-gold); color: #fff; }
+.nbm-x { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--nb-gold-soft); color: inherit; cursor: pointer; }
+.nbm-body { flex: 1; min-height: 0; position: relative; }
+.nbm-pane { display: none; height: 100%; overflow-y: auto; }
+.nbm-pane.on { display: block; }
+.nbm-pane iframe { width: 100%; height: 100%; border: 0; display: block; background: var(--nb-bg); }
+.nbm-plan { padding: .8rem 1rem 2rem; }
+.nbm-home { display: flex; align-items: center; gap: .5rem; padding: .7rem .6rem; font-weight: 700; color: var(--nb-gold); text-decoration: none; }
+.nbm-node { margin: .15rem 0; } .nbm-node .nbm-node { margin-left: 1rem; border-left: 2px solid var(--nb-border); padding-left: .4rem; }
+.nbm-node > summary { cursor: pointer; padding: .35rem .3rem; border-radius: .6rem; }
+.nbm-node > summary a { color: inherit; text-decoration: none; font-weight: 700; }
+.nbm-node > summary a.active { color: var(--nb-gold); }
+.nbm-parts { list-style: none; margin: .1rem 0 .5rem 1rem; padding: 0; }
+.nbm-parts li a { display: block; padding: .5rem .6rem; border-radius: .6rem; color: inherit; text-decoration: none; font-size: .88rem; min-height: 38px; }
+.nbm-parts li.l2 { margin-left: 1.1rem; font-size: .82rem; }
+.nbm-parts li a:hover, .nbm-parts li a.active { background: var(--nb-gold-soft); color: var(--nb-gold); }
+.nbm-defs { padding: .8rem 1rem 2rem; }
+.nbm-defs input { width: 100%; height: 44px; border-radius: 999px; border: 1px solid var(--nb-border); background: var(--nb-bg-card); color: inherit; padding: 0 1rem; font: inherit; margin-bottom: .6rem; }
+.nbm-letter { margin: 1rem 0 .3rem; color: var(--nb-gold); font-weight: 800; }
+.nbm-def { border: 1px solid var(--nb-border); border-radius: .8rem; margin: .4rem 0; background: var(--nb-bg-card); }
+.nbm-def summary { cursor: pointer; padding: .7rem .9rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: .5rem; }
+.nbm-def summary::-webkit-details-marker { display: none; }
+.nbm-def div { padding: 0 .9rem .8rem; line-height: 1.55; font-size: .92rem; }
+.nbm-def a { color: var(--nb-gold); font-weight: 700; font-size: .82rem; text-decoration: none; display: inline-block; margin-top: .4rem; }
+/* @endblock nb-menu */
+
 /* @block nb-dark-fixes */
 /* Les classes Tailwind "claires" (text-gray-800, bg-white…) deviennent lisibles en mode sombre */
 html.dark .text-gray-900, html.dark .text-gray-800, html.dark .text-gray-700, html.dark .text-stone-800, html.dark .text-slate-800 { color: var(--nb-text); }

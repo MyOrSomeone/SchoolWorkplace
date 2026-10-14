@@ -314,6 +314,75 @@ NB.register("widgets", function () {
 });
 // @endblock nb-widgets
 
+// @block nb-menu
+/* Menu à widgets (bouton #nbm-btn) : onglets Plan / Définitions / widgets (iframe chargée à la demande).
+   Définitions : liste générée depuis window.NB_GLOSSARY (reconstruit par le build à partir du contenu). */
+NB.register("menu", function () {
+    var root = document.getElementById("nbm"), btn = document.getElementById("nbm-btn");
+    if (!root || !btn || root.dataset.ready) return;
+    root.dataset.ready = "1";
+
+    function setTab(id, quiet) {
+        NB.$$(".nbm-tab", root).forEach(function (t) { t.classList.toggle("on", t.getAttribute("data-tab") === id); });
+        NB.$$(".nbm-pane", root).forEach(function (p) { p.classList.toggle("on", p.getAttribute("data-pane") === id); });
+        var pane = root.querySelector('.nbm-pane[data-pane="' + id + '"]'), fr = pane && pane.querySelector("iframe[data-src]");
+        if (fr && !fr.src) fr.src = fr.getAttribute("data-src");
+        var tab = root.querySelector('.nbm-tab[data-tab="' + id + '"]');
+        if (!quiet) root.classList.toggle("expanded", !!(tab && tab.getAttribute("data-wide")));
+        try { localStorage.setItem("nbm-tab:" + location.pathname.replace(/[^/]*$/, ""), id); } catch (e) { /* ignore */ }
+    }
+    function open(id) { root.hidden = false; document.body.style.overflow = "hidden"; if (id) setTab(id); }
+    function close() { root.hidden = true; document.body.style.overflow = ""; }
+    btn.addEventListener("click", function () { open(); });
+    root.querySelector(".nbm-backdrop").addEventListener("click", close);
+    document.getElementById("nbm-close").addEventListener("click", close);
+    document.getElementById("nbm-exp").addEventListener("click", function () { root.classList.toggle("expanded"); });
+    root.querySelector(".nbm-tabs").addEventListener("click", function (e) { var t = e.target.closest(".nbm-tab"); if (t) setTab(t.getAttribute("data-tab")); });
+    root.addEventListener("click", function (e) {
+        var a = e.target.closest("a[href]");
+        if (!a || a.closest(".nbm-def")) return;
+        var u = new URL(a.href, location.href);
+        if (u.pathname === location.pathname) close();            // lien vers la page courante (ancre) : on ferme et on défile
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !root.hidden) close(); });
+    window.addEventListener("message", function (e) {              // un widget (ex. la carte) demande à s'agrandir
+        if (e.data && e.data.nbm === "toggle-expand") root.classList.toggle("expanded");
+    });
+    window.NBM = { open: open, close: close };
+
+    // Définitions : liste alphabétique avec recherche
+    var G = window.NB_GLOSSARY || [], list = document.getElementById("nbm-dlist"), q = document.getElementById("nbm-dq");
+    function render() {
+        var f = NB.slug(q.value), html = "", letter = "";
+        G.filter(function (g) { return !f || NB.slug(g.l).indexOf(f) >= 0 || NB.slug(g.d).indexOf(f) >= 0; }).forEach(function (g) {
+            var L = (NB.slug(g.l).charAt(0) || "#").toUpperCase();
+            if (L !== letter) { letter = L; html += '<div class="nbm-letter">' + L + "</div>"; }
+            html += '<details class="nbm-def"><summary>' + NB.esc(g.l) + '<i class="fa-solid fa-chevron-down" style="opacity:.5"></i></summary><div>' + NB.esc(g.d) +
+                (g.c ? '<br><a href="' + NB.esc(g.c) + ".html#" + NB.esc(g.p) + '">Voir dans le cours · ' + NB.esc(g.ct) + "</a>" : "") + "</div></details>";
+        });
+        list.innerHTML = html || "<p>" + (G.length ? "Aucune notion ne correspond." : "Aucune notion définie pour le moment.") + "</p>";
+    }
+    q.addEventListener("input", render);
+    render();
+    var saved = null; try { saved = localStorage.getItem("nbm-tab:" + location.pathname.replace(/[^/]*$/, "")); } catch (e) { /* ignore */ }
+    if (saved && root.querySelector('.nbm-tab[data-tab="' + saved + '"]') && saved.indexOf("w-") !== 0) setTab(saved, true);
+}, { perDom: true });
+// @endblock nb-menu
+
+// @block nb-theme
+/* Thème clair/sombre : une page affichée dans une iframe (chapitre, widget) copie la classe "dark" de la page qui la contient. */
+NB.register("theme", function () {
+    try {
+        var p = window.parent;
+        if (!p || p === window) return;
+        var src = p.document.documentElement, me = document.documentElement;
+        var sync = function () { me.classList.toggle("dark", src.classList.contains("dark")); };
+        sync();
+        new MutationObserver(sync).observe(src, { attributes: true, attributeFilter: ["class"] });
+    } catch (e) { /* page parente d'une autre origine : rien à synchroniser */ }
+});
+// @endblock nb-theme
+
 // @block nb-boot
 /* Démarrage : lance tous les modules (les blocs ajoutés plus tard par l'IA s'exécutent aussitôt). Doit rester le DERNIER bloc d'origine. */
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", NB.boot);

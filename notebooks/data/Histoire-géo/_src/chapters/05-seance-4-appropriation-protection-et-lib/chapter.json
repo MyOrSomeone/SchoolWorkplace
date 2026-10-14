@@ -2,14 +2,15 @@
   "slug": "05-seance-4-appropriation-protection-et-lib",
   "title": "Séance 4 — Appropriation, protection et liberté de circulation",
   "group": "",
+  "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
   "status": "done",
-  "summary": "UNCLOS et zones maritimes, appropriation des espaces, patrimonialisation, à retenir pour le Bac.",
+  "summary": "UNCLOS et zones maritimes, océan Arctique, patrimonialisation, à retenir pour le Bac.",
   "parts": [
     {
       "id": "p01-seance-4-problematique",
       "title": "Séance 4 · Problématique",
       "level": 1,
-      "summary": "Titre de séance et problématique."
+      "summary": "Titre de la séance et problématique."
     },
     {
       "id": "p02-i-unclos",
@@ -36,5 +37,5 @@
       "summary": ""
     }
   ],
-  "created_at": "2026-10-11T09:55:41"
+  "created_at": "2026-10-14T10:36:50"
 }
