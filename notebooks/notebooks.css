@@ -721,6 +721,8 @@ html.dark .map-image { filter:brightness(.78) saturate(.8); }
 .nbn-group { grid-column: 1 / -1; font-weight: 700; margin: .6rem 0 0; }
 .nbn-gloss { margin: 1.5rem 0; } .nbn-gloss dl { padding: 1rem 1.2rem; } .nbn-gloss dd { margin: 0 0 .7rem 1rem; }
 .nbw-main { max-width: 900px; margin: 0 auto; padding: 1rem; }
+.nbr-state { text-align: center; padding: 4rem 1rem; color: var(--nb-text-muted); line-height: 1.7; }
+.nbr-state a { color: var(--nb-gold); font-weight: 700; }
 /* @endblock nb-nav */
 
 /* @block nb-menu */

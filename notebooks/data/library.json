@@ -1,9 +1,8 @@
 {
-  "generated_at": "2026-10-14T10:36:50",
+  "generated_at": "2026-10-15T19:53:31",
   "matieres": [
     {
       "matiere": "Histoire-géo",
-      "index": "Histoire-géo/index.html",
       "widgets": [
         {
           "id": "map",
@@ -19,8 +18,7 @@
           "status": "done",
           "parent": "",
           "depth": 0,
-          "n_parts": 1,
-          "url": "Histoire-géo/01-theme-1-mers-et-oceans-au-coeur-de-la-mo.html"
+          "n_parts": 1
         },
         {
           "slug": "02-seance-1-les-grands-axes-du-commerce-mar",
@@ -29,8 +27,7 @@
           "status": "done",
           "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
           "depth": 1,
-          "n_parts": 4,
-          "url": "Histoire-géo/02-seance-1-les-grands-axes-du-commerce-mar.html"
+          "n_parts": 4
         },
         {
           "slug": "03-seance-2-les-ressources-des-oceans",
@@ -39,8 +36,7 @@
           "status": "done",
           "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
           "depth": 1,
-          "n_parts": 4,
-          "url": "Histoire-géo/03-seance-2-les-ressources-des-oceans.html"
+          "n_parts": 4
         },
         {
           "slug": "04-seance-3-exploitation-et-conflits",
@@ -49,8 +45,7 @@
           "status": "done",
           "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
           "depth": 1,
-          "n_parts": 4,
-          "url": "Histoire-géo/04-seance-3-exploitation-et-conflits.html"
+          "n_parts": 4
         },
         {
           "slug": "05-seance-4-appropriation-protection-et-lib",
@@ -59,14 +54,12 @@
           "status": "done",
           "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
           "depth": 1,
-          "n_parts": 5,
-          "url": "Histoire-géo/05-seance-4-appropriation-protection-et-lib.html"
+          "n_parts": 5
         }
       ]
     },
     {
       "matiere": "Philosophie",
-      "index": "Philosophie/index.html",
       "widgets": [],
       "chapters": [
         {
@@ -76,8 +69,7 @@
           "status": "done",
           "parent": "",
           "depth": 0,
-          "n_parts": 2,
-          "url": "Philosophie/01-introduction.html"
+          "n_parts": 2
         },
         {
           "slug": "02-chapitre-1-la-conscience",
@@ -86,18 +78,7 @@
           "status": "done",
           "parent": "",
           "depth": 0,
-          "n_parts": 8,
-          "url": "Philosophie/02-chapitre-1-la-conscience.html"
-        },
-        {
-          "slug": "03-chapitre-2-le-bonheur",
-          "title": "Chapitre 2 — Le Bonheur",
-          "group": "",
-          "status": "unfinished",
-          "parent": "",
-          "depth": 0,
-          "n_parts": 2,
-          "url": "Philosophie/03-chapitre-2-le-bonheur.html"
+          "n_parts": 8
         }
       ]
     }
