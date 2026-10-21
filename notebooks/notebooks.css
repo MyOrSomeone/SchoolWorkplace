@@ -776,6 +776,21 @@ html.dark .badge-amber { color: #fcd34d; } html.dark .badge-rose { color: #fda4a
 html.dark .map-svg-container { background: #1d2a33; }
 /* @endblock nb-dark-fixes */
 
+/* @block nb-readable */
+/* Lisibilité : « encre » dorée plus foncée en thème clair (le doré #b8905a n'a que ~2:1 de contraste sur fond clair) */
+:root { --nb-gold-ink: #6f5118; }
+html.dark { --nb-gold-ink: #e3c68c; }
+.def-term, .nb-box > .nb-box-title, .part-heading, .part-heading .num, .nb-tab-btn.active, .nb-tab-btn:hover, .nb-details summary::after,
+.nbn-card small, .nb-timeline-date, .def-tooltip strong, .nbn-kids-title, .nb-chapter-title, .notebook-header h1, .section-hero:not([class*="hero-"]) h2,
+.nb-concept-card .nb-concept-icon, .nbm-letter, .nbm-def a, .nbn-pager a, .nbn-gloss summary { color: var(--nb-gold-ink); }
+.hero-eyebrow { color: color-mix(in srgb, var(--hero-a, var(--nb-gold)) 55%, var(--nb-text)); }
+/* Thème sombre : un fond « bg-white… » dont la variante dark: n'existe pas (ex. dark:bg-gray-850, classe inventée) devient une carte sombre.
+   :where() garde une spécificité faible : une vraie variante dark: valide reste prioritaire. */
+html.dark :where([class*="bg-white"]) { background-color: color-mix(in srgb, var(--nb-bg-card) 88%, transparent); }
+html.dark :where([class*="bg-gray-50"], [class*="bg-gray-100"], [class*="bg-slate-50"], [class*="bg-stone-50"]) { background-color: var(--nb-gold-soft); }
+html.dark :where([class*="border-gray-1"], [class*="border-gray-2"]) { border-color: var(--nb-border); }
+/* @endblock nb-readable */
+
 /* @block nb-motion */
 @keyframes nbFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .nb-part { animation: nbFadeUp 0.5s ease both; }
@@ -800,3 +815,21 @@ html.dark .map-svg-container { background: #1d2a33; }
 .notebook-body .nb-r-f6a52b.nb-r-f6a52b { color: var(--nb-gold); font-size: 1.3rem; font-weight: 800; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem; }
 .notebook-body .nb-r-fc5a8c.nb-r-fc5a8c { margin: 0; font-size: 2rem; font-weight: 800; color: var(--nb-text); }
 /* @endblock nb-reused */
+
+/* @block nb-tints */
+/* Cartes colorées qui marchent dans les DEUX thèmes sans classe dark: (fond translucide + texte du thème).
+   <div class="tint-emerald"><div class="ico-badge"><i class="fas fa-seedling"></i></div><h4 class="ink">Titre</h4><p>Texte</p></div> */
+.tint-gold { --t: #b8905a; } .tint-blue { --t: #3b82f6; } .tint-emerald { --t: #10b981; } .tint-amber { --t: #d97706; } .tint-rose { --t: #e11d48; }
+.tint-violet { --t: #8b5cf6; } .tint-sky { --t: #0ea5e9; } .tint-red { --t: #ef4444; } .tint-teal { --t: #14b8a6; } .tint-stone { --t: #78716c; }
+.tint-gold, .tint-blue, .tint-emerald, .tint-amber, .tint-rose, .tint-violet, .tint-sky, .tint-red, .tint-teal, .tint-stone {
+    background: color-mix(in srgb, var(--t) 11%, transparent); border: 1px solid color-mix(in srgb, var(--t) 35%, transparent);
+    border-radius: 1rem; padding: 1.25rem; margin: 1rem 0; color: var(--nb-text); transition: transform .2s ease, box-shadow .2s ease; }
+.tint-gold:hover, .tint-blue:hover, .tint-emerald:hover, .tint-amber:hover, .tint-rose:hover, .tint-violet:hover, .tint-sky:hover, .tint-red:hover, .tint-teal:hover, .tint-stone:hover {
+    transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+.tint-strong { background: color-mix(in srgb, var(--t) 22%, transparent); }
+.ink { color: color-mix(in srgb, var(--t, var(--nb-gold)) 55%, var(--nb-text)); font-weight: 700; }
+.ico-badge { width: 3rem; height: 3rem; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.25rem; flex: none; margin-bottom: .6rem;
+    background: color-mix(in srgb, var(--t, var(--nb-gold)) 20%, transparent); color: color-mix(in srgb, var(--t, var(--nb-gold)) 60%, var(--nb-text)); }
+.tag-tint { display: inline-block; padding: .1rem .55rem; border-radius: .5rem; font-weight: 600; font-size: .85em;
+    background: color-mix(in srgb, var(--t, var(--nb-gold)) 16%, transparent); color: color-mix(in srgb, var(--t, var(--nb-gold)) 55%, var(--nb-text)); }
+/* @endblock nb-tints */

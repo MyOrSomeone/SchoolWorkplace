@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T19:53:31",
+  "generated_at": "2026-10-19T17:44:14",
   "matieres": [
     {
       "matiere": "Histoire-géo",
@@ -79,6 +79,15 @@
           "parent": "",
           "depth": 0,
           "n_parts": 8
+        },
+        {
+          "slug": "03-le-bonheur",
+          "title": "Le Bonheur",
+          "group": "",
+          "status": "in_progress",
+          "parent": "",
+          "depth": 0,
+          "n_parts": 1
         }
       ]
     }

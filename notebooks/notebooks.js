@@ -615,8 +615,106 @@ NB.register("widgetpage", function () {
 });
 // @endblock nb-widgetpage
 
+
+// @block nb-themeguard
+/* Garde-fou de lisibilité clair/sombre : vérifie le contraste RÉEL (texte vs fond effectif) de chaque bloc de texte du cours
+   et corrige automatiquement ce qui est illisible (texte blanc sur fond clair, bloc blanc en thème sombre, classes Tailwind
+   inventées, etc.). Rejoué à chaque changement de thème. Ne touche jamais au contenu, seulement à color / background-color. */
+NB.register("themeguard", function () {
+    var root = document.querySelector(".notebook-content, .nbw-main");
+    if (!root || NB._tg) return;
+    var tg = NB._tg = { undo: [], timer: null };
+
+    function parse(s) {
+        var m = /rgba?\(([^)]+)\)/.exec(s);
+        if (m) { var p = m[1].split(/[ ,\/]+/).filter(Boolean).map(Number); return [p[0], p[1], p[2], p[3] === undefined ? 1 : p[3]]; }
+        m = /color\(srgb ([^)]+)\)/.exec(s);
+        if (m) { var q = m[1].split(/[ \/]+/).filter(Boolean).map(Number); return [q[0] * 255, q[1] * 255, q[2] * 255, q[3] === undefined ? 1 : q[3]]; }
+        return [0, 0, 0, 0];
+    }
+    function blend(t, b) { var a = t[3]; return [t[0] * a + b[0] * (1 - a), t[1] * a + b[1] * (1 - a), t[2] * a + b[2] * (1 - a), 1]; }
+    function lum(c) { var f = function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]); }
+    function ratio(a, b) { var l1 = lum(a), l2 = lum(b); return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05); }
+    function mix(a, b, t) { return [a[0] * (1 - t) + b[0] * t, a[1] * (1 - t) + b[1] * t, a[2] * (1 - t) + b[2] * t, a[3]]; }
+    function css(c) { return "rgba(" + Math.round(c[0]) + "," + Math.round(c[1]) + "," + Math.round(c[2]) + "," + (c[3] === undefined ? 1 : c[3]) + ")"; }
+    function set(el, prop, val) {
+        tg.undo.push([el, prop, el.style.getPropertyValue(prop), el.style.getPropertyPriority(prop)]);
+        el.style.setProperty(prop, val, "important");
+    }
+    function reset() { (tg.marked || []).forEach(function (m) { delete m.dataset.nbGuarded; }); tg.marked = []; while (tg.undo.length) { var u = tg.undo.pop(); if (u[2]) el_restore(u); else u[0].style.removeProperty(u[1]); } }
+    function el_restore(u) { u[0].style.setProperty(u[1], u[2], u[3]); }
+
+    var LIGHT_INK = [248, 243, 234, 1], DARK_INK = [28, 24, 20, 1], DARK_CARD = [28, 26, 23, 1];
+    function pass() {
+        reset();
+        var dark = document.documentElement.classList.contains("dark"), cacheBg = new Map();
+        function bgOf(el) {
+            if (cacheBg.has(el)) return cacheBg.get(el);
+            var base = el.parentElement && el !== document.body ? bgOf(el.parentElement) : [255, 255, 255, 1];
+            var c = parse(getComputedStyle(el).backgroundColor);
+            var out = c[3] > 0 ? blend(c, base) : base;
+            cacheBg.set(el, out); return out;
+        }
+        var seen = new Set(), walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) {
+            var n = walker.currentNode, el = n.parentElement;
+            if (!el || seen.has(el) || n.textContent.trim().length < 2 || el.closest("svg, script, style, .mp, canvas")) continue;
+            seen.add(el);
+            var cs = getComputedStyle(el);
+            if (cs.display === "none" || cs.visibility === "hidden") continue;
+            var bg = bgOf(el), fg = blend(parse(cs.color), bg);
+            if (ratio(fg, bg) >= 3.2) continue;
+            // 1) bloc clair en thème sombre : on assombrit TOUS les fonds clairs au-dessus du texte (en gardant leur teinte et leur transparence)
+            if (dark && lum(bg) > 0.45) {
+                for (var a = el; a && a !== root.parentElement; a = a.parentElement) {
+                    var own = parse(getComputedStyle(a).backgroundColor);
+                    if (own[3] > 0.15 && lum(own) > 0.45 && !a.dataset.nbGuarded) { set(a, "background-color", css(mix(own, DARK_CARD, 0.88))); a.dataset.nbGuarded = "1"; tg.marked = tg.marked || []; tg.marked.push(a); }
+                }
+                cacheBg.clear(); bg = bgOf(el); fg = blend(parse(getComputedStyle(el).color), bg);
+                if (ratio(fg, bg) >= 3.2) continue;
+            }
+            // 2) sinon on corrige le texte : on pousse sa couleur (en gardant la teinte) vers le noir ou le blanc jusqu'à un contraste >= 4.5
+            var target = ratio(DARK_INK, bg) >= ratio(LIGHT_INK, bg) ? DARK_INK : LIGHT_INK, c0 = parse(cs.color), best = null;
+            for (var t = 0.2; t <= 1.001; t += 0.1) { var cand = mix(c0, target, t); cand[3] = 1; if (ratio(cand, bg) >= 4.5) { best = cand; break; } }
+            set(el, "color", css(best || target));
+        }
+    }
+    function schedule(ms) { clearTimeout(tg.timer); tg.timer = setTimeout(pass, ms || 120); }
+    tg.run = schedule;
+    // Tailwind (CDN) génère ses styles après coup : on repasse un peu plus tard
+    schedule(500); setTimeout(function () { schedule(0); }, 1800);
+    new MutationObserver(function () { schedule(150); }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    window.addEventListener("load", function () { schedule(300); });
+}, { perDom: true });
+// @endblock nb-themeguard
+
 // @block nb-boot
 /* Démarrage : lance tous les modules (les blocs ajoutés plus tard par l'IA s'exécutent aussitôt). Doit rester le DERNIER bloc d'origine. */
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", NB.boot);
 else NB.boot();
 // @endblock nb-boot
+
+// @block nb-themeprobe
+/* Diagnostic : vérifie que les variantes Tailwind dark: suivent la classe .dark (et non prefers-color-scheme). Message dans la console sinon. */
+NB.register("themeprobe", function () {
+    if (NB._probed) return;
+    NB._probed = true;
+    setTimeout(function () {
+        var el = document.createElement("div");
+        el.className = "hidden dark:block";
+        el.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+        document.body.appendChild(el);
+        setTimeout(function () {                         // laisse à Tailwind (CDN) le temps de générer la règle
+            var root = document.documentElement, had = root.classList.contains("dark");
+            root.classList.add("dark"); var on = getComputedStyle(el).display;
+            root.classList.remove("dark"); var off = getComputedStyle(el).display;
+            if (had) root.classList.add("dark");
+            el.remove();
+            if (on === off && (on === "none" || on === "block")) {
+                console.warn("[notebooks] Tailwind semble en mode « media » : les classes dark: suivent le thème du SYSTÈME, pas le bouton. " +
+                             "Vérifie que tailwind.config = { darkMode: 'class' } est posé APRÈS <script src=\"https://cdn.tailwindcss.com\">.");
+            }
+        }, 700);
+    }, 300);
+});
+// @endblock nb-themeprobe

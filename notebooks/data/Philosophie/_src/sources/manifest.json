@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "id": "src005",
+    "type": "image",
+    "filename": "16.jpg",
+    "comment": "Intro + def + antique",
+    "chapter": "03-le-bonheur",
+    "ordre": 1,
+    "processed": true,
+    "added_at": "2026-10-19T17:27:09"
+  },
+  {
+    "id": "src002",
+    "type": "image",
+    "filename": "16'.jpg",
+    "comment": "fin de l'intro qui résume l'antique (met l'antique dans un block qui peut se fermer et grand I)",
+    "chapter": "03-le-bonheur",
+    "ordre": 2,
+    "processed": true,
+    "added_at": "2026-10-19T17:27:09"
+  },
+  {
+    "id": "src004",
+    "type": "image",
+    "filename": "17.jpg",
+    "comment": "antique",
+    "chapter": "03-le-bonheur",
+    "ordre": 3,
+    "processed": true,
+    "added_at": "2026-10-19T17:27:09"
+  },
+  {
+    "id": "src003",
+    "type": "image",
+    "filename": "18.jpg",
+    "comment": "antique",
+    "chapter": "03-le-bonheur",
+    "ordre": 4,
+    "processed": true,
+    "added_at": "2026-10-19T17:27:09"
+  },
+  {
+    "id": "src001",
+    "type": "image",
+    "filename": "19.jpg",
+    "comment": "Grand I suite",
+    "chapter": "03-le-bonheur",
+    "ordre": 5,
+    "processed": true,
+    "added_at": "2026-10-19T17:27:09"
+  }
+]
