@@ -70,7 +70,7 @@
   <!-- ========================================== -->
   <section class="space-y-4">
     <details class="nb-details bg-gradient-to-r from-stone-50 via-amber-50/30 to-stone-50 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 border-2 border-amber-200 dark:border-amber-800/50 rounded-3xl p-6 shadow-sm hover:border-amber-300 dark:hover:border-amber-700 transition-colors">
-      <summary class="cursor-pointer font-bold text-stone-900 dark:text-stone-100 flex items-center justify-between text-base md:text-lg select-none">
+      <summary class="cursor-pointer rounded-2xl font-bold text-stone-900 dark:text-stone-100 flex items-center justify-between text-base md:text-lg select-none">
         <div class="flex items-center space-x-4">
           <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
             <i class="fas fa-landmark"></i>
@@ -234,76 +234,116 @@
       Pour penser clairement le bonheur, il est indispensable de ne pas mélanger ces quatre états affectifs et existentiels :
     </p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <!-- 1. Plaisir -->
-      <div class="p-5 rounded-3xl bg-white dark:bg-stone-800 border-2 border-blue-200 dark:border-blue-800/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-4">
-            <i class="fas fa-ice-cream"></i>
-          </div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-600 dark:text-blue-400">Éphémère &amp; Corps</span>
-          <h3 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 mb-2">Le Plaisir</h3>
-          <p class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-            Sensation agréable, ponctuelle et localisée, essentiellement physique ou sensible. Il cesse dès que la stimulation s'arrête (ou vire au dégoût par excès).
-          </p>
+      <div class="nb-tabs">
+        <div class="nb-tab-buttons">
+          <button class="nb-tab-btn active"><i class="fas fa-cookie-bite mr-2"></i>1. Plaisir</button>
+          <button class="nb-tab-btn"><i class="fas fa-bolt mr-2"></i>2. Joie</button>
+          <button class="nb-tab-btn"><i class="fas fa-leaf mr-2"></i>3. Bonheur</button>
+          <button class="nb-tab-btn"><i class="fas fa-infinity mr-2"></i>4. Béatitude</button>
         </div>
-        <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-700 text-[11px] text-blue-700 dark:text-blue-300 font-semibold flex items-center space-x-1.5">
-          <i class="fas fa-hourglass-start"></i>
-          <span>Court terme / Instantané</span>
-        </div>
-      </div>
 
-      <!-- 2. Joie -->
-      <div class="p-5 rounded-3xl bg-white dark:bg-stone-800 border-2 border-emerald-200 dark:border-emerald-800/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4">
-            <i class="fas fa-bolt"></i>
+        <!-- 1. PLAISIR -->
+        <div class="nb-tab-panel active">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div class="md:col-span-1 text-center p-4 bg-orange-50 dark:bg-orange-950/30 rounded-2xl border border-orange-200 dark:border-orange-900/50">
+              <div class="w-16 h-16 mx-auto bg-orange-500 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+                <i class="fas fa-ice-cream"></i>
+              </div>
+              <span class="badge-tag badge-amber">Passager • Sensible</span>
+              <h4 class="font-extrabold text-lg text-gray-800 dark:text-gray-100 mt-2">Le Plaisir</h4>
+            </div>
+            <div class="md:col-span-2 text-sm text-gray-700 dark:text-gray-300 space-y-2">
+              <p>
+                <span class="def-term" data-term="plaisir" data-def="Sensation agréable immédiate, corporelle ou sensible, par nature transitoire et liée à la satisfaction d'un besoin ponctuel.">Plaisir</span> : Sensation agréable, immédiate et essentiellement corporelle ou sensible (ex : manger, boire, s'abriter).
+              </p>
+              <ul class="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+                <li><i class="fas fa-stopwatch text-orange-500 mr-2"></i><strong>Caractère :</strong> Éphémère, s'éteint dès que le besoin est assouvi.</li>
+                <li><i class="fas fa-exclamation-triangle text-amber-500 mr-2"></i><strong>Risque :</strong> Dépendance et insatisfaction perpétuelle s'il est pris pour une fin ultime.</li>
+              </ul>
+              <div class="justify-end mt-4 pt-3 border-t border-stone-300 dark:border-stone-700 text-[11px] text-amber-500 dark:text-amber-500 mr-2 font-semibold flex items-center space-x-1.5">
+                <i class="fas fa-hourglass-start"></i>
+                <span>Court terme / Instantané</span>
+              </div>
+            </div>
           </div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Dynamique &amp; Élan</span>
-          <h3 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 mb-2">La Joie</h3>
-          <p class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-            Émotion vive, exaltante et motrice. Selon Spinoza, c'est l'expérience de l'augmentation de notre puissance d'agir et de penser.
-          </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-700 text-[11px] text-emerald-700 dark:text-emerald-300 font-semibold flex items-center space-x-1.5">
-          <i class="fas fa-chart-line"></i>
-          <span>Puissance d'agir en essor</span>
-        </div>
-      </div>
 
-      <!-- 3. Bonheur -->
-      <div class="p-5 rounded-3xl bg-white dark:bg-stone-800 border-2 border-amber-300 dark:border-amber-700/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fas fa-sun"></i>
+        <!-- 2. JOIE -->
+        <div class="nb-tab-panel">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div class="md:col-span-1 text-center p-4 bg-yellow-50 dark:bg-yellow-950/30 rounded-2xl border border-yellow-200 dark:border-yellow-900/50">
+              <div class="w-16 h-16 mx-auto bg-yellow-500 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+                <i class="fas fa-fire-alt"></i>
+              </div>
+              <span class="badge-tag badge-purple">Dynamique • Émotion</span>
+              <h4 class="font-extrabold text-lg text-gray-800 dark:text-gray-100 mt-2">La Joie</h4>
+            </div>
+            <div class="md:col-span-2 text-sm text-gray-700 dark:text-gray-300 space-y-2">
+              <p>
+                <span class="def-term" data-term="joie" data-def="Émotion vive, intense et expansive liée au sentiment d'une victoire, d'un progrès ou d'une augmentation de notre puissance d'agir.">Joie</span> : Émotion vive, dynamique et expansive qui emporte l'individu.
+              </p>
+              <ul class="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+                <li><i class="fas fa-trophy text-yellow-500 mr-2"></i><strong>Sens philosophique :</strong> Souvent liée à l'accomplissement d'une <em>victoire</em> ou d'une création (Bergson, Spinoza).</li>
+                <li><i class="fas fa-dna text-yellow-600 mr-2"></i><strong>Point de vue biologique :</strong> Pic d'activation lié à la dopamine et au dépassement d'un obstacle.</li>
+              </ul>
+              <div class="justify-end mt-4 pt-3 border-t border-stone-300 dark:border-stone-700 text-[11px] text-yellow-500 dark:text-yellow-500 mr-2 font-semibold flex items-center space-x-1.5">
+                <i class="fas fa-chart-line"></i>
+                <span>Puissance d'agir en essor</span>
+              </div>
+            </div>
           </div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Durée &amp; Plénitude</span>
-          <h3 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 mb-2">Le Bonheur</h3>
-          <p class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-            État global de satisfaction et d'équilibre intérieur qui s'inscrit dans la durée. Il ne se réduit pas à une succession de plaisirs, il se cultive.
-          </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-700 text-[11px] text-amber-700 dark:text-amber-300 font-semibold flex items-center space-x-1.5">
-          <i class="fas fa-calendar-check"></i>
-          <span>Continuité &amp; Stabilité</span>
-        </div>
-      </div>
 
-      <!-- 4. Béatitude -->
-      <div class="p-5 rounded-3xl bg-white dark:bg-stone-800 border-2 border-purple-200 dark:border-purple-800/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
-            <i class="fas fa-infinity"></i>
+        <!-- 3. BONHEUR -->
+        <div class="nb-tab-panel">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div class="md:col-span-1 text-center p-4 bg-emerald-50 dark:bg-emerald-950/30 rounded-2xl border border-emerald-200 dark:border-emerald-900/50">
+              <div class="w-16 h-16 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+                <i class="fas fa-sun"></i>
+              </div>
+              <span class="badge-tag badge-emerald">État durable • Plénitude</span>
+              <h4 class="font-extrabold text-lg text-gray-800 dark:text-gray-100 mt-2">Le Bonheur</h4>
+            </div>
+            <div class="md:col-span-2 text-sm text-gray-700 dark:text-gray-300 space-y-2">
+              <p>
+                <span class="def-term" data-term="bonheur">Bonheur</span> : Non pas un pic ponctuel, mais un <strong>état global</strong> de satisfaction équilibrée, de plénitude et de paix intérieure.
+              </p>
+              <ul class="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+                <li><i class="fas fa-hourglass-half text-emerald-500 mr-2"></i><strong>Temporalité :</strong> S'inscrit dans la durée de l'existence.</li>
+                <li><i class="fas fa-spa text-emerald-600 mr-2"></i><strong>Discipline :</strong> Ne s'achète pas : il se cultive activement par la raison, la maîtrise des désirs et la sagesse.</li>
+              </ul>
+              <div class="justify-end mt-4 pt-3 border-t border-stone-300 dark:border-stone-700 text-[11px] text-emerald-500 dark:text-emerald-500 mr-2 font-semibold flex items-center space-x-1.5">
+                <i class="fas fa-calendar-check"></i>
+                <span>Continuité &amp; Stabilité</span>
+              </div>
+            </div>
           </div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">Absolu &amp; Cosmos</span>
-          <h3 class="text-lg font-extrabold text-stone-900 dark:text-stone-100 mb-2">La Béatitude</h3>
-          <p class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-            Contentement parfait, absolu et infini. Accord total avec le monde ou la vérité suprême, affranchi de toute vulnérabilité ou manque.
-          </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-700 text-[11px] text-purple-700 dark:text-purple-300 font-semibold flex items-center space-x-1.5">
-          <i class="fas fa-crown"></i>
-          <span>Plénitude absolue</span>
+
+        <!-- 4. BÉATITUDE -->
+        <div class="nb-tab-panel">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div class="md:col-span-1 text-center p-4 bg-indigo-50 dark:bg-indigo-950/30 rounded-2xl border border-indigo-200 dark:border-indigo-900/50">
+              <div class="w-16 h-16 mx-auto bg-indigo-600 text-white rounded-full flex items-center justify-center text-2xl shadow-md mb-2">
+                <i class="fas fa-meteor"></i>
+              </div>
+              <span class="badge-tag badge-blue">Absolu • Constant</span>
+              <h4 class="font-extrabold text-lg text-gray-800 dark:text-gray-100 mt-2">La Béatitude</h4>
+            </div>
+            <div class="md:col-span-2 text-sm text-gray-700 dark:text-gray-300 space-y-2">
+              <p>
+                <span class="def-term" data-term="beatitude" data-def="Contentement absolu, parfait et inébranlable résultant d'un accord total et lucide avec l'ordre de la nature ou du monde.">Béatitude</span> : Forme suprême et inébranlable du contentement ; perfection absolue où plus aucun manque ne subsiste.
+              </p>
+              <ul class="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+                <li><i class="fas fa-globe text-indigo-500 mr-2"></i><strong>Harmonie :</strong> Accord total de l'esprit avec le Tout et le cosmos.</li>
+                <li><i class="fas fa-gem text-indigo-600 mr-2"></i><strong>Constance :</strong> État immuable préservé des tempêtes émotionnelles du monde.</li>
+              </ul>
+              <div class="justify-end mt-4 pt-3 border-t border-stone-300 dark:border-stone-700 text-[11px] text-indigo-500 dark:text-indigo-500 mr-2 font-semibold flex items-center space-x-1.5">
+                <i class="fas fa-crown"></i>
+                <span>Plénitude absolue</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -316,7 +356,7 @@
 
     <!-- En-tête Grand I -->
     <div class="flex items-center space-x-5">
-      <div class="w-14 h-14 bg-amber-500 text-stone-950 font-black text-2xl rounded-2xl flex items-center justify-center shadow-lg transform -rotate-2">
+      <div class="w-14 h-14 bg-amber-500 text-stone-950 font-black text-2xl rounded-2xl flex items-center justify-center shadow-lg">
         I
       </div>
       <div>
