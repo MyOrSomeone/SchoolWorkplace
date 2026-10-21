@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<base target="_parent" />
+<title>Widget</title>
+<link rel="stylesheet" href="notebooks.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  /* IMPORTANT : cette page est dans une iframe, donc elle charge SON propre Tailwind (celui de la page parente ne s'applique pas ici).
+     Sans « darkMode: 'class' » lu par CE Tailwind, les variantes dark: suivent le thème du système (prefers-color-scheme) au lieu du bouton clair/sombre.
+     La config se pose APRÈS le script du CDN (ordre de la documentation). */
+  (window.tailwind = window.tailwind || {}).config = { darkMode: 'class', theme: { extend: { colors: { cream: { DEFAULT: "#EFECE6", dark: "#121211", gold: "#C5A059", border: "#D3C9B8", borderDark: "#2C2B28" } } } } };
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet" />
+<script>
+  window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+<script src="notebooks.js" defer></script>
+</head>
+<body class="notebook-body">
+<div id="nbw-app"><p class="nbr-state">Chargement…</p></div>
+</body>
+</html>
