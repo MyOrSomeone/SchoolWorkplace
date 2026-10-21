@@ -30,3 +30,4 @@ notebooks/*
 !notebooks/*notebooks.js
 !notebooks/*index.html
 !notebooks/*script.js
+!notebooks/*reader.html
