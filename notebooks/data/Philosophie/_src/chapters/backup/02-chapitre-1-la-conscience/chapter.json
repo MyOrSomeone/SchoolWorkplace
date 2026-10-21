@@ -1,0 +1,59 @@
+{
+  "slug": "02-chapitre-1-la-conscience",
+  "title": "Chapitre 1 — La Conscience",
+  "group": "",
+  "parent": "",
+  "status": "done",
+  "summary": "La conscience : propre de l'homme, connaissance (Descartes, Hegel), liberté (Sartre), identité personnelle.",
+  "parts": [
+    {
+      "id": "p01-la-conscience-decrire-ou",
+      "title": "La conscience : décrire ou comprendre ?",
+      "level": 1,
+      "summary": "Décrire vs comprendre, définition de la conscience, conscience spontanée vs réflexive, continuum homme-animal, test du miroir et métacognition."
+    },
+    {
+      "id": "p02-i-la-conscience-est-elle",
+      "title": "I. La conscience est-elle le propre de l'homme ?",
+      "level": 1,
+      "summary": "Instinct vs conscience, texte de Kant (anthropologie) et trois thèses sur la conscience propre à l'homme."
+    },
+    {
+      "id": "p03-ii-conscience-et-connais",
+      "title": "II. Conscience et connaissance",
+      "level": 1,
+      "summary": "Explication vs compréhension ; Descartes : héliocentrisme, doute hyperbolique (sens, raison, cogito), déduction vs intuition."
+    },
+    {
+      "id": "p04-ii-b-les-caracteristique",
+      "title": "II. B. Les caractéristiques de la conscience",
+      "level": 2,
+      "summary": "Réflexivité cartésienne (schéma) et objections."
+    },
+    {
+      "id": "p05-ii-c-la-conscience-peut",
+      "title": "II. C. La conscience peut-elle se passer du monde ?",
+      "level": 2,
+      "summary": "Hegel : la conscience de soi a besoin du monde extérieur et d'autrui (en-soi / pour-soi)."
+    },
+    {
+      "id": "p06-iii-conscience-reflexive",
+      "title": "III. Conscience réflexive et liberté (Sartre)",
+      "level": 1,
+      "summary": "Essence et existence, projet, angoisse, mauvaise foi."
+    },
+    {
+      "id": "p07-iv-la-question-de-l-iden",
+      "title": "IV. La question de l'identité personnelle",
+      "level": 1,
+      "summary": "Enjeux (épistémologique, existentiel, moral), débat Locke vs Leibniz, Ricœur et l'identité narrative."
+    },
+    {
+      "id": "p08-carte-mentale-la-conscie",
+      "title": "Carte mentale : la conscience",
+      "level": 1,
+      "summary": "Carte mentale interactive (pan/zoom) de synthèse du chapitre."
+    }
+  ],
+  "created_at": "2026-10-15T19:53:30"
+}
