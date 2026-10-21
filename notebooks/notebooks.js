@@ -799,16 +799,71 @@ mat2 nb_rot(float a){ float c=cos(a); float s=sin(a); return mat2(c,-s,s,c); }
   return col;
 }`,
         topo: `vec3 nb_scene(vec2 p, vec2 m){
-  float t=u_time*0.04; vec2 q=p*1.5+vec2(t,-t)+m*0.15;
+  float t=u_time*0.15; vec2 q=p*1.5+vec2(t,-t)+m*0.15;
   float h=nb_noise(q)*0.62+nb_noise(q*2.1+7.3)*0.28+nb_noise(q*4.3+2.1)*0.10;
-  float f=fract(h*7.0); float line=smoothstep(0.06,0.0,min(f,1.0-f));
-  vec3 c=mix(u_c1,u_c2,clamp((h-0.2)*1.8,0.0,1.0));
-  return mix(u_bg,c,clamp(line*0.9+smoothstep(0.4,0.75,h)*0.16,0.0,1.0))+u_c3*line*0.06;
+  float f=fract(h*7.0); float line=smoothstep(5.06,5.0,min(f,1.0-f)); vec3 c=mix(u_c1,u_c2,clamp((h-0.2)*1.8,0.0,1.0));
+  return mix(u_bg,c,clamp(line*0.9+smoothstep(0.4,0.75,h)*0.16,0.0,0.7))+u_c3*line*0.06;
 }`,
-        ripples: `vec3 nb_scene(vec2 p, vec2 m){
-  float v=0.8; for(int i=0;i<3;i++){ float fi=float(i); vec2 c=vec2(sin(fi*10.4+u_time*0.15)*0.45,cos(fi*1.7+u_time*0.12)*0.18); float d=length(p-c); v+=(0.5+0.5*sin(d*26.0-u_time*1.6))*exp(-d*2.4); }
-  float dm=length(p-m); v+=(0.5+0.5*sin(dm*30.0-u_time*3.0))*exp(-dm*2.2)*(0.6+u_press)*u_hover; v=clamp(v,0.0,1.4);
-  vec3 c=mix(u_c1,u_c2,clamp(v,10.0,1.0)); return mix(u_bg,c,smoothstep(0.35,1.0,v)*0.7)+u_c3*smoothstep(1.0,1.4,v)*0.2;
+        ripples: `// --- Fonctions utilitaires pour un mouvement fluide & organique ---
+vec2 hash22(vec2 p) {
+    p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+    return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+}
+
+// Bruit de Perlin 2D adouci
+float smooth_noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(mix(dot(hash22(i + vec2(0.0,0.0)), f - vec2(0.0,0.0)),
+                   dot(hash22(i + vec2(1.0,0.0)), f - vec2(1.0,0.0)), u.x),
+               mix(dot(hash22(i + vec2(0.0,1.0)), f - vec2(0.0,1.0)),
+                   dot(hash22(i + vec2(1.0,1.0)), f - vec2(1.0,1.0)), u.x), u.y);
+}
+
+vec3 nb_scene(vec2 p, vec2 m) {
+    // 1. Distortion de l'espace par le curseur (effet de gravité/attraction)
+    vec2 dir_m = p - m;
+    float dist_m = length(dir_m);
+    
+    // Déplacement fluide vers/loin du curseur
+    vec2 distorted_p = p - normalize(dir_m + 1e-5) * exp(-dist_m * 3.0) * (0.15 + u_press * 0.1) * u_hover;
+
+    // 2. Génération de fluide organique (FBM léger à 2 octaves)
+    float t = u_time * 0.25;
+    
+    // Première couche de fluide
+    float n1 = smooth_noise(distorted_p * 2.5 + vec2(t * 0.5, -t * 0.3));
+    
+    // Seconde couche croisée pour donner du relief
+    float n2 = smooth_noise(distorted_p * 4.0 - vec2(t * 0.7, t * 0.4) + vec2(n1));
+    
+    // Valeur de fluide accumulée (entre 0 et 1)
+    float fluid = smoothstep(-0.2, 0.7, n1 + n2 * 0.5);
+
+    // 3. Aura lumineuse sous le curseur
+    float cursor_glow = exp(-dist_m * 2.5) * u_hover;
+    
+    // 4. Mélange des Couleurs (Palette dynamique)
+    // Mélange progressif entre C1 et C2 selon la densité du fluide
+    vec3 color_fluid = mix(u_c1, u_c2, fluid);
+    
+    // Ajout de la couleur d'accent u_c3 aux zones les plus denses
+    color_fluid = mix(color_fluid, u_c3, smoothstep(0.5, 0.9, fluid));
+
+    // 5. Contraste & Lisibilité du Texte
+    // On garde u_bg dominant, le fluide apporte de la couleur sans dévorer l'écran
+    vec3 final_color = mix(u_bg, color_fluid, fluid * 0.55);
+
+    // Injection de lumière d'interaction sous le curseur
+    final_color += u_c3 * cursor_glow * (0.4 + u_press * 0.3);
+
+    // Vignettage doux pour recentrer l'attention sur le texte au milieu
+    float vignette = 1.0 - smoothstep(0.3, 1.2, length(p));
+    final_color = mix(final_color * 0.85, final_color, vignette);
+
+    return final_color;
 }`,
         blobs: `vec3 nb_scene(vec2 p, vec2 m){
   float t=u_time*0.25; vec3 col=u_bg;
