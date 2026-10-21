@@ -31,3 +31,6 @@ notebooks/*
 !notebooks/*index.html
 !notebooks/*script.js
 !notebooks/*reader.html
+
+
+!.nojekyll
