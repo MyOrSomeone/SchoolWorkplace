@@ -1,7 +1,6 @@
 {
-  "day": "2026-10-19",
+  "day": "2026-10-29",
   "used": {
-    "gemini-3.5-flash-lite": 4,
-    "gemini-3.8-flash": 2
+    "gemini-3.6-flash": 2
   }
 }

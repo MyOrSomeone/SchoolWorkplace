@@ -1,0 +1,52 @@
+[
+  {
+    "id": "src001",
+    "type": "image",
+    "filename": "PXL_20261029_p2v.jpg",
+    "comment": "",
+    "chapter": "",
+    "ordre": 1,
+    "processed": true,
+    "added_at": "2026-10-29T17:52:59"
+  },
+  {
+    "id": "src002",
+    "type": "image",
+    "filename": "PXL_20261029_p1v.jpg",
+    "comment": "",
+    "chapter": "",
+    "ordre": 2,
+    "processed": true,
+    "added_at": "2026-10-29T17:52:59"
+  },
+  {
+    "id": "src003",
+    "type": "image",
+    "filename": "PXL_20261029_162441173.jpg",
+    "comment": "",
+    "chapter": "",
+    "ordre": 3,
+    "processed": true,
+    "added_at": "2026-10-29T17:52:59"
+  },
+  {
+    "id": "src004",
+    "type": "image",
+    "filename": "PXL_20261029_162432009.jpg",
+    "comment": "",
+    "chapter": "",
+    "ordre": 4,
+    "processed": true,
+    "added_at": "2026-10-29T17:52:59"
+  },
+  {
+    "id": "src005",
+    "type": "image",
+    "filename": "PXL_20261029_162241188.jpg",
+    "comment": "",
+    "chapter": "",
+    "ordre": 5,
+    "processed": true,
+    "added_at": "2026-10-29T17:52:59"
+  }
+]
