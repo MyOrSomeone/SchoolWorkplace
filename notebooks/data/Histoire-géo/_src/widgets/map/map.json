@@ -41,6 +41,18 @@
       "label": "Espaces protégés (France)",
       "color": "#22c55e",
       "icon": "fa-leaf"
+    },
+    {
+      "label": "Ports maritimes",
+      "color": "#0284c7",
+      "icon": "anchor",
+      "id": "port"
+    },
+    {
+      "label": "Industrie & Chantiers",
+      "color": "#d97706",
+      "icon": "industry",
+      "id": "industrie"
     }
   ],
   "items": [
@@ -1135,6 +1147,42 @@
         "chapter": "02-seance-1-les-grands-axes-du-commerce-mar",
         "part": "p03-ii-les-acteurs-vitaux-du"
       }
+    },
+    {
+      "title": "Port de Rouen",
+      "lat": 49.4431,
+      "lon": 1.0993,
+      "cat": "port",
+      "short": "1er port céréalier de l'Europe de l'Ouest",
+      "desc": "Hub majeur d'exportation agricole en Europe.",
+      "id": "port-rouen"
+    },
+    {
+      "title": "Port du Havre",
+      "lat": 49.4944,
+      "lon": 0.1079,
+      "cat": "port",
+      "short": "1er port d'exportation de vins et spiritueux",
+      "desc": "Grand port maritime de l'Axe Seine.",
+      "id": "port-le-havre"
+    },
+    {
+      "title": "Port de Marseille",
+      "lat": 43.2965,
+      "lon": 5.3698,
+      "cat": "port",
+      "short": "1er port de croisière en France",
+      "desc": "Hub méditerranéen majeur pour les voyageurs et le fret.",
+      "id": "port-marseille"
+    },
+    {
+      "title": "Chantiers de Saint-Nazaire",
+      "lat": 47.2733,
+      "lon": -2.2137,
+      "cat": "industrie",
+      "short": "Chantiers navals de paquebots géants",
+      "desc": "Constructeur des géants des mers comme Symphony of the Seas (362m).",
+      "id": "st-nazaire"
     }
   ],
   "highlights": [

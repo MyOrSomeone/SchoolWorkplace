@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T17:57:53",
+  "generated_at": "2026-11-01T19:26:03",
   "matieres": [
     {
       "matiere": "Anglais",
@@ -60,7 +60,7 @@
           "status": "done",
           "parent": "01-theme-1-mers-et-oceans-au-coeur-de-la-mo",
           "depth": 1,
-          "n_parts": 4
+          "n_parts": 8
         },
         {
           "slug": "05-seance-4-appropriation-protection-et-lib",
@@ -75,7 +75,13 @@
     },
     {
       "matiere": "Philosophie",
-      "widgets": [],
+      "widgets": [
+        {
+          "id": "methode-explication-texte",
+          "title": "Méthodologie — Explication de Texte",
+          "icon": "fa-scroll"
+        }
+      ],
       "chapters": [
         {
           "slug": "01-introduction",
@@ -103,6 +109,21 @@
           "parent": "",
           "depth": 0,
           "n_parts": 1
+        }
+      ]
+    },
+    {
+      "matiere": "Physique Chimie",
+      "widgets": [],
+      "chapters": [
+        {
+          "slug": "01-chapitre-1",
+          "title": "Chapitre 1",
+          "group": "",
+          "status": "in_progress",
+          "parent": "",
+          "depth": 0,
+          "n_parts": 3
         }
       ]
     }

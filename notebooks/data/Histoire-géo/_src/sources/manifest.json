@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "id": "src001",
+    "type": "image",
+    "filename": "36.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 1,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src002",
+    "type": "image",
+    "filename": "35.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 2,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src003",
+    "type": "image",
+    "filename": "34.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 3,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src004",
+    "type": "image",
+    "filename": "33.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 4,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src005",
+    "type": "image",
+    "filename": "32.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 5,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src006",
+    "type": "image",
+    "filename": "31.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 6,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src007",
+    "type": "image",
+    "filename": "30.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 7,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src008",
+    "type": "image",
+    "filename": "29.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 8,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src009",
+    "type": "image",
+    "filename": "28.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 9,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:30"
+  },
+  {
+    "id": "src010",
+    "type": "image",
+    "filename": "27.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 10,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:31"
+  },
+  {
+    "id": "src011",
+    "type": "image",
+    "filename": "26.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 11,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:31"
+  },
+  {
+    "id": "src012",
+    "type": "image",
+    "filename": "25.jpg",
+    "comment": "",
+    "chapter": "04-seance-3-exploitation-et-conflits",
+    "ordre": 12,
+    "processed": true,
+    "added_at": "2026-10-29T18:05:31"
+  }
+]

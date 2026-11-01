@@ -1,0 +1,10 @@
+{
+  "id": "methode-explication-texte",
+  "kind": "page",
+  "title": "Méthodologie — Explication de Texte",
+  "icon": "fa-scroll",
+  "description": "Widget méthodologique interactif sur l'explication de texte philosophique (Bac).",
+  "wide": false,
+  "order": 1,
+  "updated_at": "2026-11-01T19:26:03"
+}

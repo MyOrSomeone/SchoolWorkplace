@@ -6,5 +6,7 @@
     "02-chapitre-1-la-conscience",
     "03-le-bonheur"
   ],
-  "widgets": []
+  "widgets": [
+    "methode-explication-texte"
+  ]
 }

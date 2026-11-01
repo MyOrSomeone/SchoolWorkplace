@@ -1,0 +1,305 @@
+<section class="section-hero hero-violet relative overflow-hidden mb-8 rounded-3xl p-6 sm:p-8">
+  <div class="nb-shader-bg" data-preset="waves" data-palette="violet" data-intensity="0.4"></div>
+  <div class="relative z-10">
+    <div class="hero-eyebrow flex items-center gap-2 text-violet-300 font-semibold text-xs uppercase tracking-wider mb-2">
+      <i class="fas fa-wave-square"></i> Physique • Thème 4 : Ondes & Signaux
+    </div>
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3">III. Ondes Progressives, Diffraction & Interférences</h1>
+    <p class="text-violet-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+      Découvrez comment la lumière et le son se propagent, s'écartent autour d'obstacles et se superposent pour créer des figures lumineuses spectaculaires.
+    </p>
+  </div>
+</section>
+
+<!-- RAPPELS ONDES PROGRESSIVES -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="ico-badge tint-violet"><i class="fas fa-broadcast-tower"></i></div>
+    <h2 class="text-xl font-bold ink">1. Rappels sur les Ondes Progressives Périodiques</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="tint-violet p-6 rounded-2xl border border-violet-500/20 shadow-sm flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-2 text-violet-600 dark:text-violet-400 font-bold mb-2">
+          <i class="fas fa-compress-arrows-alt"></i>
+          <span>Définition d'une Onde Progressive</span>
+        </div>
+        <p class="text-sm leading-relaxed mb-4">
+          Une <span class="def-term" data-term="onde-progressive" data-def="Phénomène de propagation d'une perturbation de proche en proche dans un milieu, avec transport d'énergie mais sans transport de matière.">onde progressive</span> est le phénomène de propagation d'une perturbation de proche en proche dans un milieu, transportant de l'<strong>énergie</strong> sans transporter de <strong>matière</strong>.
+        </p>
+      </div>
+      <div class="bg-violet-500/10 p-3 rounded-xl border border-violet-500/20 text-xs text-violet-700 dark:text-violet-300">
+        <i class="fas fa-lightbulb mr-1"></i> <strong>Périodicité :</strong> Si la perturbation est répétée à intervalles de temps réguliers, l'onde est dite <strong>périodique sinusoïdale</strong>.
+      </div>
+    </div>
+
+    <!-- CARTE INTERACTIVE CARACTÉRISTIQUES D'UNE ONDE -->
+    <div class="tint-sky p-6 rounded-2xl border border-sky-500/20 shadow-sm">
+      <h3 class="font-bold text-sky-700 dark:text-sky-300 mb-3 flex items-center gap-2">
+        <i class="fas fa-sliders-h"></i> Paramètres Clés d'une Onde
+      </h3>
+      <div class="space-y-3 text-xs sm:text-sm">
+        <div class="p-3 bg-white/60 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-sky-200 dark:border-sky-800">
+          <div>
+            <span class="font-bold text-sky-900 dark:text-sky-100">Période Temporelle \(T\)</span>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Durée d'un motif élémentaire (en secondes s)</p>
+          </div>
+          <span class="font-mono text-base font-bold text-sky-600">\(T = \frac{1}{f}\)</span>
+        </div>
+        <div class="p-3 bg-white/60 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-sky-200 dark:border-sky-800">
+          <div>
+            <span class="font-bold text-sky-900 dark:text-sky-100">Longueur d'Onde \(\lambda\)</span>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Période spatiale / distance parcourue en un temps \(T\) (en m)</p>
+          </div>
+          <span class="font-mono text-base font-bold text-sky-600">\(\lambda = v \cdot T\)</span>
+        </div>
+        <div class="p-3 bg-white/60 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-sky-200 dark:border-sky-800">
+          <div>
+            <span class="font-bold text-sky-900 dark:text-sky-100">Célérité \(v\)</span>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Vitesse de propagation (dépend exclusivement du milieu !)</p>
+          </div>
+          <span class="font-mono text-base font-bold text-sky-600">\(v = \lambda \cdot f\)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLEAU COMPARATIF VITESSES -->
+  <div class="nb-box exemple">
+    <span class="nb-box-title"><i class="fas fa-bolt"></i> Ordres de Grandeur Indispensables</span>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+      <div class="p-3 bg-amber-500/10 rounded-xl border border-amber-500/20 flex items-center gap-3">
+        <i class="fas fa-volume-up text-amber-600 text-2xl"></i>
+        <div>
+          <div class="font-bold text-amber-900 dark:text-amber-200 text-sm">Onde Sonore (dans l'air)</div>
+          <div class="text-xs font-mono text-amber-700 dark:text-amber-300">\(v_{\text{son}} \approx 340 \text{ m/s}\)</div>
+        </div>
+      </div>
+      <div class="p-3 bg-rose-500/10 rounded-xl border border-rose-500/20 flex items-center gap-3">
+        <i class="fas fa-sun text-rose-600 text-2xl"></i>
+        <div>
+          <div class="font-bold text-rose-900 dark:text-rose-200 text-sm">Onde Électromagnétique (Vide / Air)</div>
+          <div class="text-xs font-mono text-rose-700 dark:text-rose-300">\(c = 3{,}00 \times 10^8 \text{ m/s}\)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 : DIFFRACTION -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="ico-badge tint-amber"><i class="fas fa-bullseye"></i></div>
+    <h2 class="text-xl font-bold ink">2. Le Phénomène de Diffraction</h2>
+  </div>
+
+  <div class="tint-amber p-6 rounded-2xl border border-amber-500/20 mb-6">
+    <p class="text-sm leading-relaxed mb-4">
+      La <span class="def-term" data-term="diffraction" data-def="Modification de la direction de propagation d'une onde lorsqu'elle rencontre une ouverture ou un obstacle de dimension comparable ou inférieure à sa longueur d'onde.">diffraction</span> se produit lorsqu'une onde rencontre un obstacle ou une fente de petite taille \(a\). L'onde s'étale après l'obstacle <strong>sans modification de sa fréquence ni de sa longueur d'onde</strong>.
+    </p>
+    <div class="flex items-center gap-2 p-3 bg-amber-500/10 rounded-xl border border-amber-500/30 text-amber-900 dark:text-amber-200 font-semibold text-xs sm:text-sm">
+      <i class="fas fa-exclamation-triangle text-amber-600 text-lg"></i>
+      <span>Condition d'observation : La diffraction est d'autant plus marquée que la taille \(a\) de l'obstacle est proche ou inférieure à la longueur d'onde \(\lambda\) (\(a \le \lambda\) ou du même ordre de grandeur).</span>
+    </div>
+  </div>
+
+  <!-- SIMULATEUR INTERACTIF DE DIFFRACTION -->
+  <div class="p-6 bg-slate-900 text-white rounded-3xl shadow-xl mb-8">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center text-white">
+          <i class="fas fa-flask"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-base sm:text-lg text-violet-200">Banc d'Optique Virtuel : Tache de Diffraction</h3>
+          <p class="text-xs text-slate-400">Ajustez les paramètres pour voir la figure de diffraction évoluer en temps réel !</p>
+        </div>
+      </div>
+      <span class="hidden sm:inline-block px-3 py-1 bg-violet-500/20 text-violet-300 rounded-full text-xs font-mono border border-violet-500/30">
+        \(\theta \approx \frac{\lambda}{a} = \frac{L}{2D}\)
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <!-- CONTROLES -->
+      <div class="space-y-4 bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+        <div>
+          <label class="text-xs text-slate-300 font-semibold flex justify-between mb-1">
+            <span>Longueur d'onde \(\lambda\) (Laser)</span>
+            <span id="diff-lambda-val" class="font-mono text-violet-400 font-bold">650 nm</span>
+          </label>
+          <input id="diff-lambda" type="range" min="400" max="700" step="10" value="650" class="w-full accent-violet-500 cursor-pointer" oninput="updateDiffraction()">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+            <span>400 nm (Violet)</span>
+            <span>650 nm (Rouge)</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-300 font-semibold flex justify-between mb-1">
+            <span>Largeur de fente \(a\) (\(\mu\text{m}\))</span>
+            <span id="diff-a-val" class="font-mono text-emerald-400 font-bold">60 µm</span>
+          </label>
+          <input id="diff-a" type="range" min="10" max="200" step="5" value="60" class="w-full accent-emerald-500 cursor-pointer" oninput="updateDiffraction()">
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-300 font-semibold flex justify-between mb-1">
+            <span>Distance Écran \(D\) (m)</span>
+            <span id="diff-D-val" class="font-mono text-amber-400 font-bold">2.0 m</span>
+          </label>
+          <input id="diff-D" type="range" min="0.5" max="4.0" step="0.1" value="2.0" class="w-full accent-amber-500 cursor-pointer" oninput="updateDiffraction()">
+        </div>
+      </div>
+
+      <!-- VISUALISATION ÉCRAN VIRTUEL -->
+      <div class="md:col-span-2 bg-black rounded-2xl p-6 border border-slate-800 flex flex-col justify-between items-center relative overflow-hidden min-h-[220px]">
+        <div class="text-xs text-slate-400 w-full flex justify-between items-center z-10">
+          <span><i class="fas fa-desktop mr-1"></i> Écran d'observation</span>
+          <span class="font-mono text-emerald-400">Largeur tache centrale \(L = \frac{2\lambda D}{a}\)</span>
+        </div>
+
+        <!-- TACHE CENTRALE DYNAMIQUE -->
+        <div class="my-auto w-full flex flex-col items-center justify-center py-4 z-10">
+          <div id="diff-spot" class="h-12 rounded-full transition-all duration-200 shadow-2xl" style="width: 140px; background: radial-gradient(ellipse at center, rgba(239,68,68,1) 0%, rgba(239,68,68,0.4) 40%, rgba(239,68,68,0) 80%); shadow: 0 0 25px rgba(239,68,68,0.8);"></div>
+          <!-- Repère de mesure L -->
+          <div class="w-full flex items-center justify-center gap-2 mt-4">
+            <div class="h-px bg-slate-600 flex-1"></div>
+            <span id="diff-L-display" class="font-mono font-bold text-red-400 text-sm px-2 py-0.5 bg-slate-800 rounded-md border border-slate-700">L = 4.33 cm</span>
+            <div class="h-px bg-slate-600 flex-1"></div>
+          </div>
+        </div>
+
+        <!-- CALCULS RESULTATS -->
+        <div class="w-full grid grid-cols-2 gap-3 text-xs z-10 pt-2 border-t border-slate-800">
+          <div class="bg-slate-800/80 p-2.5 rounded-xl border border-slate-700">
+            <span class="text-slate-400">Écart angulaire \(\theta\) :</span>
+            <div id="diff-theta-val" class="font-mono text-violet-300 font-bold text-sm">0.0108 rad (0.62°)</div>
+          </div>
+          <div class="bg-slate-800/80 p-2.5 rounded-xl border border-slate-700">
+            <span class="text-slate-400">Largeur Tache \(L\) :</span>
+            <div id="diff-L-val" class="font-mono text-emerald-300 font-bold text-sm">4.33 cm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 : INTERFÉRENCES -->
+<div class="mb-8">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="ico-badge tint-emerald"><i class="fas fa-layer-group"></i></div>
+    <h2 class="text-xl font-bold ink">3. Interférences Lumineuses & Fentes de Young</h2>
+  </div>
+
+  <div class="nb-tabs">
+    <div class="nb-tab-buttons">
+      <button class="nb-tab-btn active" onclick="switchTab(event, 'tab-interf-def')">
+        <i class="fas fa-align-left mr-1"></i> Principe & Conditions
+      </button>
+      <button class="nb-tab-btn" onclick="switchTab(event, 'tab-interf-types')">
+        <i class="fas fa-balance-scale mr-1"></i> Constructif vs Destructif
+      </button>
+      <button class="nb-tab-btn" onclick="switchTab(event, 'tab-interf-young')">
+        <i class="fas fa-grip-lines-vertical mr-1"></i> Montage de Young
+      </button>
+    </div>
+
+    <div id="tab-interf-def" class="nb-tab-panel active">
+      <div class="tint-emerald p-6 rounded-2xl border border-emerald-500/20">
+        <h3 class="font-bold text-emerald-800 dark:text-emerald-300 mb-2">Superposition de deux ondes</h3>
+        <p class="text-sm leading-relaxed mb-4">
+          Il y a <span class="def-term" data-term="interferences" data-def="Superposition de deux ondes synchrones de même fréquence et de déphasage constant, entraînant des zones d'amplification et d'extinction.">interférences</span> lorsque deux ondes se superposent dans une même région de l'espace.
+        </p>
+        <div class="p-4 bg-white/70 dark:bg-slate-800/70 rounded-xl border border-emerald-300 dark:border-emerald-700">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-emerald-700 dark:text-emerald-300 mb-2">Condition de Cohérence</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-300">
+            Pour observer des interférences stables, les sources doivent être <span class="def-term" data-term="sources-coherentes" data-def="Sources émettant des ondes de même fréquence avec un déphasage constant au cours du temps.">cohérentes</span> (même fréquence \(f\) et déphasage constant au cours du temps). C'est pour cela qu'on utilise généralement une source unique divisée en deux (comme un laser éclairant deux fentes).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-interf-types" class="nb-tab-panel">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="tint-emerald p-5 rounded-2xl border border-emerald-500/30">
+          <div class="flex items-center gap-2 font-bold text-emerald-700 dark:text-emerald-300 mb-2">
+            <i class="fas fa-plus-circle text-lg"></i>
+            <span>Interférences Constructives</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">
+            Les ondes arrivent <strong>en phase</strong>. Les amplitudes s'ajoutent : l'intensité lumineuse est maximale (frange brillante).
+          </p>
+          <div class="font-mono text-center bg-emerald-500/10 p-2 rounded-lg text-emerald-800 dark:text-emerald-200 text-xs font-bold">
+            Différence de marche : \(\delta = k \cdot \lambda \quad (k \in \mathbb{Z})\)
+          </div>
+        </div>
+
+        <div class="tint-rose p-5 rounded-2xl border border-rose-500/30">
+          <div class="flex items-center gap-2 font-bold text-rose-700 dark:text-rose-300 mb-2">
+            <i class="fas fa-minus-circle text-lg"></i>
+            <span>Interférences Destructives</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">
+            Les ondes arrivent <strong>en opposition de phase</strong>. Les amplitudes s'annulent : l'intensité est minimale (frange sombre).
+          </p>
+          <div class="font-mono text-center bg-rose-500/10 p-2 rounded-lg text-rose-800 dark:text-rose-200 text-xs font-bold">
+            Différence de marche : \(\delta = (k + 0{,}5) \cdot \lambda\)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-interf-young" class="nb-tab-panel">
+      <div class="tint-sky p-6 rounded-2xl border border-sky-500/20">
+        <h3 class="font-bold text-sky-800 dark:text-sky-300 mb-2">L'Interfrange \(i\) dans les Fentes de Young</h3>
+        <p class="text-sm leading-relaxed mb-4">
+          L'<strong>interfrange \(i\)</strong> est la distance séparant deux franges brillantes (ou sombres) consécutives sur l'écran.
+        </p>
+        <div class="p-4 bg-sky-500/10 rounded-xl border border-sky-500/30 font-mono text-center text-sky-900 dark:text-sky-200 text-base font-bold mb-3">
+          \(i = \frac{\lambda \cdot D}{b}\)
+        </div>
+        <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1">
+          <p>• \(\lambda\) : Longueur d'onde de la lumière (m)</p>
+          <p>• \(D\) : Distance entre la double fente et l'écran (m)</p>
+          <p>• \(b\) : Écartement entre les deux fentes \(S_1\) et \(S_2\) (m)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateDiffraction() {
+  const lambda = parseFloat(document.getElementById('diff-lambda').value);
+  const a = parseFloat(document.getElementById('diff-a').value);
+  const D = parseFloat(document.getElementById('diff-D').value);
+
+  document.getElementById('diff-lambda-val').innerText = lambda + ' nm';
+  document.getElementById('diff-a-val').innerText = a + ' µm';
+  document.getElementById('diff-D-val').innerText = D.toFixed(1) + ' m';
+
+  const theta = (lambda * 1e-9) / (a * 1e-6);
+  const L = (2 * lambda * 1e-9 * D) / (a * 1e-6) * 100;
+
+  document.getElementById('diff-theta-val').innerText = theta.toFixed(4) + ' rad (' + (theta * 180 / Math.PI).toFixed(2) + '°)';
+  document.getElementById('diff-L-val').innerText = L.toFixed(2) + ' cm';
+  document.getElementById('diff-L-display').innerText = 'L = ' + L.toFixed(2) + ' cm';
+
+  const spot = document.getElementById('diff-spot');
+  if (spot) {
+    const widthPx = Math.min(Math.max(L * 25, 20), 320);
+    spot.style.width = widthPx + 'px';
+    
+    let color = 'rgba(239, 68, 68, 1)'; // Rouge par défaut
+    if (lambda < 450) color = 'rgba(139, 92, 246, 1)'; // Violet
+    else if (lambda < 520) color = 'rgba(59, 130, 246, 1)'; // Bleu
+    else if (lambda < 580) color = 'rgba(16, 185, 129, 1)'; // Vert
+    else if (lambda < 620) color = 'rgba(245, 158, 11, 1)'; // Jaune/Orange
+
+    spot.style.background = `radial-gradient(ellipse at center, ${color} 0%, ${color.replace('1)', '0.3)')} 50%, rgba(0,0,0,0) 80%)`;
+  }
+}
+</script>

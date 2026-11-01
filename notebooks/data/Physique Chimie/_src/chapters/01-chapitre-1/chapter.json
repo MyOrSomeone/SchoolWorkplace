@@ -1,0 +1,29 @@
+{
+  "slug": "01-chapitre-1",
+  "title": "Chapitre 1",
+  "group": "",
+  "parent": "",
+  "status": "in_progress",
+  "summary": "",
+  "parts": [
+    {
+      "id": "p01-i-quantite-de-matiere-et",
+      "title": "I. Quantité de Matière et Modèle du Gaz Parfait",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p02-ii-methodes-physiques-d",
+      "title": "II. Méthodes Physiques d'Analyse & Spectroscopie",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p03-iii-ondes-progressives-d",
+      "title": "III. Ondes Progressives, Diffraction et Interférences",
+      "level": 1,
+      "summary": ""
+    }
+  ],
+  "created_at": "2026-10-29T18:17:35"
+}

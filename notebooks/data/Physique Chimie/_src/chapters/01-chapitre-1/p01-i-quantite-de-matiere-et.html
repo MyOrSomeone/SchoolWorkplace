@@ -1,0 +1,263 @@
+<section class="section-hero hero-blue relative overflow-hidden rounded-3xl p-8 mb-8 shadow-lg">
+  <div class="nb-shader-bg" data-preset="aurora" data-palette="blue" data-intensity="0.45"></div>
+  <div class="relative z-10 text-white">
+    <div class="hero-eyebrow text-xs uppercase tracking-widest font-bold opacity-80 mb-2 flex items-center gap-2">
+      <i class="fas fa-atom text-blue-300"></i> Chimie Physique &bull; Chapitre 2
+    </div>
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-3">I. Quantité de Matière & Modèle du Gaz Parfait</h1>
+    <p class="text-lg opacity-90 max-w-2xl leading-relaxed">
+      La quantité de matière \\(n\\) (exprimée en moles) est la pierre angulaire des calculs chimiques. Découvrez les voies d'accès selon l'état de votre échantillon !
+    </p>
+  </div>
+</section>
+
+<!-- CARTE MENTALE INTERACTIVE DE LA QUANTITÉ DE MATIÈRE -->
+<div class="tint-blue p-6 rounded-2xl mb-8 border border-blue-200 dark:border-blue-800/30">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl font-bold shadow-inner">
+      <i class="fas fa-project-diagram"></i>
+    </div>
+    <div>
+      <h3 class="text-xl font-bold ink">Explorateur Interactif de la Quantité de Matière \\(n\\)</h3>
+      <p class="text-sm var(--nb-text-muted)">Cliquez sur les onglets ci-dessous pour explorer la formule adaptée à votre système physico-chimique.</p>
+    </div>
+  </div>
+
+  <div class="nb-tabs">
+    <div class="nb-tab-buttons flex flex-wrap gap-2 mb-4">
+      <button class="nb-tab-btn active px-4 py-2 rounded-xl font-semibold text-sm transition-all flex items-center gap-2">
+        <i class="fas fa-cubes"></i> Solide ou Liquide
+      </button>
+      <button class="nb-tab-btn px-4 py-2 rounded-xl font-semibold text-sm transition-all flex items-center gap-2">
+        <i class="fas fa-wind"></i> Gaz & Gaz Parfait
+      </button>
+      <button class="nb-tab-btn px-4 py-2 rounded-xl font-semibold text-sm transition-all flex items-center gap-2">
+        <i class="fas fa-vial"></i> Solution & Soluté
+      </button>
+      <button class="nb-tab-btn px-4 py-2 rounded-xl font-semibold text-sm transition-all flex items-center gap-2">
+        <i class="fas fa-microscope"></i> Nombre d'Entités
+      </button>
+    </div>
+
+    <!-- TAB 1 : SOLIDE / LIQUIDE -->
+    <div class="nb-tab-panel active">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="tint-gold p-5 rounded-xl border">
+          <div class="ico-badge mb-3"><i class="fas fa-weight-hanging"></i></div>
+          <h4 class="font-bold text-lg mb-2 ink">Formule Fondamentale (Masse)</h4>
+          <div class="bg-white/80 dark:bg-slate-800/80 p-4 rounded-lg text-center shadow-sm mb-3">
+            <p class="text-2xl font-extrabold text-amber-600 dark:text-amber-400">
+              \\[ n = \frac{m}{M} \\]
+            </p>
+          </div>
+          <ul class="text-sm space-y-1 var(--nb-text-muted)">
+            <li>&bull; <strong class="ink">\\(n\\)</strong> : Quantité de matière (\\(\text{mol}\\))</li>
+            <li>&bull; <strong class="ink">\\(m\\)</strong> : Masse de l'échantillon (\\(\text{g}\\))</li>
+            <li>&bull; <strong class="ink">\\(M\\)</strong> : Masse molaire de l'espèce (\\(\text{g}\cdot\text{mol}^{-1}\\))</li>
+          </ul>
+        </div>
+
+        <div class="tint-stone p-5 rounded-xl border">
+          <div class="ico-badge mb-3"><i class="fas fa-balance-scale"></i></div>
+          <h4 class="font-bold text-lg mb-2 ink">Variantes (Masse volumique & Densité)</h4>
+          <p class="text-xs mb-3 var(--nb-text-muted)">Si la masse \\(m\\) n'est pas connue directement :</p>
+          <div class="space-y-3">
+            <div class="bg-white/80 dark:bg-slate-800/80 p-3 rounded-lg text-center">
+              <span class="text-xs font-semibold uppercase text-stone-500 block mb-1">Via la Masse Volumique \\(\rho = \frac{m}{V}\\)</span>
+              <p class="text-lg font-bold text-slate-700 dark:text-slate-200">\\[ n = \frac{\rho \times V}{M} \\]</p>
+            </div>
+            <div class="bg-white/80 dark:bg-slate-800/80 p-3 rounded-lg text-center">
+              <span class="text-xs font-semibold uppercase text-stone-500 block mb-1">Via la Densité \\(d = \frac{\rho}{\rho_{\text{eau}}}\\)</span>
+              <p class="text-lg font-bold text-slate-700 dark:text-slate-200">\\[ n = \frac{\rho_{\text{eau}} \times d \times V}{M} \\]</p>
+              <span class="text-xs text-emerald-600 dark:text-emerald-400 font-medium block mt-1">
+                <i class="fas fa-info-circle"></i> \\(\rho_{\text{eau}} = 1000\text{ g}\cdot\text{L}^{-1}\\) ou \\(1\text{ g}\cdot\text{mL}^{-1}\\)
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2 : GAZ -->
+    <div class="nb-tab-panel">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="tint-sky p-5 rounded-xl border">
+          <div class="ico-badge mb-3"><i class="fas fa-cloud"></i></div>
+          <h4 class="font-bold text-lg mb-2 ink">Volume Molaire \\(V_m\\)</h4>
+          <div class="bg-white/80 dark:bg-slate-800/80 p-4 rounded-lg text-center shadow-sm mb-3">
+            <p class="text-2xl font-extrabold text-sky-600 dark:text-sky-400">
+              \\[ n = \frac{V}{V_m} \\]
+            </p>
+          </div>
+          <ul class="text-sm space-y-1 var(--nb-text-muted)">
+            <li>&bull; <strong class="ink">\\(V\\)</strong> : Volume du gaz (\\(\text{L}\\))</li>
+            <li>&bull; <strong class="ink">\\(V_m\\)</strong> : Volume molaire (\\(\text{L}\cdot\text{mol}^{-1}\\))</li>
+            <li>&bull; À \\(0^\circ\text{C}\\) et pression normale : \\(V_m \approx 22{,}4\text{ L}\cdot\text{mol}^{-1}\\)</li>
+          </ul>
+        </div>
+
+        <div class="tint-violet p-5 rounded-xl border">
+          <div class="ico-badge mb-3"><i class="fas fa-fire-alt"></i></div>
+          <h4 class="font-bold text-lg mb-2 ink">Loi des Gaz Parfaits (PV = nRT)</h4>
+          <div class="bg-white/80 dark:bg-slate-800/80 p-4 rounded-lg text-center shadow-sm mb-3">
+            <p class="text-2xl font-extrabold text-violet-600 dark:text-violet-400">
+              \\[ P \cdot V = n \cdot R \cdot T \\]
+            </p>
+          </div>
+          <div class="text-xs space-y-1.5 var(--nb-text-muted)">
+            <p><strong class="ink">\\(P\\)</strong> : Pression en <span class="text-red-500 font-bold">Pascals (Pa)</span> \\((1\text{ bar} = 10^5\text{ Pa})\\)</p>
+            <p><strong class="ink">\\(V\\)</strong> : Volume en <span class="text-red-500 font-bold">mètres cubes (m³)</span> \\((1\text{ m}^3 = 1000\text{ L})\\)</p>
+            <p><strong class="ink">\\(R\\)</strong> : Constante \\(8{,}314\text{ J}\cdot\text{K}^{-1}\cdot\text{mol}^{-1}\\)</p>
+            <p><strong class="ink">\\(T\\)</strong> : Température en <span class="text-red-500 font-bold">Kelvin (K)</span> \\(T(\text{K}) = \theta(^\circ\text{C}) + 273{,}15\\)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3 : SOLUTION -->
+    <div class="nb-tab-panel">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="tint-rose p-5 rounded-xl border">
+          <div class="ico-badge mb-3"><i class="fas fa-flask"></i></div>
+          <h4 class="font-bold text-lg mb-2 ink">Concentration Molaire \\(C\\)</h4>
+          <div class="bg-white/80 dark:bg-slate-800/80 p-4 rounded-lg text-center shadow-sm mb-3">
+            <p class="text-2xl font-extrabold text-rose-600 dark:text-rose-400">
+              \\[ n = C \times V_{\text{solution}} \\]
+            </p>
+          </div>
+          <ul class="text-sm space-y-1 var(--nb-text-muted)">
+            <li>&bull; <strong class="ink">\\(C\\)</strong> : Concentration molaire (\\(\text{mol}\cdot\text{L}^{-1}\\))</li>
+            <li>&bull; <strong class="ink">\\(V_{\text{solution}}\\)</strong> : Volume de la solution (\\(\text{L}\\))</li>
+          </ul>
+        </div>
+
+        <div class="tint-amber p-5 rounded-xl border">
+          <div class="ico-badge mb-3"><i class="fas fa-filter"></i></div>
+          <h4 class="font-bold text-lg mb-2 ink">Concentration Massique \\(C_m\\)</h4>
+          <div class="bg-white/80 dark:bg-slate-800/80 p-4 rounded-lg text-center shadow-sm mb-3">
+            <p class="text-2xl font-extrabold text-amber-600 dark:text-amber-400">
+              \\[ C_m = C \times M = \frac{m}{V_{\text{solution}}} \\]
+            </p>
+          </div>
+          <ul class="text-sm space-y-1 var(--nb-text-muted)">
+            <li>&bull; <strong class="ink">\\(C_m\\)</strong> : Concentration en masse (\\(\text{g}\cdot\text{L}^{-1}\\))</li>
+            <li>&bull; <strong class="ink">Lien fort</strong> : \\(C_m\\) s'obtient directement en multipliant la concentration molaire par la masse molaire \\(M\\).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4 : ENTITÉS -->
+    <div class="nb-tab-panel">
+      <div class="tint-teal p-5 rounded-xl border">
+        <div class="ico-badge mb-3"><i class="fas fa-atom"></i></div>
+        <h4 class="font-bold text-lg mb-2 ink">Dénombrement d'Entités (Atomes, Ions, Molécules)</h4>
+        <div class="bg-white/80 dark:bg-slate-800/80 p-5 rounded-lg text-center shadow-sm mb-4 max-w-md mx-auto">
+          <p class="text-3xl font-extrabold text-teal-600 dark:text-teal-400">
+            \\[ n = \frac{N}{N_A} \\]
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm var(--nb-text-muted)">
+          <div class="bg-teal-500/10 p-3 rounded-lg">
+            <strong class="ink block mb-1">\\(N\\) : Nombre d'entités</strong>
+            Nombre d'atomes, d'ions ou de molécules dénombrés (sans unité).
+          </div>
+          <div class="bg-teal-500/10 p-3 rounded-lg">
+            <strong class="ink block mb-1">\\(N_A\\) : Constante d'Avogadro</strong>
+            \\(N_A = 6{,}02 \times 10^{23}\text{ mol}^{-1}\\) (nombre d'entités par mole).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIMULATEUR INTERACTIF DU GAZ PARFAIT -->
+<div class="tint-violet p-6 rounded-2xl mb-8 border border-violet-200 dark:border-violet-800/30">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400 flex items-center justify-center text-2xl font-bold shadow-inner">
+      <i class="fas fa-sliders-h"></i>
+    </div>
+    <div>
+      <h3 class="text-xl font-bold ink">Simulateur Interactif &bull; Équation du Gaz Parfait</h3>
+      <p class="text-sm var(--nb-text-muted)">Modifiez la pression, le volume ou la température pour observer instantanément le calcul de la quantité de matière \\(n\\) !</p>
+    </div>
+  </div>
+
+  <div class="bg-white/80 dark:bg-slate-900/80 p-6 rounded-2xl shadow-sm border border-violet-100 dark:border-violet-900/40">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <!-- Pression -->
+      <div>
+        <label class="block text-xs font-bold uppercase text-violet-700 dark:text-violet-300 mb-2">
+          Pression \\(P\\) : <span id="gp-p-val" class="text-base font-extrabold text-violet-600 dark:text-violet-400">1013</span> hPa
+        </label>
+        <input type="range" id="gp-p" min="500" max="2000" step="10" value="1013" class="w-full accent-violet-600 cursor-pointer" oninput="updateGasSim()">
+        <span class="text-[11px] text-gray-500 font-mono block mt-1">= <span id="gp-p-pa">101300</span> Pa</span>
+      </div>
+
+      <!-- Volume -->
+      <div>
+        <label class="block text-xs font-bold uppercase text-violet-700 dark:text-violet-300 mb-2">
+          Volume \\(V\\) : <span id="gp-v-val" class="text-base font-extrabold text-violet-600 dark:text-violet-400">2.5</span> L
+        </label>
+        <input type="range" id="gp-v" min="0.1" max="10.0" step="0.1" value="2.5" class="w-full accent-violet-600 cursor-pointer" oninput="updateGasSim()">
+        <span class="text-[11px] text-gray-500 font-mono block mt-1">= <span id="gp-v-m3">0.0025</span> m³</span>
+      </div>
+
+      <!-- Température -->
+      <div>
+        <label class="block text-xs font-bold uppercase text-violet-700 dark:text-violet-300 mb-2">
+          Température \\(\theta\\) : <span id="gp-t-val" class="text-base font-extrabold text-violet-600 dark:text-violet-400">20</span> °C
+        </label>
+        <input type="range" id="gp-t" min="-20" max="100" step="1" value="20" class="w-full accent-violet-600 cursor-pointer" oninput="updateGasSim()">
+        <span class="text-[11px] text-gray-500 font-mono block mt-1">= <span id="gp-t-k">293.15</span> K</span>
+      </div>
+    </div>
+
+    <div class="tint-amber p-4 rounded-xl flex items-center justify-between flex-wrap gap-4 border border-amber-300/40">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-calculator text-2xl text-amber-600 dark:text-amber-400"></i>
+        <div>
+          <span class="text-xs uppercase font-bold text-amber-800 dark:text-amber-200 block">Résultat du calcul \\(n = \frac{P \cdot V}{R \cdot T}\\)</span>
+          <span class="text-xs text-amber-700 dark:text-amber-300">avec \\(R = 8{,}314\text{ J}\cdot\text{K}^{-1}\cdot\text{mol}^{-1}\\)</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <span id="gp-res-n" class="text-3xl font-extrabold text-amber-700 dark:text-amber-300 font-mono">0.104</span>
+        <span class="text-lg font-bold text-amber-800 dark:text-amber-200"> mol</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateGasSim() {
+  const p_hpa = parseFloat(document.getElementById('gp-p').value);
+  const v_l = parseFloat(document.getElementById('gp-v').value);
+  const t_c = parseFloat(document.getElementById('gp-t').value);
+
+  const p_pa = p_hpa * 100;
+  const v_m3 = v_l / 1000;
+  const t_k = t_c + 273.15;
+  const R = 8.314;
+
+  const n = (p_pa * v_m3) / (R * t_k);
+
+  document.getElementById('gp-p-val').innerText = p_hpa;
+  document.getElementById('gp-p-pa').innerText = p_pa.toLocaleString();
+  document.getElementById('gp-v-val').innerText = v_l.toFixed(1);
+  document.getElementById('gp-v-m3').innerText = v_m3.toFixed(4);
+  document.getElementById('gp-t-val').innerText = t_c;
+  document.getElementById('gp-t-k').innerText = t_k.toFixed(2);
+  document.getElementById('gp-res-n').innerText = n.toFixed(4);
+}
+</script>
+
+<div class="nb-box attention mb-6">
+  <span class="nb-box-title"><i class="fas fa-exclamation-triangle"></i> PIÈGES ET CONVERSIONS D'UNITÉS EN PHYSIQUE</span>
+  <div class="mt-2 space-y-2 text-sm">
+    <p>&bull; <strong>Volume dans \\(P\cdot V = n\cdot R\cdot T\\) :</strong> Doit IMPÉRATIVEMENT être en \\(\text{m}^3\\) ! Rappel : \\(1\text{ m}^3 = 1000\text{ L} = 10^3\text{ dm}^3\\).</p>
+    <p>&bull; <strong>Pression :</strong> Doit être en Pascals (\\(\text{Pa}\\)). \\(1\text{ bar} = 10^5\text{ Pa}\\) et \\(1\text{ hPa} = 100\text{ Pa}\\).</p>
+    <p>&bull; <strong>Température absolue :</strong> Toujours ajouter \\(273{,}15\\) aux degrés Celsius pour obtenir les Kelvin (\\(\text{K}\\)).</p>
+  </div>
+</div>

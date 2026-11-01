@@ -1,0 +1,502 @@
+<section class="section-hero hero-violet relative overflow-hidden rounded-3xl p-6 sm:p-8 mb-8">
+  <div class="nb-shader-bg" data-preset="aurora" data-palette="violet" data-intensity="0.45"></div>
+  <div class="relative z-10">
+    <div class="hero-eyebrow text-xs font-extrabold uppercase tracking-widest text-violet-300 mb-2 flex items-center gap-2">
+      <i class="fas fa-microscope"></i> Physique & Chimie Physique
+    </div>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">II. Méthodes Physiques d'Analyse & Spectroscopie</h2>
+    <p class="text-violet-100 text-base max-w-2xl leading-relaxed">
+      Déterminez la concentration et la structure des espèces chimiques grâce à la conductance, l'absorption UV-visible et la spectroscopie IR.
+    </p>
+    <div class="hero-chips flex flex-wrap gap-2 mt-4">
+      <span class="badge-tag badge-purple"><i class="fas fa-bolt mr-1"></i> Conductimétrie</span>
+      <span class="badge-tag badge-blue"><i class="fas fa-rainbow mr-1"></i> Spectres UV-vis</span>
+      <span class="badge-tag badge-rose"><i class="fas fa-wave-square mr-1"></i> Spectroscopie IR</span>
+      <span class="badge-tag badge-amber"><i class="fas fa-balance-scale mr-1"></i> Bilan de Forces</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: CONDUCTIMÉTRIE ET DOSAGE -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="w-12 h-12 rounded-2xl bg-violet-500/20 text-violet-400 flex items-center justify-center text-xl font-bold shadow-inner">
+      <i class="fas fa-bolt"></i>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">1. Conductimétrie & Mesure de la Conductance</h3>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Analyse quantitative des solutions ioniques conductrices</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Montage Conductimétrique -->
+    <div class="tint-violet rounded-3xl p-6 flex flex-col justify-between border border-violet-500/20">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="ico-badge"><i class="fas fa-plug text-violet-400"></i></span>
+          <span class="text-xs font-bold px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full">Montage expérimental</span>
+        </div>
+        <h4 class="text-xl font-bold ink mb-2">Cellule de Conductimétrie</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          Une portion de solution est analysée entre deux plaques métalliques de surface $S$ séparées d'une distance $L$. On applique une tension alternative $U$ pour éviter la polarisation.
+        </p>
+
+        <!-- SVG Schéma du montage -->
+        <div class="bg-gray-900/40 p-4 rounded-2xl border border-violet-500/30 flex justify-center mb-4">
+          <svg viewBox="0 0 320 180" class="w-full max-w-xs h-auto">
+            <!-- Bécher -->
+            <rect x="80" y="70" width="160" height="90" rx="10" fill="rgba(139, 92, 246, 0.15)" stroke="#a78bfa" stroke-width="2"/>
+            <!-- Solution liquide -->
+            <path d="M 81 100 Q 160 105 239 100 L 239 152 A 8 8 0 0 1 231 160 L 89 160 A 8 8 0 0 1 81 152 Z" fill="rgba(167, 139, 250, 0.3)"/>
+            <!-- Électrodes -->
+            <rect x="110" y="80" width="8" height="65" fill="#94a3b8" rx="2"/>
+            <rect x="202" y="80" width="8" height="65" fill="#94a3b8" rx="2"/>
+            <!-- Tension U / Courant I -->
+            <path d="M 114 80 L 114 30 L 140 30" stroke="#c084fc" stroke-width="2" fill="none"/>
+            <path d="M 206 80 L 206 30 L 180 30" stroke="#c084fc" stroke-width="2" fill="none"/>
+            <!-- Générateur GBF -->
+            <circle cx="160" cy="30" r="16" fill="#1e1b4b" stroke="#c084fc" stroke-width="2"/>
+            <path d="M 152 30 Q 156 22 160 30 T 168 30" fill="none" stroke="#e879f9" stroke-width="2"/>
+            <!-- Voltmètre V / Ampèremètre A -->
+            <circle cx="114" cy="55" r="10" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="114" y="58" text-anchor="middle" fill="#e9d5ff" font-size="10" font-weight="bold">A</text>
+            <circle cx="206" cy="55" r="10" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="206" y="58" text-anchor="middle" fill="#e9d5ff" font-size="10" font-weight="bold">V</text>
+            <!-- Légendes -->
+            <text x="160" y="130" text-anchor="middle" fill="#ddd6fe" font-size="11" font-weight="bold">Portion de solution</text>
+            <text x="160" y="145" text-anchor="middle" fill="#a78bfa" font-size="9">Conductance G = I / U</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="nb-box formula my-0">
+        <span class="nb-box-title"><i class="fas fa-calculator mr-2"></i> Formule fondamentale</span>
+        $$\text{Conductance : } G = \frac{1}{R} = \frac{I}{U}$$
+        <p class="text-xs text-violet-200 mt-1">
+          $G$ en Siemens ($\text{S}$), $I$ en Ampères ($\text{A}$), $U$ en Volts ($\text{V}$).
+        </p>
+      </div>
+    </div>
+
+    <!-- Simulateur interactif de Conductance -->
+    <div class="tint-slate rounded-3xl p-6 flex flex-col justify-between border border-gray-700/50 bg-gray-900/60 text-white">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="ico-badge"><i class="fas fa-sliders-h text-emerald-400"></i></span>
+          <span class="text-xs font-bold px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full">Labo Interactif</span>
+        </div>
+        <h4 class="text-xl font-bold text-emerald-400 mb-2">Simulateur de Conductance $G$</h4>
+        <p class="text-xs text-gray-300 mb-6">
+          Ajustez la tension appliquée $U$ et l'intensité mesurée $I$ pour calculer en direct la <span class="def-term" data-term="conductance" data-def="Aptitude d'une solution à conduire le courant électrique, égale à l'inverse de la résistance G = I / U (Siemens, S).">conductance</span> et la résistance de la solution.
+        </p>
+
+        <!-- Sliders -->
+        <div class="space-y-5 bg-gray-800/80 p-4 rounded-2xl border border-gray-700">
+          <div>
+            <div class="flex justify-between text-sm font-semibold mb-1">
+              <span class="text-gray-300">Tension $U$ (GBF) :</span>
+              <span id="val-u" class="text-violet-400 font-bold">2.0 V</span>
+            </div>
+            <input id="slider-u" type="range" min="0.5" max="10.0" step="0.1" value="2.0" class="w-full accent-violet-500 cursor-pointer" oninput="updateConductance()">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-sm font-semibold mb-1">
+              <span class="text-gray-300">Intensité $I$ mesurée :</span>
+              <span id="val-i" class="text-emerald-400 font-bold">10.0 mA</span>
+            </div>
+            <input id="slider-i" type="range" min="0.5" max="50.0" step="0.5" value="10.0" class="w-full accent-emerald-500 cursor-pointer" oninput="updateConductance()">
+          </div>
+        </div>
+
+        <!-- Dynamic Results Display -->
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <div class="p-4 rounded-2xl bg-violet-950/50 border border-violet-500/30 text-center">
+            <span class="text-xs text-violet-300 uppercase font-semibold">Conductance $G$</span>
+            <div id="res-g" class="text-2xl font-black text-violet-300 my-1">5.00 mS</div>
+            <span class="text-[10px] text-violet-400">$G = I / U$</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-950/50 border border-emerald-500/30 text-center">
+            <span class="text-xs text-emerald-300 uppercase font-semibold">Résistance $R$</span>
+            <div id="res-r" class="text-2xl font-black text-emerald-300 my-1">200 Ω</div>
+            <span class="text-[10px] text-emerald-400">$R = 1 / G = U / I$</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 text-xs text-gray-400 text-center italic">
+        <i class="fas fa-lightbulb text-amber-400 mr-1"></i> La conductance augmente quand la concentration en ions libres augmente !
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: SPECTROSCOPIE UV-VISIBLE -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="w-12 h-12 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl font-bold shadow-inner">
+      <i class="fas fa-eye"></i>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">2. Spectroscopie UV-Visible & Couleur des Solutions</h3>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Absorbanance, longueur d'onde maximale et couleur complémentaire</p>
+    </div>
+  </div>
+
+  <div class="tint-rose rounded-3xl p-6 border border-pink-500/20 mb-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Explication théorique -->
+      <div class="lg:col-span-5 flex flex-col justify-between">
+        <div>
+          <span class="badge-tag badge-rose mb-3"><i class="fas fa-palette mr-1"></i> Doc 2 du cours</span>
+          <h4 class="text-xl font-bold ink mb-3">Spectre d'Absorption UV-Vis</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+            Une espèce chimique absorbe certaines longueurs d'onde $\lambda$. La couleur perçue par l'œil humain correspond aux <strong>couleurs complémentaires</strong> transmises et diffusées par la solution.
+          </p>
+
+          <div class="nb-box exemple my-2">
+            <span class="nb-box-title"><i class="fas fa-vial mr-2"></i> Cas du Permanganate ($\text{MnO}_4^-$)</span>
+            <p class="text-xs text-gray-700 dark:text-gray-200">
+              Absorbe fortement entre <strong>$500\text{ nm}$ et $550\text{ nm}$</strong> (lumière vert-jaune). Il laisse passer le bleu et le rouge : la solution apparaît donc <strong>Magenta</strong> !
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-pink-950/30 rounded-xl border border-pink-500/30 text-xs text-pink-200 mt-4">
+          <i class="fas fa-info-circle mr-1"></i> L'absorbance $A$ est maximale à $\lambda_{\max}$. Plus la concentration $C$ augmente, plus $A_{\max}$ s'élève (Loi de Beer-Lambert $A = \epsilon \cdot L \cdot C$).
+        </div>
+      </div>
+
+      <!-- Explorer de couleur absorbée / transmise -->
+      <div class="lg:col-span-7 bg-gray-900/90 rounded-2xl p-5 border border-pink-500/30 text-white flex flex-col justify-between">
+        <div>
+          <h5 class="text-sm font-bold text-pink-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i class="fas fa-sliders-h"></i> Explorer interactif de la couleur perçue
+          </h5>
+
+          <p class="text-xs text-gray-300 mb-4">
+            Déplacez le curseur de longueur d'onde absorbée ($\lambda$) pour visualiser instantanément la couleur transmise/perçue de la solution !
+          </p>
+
+          <!-- Slider longueur d'onde -->
+          <div class="bg-gray-800 p-4 rounded-xl mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-semibold text-gray-300">Longueur d'onde absorbée $\lambda$ :</span>
+              <span id="lambda-val" class="text-sm font-black text-pink-400">525 nm (Vert-Jaune)</span>
+            </div>
+            <input id="lambda-slider" type="range" min="400" max="700" step="5" value="525" class="w-full h-2 bg-gradient-to-r from-violet-500 via-green-500 to-red-500 rounded-lg appearance-none cursor-pointer" oninput="updateColorSimulator()">
+          </div>
+
+          <!-- Affichage dynamique des couleurs -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-gray-800 border border-gray-700 text-center flex flex-col items-center">
+              <span class="text-[11px] text-gray-400 font-bold uppercase mb-2">Couleur Absorbée</span>
+              <div id="box-absorbed" class="w-16 h-16 rounded-full border-2 border-white/20 shadow-lg mb-2 transition-all duration-300" style="background-color: rgb(80, 220, 80);"></div>
+              <span id="text-absorbed" class="text-xs font-bold text-green-400">Vert (525 nm)</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-gray-800 border border-gray-700 text-center flex flex-col items-center">
+              <span class="text-[11px] text-gray-400 font-bold uppercase mb-2">Couleur Transmise (Perçue)</span>
+              <div id="box-perceived" class="w-16 h-16 rounded-full border-2 border-white/20 shadow-lg mb-2 transition-all duration-300" style="background-color: rgb(230, 50, 180);"></div>
+              <span id="text-perceived" class="text-xs font-bold text-pink-400">Magenta</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 text-[11px] text-gray-400 text-center">
+          <i class="fas fa-sync-alt text-pink-400 mr-1"></i> La couleur perçue est le mélange de toutes les longueurs d'onde NON absorbées.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: SPECTROSCOPIE IR -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold shadow-inner">
+      <i class="fas fa-wave-square"></i>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">3. Spectroscopie Infrarouge (IR) & Groupes Caractéristiques</h3>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Identification des liaisons chimiques par étude de la Transmittance $T(\%)$</p>
+    </div>
+  </div>
+
+  <div class="tint-amber rounded-3xl p-6 border border-amber-500/20">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+      <div>
+        <span class="badge-tag badge-amber mb-2"><i class="fas fa-atom mr-1"></i> Doc 3 — Exemple : Pinacol</span>
+        <h4 class="text-xl font-bold ink">Analyse de Spectre IR Interactif</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          En IR, l'axe horizontal indique le <span class="def-term" data-term="nombre-onde" data-def="Le nombre d'onde sigma est l'inverse de la longueur d'onde, exprimé en cm⁻¹ (sigma = 1 / lambda).">nombre d'onde $\sigma = 1/\lambda$</span> ($\text{cm}^{-1}$) décroissant de gauche à droite. Cliquez sur les pics pour révéler la liaison associée !
+        </p>
+      </div>
+    </div>
+
+    <!-- Interactive IR Spectrum Viewer -->
+    <div class="bg-gray-950 p-6 rounded-2xl border border-amber-500/30 text-white">
+      <div class="flex justify-between items-center text-xs text-amber-300 font-mono mb-2">
+        <span>Transmittance $T(\%)$</span>
+        <span>Axe des nombres d'onde $\sigma\ (\text{cm}^{-1})$ [4000 → 400]</span>
+      </div>
+
+      <!-- Simulated SVG Spectrum -->
+      <div class="relative w-full h-56 bg-gray-900 rounded-xl border border-gray-800 overflow-hidden mb-4 p-2">
+        <svg viewBox="0 0 600 200" class="w-full h-full">
+          <!-- Grid lines -->
+          <line x1="0" y1="40" x2="600" y2="40" stroke="#334155" stroke-dasharray="4"/>
+          <line x1="0" y1="100" x2="600" y2="100" stroke="#334155" stroke-dasharray="4"/>
+          <line x1="0" y1="160" x2="600" y2="160" stroke="#334155" stroke-dasharray="4"/>
+          <line x1="150" y1="0" x2="150" y2="200" stroke="#334155" stroke-dasharray="4"/>
+          <line x1="300" y1="0" x2="300" y2="200" stroke="#334155" stroke-dasharray="4"/>
+          <line x1="450" y1="0" x2="450" y2="200" stroke="#334155" stroke-dasharray="4"/>
+
+          <!-- IR Spectrum Path -->
+          <path d="M 10 20 
+                   L 80 20 
+                   Q 110 160 140 180 Q 170 160 200 25
+                   L 230 25
+                   Q 250 140 270 150 Q 290 120 310 25
+                   L 370 25
+                   Q 400 170 420 170 Q 440 30 460 30
+                   L 480 30 Q 510 160 530 140 L 590 30" 
+                fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+
+          <!-- Interactive Clickable Hotspots -->
+          <!-- Peak 1: O-H Alcool (3200-3500 cm-1) -->
+          <circle cx="140" cy="180" r="14" fill="rgba(245, 158, 11, 0.4)" stroke="#fbbf24" stroke-width="2" class="animate-pulse cursor-pointer hover:r-18 transition-all" onclick="selectIrPeak('oh')"/>
+          <text x="140" y="195" text-anchor="middle" fill="#fef08a" font-size="10" font-weight="bold">1</text>
+
+          <!-- Peak 2: C-H (2900-3000 cm-1) -->
+          <circle cx="270" cy="150" r="14" fill="rgba(59, 130, 246, 0.4)" stroke="#60a5fa" stroke-width="2" class="animate-pulse cursor-pointer hover:r-18 transition-all" onclick="selectIrPeak('ch')"/>
+          <text x="270" y="165" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="bold">2</text>
+
+          <!-- Peak 3: C=O ou Empreinte digitale -->
+          <circle cx="420" cy="170" r="14" fill="rgba(236, 72, 153, 0.4)" stroke="#f472b6" stroke-width="2" class="animate-pulse cursor-pointer hover:r-18 transition-all" onclick="selectIrPeak('co')"/>
+          <text x="420" y="185" text-anchor="middle" fill="#fbcfe8" font-size="10" font-weight="bold">3</text>
+
+          <!-- Axis markings -->
+          <text x="20" y="15" fill="#94a3b8" font-size="9">4000 cm⁻¹</text>
+          <text x="150" y="15" fill="#94a3b8" font-size="9">3200 cm⁻¹</text>
+          <text x="300" y="15" fill="#94a3b8" font-size="9">2800 cm⁻¹</text>
+          <text x="450" y="15" fill="#94a3b8" font-size="9">1700 cm⁻¹</text>
+          <text x="560" y="15" fill="#94a3b8" font-size="9">500 cm⁻¹</text>
+        </svg>
+      </div>
+
+      <!-- Peak Explanation Panel -->
+      <div id="ir-info-panel" class="p-4 rounded-xl bg-amber-950/60 border border-amber-500/40">
+        <div class="flex items-center gap-3 mb-2">
+          <span id="ir-badge" class="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-500 text-gray-950">Bande 1</span>
+          <h5 id="ir-title" class="text-base font-bold text-amber-300">Bande d'absorption O-H (Liaison hydrogène)</h5>
+        </div>
+        <p id="ir-desc" class="text-xs text-gray-200 leading-relaxed mb-2">
+          Bande <strong>très intense et large</strong> située entre $3200\text{ cm}^{-1}$ et $3500\text{ cm}^{-1}$. Caractéristique de la présence d'un groupe <strong>hydroxyle $-\text{OH}$ (Alcool)</strong> engagé dans des liaisons hydrogène intermoléculaires (Pinacol).
+        </p>
+        <div id="ir-formula" class="text-xs font-mono text-amber-200 bg-black/40 px-3 py-1.5 rounded-lg inline-block">
+          Groupe : $-\text{OH}$ | Zone : $3200 - 3500\text{ cm}^{-1}$
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: BILAN DE MÉCANIQUE INTERACTIF (DOC SRC006) -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="w-12 h-12 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl font-bold shadow-inner">
+      <i class="fas fa-balance-scale"></i>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">4. Application Pratique : Mouvement d'une Goutte en Référentiel Terrestre</h3>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Étude des forces ($\vec{P}$, $\vec{\Pi}$, $\vec{f}$) et 1ère Loi de Newton (Source src006)</p>
+    </div>
+  </div>
+
+  <div class="tint-teal rounded-3xl p-6 border border-teal-500/20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div class="lg:col-span-6 space-y-4">
+        <h4 class="text-xl font-bold ink">Chute d'une Goutte de Permanganate</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+          Dans le référentiel terrestre supposé galiléen, la goutte est soumise à 3 forces :
+        </p>
+
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center gap-3 p-3 bg-teal-950/20 rounded-xl border border-teal-500/20">
+            <i class="fas fa-arrow-down text-red-400 text-lg"></i>
+            <div>
+              <strong class="text-red-400">Poids $\vec{P}$ :</strong> $P = m \cdot g = \rho_{\text{sol}} \cdot V_g \cdot g$ (dirigé vers le bas).
+            </div>
+          </li>
+
+          <li class="flex items-center gap-3 p-3 bg-teal-950/20 rounded-xl border border-teal-500/20">
+            <i class="fas fa-arrow-up text-blue-400 text-lg"></i>
+            <div>
+              <strong class="text-blue-400">Poussée d'Archimède $\vec{\Pi}$ :</strong> $\Pi = \rho_{\text{eau}} \cdot V_g \cdot g = 4{,}0 \times 10^{-4}\text{ N}$ (vers le haut).
+            </div>
+          </li>
+
+          <li class="flex items-center gap-3 p-3 bg-teal-950/20 rounded-xl border border-teal-500/20">
+            <i class="fas fa-arrow-up text-emerald-400 text-lg"></i>
+            <div>
+              <strong class="text-emerald-400">Frottement fluide $\vec{f}$ :</strong> Opposé au mouvement (vers le haut).
+            </div>
+          </li>
+        </ul>
+
+        <div class="nb-box theoreme my-2">
+          <span class="nb-box-title"><i class="fas fa-check-circle mr-2"></i> Mouvement Rectiligne Uniforme (1ère Loi)</span>
+          En Mouvement Rectiligne Uniforme, $\sum \vec{F} = \vec{0}$, donc $\vec{P} + \vec{\Pi} + \vec{f} = \vec{0}$.
+        </div>
+      </div>
+
+      <!-- Interactive Force Equilibrium Calculator -->
+      <div class="lg:col-span-6 bg-gray-900 rounded-2xl p-5 border border-teal-500/30 text-white flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-bold text-teal-400 uppercase tracking-wider mb-2 block">Calculateur d'Équilibre de la Goutte</span>
+          
+          <div class="bg-gray-800 p-4 rounded-xl space-y-4 mb-4">
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span>Nombre de gouttes dans $2{,}0\text{ mL}$ :</span>
+                <span id="drop-count-val" class="text-teal-300 font-bold">50 gouttes</span>
+              </div>
+              <input id="drop-slider" type="range" min="20" max="100" step="5" value="50" class="w-full accent-teal-400 cursor-pointer" oninput="updateDropPhysics()">
+            </div>
+
+            <div class="text-xs text-gray-300 space-y-1 font-mono">
+              <div>Volume d'une goutte $V_g = \frac{2{,}0}{N} = $ <span id="vg-val" class="text-amber-300 font-bold">0.040 mL</span></div>
+              <div>Poussée Archimède $\Pi = \rho \cdot V_g \cdot g = $ <span id="pi-val" class="text-blue-300 font-bold">4.00 × 10⁻⁴ N</span></div>
+            </div>
+          </div>
+
+          <!-- Dynamic Diagram of Forces -->
+          <div class="flex justify-center items-center py-4 bg-gray-950 rounded-xl border border-gray-800 relative">
+            <svg viewBox="0 0 200 160" class="w-48 h-36">
+              <!-- Drop -->
+              <ellipse cx="100" cy="80" rx="14" ry="20" fill="#c084fc" opacity="0.8"/>
+              <!-- Poid P (down) -->
+              <line x1="100" y1="80" x2="100" y2="140" stroke="#f87171" stroke-width="3" marker-end="url(#arrow-red)"/>
+              <text x="110" y="130" fill="#f87171" font-size="11" font-weight="bold">P</text>
+              <!-- Archimede Pi (up) -->
+              <line x1="95" y1="80" x2="95" y2="35" stroke="#60a5fa" stroke-width="3"/>
+              <text x="75" y="45" fill="#60a5fa" font-size="11" font-weight="bold">Π</text>
+              <!-- Frottement f (up) -->
+              <line x1="105" y1="80" x2="105" y2="45" stroke="#34d399" stroke-width="3"/>
+              <text x="115" y="55" fill="#34d399" font-size="11" font-weight="bold">f</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="text-center text-xs text-teal-300 mt-2 font-bold">
+          À l'équilibre : $P_y = \Pi_y + f_y \implies \sum F_y = 0$
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateConductance() {
+  const u = parseFloat(document.getElementById('slider-u').value);
+  const i_ma = parseFloat(document.getElementById('slider-i').value);
+
+  document.getElementById('val-u').innerText = u.toFixed(1) + " V";
+  document.getElementById('val-i').innerText = i_ma.toFixed(1) + " mA";
+
+  const g_ms = i_ma / u;
+  const g_s = g_ms / 1000;
+  const r_ohm = 1 / g_s;
+
+  document.getElementById('res-g').innerText = g_ms.toFixed(2) + " mS";
+  document.getElementById('res-r').innerText = Math.round(r_ohm) + " Ω";
+}
+
+function updateColorSimulator() {
+  const lambda = parseInt(document.getElementById('lambda-slider').value);
+  let absText = "";
+  let absColor = "";
+  let percText = "";
+  let percColor = "";
+
+  if (lambda < 450) {
+    absText = "Violet/Bleu (" + lambda + " nm)";
+    absColor = "rgb(120, 50, 240)";
+    percText = "Jaune / Jaune-Orange";
+    percColor = "rgb(250, 200, 30)";
+  } else if (lambda < 500) {
+    absText = "Bleu-Cyan (" + lambda + " nm)";
+    absColor = "rgb(30, 160, 240)";
+    percText = "Orange / Rouge-Orange";
+    percColor = "rgb(250, 110, 30)";
+  } else if (lambda < 560) {
+    absText = "Vert / Vert-Jaune (" + lambda + " nm)";
+    absColor = "rgb(50, 200, 80)";
+    percText = "Magenta (Permanganate)";
+    percColor = "rgb(230, 40, 180)";
+  } else if (lambda < 620) {
+    absText = "Jaune / Orange (" + lambda + " nm)";
+    absColor = "rgb(240, 180, 30)";
+    percText = "Bleu Violet";
+    percColor = "rgb(80, 80, 240)";
+  } else {
+    absText = "Rouge (" + lambda + " nm)";
+    absColor = "rgb(240, 50, 50)";
+    percText = "Cyan / Vert-Bleu";
+    percColor = "rgb(30, 220, 220)";
+  }
+
+  document.getElementById('lambda-val').innerText = lambda + " nm";
+  document.getElementById('box-absorbed').style.backgroundColor = absColor;
+  document.getElementById('text-absorbed').innerText = absText;
+  document.getElementById('box-perceived').style.backgroundColor = percColor;
+  document.getElementById('text-perceived').innerText = percText;
+}
+
+function selectIrPeak(type) {
+  const panel = document.getElementById('ir-info-panel');
+  const badge = document.getElementById('ir-badge');
+  const title = document.getElementById('ir-title');
+  const desc = document.getElementById('ir-desc');
+  const formula = document.getElementById('ir-formula');
+
+  if (type === 'oh') {
+    badge.innerText = "Bande 1";
+    badge.className = "px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-500 text-gray-950";
+    title.innerText = "Bande d'absorption O-H (Liaison hydrogène)";
+    desc.innerHTML = "Bande <strong>très intense et large</strong> située entre $3200\\text{ cm}^{-1}$ et $3500\\text{ cm}^{-1}$. Caractéristique du groupe <strong>hydroxyle -OH (Alcool)</strong> engagé dans des liaisons H intermoléculaires.";
+    formula.innerText = "Groupe : -OH (Alcool) | Zone : 3200 - 3500 cm⁻¹";
+  } else if (type === 'ch') {
+    badge.innerText = "Bande 2";
+    badge.className = "px-2.5 py-0.5 rounded-full text-xs font-black bg-blue-500 text-white";
+    title.innerText = "Bande d me vibration C-H (Alcannes)";
+    desc.innerHTML = "Pics d'absorption fins et intenses vers <strong>$2900 - 3000\\text{ cm}^{-1}$</strong>, correspondant à la vibration d'élongation des liaisons $C_{sp3}-H$.";
+    formula.innerText = "Groupe : C-H (Alcane) | Zone : 2900 - 3000 cm⁻¹";
+  } else if (type === 'co') {
+    badge.innerText = "Bande 3";
+    badge.className = "px-2.5 py-0.5 rounded-full text-xs font-black bg-pink-500 text-white";
+    title.innerText = "Zone C=O / Empreinte Digitale";
+    desc.innerHTML = "Pic fin et intense vers $1700\\text{ cm}^{-1}$ lorsqu'un groupe <strong>Carbonyle C=O</strong> est présent (aldéhyde, cétone, acide carboxylique).";
+    formula.innerText = "Groupe : C=O (Carbonyle) | Zone : 1650 - 1750 cm⁻¹";
+  }
+  if (window.MathJax) MathJax.typesetPromise();
+}
+
+function updateDropPhysics() {
+  const n = parseInt(document.getElementById('drop-slider').value);
+  document.getElementById('drop-count-val').innerText = n + " gouttes";
+
+  const vg_ml = 2.0 / n;
+  const vg_m3 = vg_ml * 1e-6;
+  const rho_water = 1000; // kg/m3
+  const g = 9.81;
+
+  const pi = rho_water * vg_m3 * g;
+
+  document.getElementById('vg-val').innerText = vg_ml.toFixed(3) + " mL";
+  document.getElementById('pi-val').innerText = pi.toExponential(2) + " N";
+}
+</script>

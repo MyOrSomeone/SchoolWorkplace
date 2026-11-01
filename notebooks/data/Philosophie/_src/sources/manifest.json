@@ -48,5 +48,35 @@
     "ordre": 5,
     "processed": true,
     "added_at": "2026-10-19T17:27:09"
+  },
+  {
+    "id": "src006",
+    "type": "image",
+    "filename": "methodologie_2.jpg",
+    "comment": "",
+    "chapter": "02-chapitre-1-la-conscience",
+    "ordre": 6,
+    "processed": true,
+    "added_at": "2026-11-01T19:21:47"
+  },
+  {
+    "id": "src007",
+    "type": "image",
+    "filename": "methodologie_3.jpg",
+    "comment": "",
+    "chapter": "02-chapitre-1-la-conscience",
+    "ordre": 7,
+    "processed": true,
+    "added_at": "2026-11-01T19:21:47"
+  },
+  {
+    "id": "src008",
+    "type": "image",
+    "filename": "methodologie_1.jpg",
+    "comment": "",
+    "chapter": "02-chapitre-1-la-conscience",
+    "ordre": 8,
+    "processed": true,
+    "added_at": "2026-11-01T19:21:47"
   }
 ]

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Méthode : Explication de Texte Philosophique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Comfortaa', 'cursive'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-body, #f8fafc);
+      color: var(--text-main, #1e293b);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark body {
+      --bg-body: #0f172a;
+      --text-main: #f1f5f9;
+    }
+    h1, h2, h3, .font-display {
+      font-family: 'Comfortaa', cursive;
+    }
+    .tab-btn.active {
+      border-bottom-color: #0284c7;
+      color: #0284c7;
+      font-weight: 700;
+      background-color: rgba(2, 132, 199, 0.08);
+    }
+    .dark .tab-btn.active {
+      border-bottom-color: #38bdf8;
+      color: #38bdf8;
+      background-color: rgba(56, 189, 248, 0.12);
+    }
+    .step-card {
+      transition: all 0.25s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-2px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .dark .glass-card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(51, 65, 85, 0.8);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen text-slate-800 dark:text-slate-100">
+
+  <!-- Header principal -->
+  <header class="max-w-5xl mx-auto mb-8 text-center md:text-left">
+    <div class="glass-card rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+        <div class="flex items-center gap-5">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-sky-500/20 shrink-0">
+            <i class="fas fa-scroll"></i>
+          </div>
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 mb-1">
+              Méthodologie Bac Philosophie
+            </span>
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">L'Explication de Texte</h1>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Guide pas à pas pour réussir l'analyse, le brouillon et la rédaction.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-800/80 p-2 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <div class="text-center px-3 py-1">
+            <span class="block text-xs text-slate-500 dark:text-slate-400">Temps estimé</span>
+            <span class="font-bold text-sky-600 dark:text-sky-400 text-sm"><i class="far fa-clock mr-1"></i>4 Heures</span>
+          </div>
+          <div class="h-8 w-px bg-slate-300 dark:bg-slate-700"></div>
+          <div class="text-center px-3 py-1">
+            <span class="block text-xs text-slate-500 dark:text-slate-400">Brouillon</span>
+            <span class="font-bold text-amber-600 dark:text-amber-400 text-sm"><i class="fas fa-hourglass-half mr-1"></i>≥ 1 Heure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation par Onglets -->
+  <nav class="max-w-5xl mx-auto mb-6">
+    <div class="flex overflow-x-auto custom-scrollbar border-b border-slate-200 dark:border-slate-700 gap-1 bg-white/50 dark:bg-slate-800/50 p-1.5 rounded-2xl">
+      <button onclick="showTab('preparation')" id="btn-preparation" class="tab-btn active flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all">
+        <i class="fas fa-brain text-sky-500"></i> 1. Préparation & Brouillon
+      </button>
+      <button onclick="showTab('introduction')" id="btn-introduction" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all text-slate-600 dark:text-slate-400 hover:text-sky-500">
+        <i class="fas fa-door-open text-indigo-500"></i> 2. L'Introduction (6 moments)
+      </button>
+      <button onclick="showTab('corps')" id="btn-corps" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all text-slate-600 dark:text-slate-400 hover:text-sky-500">
+        <i class="fas fa-layer-group text-emerald-500"></i> 3. Le Corps du Devoir
+      </button>
+      <button onclick="showTab('conclusion')" id="btn-conclusion" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all text-slate-600 dark:text-slate-400 hover:text-sky-500">
+        <i class="fas fa-flag-checkered text-rose-500"></i> 4. Conclusion & Relecture
+      </button>
+      <button onclick="showTab('builder')" id="btn-builder" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20">
+        <i class="fas fa-magic"></i> Constructeur d'Intro
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENU DES ONGLETS -->
+  <main class="max-w-5xl mx-auto space-y-6">
+
+    <!-- TAB 1 : PRÉPARATION & BROUILLON -->
+    <section id="tab-preparation" class="tab-content space-y-6">
+      
+      <!-- Les pièges card -->
+      <div class="glass-card rounded-3xl p-6 shadow-md border-l-4 border-l-rose-500">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center text-lg font-bold">
+            <i class="fas fa-ban"></i>
+          </div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Ce qu'il ne faut SURTOUT PAS faire</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-rose-50 dark:bg-rose-950/30 p-4 rounded-2xl border border-rose-200 dark:border-rose-900/50">
+            <span class="font-bold text-rose-700 dark:text-rose-400 block mb-1"><i class="fas fa-times-circle mr-1.5"></i>Pas de prétexte</span>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">L'explication ne doit jamais servir de simple prétexte pour plaquer un cours ou faire une dissertation.</p>
+          </div>
+          <div class="bg-rose-50 dark:bg-rose-950/30 p-4 rounded-2xl border border-rose-200 dark:border-rose-900/50">
+            <span class="font-bold text-rose-700 dark:text-rose-400 block mb-1"><i class="fas fa-times-circle mr-1.5"></i>Pas de paraphrase</span>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">Répéter le texte avec d'autres mots sans expliquer le fonctionnement logique est éliminatoire.</p>
+          </div>
+          <div class="bg-rose-50 dark:bg-rose-950/30 p-4 rounded-2xl border border-rose-200 dark:border-rose-900/50">
+            <span class="font-bold text-rose-700 dark:text-rose-400 block mb-1"><i class="fas fa-times-circle mr-1.5"></i>Pas de mot-à-mot</span>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">Évitez le saucissonnage pointilliste : vous perdriez le caractère vivant et organique du texte.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- État d'esprit -->
+      <div class="glass-card rounded-3xl p-6 shadow-md">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <i class="fas fa-compass text-sky-500"></i> L'État d'esprit pour aborder le texte
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-2xl bg-sky-50 dark:bg-sky-900/20 border border-sky-100 dark:border-sky-800">
+            <div class="w-8 h-8 rounded-lg bg-sky-500 text-white flex items-center justify-center font-bold mb-2">1</div>
+            <h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 text-sm">Réceptivité</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300">Lire le texte pour lui-même en faisant d'abord abstraction des bribes de mémoire. Le texte seul est votre guide.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800">
+            <div class="w-8 h-8 rounded-lg bg-indigo-500 text-white flex items-center justify-center font-bold mb-2">2</div>
+            <h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 text-sm">S'étonner</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300">La position de l'auteur n'est jamais évidente. Demandez-vous toujours en quoi elle s'oppose au sens commun.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center font-bold mb-2">3</div>
+            <h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 text-sm">Confiance</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300">Le texte a du sens ! Si vous trouvez une contradiction absurde, c'est que vous l'avez mal compris. Relisez.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- La méthode des 4 lectures -->
+      <div class="glass-card rounded-3xl p-6 shadow-md">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <i class="fas fa-book-open text-amber-500"></i> La méthode des 4 lectures préparatoires
+        </h3>
+        <div class="space-y-3">
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <span class="px-3 py-1 bg-amber-500 text-white font-bold rounded-lg text-xs shrink-0">Lecture 1</span>
+            <div>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Découverte globale</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Identifier l'impression générale, le thème principal et pressentir l'idée directrice.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <span class="px-3 py-1 bg-amber-500 text-white font-bold rounded-lg text-xs shrink-0">Lecture 2</span>
+            <div>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Crayon en main (Mots-clés & Connecteurs)</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Surligner les termes importants à définir, entourer les connecteurs logiques (car, pourtant, donc), identifier le problème auquel répond le texte.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <span class="px-3 py-1 bg-amber-500 text-white font-bold rounded-lg text-xs shrink-0">Lecture 3</span>
+            <div>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Découpage des mouvements (3 moments)</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Tracer des barres de séparation entre les grandes étapes de la réflexion. Généralement 2 à 3 mouvements articulés rationnellement.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <span class="px-3 py-1 bg-amber-500 text-white font-bold rounded-lg text-xs shrink-0">Lecture 4</span>
+            <div>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Vérification de la cohérence</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Relire pour s'assurer qu'aucun détail n'a été oublié et que le fil conducteur logique tient parfaitement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2 : L'INTRODUCTION -->
+    <section id="tab-introduction" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card rounded-3xl p-6 shadow-md border-l-4 border-l-indigo-500">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2">L'Introduction : La vitrine de votre devoir</h2>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          Une bonne introduction bien organisée dispose d'emblée le correcteur en votre faveur. Elle doit être rédigée <strong>entièrement au brouillon</strong> avant de commencer à rédiger le corps. Pas de développement ni d'auteurs secondaires dans l'intro !
+        </p>
+      </div>
+
+      <!-- Les 6 éléments successifs -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fas fa-list-ol text-indigo-500"></i> Les 6 éléments obligatoires (dans l'ordre)
+        </h3>
+
+        <!-- Étape 1 -->
+        <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
+            <div class="w-full">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Le Thème ou l'objet du texte</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Ce dont traite l'auteur dans ce passage (concerne la <i>totalité</i> du texte).</p>
+              <div class="mt-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 text-xs font-mono border border-indigo-200 dark:border-indigo-900/50">
+                <i class="fas fa-quote-left mr-1 opacity-50"></i> Dans cet extrait de... [Auteur], il est traité du thème de...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 2 -->
+        <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+            <div class="w-full">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Le Problème implicite</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">La question sous-jacente ou la difficulté que le texte cherche à résoudre.</p>
+              <div class="mt-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 text-xs font-mono border border-indigo-200 dark:border-indigo-900/50">
+                <i class="fas fa-quote-left mr-1 opacity-50"></i> Le texte cherche à déterminer si [difficulté/question central]...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 3 -->
+        <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-400 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+            <div class="w-full">
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">La Position commune ou adverse</h4>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">Optionnel</span>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">L'opinion commune ou la thèse d'un adversaire contre laquelle l'auteur s'inscrit.</p>
+              <div class="mt-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 text-xs font-mono border border-indigo-200 dark:border-indigo-900/50">
+                <i class="fas fa-quote-left mr-1 opacity-50"></i> On croit souvent que... / L'opinion commune soutient généralement que...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 4 -->
+        <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
+            <div class="w-full">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">La Thèse de l'auteur</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Attention : la thèse est une <strong>AFFIRMATION</strong> (pas une question !). C'est la position défendue.</p>
+              <div class="mt-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 text-xs font-mono border border-indigo-200 dark:border-indigo-900/50">
+                <i class="fas fa-quote-left mr-1 opacity-50"></i> Pourtant, l'auteur affirme que [Thèse spécifique]...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 5 -->
+        <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">5</span>
+            <div class="w-full">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Les Enjeux du texte</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Ce que le texte "met en jeu". Pourquoi cette question importe-t-elle ? Qu'est-ce que cela entraîne ?</p>
+              <div class="mt-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 text-xs font-mono border border-indigo-200 dark:border-indigo-900/50">
+                <i class="fas fa-quote-left mr-1 opacity-50"></i> L'enjeu est de comprendre en quoi... / Pourquoi X ? Qu'est-ce que cela implique ?
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 6 -->
+        <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">6</span>
+            <div class="w-full">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Les Mouvements du texte (Plan)</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">L'argumentation découpée en moments logiques reliés par des articulations précises.</p>
+              <div class="mt-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 text-xs font-mono border border-indigo-200 dark:border-indigo-900/50">
+                <i class="fas fa-quote-left mr-1 opacity-50"></i> Dans un premier moment, l'auteur montre que... [mouvement 1], puis établit que... [mouvement 2], et enfin explique que... [mouvement 3].
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/50 text-xs text-amber-900 dark:text-amber-200 flex items-center gap-3">
+        <i class="fas fa-lightbulb text-amber-500 text-lg shrink-0"></i>
+        <span><strong>Règle d'or :</strong> Ne dévoilez pas toutes vos batteries dans l'introduction ! Ne donnez pas les réponses détaillées qui doivent figurer en conclusion.</span>
+      </div>
+
+    </section>
+
+    <!-- TAB 3 : LE CORPS DU DEVOIR -->
+    <section id="tab-corps" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card rounded-3xl p-6 shadow-md border-l-4 border-l-emerald-500">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Le Corps du Devoir : L'explication étape par étape</h2>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          Le développement suit l'ordre du texte, mouvement par mouvement. Il allie l'<strong>explication linéaire rigoureuse</strong> et les <strong>éléments de commentaire</strong> éclairants.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Colonne 1: Explication proprement dite -->
+        <div class="glass-card rounded-3xl p-6 shadow-md space-y-4">
+          <div class="flex items-center gap-3 pb-3 border-b border-slate-200 dark:border-slate-700">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg">
+              <i class="fas fa-magnifying-glass"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white text-base">1. Explication proprement dite</h3>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Le cœur de votre travail (~80%)</span>
+            </div>
+          </div>
+
+          <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Relever & Définir les termes importants :</strong> Mettre en lumière les notions explicites et faire surgir les notions sous-jacentes.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Relever les problèmes :</strong> Mettre en évidence les questions que l'auteur rencontre et résout pour faire progresser sa recherche.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Dégager les articulations logiques :</strong> Montrer comment l'auteur raisonne et passe d'une idée à une autre.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Expliciter les questions sous-jacentes :</strong> Poser la question implicite pour introduire chaque nouveau mouvement du texte.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Expliquer les exemples :</strong> Si l'auteur donne un exemple, en révéler toute la portée philosophique.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Colonne 2: Éléments de commentaire -->
+        <div class="glass-card rounded-3xl p-6 shadow-md space-y-4">
+          <div class="flex items-center gap-3 pb-3 border-b border-slate-200 dark:border-slate-700">
+            <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 dark:text-sky-400 flex items-center justify-center text-lg">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white text-base">2. Éléments de commentaire</h3>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Pour enrichir le devoir (~20%)</span>
+            </div>
+          </div>
+
+          <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <i class="fas fa-plus text-sky-500 mt-0.5 shrink-0"></i>
+              <span><strong>Souligner l'originalité :</strong> Mettre en valeur la singularité de la pensée de l'auteur.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-plus text-sky-500 mt-0.5 shrink-0"></i>
+              <span><strong>Rapprocher ou opposer :</strong> Faire de courts parallèles avec d'autres auteurs ou d'autres thèses du programme.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5 shrink-0"></i>
+              <span><strong>Attention au dosage :</strong> Les commentaires ne doivent jamais faire perdre de vue l'explication du texte !</span>
+            </li>
+          </ul>
+
+          <div class="p-3 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-900/50 text-[11px] text-sky-900 dark:text-sky-200">
+            <i class="fas fa-quote-left mr-1 opacity-70"></i> <strong>Règle de citation :</strong> Citez toujours des passages très courts entre guillemets. Ne recopiez jamais de longs paragraphes.
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 4 : CONCLUSION & RELECTURE -->
+    <section id="tab-conclusion" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card rounded-3xl p-6 shadow-md border-l-4 border-l-rose-500">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2">La Conclusion & La Relecture</h2>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          La conclusion clôt le devoir en dressant le bilan exact de la démarche de l'auteur. La relecture est indispensable pour éliminer les fautes pénalisantes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- La conclusion -->
+        <div class="glass-card rounded-3xl p-6 shadow-md space-y-4">
+          <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fas fa-flag text-rose-500"></i> Rédiger la Conclusion
+          </h3>
+
+          <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">1. Synthèse du parcours</span>
+              <p>Reprendre succinctement le propos du texte, insister sur la thèse précise, son originalité et ses enjeux.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">2. Modestie & Mesure</span>
+              <p>Éviter les ouvertures déplacées ou prétentieuses ("Depuis la nuit des temps...", "L'homme devrait..."). Ne cherchez pas à "dépasser" l'auteur.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist de relecture -->
+        <div class="glass-card rounded-3xl p-6 shadow-md space-y-4">
+          <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fas fa-clipboard-check text-emerald-500"></i> Checklist de Relecture
+          </h3>
+
+          <div class="space-y-2 text-xs">
+            <label class="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+              <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+              <span class="text-slate-700 dark:text-slate-300"><strong>Accords :</strong> Sujet/Verbe et Noms/Adjectifs.</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+              <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+              <span class="text-slate-700 dark:text-slate-300"><strong>Homophones :</strong> (a/à, et/est, ce/se, ou/où, son/sont).</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+              <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+              <span class="text-slate-700 dark:text-slate-300"><strong>Citations :</strong> Courtes et intégrées grammaticalement.</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+              <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+              <span class="text-slate-700 dark:text-slate-300"><strong>Vocabulaire :</strong> Termes philosophiques clairement définis.</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 5 : CONSTRUCTEUR D'INTRO (LUDIQUE) -->
+    <section id="tab-builder" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card rounded-3xl p-6 shadow-md border-l-4 border-l-amber-500">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Simulateur / Constructeur d'Introduction</h2>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          Remplissez les champs ci-dessous avec les éléments de votre texte pour générer automatiquement l'ossature d'une introduction parfaitement structurée !
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Formulaire -->
+        <div class="glass-card rounded-3xl p-6 shadow-md space-y-4">
+          <h3 class="font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider">Formulaire d'introduction</h3>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300">Auteur :</label>
+              <input type="text" id="inp-auteur" placeholder="ex: Kant, Descartes, Alain..." value="Kant" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs">
+            </div>
+            <div>
+              <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300">Thème général :</label>
+              <input type="text" id="inp-theme" placeholder="ex: la recherche du bonheur, la conscience..." value="la possibilité d'atteindre le bonheur par la raison" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs">
+            </div>
+            <div>
+              <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300">Problème implicite :</label>
+              <input type="text" id="inp-probleme" placeholder="ex: si le bonheur peut être un objectif méthodique..." value="si le bonheur relève d'un savoir méthodique ou d'un idéal de l'imagination" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs">
+            </div>
+            <div>
+              <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300">Opinion commune / adverse :</label>
+              <input type="text" id="inp-adverse" placeholder="ex: on croit que la raison peut tout calculer..." value="l'homme peut déterminer avec certitude ce qui le rendra heureux" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs">
+            </div>
+            <div>
+              <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300">Thèse de l'auteur :</label>
+              <input type="text" id="inp-these" placeholder="ex: le bonheur est un idéal empirique..." value="le bonheur n'est pas un idéal de la raison mais de l'imagination" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs">
+            </div>
+            <div>
+              <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300">Mouvements du texte :</label>
+              <input type="text" id="inp-mouv" placeholder="ex: 1. la critique du savoir / 2. la définition de l'imagination" value="dans un premier moment, la critique des impératifs de la prudence, puis la définition de l'imagination comme source des représentations du bonheur" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs">
+            </div>
+          </div>
+        </div>
+
+        <!-- Aperçu généré -->
+        <div class="glass-card rounded-3xl p-6 shadow-md flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                <i class="fas fa-eye text-amber-500"></i> Aperçu de l'Introduction
+              </h3>
+              <button onclick="updateBuilder()" class="px-3 py-1 bg-amber-500 text-white rounded-lg text-xs font-bold hover:bg-amber-600 transition-colors">
+                Mettre à jour
+              </button>
+            </div>
+
+            <div id="builder-output" class="p-4 rounded-2xl bg-amber-50/50 dark:bg-slate-900/80 border border-amber-200 dark:border-slate-700 text-xs leading-relaxed text-slate-800 dark:text-slate-200 font-serif space-y-2">
+              <!-- Aperçu dynamique -->
+            </div>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-end">
+            <button onclick="copyIntro()" class="px-4 py-2 bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-900 rounded-xl text-xs font-bold hover:opacity-90 transition-opacity flex items-center gap-2">
+              <i class="fas fa-copy"></i> Copier le texte
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+      document.getElementById('btn-' + tabId).classList.add('active');
+
+      if(tabId === 'builder') {
+        updateBuilder();
+      }
+    }
+
+    function updateBuilder() {
+      const auteur = document.getElementById('inp-auteur').value || '[Auteur]';
+      const theme = document.getElementById('inp-theme').value || '[Thème]';
+      const probleme = document.getElementById('inp-probleme').value || '[Problème]';
+      const adverse = document.getElementById('inp-adverse').value || '[Opinion commune]';
+      const these = document.getElementById('inp-these').value || '[Thèse]';
+      const mouv = document.getElementById('inp-mouv').value || '[Mouvements]';
+
+      const html = `
+        <p><span class="bg-indigo-100 dark:bg-indigo-900/60 text-indigo-800 dark:text-indigo-200 px-1 rounded font-semibold">1. Thème :</span> Dans cet extrait de <strong>${auteur}</strong>, il est question de <em>${theme}</em>.</p>
+        <p><span class="bg-sky-100 dark:bg-sky-900/60 text-sky-800 dark:text-sky-200 px-1 rounded font-semibold">2 & 3. Problème & Opinion :</span> Ce texte cherche plus particulièrement à déterminer <em>${probleme}</em>. En effet, on croit souvent que ${adverse}.</p>
+        <p><span class="bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200 px-1 rounded font-semibold">4 & 5. Thèse & Enjeux :</span> Pourtant, l'auteur affirme à l'inverse que <strong>${these}</strong>. L'enjeu de cette démonstration est de saisir toute la portée de cette distinction pour notre réflexion.</p>
+        <p><span class="bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 px-1 rounded font-semibold">6. Mouvements :</span> Pour étayer cette position, l'argumentation se déploie selon des étapes précises : ${mouv}.</p>
+      `;
+
+      document.getElementById('builder-output').innerHTML = html;
+    }
+
+    function copyIntro() {
+      const el = document.getElementById('builder-output');
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Introduction copiée dans le presse-papier !');
+      });
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      updateBuilder();
+    });
+  </script>
+</body>
+</html>
