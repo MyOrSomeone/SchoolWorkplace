@@ -1,0 +1,115 @@
+<section class="section-hero hero-emerald relative overflow-hidden rounded-3xl p-6 md:p-8 mb-8 shadow-lg">
+  <div class="nb-shader-bg" data-preset="cells" data-palette="emerald" data-intensity="0.4"></div>
+  <div class="relative z-10 text-white">
+    <div class="hero-eyebrow flex items-center gap-2 text-xs font-bold uppercase tracking-wider opacity-90 mb-2">
+      <i class="fas fa-flask text-emerald-300"></i> Chimie des Solutions • Chapitre 1
+    </div>
+    <h1 class="hero-head text-2xl md:text-4xl font-extrabold mb-3">II. Le pH & L'Autoprotolyse de l'Eau</h1>
+    <p class="text-sm md:text-base opacity-95 max-w-2xl leading-relaxed">
+      Comment mesurer l'acidité d'une solution et comprendre le rôle central de l'eau, constante d'équilibre ionique et échelle de pH à 25°C.
+    </p>
+  </div>
+</section>
+
+<!-- SECTION AUTOPROTOLYSE DE L'EAU -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-xl tint-emerald flex items-center justify-center font-bold text-lg">
+      <i class="fas fa-droplet ico-badge"></i>
+    </div>
+    <h2 class="text-xl font-bold ink">1. L'Autoprotolyse de l'Eau & Le Produit Ionique \(K_e\)</h2>
+  </div>
+
+  <p class="mb-4 text-sm md:text-base leading-relaxed">
+    L'eau pure n'est pas un isolant chimique inerte. En raison de son caractère <span class="def-term" data-term="amphotere">amphotère</span>, deux molécules d'eau réagissent spontanément entre elles dans un transfert de proton très limité. C'est la réaction d'<strong>autoprotolyse de l'eau</strong>.
+  </p>
+
+  <div class="nb-box formule my-6">
+    <span class="nb-box-title"><i class="fas fa-atom mr-2"></i> Équation de l'Autoprotolyse de l'Eau</span>
+    <div class="text-center py-3 text-lg font-semibold">
+      \[ 2 \, H_2O_{(l)} \;\rightleftharpoons\; H_3O^+_{(aq)} + HO^-_{(aq)} \]
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+    <div class="tint-emerald rounded-2xl p-5 border border-emerald-500/20 shadow-sm flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="ico-badge text-xl"><i class="fas fa-key"></i></span>
+          <h3 class="font-bold text-base ink">Le Produit Ionique \(K_e\)</h3>
+        </div>
+        <p class="text-xs md:text-sm leading-relaxed mb-3">
+          À toute solution aqueuse équilibrée à <strong>25 °C</strong> est associée une constante d'équilibre sans unité, appelée <strong>produit ionique de l'eau</strong> :
+        </p>
+      </div>
+      <div class="nb-box formula my-1 bg-emerald-950/10 border-emerald-500/30 text-center py-2 rounded-xl">
+        \[ K_e = \left[ H_3O^+ \right] \cdot \left[ HO^- \right] = 10^{-14} \]
+        <p class="text-xs text-muted mt-1">(Concentrations exprimées en \(\text{mol}\cdot\text{L}^{-1}\))</p>
+      </div>
+    </div>
+
+    <div class="tint-teal rounded-2xl p-5 border border-teal-500/20 shadow-sm flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="ico-badge text-xl"><i class="fas fa-calculator"></i></span>
+          <h3 class="font-bold text-base ink">Le \(pK_e\) de l'Eau</h3>
+        </div>
+        <p class="text-xs md:text-sm leading-relaxed mb-3">
+          Comme pour le pH, on utilise une échelle logarithmique pour exprimer cette constante d'équilibre :
+        </p>
+      </div>
+      <div class="nb-box formula my-1 bg-teal-950/10 border-teal-500/30 text-center py-2 rounded-xl">
+        \[ pK_e = -\log(K_e) = 14 \quad \text{(à 25 °C)} \]
+        <p class="text-xs text-muted mt-1">Relation réciproque : \(K_e = 10^{-pK_e}\)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION CALCUL DU PH -->
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-xl tint-blue flex items-center justify-center font-bold text-lg">
+      <i class="fas fa-gauge-high ico-badge"></i>
+    </div>
+    <h2 class="text-xl font-bold ink">2. Relation fondamentale entre pH et \([H_3O^+]\)</h2>
+  </div>
+
+  <div class="nb-box theoreme my-4">
+    <span class="nb-box-title"><i class="fas fa-square-root-variable mr-2"></i> Définition du pH & Logarithme Décimal</span>
+    <p class="mb-3 text-sm">
+      Le pH mesure la concentration en ions oxonium \(H_3O^+\) en solution aqueuse diluée (pour \([H_3O^+] \le 10^{-1} \text{ mol/L}\)) :
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center my-2">
+      <div class="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
+        <span class="block text-xs font-bold text-blue-400 uppercase tracking-wide mb-1">Calcul du pH</span>
+        \[ pH = -\log\left(\frac{[H_3O^+]}{C^0}\right) \]
+      </div>
+      <div class="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
+        <span class="block text-xs font-bold text-blue-400 uppercase tracking-wide mb-1">Calcul de la concentration</span>
+        \[ [H_3O^+] = C^0 \cdot 10^{-pH} \]
+      </div>
+    </div>
+    <p class="text-xs text-muted mt-2">
+      <i class="fas fa-info-circle mr-1"></i> \(C^0 = 1\text{ mol}\cdot\text{L}^{-1}\) est la concentration standard qui rend la quantité sous le logarithme adimensionnelle.
+    </p>
+  </div>
+
+  <details class="nb-details my-4">
+    <summary class="cursor-pointer font-bold flex items-center gap-2">
+      <i class="fas fa-lightbulb text-amber-400"></i>
+      <span>Astuce Mathématique : Propriété du Logarithme et dilution d'un facteur 10</span>
+    </summary>
+    <div class="nb-details-content text-sm space-y-2 mt-3 p-4 rounded-xl tint-amber">
+      <p>
+        Si l'on divise la concentration en ions oxonium par <strong>10</strong> (par exemple lors d'une dilution successive) :
+      </p>
+      <p class="font-mono bg-black/10 p-2 rounded text-xs md:text-sm">
+        \( pH' = -\log\left(\frac{[H_3O^+]/10}{C^0}\right) = -\log\left(\frac{[H_3O^+]}{C^0}\right) - \log(10^{-1}) = pH + 1 \)
+      </p>
+      <p class="text-xs">
+        <strong>Règle d'or :</strong> Diviser la concentration \([H_3O^+]\) par 10 augmente le pH exactement de <strong>+1 unité</strong> !
+      </p>
+    </div>
+  </details>
+</div>

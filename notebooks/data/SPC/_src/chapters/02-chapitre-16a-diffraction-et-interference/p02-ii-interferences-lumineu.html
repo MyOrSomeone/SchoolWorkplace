@@ -1,0 +1,81 @@
+<section class="section-hero hero-blue mb-8 rounded-3xl p-8 relative overflow-hidden text-white shadow-xl">
+  <div class="nb-shader-bg" data-preset="aurora" data-palette="blue" data-intensity="0.4"></div>
+  <div class="relative z-10">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-2xl text-blue-200">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div>
+        <span class="hero-eyebrow uppercase tracking-widest text-xs font-bold text-blue-200">II. Ondes Lumineuses Monochromatiques</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Interférences et Interfrange</h2>
+      </div>
+    </div>
+    <p class="text-blue-100 text-sm md:text-base leading-relaxed max-w-2xl">
+      Comment deux faisceaux lumineux issus d'une même source créent-ils des zones de lumière et d'obscurité sur un écran ? Explorons la superposition des ondes lumineuses à l'aide de sources secondaires cohérentes.
+    </p>
+  </div>
+</section>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div class="tint-blue p-6 rounded-3xl border border-blue-200 dark:border-blue-800/40 shadow-sm flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="ico-badge bg-blue-500 text-white"><i class="fas fa-route"></i></div>
+        <h3 class="font-bold text-lg ink">La Différence de Marche</h3>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+        On appelle <span class="def-term" data-term="difference-de-marche" data-def="Différence de chemin optique entre deux rayons lumineux issus de deux sources secondaires, notée \(\Delta L = n(S_2M - S_1M)\).">différence de marche</span> (ou différence de chemin optique, notée \(\Delta L\) ou \(\delta\)) la différence de distance parcourue par la lumière entre deux sources secondaires \(S_1\) et \(S_2\) pour atteindre un point \(M\) de l'écran :
+      </p>
+      <div class="p-4 bg-white/80 dark:bg-gray-900/40 rounded-2xl border border-blue-100 dark:border-blue-900/50 text-center font-mono text-sm text-blue-700 dark:text-blue-300 font-bold mb-4">
+        \[ \Delta L = n \cdot (S_2M - S_1M) \]
+      </div>
+      <ul class="space-y-2 text-xs text-gray-600 dark:text-gray-300">
+        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-500"></i><span>\(n\) : indice de réfraction du milieu de propagation (dans l'air, \(n \approx 1\)).</span></li>
+        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-500"></i><span>\(S_1\) et \(S_2\) : <span class="def-term" data-term="sources-secondaires" data-def="Sources d'ondes cohérentes créées à partir d'une source unique (par exemple via des fentes d'Young).">sources secondaires</span> cohérentes.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tint-violet p-6 rounded-3xl border border-violet-200 dark:border-violet-800/40 shadow-sm flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="ico-badge bg-violet-500 text-white"><i class="fas fa-project-diagram"></i></div>
+        <h3 class="font-bold text-lg ink">Nature des Interférences en \(M\)</h3>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+        Selon la valeur de la différence de marche \(\Delta L\) comparée à la longueur d'onde \(\lambda_0\) dans le vide, les ondes se renforcent ou s'annulent :
+      </p>
+      <div class="space-y-3">
+        <div class="p-3 bg-white/80 dark:bg-gray-900/40 rounded-xl border border-violet-100 dark:border-violet-900/50">
+          <div class="font-bold text-xs text-violet-700 dark:text-violet-300 uppercase tracking-wider mb-1"><i class="fas fa-sun text-amber-500 mr-1"></i> Franges Brillantes</div>
+          <p class="text-xs text-gray-600 dark:text-gray-300 font-mono">\[ \Delta L = k \cdot \lambda_0 \quad (\text{avec } k \in \mathbb{Z}) \] Interférences <strong class="text-violet-600 dark:text-violet-400">constructives</strong>.</p>
+        </div>
+        <div class="p-3 bg-white/80 dark:bg-gray-900/40 rounded-xl border border-violet-100 dark:border-violet-900/50">
+          <div class="font-bold text-xs text-violet-700 dark:text-violet-300 uppercase tracking-wider mb-1"><i class="fas fa-moon text-indigo-500 mr-1"></i> Franges Sombres</div>
+          <p class="text-xs text-gray-600 dark:text-gray-300 font-mono">\[ \Delta L = \left(k + \frac{1}{2}\right) \lambda_0 \quad (\text{avec } k \in \mathbb{Z}) \] Interférences <strong class="text-violet-600 dark:text-violet-400">destructives</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nb-box theoreme mb-8">
+  <span class="nb-box-title"><i class="fas fa-ruler-combined mr-2"></i> L'Interfrange \(i\)</span>
+  <p class="text-sm leading-relaxed mb-3">
+    La distance qui sépare les centres de deux franges consécutives de même nature (deux franges brillantes ou deux franges sombres) est appelée l'<strong>interfrange</strong>, notée \(i\). Elle s'exprime par la relation fondamentale :
+  </p>
+  <div class="text-center font-mono font-bold text-lg text-blue-700 dark:text-blue-300 my-4 p-3 bg-blue-50/50 dark:bg-blue-950/30 rounded-2xl border border-blue-200/50">
+    \[ i = \frac{\lambda_0 \cdot D}{b} \]
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-gray-600 dark:text-gray-300">
+    <div class="p-3 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+      <strong class="text-blue-600 dark:text-blue-400 block mb-1">\(\lambda_0\)</strong> Longueur d'onde dans le vide (\(\text{m}\)).
+    </div>
+    <div class="p-3 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+      <strong class="text-blue-600 dark:text-blue-400 block mb-1">\(D\)</strong> Distance séparant les fentes de l'écran (\(\text{m}\)).
+    </div>
+    <div class="p-3 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+      <strong class="text-blue-600 dark:text-blue-400 block mb-1">\(b\) (ou \(a\))</strong> Distance entre les deux fentes d'Young (\(\text{m}\)).
+    </div>
+  </div>
+</div>

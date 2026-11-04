@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T19:26:03",
+  "generated_at": "2026-11-04T15:40:35",
   "matieres": [
     {
       "matiere": "Anglais",
@@ -124,6 +124,48 @@
           "parent": "",
           "depth": 0,
           "n_parts": 3
+        }
+      ]
+    },
+    {
+      "matiere": "SPC",
+      "widgets": [],
+      "chapters": [
+        {
+          "slug": "01-chapitre-1",
+          "title": "Chapitre 1",
+          "group": "",
+          "status": "in_progress",
+          "parent": "",
+          "depth": 0,
+          "n_parts": 3
+        },
+        {
+          "slug": "02-chapitre-16a-diffraction-et-interference",
+          "title": "Chapitre 16A – Diffraction et interférences",
+          "group": "",
+          "status": "in_progress",
+          "parent": "",
+          "depth": 0,
+          "n_parts": 4
+        },
+        {
+          "slug": "03-chapitre-2-methodes-physiques-d-analyse",
+          "title": "Chapitre 2 – Méthodes physiques d'analyse",
+          "group": "",
+          "status": "in_progress",
+          "parent": "02-chapitre-16a-diffraction-et-interference",
+          "depth": 1,
+          "n_parts": 0
+        },
+        {
+          "slug": "04-chapitre-2-methodes-physiques-d-analyse",
+          "title": "Chapitre 2 – Méthodes physiques d'analyse",
+          "group": "",
+          "status": "in_progress",
+          "parent": "02-chapitre-16a-diffraction-et-interference",
+          "depth": 1,
+          "n_parts": 0
         }
       ]
     }

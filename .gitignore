@@ -35,3 +35,8 @@ notebooks/*
 
 
 !.nojekyll
+
+# sauvegardes automatiques et fichiers locaux de l'IA
+notebooks/data/**/_history/
+notebooks/_backup/
+notebooks/data/_quota.json

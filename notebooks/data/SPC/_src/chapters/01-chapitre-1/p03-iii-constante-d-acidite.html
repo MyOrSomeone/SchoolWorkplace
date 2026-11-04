@@ -1,0 +1,135 @@
+<div class="part" id="p03-iii-constante-d-acidite-et-force">
+  <section class="section-hero hero-emerald mb-8 relative overflow-hidden rounded-3xl p-6 sm:p-8">
+    <div class="nb-shader-bg" data-preset="aurora" data-palette="emerald" data-intensity="0.45"></div>
+    <div class="relative z-10">
+      <div class="hero-eyebrow flex items-center gap-2 mb-2 text-emerald-700 dark:text-emerald-300 font-bold uppercase tracking-wider text-xs">
+        <i class="fas fa-flask text-sm"></i> Équilibres en Solution Aqueuse
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
+        III. Constante d'Acidité \(K_A\) & Force des Acides et Bases
+      </h2>
+      <p class="text-slate-700 dark:text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl">
+        Comment quantifier la tendance d'un acide faible à céder un proton dans l'eau ? Découvrons la constante d'équilibre \(K_A\), l'échelle de \(pK_A\) et la comparaison des forces acido-basiques.
+      </p>
+    </div>
+  </section>
+
+  <!-- Bloc d'introduction théorique -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div class="tint-emerald rounded-2xl p-5 border border-emerald-500/20 shadow-sm flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="ico-badge bg-emerald-500 text-white rounded-xl w-10 h-10 flex items-center justify-center font-bold text-lg shadow-sm">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <h3 class="font-bold text-lg ink">Réaction Partielle & Équilibre Chimie</h3>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+          Contrairement à un acide fort qui réagit totalement, un <strong>acide faible</strong> \(\text{HA}\) réagit de façon <strong>partielle</strong> avec l'eau. Toutes les espèces sont simultanément présentes à l'équilibre chimique :
+        </p>
+        <div class="bg-white/80 dark:bg-slate-900/80 rounded-xl p-3 text-center border border-emerald-500/30 font-mono text-sm sm:text-base font-semibold ink my-2">
+          \[ \text{HA}_{(aq)} + \text{H}_2\text{O}_{(l)} \;\rightleftharpoons\; \text{A}^-_{(aq)} + \text{H}_3\text{O}^+_{(aq)} \]
+        </div>
+      </div>
+    </div>
+
+    <div class="tint-teal rounded-2xl p-5 border border-teal-500/20 shadow-sm flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="ico-badge bg-teal-500 text-white rounded-xl w-10 h-10 flex items-center justify-center font-bold text-lg shadow-sm">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <h3 class="font-bold text-lg ink">La Constante d'Acidité \(K_A\)</h3>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+          À tout <span class="def-term" data-term="couple-acide-base">couple acide/base</span> est associée une grandeur thermodynamique sans unité appelée <strong>constante d'acidité \(K_A\)</strong> (dépend uniquement de la température) :
+        </p>
+        <div class="bg-white/80 dark:bg-slate-900/80 rounded-xl p-3 text-center border border-teal-500/30 font-mono text-sm sm:text-base font-semibold ink my-2">
+          \[ K_A = \frac{[\text{A}^-]_{\text{éq}} \cdot [\text{H}_3\text{O}^+]_{\text{éq}}}{[\text{HA}]_{\text{éq}} \cdot C^0} \]
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 text-center">
+          Avec \(C^0 = 1\text{ mol}\cdot\text{L}^{-1}\) la concentration standard.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formule du pKa -->
+  <div class="nb-box formule mb-8">
+    <span class="nb-box-title"><i class="fas fa-subscript"></i> Échelle logarithmique : Le \(pK_A\)</span>
+    <p class="mb-3 text-sm leading-relaxed">
+      Les valeurs de \(K_A\) s'étalant sur de nombreux ordres de grandeur, on utilise l'échelle logarithmique décimale \(pK_A\) :
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center font-semibold text-lg py-2">
+      <div class="p-3 bg-amber-500/10 rounded-xl border border-amber-500/30 ink">
+        \[ pK_A = -\log(K_A) \]
+      </div>
+      <div class="p-3 bg-amber-500/10 rounded-xl border border-amber-500/30 ink">
+        \[ K_A = 10^{-pK_A} \]
+      </div>
+    </div>
+  </div>
+
+  <!-- Règles de comparaison de force -->
+  <div class="tint-amber rounded-2xl p-6 border border-amber-500/20 mb-8 shadow-sm">
+    <h3 class="text-xl font-bold mb-4 ink flex items-center gap-2">
+      <i class="fas fa-fire-alt text-amber-500"></i> Règle d'or : Force des Acides et des Bases
+    </h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div class="bg-white/80 dark:bg-slate-900/80 p-4 rounded-xl border border-amber-500/30 text-center">
+        <div class="text-xs uppercase font-bold text-amber-600 dark:text-amber-400 mb-1">Domaine d'eau (25 °C)</div>
+        <div class="text-lg font-extrabold ink">\(0 < pK_A < 14\)</div>
+        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Acides et bases faibles dans l'eau</div>
+      </div>
+      <div class="bg-white/80 dark:bg-slate-900/80 p-4 rounded-xl border border-amber-500/30 text-center">
+        <div class="text-xs uppercase font-bold text-red-600 dark:text-red-400 mb-1">Acide plus fort</div>
+        <div class="text-lg font-extrabold ink">\(pK_A \searrow \;\implies\; K_A \nearrow\)</div>
+        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Cède plus facilement son proton</div>
+      </div>
+      <div class="bg-white/80 dark:bg-slate-900/80 p-4 rounded-xl border border-amber-500/30 text-center">
+        <div class="text-xs uppercase font-bold text-blue-600 dark:text-blue-400 mb-1">Base plus forte</div>
+        <div class="text-lg font-extrabold ink">\(pK_A \nearrow \;\implies\; K_A \searrow\)</div>
+        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Capte plus facilement un proton</div>
+      </div>
+    </div>
+
+    <!-- Schéma statique illustrant l'échelle des pKa des couples usuels -->
+    <div class="bg-white/90 dark:bg-slate-900/90 rounded-2xl p-5 border border-amber-500/30 shadow-inner mt-4">
+      <h4 class="font-bold text-center mb-4 ink text-sm sm:text-base">
+        <i class="fas fa-sort-numeric-down"></i> Échelle comparative des couples acido-basiques usuels
+      </h4>
+      <div class="space-y-2 max-w-xl mx-auto text-xs sm:text-sm font-mono">
+        <div class="flex items-center justify-between p-2 rounded-lg bg-rose-500/10 border border-rose-500/20">
+          <span class="font-bold text-red-600 dark:text-red-400">\(\text{H}_3\text{O}^+ / \text{H}_2\text{O}\)</span>
+          <span class="px-2 py-0.5 rounded bg-rose-500 text-white font-bold">\(pK_A = 0,00\)</span>
+          <span class="text-slate-500 dark:text-slate-400">Acide le plus fort dans l'eau</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+          <span class="font-bold text-amber-700 dark:text-amber-300">\(\text{HF} / \text{F}^-\)</span>
+          <span class="px-2 py-0.5 rounded bg-amber-500 text-white font-bold">\(pK_A = 3,20\)</span>
+          <span class="text-slate-500 dark:text-slate-400">Acide fluorhydrique</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+          <span class="font-bold text-emerald-700 dark:text-emerald-300">\(\text{CH}_3\text{COOH} / \text{CH}_3\text{COO}^-\)</span>
+          <span class="px-2 py-0.5 rounded bg-emerald-500 text-white font-bold">\(pK_A = 4,76\)</span>
+          <span class="text-slate-500 dark:text-slate-400">Acide éthanoïque / Vinaigre</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-sky-500/10 border border-sky-500/20">
+          <span class="font-bold text-sky-700 dark:text-sky-300">\(\text{NH}_4^+ / \text{NH}_3\)</span>
+          <span class="px-2 py-0.5 rounded bg-sky-500 text-white font-bold">\(pK_A = 9,24\)</span>
+          <span class="text-slate-500 dark:text-slate-400">Ion ammonium / Ammoniac</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+          <span class="font-bold text-blue-600 dark:text-blue-400">\(\text{H}_2\text{O} / \text{HO}^-\)</span>
+          <span class="px-2 py-0.5 rounded bg-blue-500 text-white font-bold">\(pK_A = 14,00\)</span>
+          <span class="text-slate-500 dark:text-slate-400">Base la plus forte dans l'eau</span>
+        </div>
+      </div>
+      <div class="flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400 mt-4 px-2">
+        <span class="text-red-600 dark:text-red-400"><i class="fas fa-arrow-up"></i> Force de l'acide augmente</span>
+        <span class="text-blue-600 dark:text-blue-400">Force de la base augmente <i class="fas fa-arrow-down"></i></span>
+      </div>
+    </div>
+  </div>
+</div>

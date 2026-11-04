@@ -1,0 +1,139 @@
+<section class="section-hero hero-blue mb-8 relative overflow-hidden rounded-3xl p-6 md:p-8">
+  <div class="nb-shader-bg" data-preset="waves" data-palette="blue" data-intensity="0.4"></div>
+  <div class="relative z-10">
+    <div class="hero-head flex items-center gap-3 mb-2">
+      <div class="ico-badge text-blue-600 bg-blue-100 dark:bg-blue-900/40 text-2xl p-3 rounded-2xl">
+        <i class="fas fa-wave-square"></i>
+      </div>
+      <span class="hero-eyebrow font-semibold tracking-wide uppercase text-xs opacity-90">Thème 4 : Ondes et signaux</span>
+    </div>
+    <h1 class="text-2xl md:text-4xl font-bold mb-3 ink">I. Rappels sur les Ondes Progressives & Périodiques</h1>
+    <p class="text-sm md:text-base opacity-90 max-w-2xl leading-relaxed">
+      Fondements de la propagation d'une perturbation, périodicité temporelle et spatiale, et paramètres fondamentaux d'une onde.
+    </p>
+  </div>
+</section>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <!-- Onde progressive -->
+  <div class="tint-blue rounded-2xl p-6 border border-blue-200 dark:border-blue-800/30 shadow-sm flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="ico-badge text-blue-600 bg-blue-100 dark:bg-blue-900/40 w-10 h-10 rounded-xl flex items-center justify-center font-bold">
+          <i class="fas fa-arrows-alt-h"></i>
+        </div>
+        <h3 class="text-lg font-bold ink">Onde Progressive</h3>
+      </div>
+      <p class="text-sm leading-relaxed mb-4">
+        C'est le phénomène de <strong>propagation d'une perturbation</strong> de proche en proche dans un milieu, avec 
+        <span class="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 px-2 py-0.5 rounded font-semibold">transport d'énergie</span> 
+        mais <strong>SANS transport de matière</strong>.
+      </p>
+    </div>
+    <div class="nb-box info p-3 text-xs flex items-center gap-2">
+      <i class="fas fa-info-circle text-blue-500"></i>
+      <span>Exemple : une goutte d'eau tombant à la surface d'un fluide crée une onde circulaire.</span>
+    </div>
+  </div>
+
+  <!-- Onde périodique sinusoïdale -->
+  <div class="tint-emerald rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/30 shadow-sm flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="ico-badge text-emerald-600 bg-emerald-100 dark:bg-emerald-900/40 w-10 h-10 rounded-xl flex items-center justify-center font-bold">
+          <i class="fas fa-infinity"></i>
+        </div>
+        <h3 class="text-lg font-bold ink">Périodicité Sinusoïdale</h3>
+      </div>
+      <p class="text-sm leading-relaxed mb-4">
+        L'onde est dite <strong>périodique sinusoïdale</strong> lorsque la perturbation est produite de manière régulière et répétitive par la source émettrice.
+      </p>
+    </div>
+    <div class="flex items-center gap-2 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 p-2.5 rounded-xl">
+      <i class="fas fa-sync-alt"></i>
+      <span>Répétition identique à des intervalles de temps égaux.</span>
+    </div>
+  </div>
+</div>
+
+<!-- Propriétés fondamentales -->
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2 ink">
+  <i class="fas fa-sliders-h text-blue-500"></i>
+  Propriétés & Caractéristiques Majeures
+</h3>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+  <!-- Période & Fréquence -->
+  <div class="tint-amber rounded-2xl p-5 border border-amber-200 dark:border-amber-800/30">
+    <div class="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-bold mb-2">
+      <i class="fas fa-stopwatch text-lg"></i>
+      <h4>Période \(T\) & Fréquence \(f\)</h4>
+    </div>
+    <ul class="text-xs space-y-2 mb-3">
+      <li><strong>Période \(T\) :</strong> durée d'un motif élémentaire (en secondes \(\text{s}\)).</li>
+      <li><strong>Fréquence \(f\) :</strong> nombre de motifs par seconde (en Hertz \(\text{Hz}\)).</li>
+    </ul>
+    <div class="nb-box formule text-center py-2 text-sm font-bold">
+      \(f = \frac{1}{T}\)
+    </div>
+    <p class="text-xs mt-3 text-amber-700 dark:text-amber-300 font-medium">
+      <i class="fas fa-exclamation-circle mr-1"></i> La fréquence \(f\) est <strong>indépendante</strong> du milieu de propagation !
+    </p>
+  </div>
+
+  <!-- Longueur d'onde -->
+  <div class="tint-violet rounded-2xl p-5 border border-violet-200 dark:border-violet-800/30">
+    <div class="flex items-center gap-2 text-violet-600 dark:text-violet-400 font-bold mb-2">
+      <i class="fas fa-ruler-horizontal text-lg"></i>
+      <h4>Longueur d'onde \(\lambda\)</h4>
+    </div>
+    <p class="text-xs mb-3 leading-relaxed">
+      <strong>Période spatiale :</strong> distance parcourue par l'onde pendant une période temporelle \(T\) (en mètres \(\text{m}\)).
+    </p>
+    <div class="bg-violet-50 dark:bg-violet-900/30 p-3 rounded-xl text-center text-xs font-bold text-violet-800 dark:text-violet-200 mb-2">
+      Distance entre 2 points consécutifs dans le même état d'vibration
+    </div>
+  </div>
+
+  <!-- Célérité -->
+  <div class="tint-sky rounded-2xl p-5 border border-sky-200 dark:border-sky-800/30">
+    <div class="flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold mb-2">
+      <i class="fas fa-tachometer-alt text-lg"></i>
+      <h4>Célérité \(v\)</h4>
+    </div>
+    <p class="text-xs mb-2 leading-relaxed">
+      Vitesse de propagation de l'onde (en \(\text{m}\cdot\text{s}^{-1}\)).
+    </p>
+    <div class="nb-box formule text-center py-2 text-sm font-bold mb-2">
+      \(v = \frac{\lambda}{T} = \lambda \cdot f\)
+    </div>
+    <p class="text-xs text-sky-700 dark:text-sky-300 font-medium">
+      <i class="fas fa-check-circle mr-1"></i> La célérité <strong>dépend</strong> du milieu de propagation.
+    </p>
+  </div>
+</div>
+
+<!-- Repères d'ordres de grandeur -->
+<div class="nb-box exemple p-5 rounded-2xl mb-6">
+  <span class="nb-box-title"><i class="fas fa-bullseye"></i> Ordres de grandeur des Célérités à connaître</span>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
+    <div class="flex items-center gap-3 bg-white/50 dark:bg-black/20 p-3 rounded-xl border border-gray-200 dark:border-gray-700">
+      <div class="ico-badge text-amber-500 bg-amber-100 dark:bg-amber-900/40 p-2.5 rounded-lg text-lg">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div>
+        <div class="text-xs text-gray-500 dark:text-gray-400">Onde Sonore (dans l'air)</div>
+        <div class="text-base font-extrabold text-amber-600 dark:text-amber-400">\(v_{\text{son}} \approx 340 \text{ m}\cdot\text{s}^{-1}\)</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 bg-white/50 dark:bg-black/20 p-3 rounded-xl border border-gray-200 dark:border-gray-700">
+      <div class="ico-badge text-yellow-500 bg-yellow-100 dark:bg-yellow-900/40 p-2.5 rounded-lg text-lg">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <div>
+        <div class="text-xs text-gray-500 dark:text-gray-400">Onde Électromagnétique (dans le vide)</div>
+        <div class="text-base font-extrabold text-yellow-600 dark:text-yellow-400">\(c = 3{,}00 \times 10^8 \text{ m}\cdot\text{s}^{-1}\)</div>
+      </div>
+    </div>
+  </div>
+</div>

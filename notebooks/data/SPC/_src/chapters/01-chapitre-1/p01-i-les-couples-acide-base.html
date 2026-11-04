@@ -1,0 +1,110 @@
+<section class="section-hero hero-blue">
+  <div class="nb-shader-bg" data-preset="aurora" data-palette="blue" data-intensity="0.4"></div>
+  <div class="hero-head">
+    <div class="hero-eyebrow"><i class="fas fa-atom mr-2"></i> SPC Terminale — Thème 1 : Constitution & Transformations</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">I. Les Couples Acide / Base (Théorie de Brönsted)</h1>
+    <p class="subtitle text-blue-100 mt-2 text-base sm:text-lg">Comprendre les échanges de protons $H^+$, les espèces conjuguées et le rôle amphotère de l'eau.</p>
+  </div>
+</section>
+
+<!-- CARTES CONCEPTUELLES : ACIDE / BASE -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <!-- CARTE ACIDE -->
+  <div class="tint-rose p-6 rounded-2xl border border-rose-200 dark:border-rose-900/50 shadow-sm hover:shadow-md transition-all">
+    <div class="flex items-center gap-4 mb-4">
+      <div class="ico-badge w-14 h-14 text-2xl flex items-center justify-center rounded-2xl bg-rose-500 text-white shadow-lg shadow-rose-500/30">
+        <i class="fas fa-minus-circle"></i>
+      </div>
+      <div>
+        <span class="badge-tag badge-rose font-bold text-xs uppercase tracking-wider">Donneur de proton</span>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">L'Acide (AH)</h3>
+      </div>
+    </div>
+    <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
+      Espèce chimique capable de <strong class="text-rose-600 dark:text-rose-400">céder au moins un proton $H^+$</strong> lors d'une réaction chimique.
+    </p>
+    <div class="mt-4 p-3 bg-white/80 dark:bg-gray-800/80 rounded-xl border border-rose-100 dark:border-rose-900/30 text-sm font-mono text-center text-rose-700 dark:text-rose-300 font-semibold">
+      $\text{Acide} \longrightarrow \text{Base conjuguée} + H^+$
+    </div>
+  </div>
+
+  <!-- CARTE BASE -->
+  <div class="tint-emerald p-6 rounded-2xl border border-emerald-200 dark:border-emerald-900/50 shadow-sm hover:shadow-md transition-all">
+    <div class="flex items-center gap-4 mb-4">
+      <div class="ico-badge w-14 h-14 text-2xl flex items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-500/30">
+        <i class="fas fa-plus-circle"></i>
+      </div>
+      <div>
+        <span class="badge-tag badge-emerald font-bold text-xs uppercase tracking-wider">Accepteur de proton</span>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">La Base ($A^-$)</h3>
+      </div>
+    </div>
+    <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
+      Espèce chimique capable de <strong class="text-emerald-600 dark:text-emerald-400">capter au moins un proton $H^+$</strong>.
+    </p>
+    <div class="mt-4 p-3 bg-white/80 dark:bg-gray-800/80 rounded-xl border border-emerald-100 dark:border-emerald-900/30 text-sm font-mono text-center text-emerald-700 dark:text-emerald-300 font-semibold">
+      $\text{Base} + H^+ \longrightarrow \text{Acide conjugué}$
+    </div>
+  </div>
+</div>
+
+<!-- BOX EQUATION GENERALISEE -->
+<div class="nb-box formule my-8">
+  <span class="nb-box-title"><i class="fas fa-exchange-alt mr-2"></i> Demi-équation acido-basique & Couple Acide/Base</span>
+  <p class="mb-3">
+    Un <span class="def-term" data-term="couple-acide-base" data-def="Ensemble constitué d'un acide et de sa base conjuguée, reliés par la perte ou le gain d'un proton H+.">couple acide/base</span> est noté $\text{Acide}/\text{Base}$ (ex : $\text{AH}/\text{A}^-$). Ils sont reliés par le schéma d'échange :
+  </p>
+  <div class="text-center text-xl font-bold my-4 p-4 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200">
+    $$\text{Acide} \rightleftharpoons \text{Base} + H^+$$
+  </div>
+  <p class="text-sm text-gray-600 dark:text-gray-400">
+    <i class="fas fa-info-circle text-amber-500 mr-1"></i> Remarque : Le proton $H^+$ n'existe jamais à l'état libre dans l'eau ; il est toujours immédiatement capté par une autre espèce chimique (souvent l'eau elle-même).
+  </p>
+</div>
+
+<!-- LE CAS DE L'EAU ET L'AMPHOTERIE -->
+<div class="tint-violet p-6 sm:p-8 rounded-3xl border border-violet-200 dark:border-violet-900/50 my-8">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="ico-badge w-12 h-12 text-xl flex items-center justify-center rounded-xl bg-violet-600 text-white">
+      <i class="fas fa-tint"></i>
+    </div>
+    <div>
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white">Le cas remarquable de l'Eau ($H_2O$)</h3>
+      <p class="text-xs text-violet-600 dark:text-violet-300 font-semibold uppercase tracking-wider">Une espèce amphotère (ou ampholyte)</p>
+    </div>
+  </div>
+
+  <p class="text-gray-700 dark:text-gray-200 leading-relaxed mb-6">
+    L'eau peut se comporter **soit comme un acide, soit comme une base** selon l'espèce avec laquelle elle réagit. Une telle espèce est dite <span class="def-term" data-term="amphotere" data-def="Espèce chimique pouvant se comporter à la fois comme un acide et comme une base selon le milieu.">amphotère</span> (ou un ampholyte).
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- EAU BASE -->
+    <div class="bg-white/90 dark:bg-gray-800/90 p-5 rounded-2xl border border-violet-100 dark:border-violet-900/30">
+      <div class="flex items-center gap-2 text-violet-700 dark:text-violet-300 font-bold mb-2">
+        <i class="fas fa-shield-alt"></i> 1. L'eau agit comme BASE
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Elle capte un proton $H^+$ pour devenir l'ion oxonium $H_3O^+$ :</p>
+      <div class="font-mono text-center text-sm font-bold p-2 bg-violet-50 dark:bg-violet-950/50 rounded-lg text-violet-800 dark:text-violet-200">
+        $H_3O^+_{(aq)} / H_2O_{(l)}$
+      </div>
+      <div class="text-xs text-center text-gray-500 dark:text-gray-400 mt-2">
+        Demi-équation : $H_3O^+_{(aq)} \rightleftharpoons H_2O_{(l)} + H^+$
+      </div>
+    </div>
+
+    <!-- EAU ACIDE -->
+    <div class="bg-white/90 dark:bg-gray-800/90 p-5 rounded-2xl border border-violet-100 dark:border-violet-900/30">
+      <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold mb-2">
+        <i class="fas fa-flask"></i> 2. L'eau agit comme ACIDE
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Elle cède un proton $H^+$ pour devenir l'ion hydroxyde $HO^-$ :</p>
+      <div class="font-mono text-center text-sm font-bold p-2 bg-blue-50 dark:bg-blue-950/50 rounded-lg text-blue-800 dark:text-blue-200">
+        $H_2O_{(l)} / HO^-_{(aq)}$
+      </div>
+      <div class="text-xs text-center text-gray-500 dark:text-gray-400 mt-2">
+        Demi-équation : $H_2O_{(l)} \rightleftharpoons HO^-_{(aq)} + H^+$
+      </div>
+    </div>
+  </div>
+</div>

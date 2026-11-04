@@ -1,0 +1,117 @@
+<section class="section-hero hero-emerald rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden">
+  <div class="nb-shader-bg" data-preset="cells" data-palette="emerald" data-intensity="0.4"></div>
+  <div class="relative z-10">
+    <div class="hero-eyebrow flex items-center gap-2 text-emerald-300 font-semibold text-sm uppercase tracking-wider mb-2">
+      <i class="fas fa-bolt"></i> Méthodes Physiques d'Analyse
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">II. Conductimétrie & Loi de Kohlrausch</h2>
+    <p class="text-emerald-100 text-sm sm:text-base leading-relaxed max-w-2xl">
+      Mesure de la capacité d'une solution ionique à conduire le courant électrique pour déterminer la concentration d'espèces chimiques en solution.
+    </p>
+  </div>
+</section>
+
+<!-- Définition & Principe -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div class="tint-emerald p-6 rounded-2xl flex flex-col justify-between">
+    <div>
+      <div class="ico-badge mb-4"><i class="fas fa-charging-station text-xl"></i></div>
+      <h3 class="text-lg font-bold ink mb-2">La Conductivité \(\sigma\)</h3>
+      <p class="text-sm leading-relaxed mb-4">
+        La <span class="def-term" data-term="conductivite" data-def="Grandeur physique mesurant la capacité d'une solution à conduire le courant électrique, exprimée en S/m.">conductivité</span> \(\sigma\) d'une solution traduit la facilité avec laquelle les ions s'y déplacent. Elle dépend de la nature des ions, de leur concentration et de la température.
+      </p>
+    </div>
+    <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl text-xs font-semibold text-emerald-800 dark:text-emerald-200">
+      <i class="fas fa-ruler-combined mr-1"></i> Unité SI : Siemens par mètre (\(\text{S}\cdot\text{m}^{-1}\))
+    </div>
+  </div>
+
+  <div class="tint-teal p-6 rounded-2xl flex flex-col justify-between">
+    <div>
+      <div class="ico-badge mb-4"><i class="fas fa-atom text-xl"></i></div>
+      <h3 class="text-lg font-bold ink mb-2">Conductivité Ionique Molaire \(\lambda_i\)</h3>
+      <p class="text-sm leading-relaxed mb-4">
+        Chaque ion \(X_i\) possède une propre capacité à conduire le courant, appelée <span class="def-term" data-term="conductivite-ionique-molaire" data-def="Conductivité propre à un ion donné en solution extrêmement diluée, exprimée en S·m²·mol⁻¹">conductivité ionique molaire</span> \(\lambda_i\).
+      </p>
+    </div>
+    <div class="bg-teal-500/10 border border-teal-500/20 p-3 rounded-xl text-xs font-semibold text-teal-800 dark:text-teal-200">
+      <i class="fas fa-microscope mr-1"></i> Unité SI : \(\text{S}\cdot\text{m}^2\cdot\text{mol}^{-1}\)
+    </div>
+  </div>
+</div>
+
+<!-- Formule majeure -->
+<div class="nb-box formule mb-8">
+  <div class="nb-box-title flex items-center gap-2">
+    <i class="fas fa-square-root-variable text-emerald-600 dark:text-emerald-400"></i>
+    <span>Loi de Kohlrausch</span>
+  </div>
+  <p class="text-sm mb-3">
+    Pour une solution aqueuse diluée contenant des ions \(X_i\), la conductivité totale \(\sigma\) est égale à la somme des contributions de chaque ion :
+  </p>
+  <div class="text-center text-xl sm:text-2xl font-bold py-3 my-2 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-900 dark:text-emerald-100 font-mono">
+    \[ \sigma = \sum_{i=1}^{n} \lambda_i \cdot [X_i] = \lambda_1 [X_1] + \lambda_2 [X_2] + \dots \]
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 text-xs">
+    <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+      <strong class="block text-emerald-700 dark:text-emerald-300 font-bold">\(\sigma\)</strong> Conductivité en \(\text{S}\cdot\text{m}^{-1}\)
+    </div>
+    <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+      <strong class="block text-emerald-700 dark:text-emerald-300 font-bold">\(\lambda_i\)</strong> Conductivité molaire ionique en \(\text{S}\cdot\text{m}^2\cdot\text{mol}^{-1}\)
+    </div>
+    <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+      <strong class="block text-emerald-700 dark:text-emerald-300 font-bold">\([X_i]\)</strong> Concentration de l'ion en <span class="underline decoration-red-500 font-extrabold text-red-600 dark:text-red-400">\(\text{mol}\cdot\text{m}^{-3}\)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Piège d'Unité & Conditions -->
+<div class="nb-box attention mb-8">
+  <div class="nb-box-title flex items-center gap-2 text-rose-600 dark:text-rose-400">
+    <i class="fas fa-exclamation-triangle"></i>
+    <span>PIÈGE CLASSIQUE DU BAC : Conversion d'Unités & Domaine de Validité</span>
+  </div>
+  <div class="space-y-3 text-sm">
+    <div class="flex items-start gap-3">
+      <div class="w-7 h-7 rounded-full bg-rose-500/20 text-rose-600 dark:text-rose-300 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5"><i class="fas fa-exchange-alt"></i></div>
+      <div>
+        <strong class="text-rose-900 dark:text-rose-200">Attention à la concentration \([X_i]\) !</strong>
+        <p class="text-xs text-rose-800 dark:text-rose-300 mt-0.5">
+          Dans la formule SI de Kohlrausch, la concentration doit impérativement être exprimée en \(\mathbf{\text{mol}\cdot\text{m}^{-3}}\).<br>
+          Rappel indispensable : \(1\text{ mol/L} = 10^3\text{ mol}\cdot\text{m}^{-3}\) (ou \(C(\text{mol}\cdot\text{m}^{-3}) = C(\text{mol/L}) \times 1000\)).
+        </p>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 pt-2 border-t border-rose-200 dark:border-rose-900/50">
+      <div class="w-7 h-7 rounded-full bg-rose-500/20 text-rose-600 dark:text-rose-300 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5"><i class="fas fa-filter"></i></div>
+      <div>
+        <strong class="text-rose-900 dark:text-rose-200">Limite de concentration (\(C < 10\text{ mmol/L}\)) :</strong>
+        <p class="text-xs text-rose-800 dark:text-rose-300 mt-0.5">
+          La loi de Kohlrausch n'est exacte que pour les solutions <strong>très diluées</strong> (\(C < 10\text{ mmol}\cdot\text{L}^{-1}\) ou \(C < 10^{-2}\text{ mol}\cdot\text{L}^{-1}\)). Au-delà, les interactions électrostatiques entre ions déforment la proportionnalité.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exemple guidé d'application -->
+<details class="nb-details mb-8">
+  <summary class="font-bold text-emerald-800 dark:text-emerald-200 flex items-center gap-2">
+    <i class="fas fa-flask text-emerald-500"></i> Exemple d'application : Solution de Sulfate de Sodium \(\text{Na}_2\text{SO}_4\)
+  </summary>
+  <div class="nb-details-content space-y-3 text-sm">
+    <p>Soit une solution aqueuse de sulfate de sodium \(\text{Na}_2\text{SO}_{4(aq)}\) de concentration apportée \(C\).</p>
+    <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 font-mono text-xs">
+      \(\text{Na}_2\text{SO}_{4(s)} \xrightarrow{\text{eau}} 2\,\text{Na}^+_{(aq)} + \text{SO}_{4(aq)}^{2-}\)
+    </div>
+    <p>On en déduit les concentrations ioniques :</p>
+    <ul class="list-disc list-inside space-y-1 text-xs pl-2">
+      <li>\([\text{Na}^+] = 2C\)</li>
+      <li>\([\text{SO}_4^{2-}] = C\)</li>
+    </ul>
+    <p>Expression de la conductivité selon la loi de Kohlrausch :</p>
+    <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 font-mono text-xs text-center font-bold">
+      \(\sigma = \lambda_{\text{Na}^+} \cdot [\text{Na}^+] + \lambda_{\text{SO}_4^{2-}} \cdot [\text{SO}_4^{2-}] = (2\lambda_{\text{Na}^+} + \lambda_{\text{SO}_4^{2-}}) \cdot C\)
+    </div>
+  </div>
+</details>

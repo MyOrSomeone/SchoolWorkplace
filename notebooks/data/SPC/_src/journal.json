@@ -1,0 +1,28 @@
+{
+  "notes": [
+    {
+      "id": "nc15550",
+      "text": "La source src010 présente un exercice/cours de mécanique (chute de goutte, 1ère loi de Newton, poussée d'Archimède, frottement) qui ne traite pas du chapitre Diffraction et Interférences. Seule la source src009 (page 4/4) concerne les interférences lumineuses.",
+      "by": "ia",
+      "chapter": "02-chapitre-16a-diffraction-et-interference",
+      "at": "2026-11-04T15:30:39"
+    },
+    {
+      "id": "n6c5334",
+      "text": "Sources src013 et src014 traitent bien du Chapitre 2 (Méthodes physiques d'analyse : conductimétrie, loi de Kohlrausch, gaz parfaits, spectroscopie UV-visible et loi de Beer-Lambert) et doivent être intégrées dans le nouveau chapitre 2 du cours.",
+      "by": "ia",
+      "chapter": "02-chapitre-16a-diffraction-et-interference",
+      "at": "2026-11-04T15:34:49"
+    }
+  ],
+  "todo": [
+    {
+      "id": "td73a20",
+      "text": "Les sources src011 et src012 traitent du Chapitre 2 - Méthodes physiques d'analyse (dosage par étalonnage conductimétrique, spectroscopie UV-visible, infrarouge), ce qui est complètement hors-sujet par rapport au Chapitre 16A en cours sur la diffraction et les interférences. Je dois ignorer ces sources hors-sujet et ne pas les insérer dans le cours sur les ondes.",
+      "by": "ia",
+      "chapter": "02-chapitre-16a-diffraction-et-interference",
+      "done": true,
+      "at": "2026-11-04T15:31:49"
+    }
+  ]
+}
