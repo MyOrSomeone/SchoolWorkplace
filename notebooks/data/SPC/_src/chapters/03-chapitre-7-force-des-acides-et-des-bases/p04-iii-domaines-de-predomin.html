@@ -1,0 +1,73 @@
+<section class="section-hero hero-emerald">
+  <div class="nb-shader-bg" data-preset="waves" data-palette="emerald" data-intensity="0.4"></div>
+  <div class="hero-head"><div class="icon-hero"><i class="fas fa-chart-area"></i></div>
+    <div style="flex:1 1 260px;min-width:0"><span class="hero-eyebrow">III — Qui domine ?</span><h2>Domaines de prédominance</h2></div></div>
+  <p class="subtitle">Selon le pH de la solution, c’est l’acide ou sa base conjuguée qui prédomine.</p>
+</section>
+<p style="line-height:1.7;margin:.8rem 0">Le pH d’une solution contenant un acide faible AH et sa base conjuguée A<sup>−</sup> est lié au pK<sub>A</sub> du couple AH/A<sup>−</sup> par la relation :</p>
+<div style="max-width:100%;overflow-x:auto;text-align:center;padding:.85rem 1rem;margin:1rem 0;border:1px solid var(--nb-border);border-left:4px solid var(--nb-gold);border-radius:.75rem;background:var(--nb-gold-soft)">\[ \text{pH} = pK_A + \log\left(\frac{[\text{A}^-]}{[\text{AH}]}\right) \]</div>
+<div class="nb-box attention"><span class="nb-box-title"><i class="fas fa-triangle-exclamation" style="margin-right:.5rem"></i>Domaine de validité</span>
+<p style="line-height:1.7;margin:.8rem 0">\(\text{pH} = -\log[\text{H}_3\text{O}^+]\) n’est valable que pour des concentrations \(10^{-6} < [\text{H}_3\text{O}^+] \le 5\cdot 10^{-2}\) mol·L<sup>−1</sup>.</p>
+
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;align-items:start;margin:1.2rem 0">
+<div class="tint-rose" style="margin:0;min-width:0"><div class="ico-badge"><i class="fas fa-arrow-left"></i></div><h4 class="ink" style="margin:.1rem 0 .5rem;font-size:1.05rem">pH &lt; pK<sub>A</sub></h4><div style="font-size:.95rem;line-height:1.6"><p style="line-height:1.7;margin:.8rem 0">[AH] &gt; [A<sup>−</sup>] : la forme <b>acide AH prédomine</b>.</p>
+</div></div>
+<div class="tint-amber" style="margin:0;min-width:0"><div class="ico-badge"><i class="fas fa-equals"></i></div><h4 class="ink" style="margin:.1rem 0 .5rem;font-size:1.05rem">pH = pK<sub>A</sub></h4><div style="font-size:.95rem;line-height:1.6"><p style="line-height:1.7;margin:.8rem 0">[AH] = [A<sup>−</sup>] : 50 % de chaque forme.</p>
+</div></div>
+<div class="tint-blue" style="margin:0;min-width:0"><div class="ico-badge"><i class="fas fa-arrow-right"></i></div><h4 class="ink" style="margin:.1rem 0 .5rem;font-size:1.05rem">pH &gt; pK<sub>A</sub></h4><div style="font-size:.95rem;line-height:1.6"><p style="line-height:1.7;margin:.8rem 0">[A<sup>−</sup>] &gt; [AH] : la forme <b>basique A<sup>−</sup> prédomine</b>.</p>
+</div></div>
+</div>
+<div class="nbx nb-interactive" id="nbx-dist"><div class="nbx-head"><i class="fas fa-chart-area"></i><span>Diagramme de distribution : qui domine selon le pH ?</span><span class="nbx-tag">Interactif</span></div><p class="nbx-sub">Fais varier le pH et le pKA : la proportion de AH et de A⁻ suit pH = pKA + log([A⁻]/[AH]). Choisis un indicateur coloré pour voir la couleur changer.</p>
+<div class="nbx-row"><div class="nbx-ctl" style="flex:2 1 220px"><label><span>Couple acide / base</span></label><select id="g_cp"></select></div>
+ <div class="nbx-ctl"><label><span>pK<sub>A</sub> du couple</span><b id="g_pk_v"></b></label><input type="range" id="g_pk" min="1" max="13" step="0.05" value="4.76"></div>
+ <div class="nbx-ctl"><label><span>pH de la solution</span><b id="g_ph_v"></b></label><input type="range" id="g_ph" min="0" max="14" step="0.05" value="4.76"></div></div>
+<canvas id="g_c"></canvas>
+<div class="nbx-grid"><div><canvas id="g_p" style="margin-top:.6rem"></canvas></div><div><div class="nbx-read" id="g_r" style="flex-direction:column;align-items:flex-start"></div>
+ <div class="nbx-row"><span class="nbx-note" style="margin:0">Couleur de la solution (indicateur coloré)</span><div id="g_sw" style="width:46px;height:46px;border-radius:50%;border:2px solid var(--nbx-bd)"></div></div></div></div>
+</div>
+<script>(function(){var root=document.getElementById("nbx-dist");if(!root||root.dataset.on)return;root.dataset.on="1";
+var _id='nbx-css-v1';if(!document.getElementById(_id)){var _s=document.createElement('style');_s.id=_id;_s.textContent="\n.nbx{--nbx-bg:var(--nb-bg-card,#fff);--nbx-bd:var(--nb-border,#d3c9b8);--nbx-tx:var(--nb-text,#222);--nbx-mu:var(--nb-text-muted,#777);--nbx-gold:var(--nb-gold-ink,#6f5118);\n --nbx-a:var(--nb-accent-blue,#2563eb);--nbx-b:var(--nb-accent-emerald,#059669);--nbx-c:var(--nb-accent-purple,#7c3aed);--nbx-d:var(--nb-accent-amber,#d97706);\n margin:1.5rem 0;padding:1rem 1.1rem 1.1rem;border:1px solid var(--nbx-bd);border-radius:18px;background:var(--nbx-bg);color:var(--nbx-tx);\n box-shadow:0 6px 22px -14px rgba(0,0,0,.45);font-size:14px;line-height:1.45;position:relative;overflow:hidden}\n.nbx *{box-sizing:border-box}\n.nbx-head{display:flex;align-items:center;gap:.6rem;font-weight:800;color:var(--nbx-gold);font-size:.95rem;margin-bottom:.25rem}\n.nbx-head .nbx-tag{margin-left:auto;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--nbx-gold);border-radius:99px;padding:.1rem .55rem;opacity:.85}\n.nbx-sub{color:var(--nbx-mu);font-size:.8rem;margin:0 0 .7rem}\n.nbx-row{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin:.5rem 0}\n.nbx-ctl{display:flex;flex-direction:column;gap:.15rem;min-width:150px;flex:1 1 170px}\n.nbx-ctl label{font-size:.72rem;font-weight:700;color:var(--nbx-mu);display:flex;justify-content:space-between;gap:.5rem}\n.nbx-ctl label b{color:var(--nbx-tx);font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700}\n.nbx input[type=range]{width:100%;accent-color:var(--nbx-gold);cursor:pointer}\n.nbx select,.nbx input[type=number],.nbx input[type=text]{background:transparent;color:var(--nbx-tx);border:1px solid var(--nbx-bd);border-radius:10px;padding:.3rem .5rem;font:inherit;max-width:100%}\n.nbx select option{color:#222}\n.nbx button{cursor:pointer;border:1px solid var(--nbx-gold);color:var(--nbx-gold);background:transparent;border-radius:99px;padding:.3rem .8rem;font:inherit;font-weight:700;font-size:.78rem;transition:background .15s,transform .1s}\n.nbx button:hover{background:rgba(197,160,89,.16)} .nbx button:active{transform:scale(.96)}\n.nbx button.on{background:var(--nbx-gold);color:var(--nbx-bg)}\n.nbx canvas,.nbx svg.nbx-svg{display:block;max-width:100%;border-radius:12px;background:rgba(127,127,127,.07);touch-action:none}\n.nbx-grid>*{min-width:0}.nbx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;align-items:start}\n.nbx-box{border:1px dashed var(--nbx-bd);border-radius:12px;padding:.55rem .8rem}\n.nbx-read{display:flex;flex-wrap:wrap;gap:.4rem .6rem;margin:.5rem 0}\n.nbx-chip{border:1px solid var(--nbx-bd);border-radius:10px;padding:.2rem .6rem;font-size:.78rem;background:rgba(127,127,127,.06)}\n.nbx-chip b{font-family:ui-monospace,Menlo,Consolas,monospace}\n.nbx-ok{color:var(--nbx-b);font-weight:800}.nbx-no{color:#dc2626;font-weight:800}\n.nbx-note{font-size:.76rem;color:var(--nbx-mu);margin:.4rem 0 0}\n.nbx-verdict{font-weight:800;padding:.35rem .7rem;border-radius:10px;display:inline-block;border:1px solid var(--nbx-bd)}\n.nbx sub,.nbx sup{line-height:0}\n.nbx .nbx-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:.2rem 0 .6rem}\n@media (max-width:520px){.nbx{padding:.8rem}.nbx-ctl{min-width:130px}}\n";document.head.appendChild(_s)}
+
+var Q=function(s,r){return (r||root).querySelector(s)},QA=function(s,r){return Array.prototype.slice.call((r||root).querySelectorAll(s))};
+var V=function(n,d){var v=getComputedStyle(root).getPropertyValue(n).trim();return v||d};
+var COL=function(){return {tx:V('--nb-text','#222'),mu:V('--nb-text-muted','#777'),card:V('--nb-bg-card','#fff'),bd:V('--nb-border','#ccc'),gold:V('--nb-gold-ink','#6f5118'),
+ blue:V('--nb-accent-blue','#2563eb'),em:V('--nb-accent-emerald','#059669'),pu:V('--nb-accent-purple','#7c3aed'),am:V('--nb-accent-amber','#d97706'),
+ dark:document.documentElement.classList.contains('dark')}};
+function setup(cv,h){var d=Math.min(window.devicePixelRatio||1,2),w=Math.max(260,Math.round(cv.parentElement.clientWidth||cv.clientWidth||600));
+ cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';cv.style.width=w+'px';var g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return {g:g,w:w,h:h}}
+var vis=true;if('IntersectionObserver' in window){new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(root)}
+function loop(fn){var last=null;(function f(t){if(vis){var dt=last==null?0:Math.min(.05,(t-last)/1000);last=t;fn(dt,t/1000)}else last=null;requestAnimationFrame(f)})(0)}
+var redrawers=[];function onRedraw(f){redrawers.push(f)}
+function redrawAll(){redrawers.forEach(function(f){try{f()}catch(e){console.error(e)}})}
+new MutationObserver(redrawAll).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+if(window.ResizeObserver){var _ro=new ResizeObserver(function(){clearTimeout(_ro._t);_ro._t=setTimeout(redrawAll,80)});_ro.observe(root)}
+function fmt(x,n){n=n==null?3:n;if(x===0)return '0';var a=Math.abs(x);if(a>=1e4||a<1e-2){var e=Math.floor(Math.log10(a)),m=x/Math.pow(10,e);return m.toFixed(n-1).replace('.',',')+'×10<sup>'+e+'</sup>'}return (+x.toPrecision(n)).toString().replace('.',',')}
+function fmtT(x,n){return fmt(x,n).replace(/<sup>(-?\d+)<\/sup>/,function(_,e){return '^'+e}).replace(/<[^>]+>/g,'')}
+function lamRGB(nm){var r=0,g=0,b=0;if(nm>=380&&nm<440){r=-(nm-440)/60;b=1}else if(nm<490){g=(nm-440)/50;b=1}else if(nm<510){g=1;b=-(nm-510)/20}else if(nm<580){r=(nm-510)/70;g=1}else if(nm<645){r=1;g=-(nm-645)/65}else if(nm<=780){r=1}
+ var f=nm<420?.3+.7*(nm-380)/40:nm>700?.3+.7*(780-nm)/80:1;return [Math.round(255*Math.pow(r*f,.8)),Math.round(255*Math.pow(g*f,.8)),Math.round(255*Math.pow(b*f,.8))]}
+
+
+var IND=[{n:'Acide éthanoïque / éthanoate (incolore)',pk:4.76,ca:null,cb:null},{n:'Ion ammonium / ammoniac',pk:9.24,ca:null,cb:null},{n:'Acide fluorhydrique / fluorure',pk:3.2,ca:null,cb:null},
+ {n:'Hélianthine (indicateur : rouge → jaune)',pk:3.7,ca:[225,29,72],cb:[250,204,21]},{n:'Bleu de bromothymol (jaune → bleu)',pk:7.1,ca:[250,204,21],cb:[37,99,235]},{n:'Phénolphtaléine (incolore → rose)',pk:9.4,ca:[235,235,235],cb:[219,39,119]}];
+var pk=4.76,ph=4.76,c=Q('#g_c'),p=Q('#g_p'),P=[];for(var i=0;i<60;i++)P.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1});
+Q('#g_cp').innerHTML=IND.map(function(x,i){return '<option value="'+i+'">'+x.n+' — pKA '+x.pk+'</option>'}).join('');
+function fa(){return 1/(1+Math.pow(10,ph-pk))}
+function draw(){var S=setup(c,300),g=S.g,w=S.w,h=S.h,C=COL(),L=44,R=w-14,T=34,B=h-40,X=function(v){return L+(R-L)*v/14},Yp=function(f){return B-(B-T)*f};g.clearRect(0,0,w,h);g.font='12px system-ui';g.textBaseline='middle';
+ g.fillStyle='rgba(220,38,38,.10)';g.fillRect(L,T-18,X(pk)-L,B-T+18);g.fillStyle='rgba(37,99,235,.10)';g.fillRect(X(pk),T-18,R-X(pk),B-T+18);
+ g.fillStyle=C.am;g.textAlign='center';g.font='bold 12px system-ui';g.fillText('AH prédomine ([AH] > [A⁻])',(L+X(pk))/2,T-8);g.fillStyle=C.blue;g.fillText('A⁻ prédomine ([A⁻] > [AH])',(X(pk)+R)/2,T-8);
+ g.strokeStyle=C.bd;g.lineWidth=1;g.font='11px system-ui';g.fillStyle=C.mu;for(var v=0;v<=14;v+=2){g.beginPath();g.moveTo(X(v),B);g.lineTo(X(v),B+5);g.stroke();g.fillText(v,X(v),B+16)}g.fillText('pH',R-6,B+30);
+ g.textAlign='right';[0,50,100].forEach(function(q){g.fillText(q+' %',L-6,Yp(q/100));g.beginPath();g.moveTo(L,Yp(q/100));g.lineTo(R,Yp(q/100));g.strokeStyle='rgba(127,127,127,.22)';g.stroke()});
+ [['AH',C.am,function(v){return 1/(1+Math.pow(10,v-pk))}],['A⁻',C.blue,function(v){return 1-1/(1+Math.pow(10,v-pk))}]].forEach(function(s){g.strokeStyle=s[1];g.lineWidth=3;g.beginPath();for(var q=0;q<=280;q++){var v=14*q/280,Xp=X(v),Y=Yp(s[2](v));if(q==0)g.moveTo(Xp,Y);else g.lineTo(Xp,Y)}g.stroke()});
+ g.setLineDash([4,4]);g.strokeStyle=C.gold;g.lineWidth=1.5;g.beginPath();g.moveTo(X(pk),T-18);g.lineTo(X(pk),B);g.stroke();g.setLineDash([]);g.fillStyle=C.gold;g.textAlign='center';g.font='bold 12px system-ui';g.fillText('pH = pKA',X(pk),B+30);g.beginPath();g.arc(X(pk),Yp(.5),5,0,7);g.fill();
+ var xp=X(ph),f=fa();g.strokeStyle=C.tx;g.lineWidth=2;g.beginPath();g.moveTo(xp,T-18);g.lineTo(xp,B);g.stroke();g.fillStyle=C.am;g.beginPath();g.arc(xp,Yp(f),6,0,7);g.fill();g.fillStyle=C.blue;g.beginPath();g.arc(xp,Yp(1-f),6,0,7);g.fill()}
+function drawP(dt){var S=setup(p,150),g=S.g,w=S.w,h=S.h,C=COL(),f=fa(),n=Math.round(f*P.length);g.clearRect(0,0,w,h);P.forEach(function(q,i){q.x+=q.vx*dt*3;q.y+=q.vy*dt*3;if(q.x<.03||q.x>.97)q.vx*=-1;if(q.y<.05||q.y>.95)q.vy*=-1;q.vx+=(Math.random()-.5)*.02;q.vy+=(Math.random()-.5)*.02;q.vx=Math.max(-.12,Math.min(.12,q.vx));q.vy=Math.max(-.12,Math.min(.12,q.vy));
+  var acid=i<n;g.fillStyle=acid?C.am:C.blue;g.beginPath();g.arc(8+q.x*(w-16),8+q.y*(h-16),7,0,7);g.fill();if(acid){g.fillStyle=C.card;g.font='bold 8px system-ui';g.textAlign='center';g.fillText('H',8+q.x*(w-16),11+q.y*(h-16))}})}
+function upd(){var f=fa(),ratio=Math.pow(10,ph-pk),x=IND[+Q('#g_cp').value],col=null;Q('#g_pk_v').textContent=pk.toFixed(2).replace('.',',');Q('#g_ph_v').textContent=ph.toFixed(2).replace('.',',');
+ var dom=Math.abs(ph-pk)<.05?'[AH] = [A⁻] (pH = pKA)':ph<pk?'AH prédomine':'A⁻ prédomine';
+ Q('#g_r').innerHTML='<span class="nbx-chip">[A⁻]/[AH] = 10<sup>pH − pK<sub>A</sub></sup> = <b>'+fmt(ratio,3)+'</b></span><span class="nbx-chip">AH : <b>'+(f*100).toFixed(1).replace('.',',')+' %</b> · A⁻ : <b>'+((1-f)*100).toFixed(1).replace('.',',')+' %</b></span><span class="nbx-chip">pH = pK<sub>A</sub> + log([A⁻]/[AH]) = <b>'+ph.toFixed(2).replace('.',',')+'</b></span><span class="nbx-verdict">'+dom+(Math.abs(ph-pk)>=1?' (≥ 10 fois)':'')+'</span>';
+ if(x.ca){col=[0,1,2].map(function(i){return Math.round(x.ca[i]*f+x.cb[i]*(1-f))});Q('#g_sw').style.background='rgb('+col+')'}else Q('#g_sw').style.background='repeating-linear-gradient(45deg,rgba(127,127,127,.15),rgba(127,127,127,.15) 6px,transparent 6px,transparent 12px)';draw()}
+Q('#g_cp').addEventListener('change',function(){pk=IND[+this.value].pk;Q('#g_pk').value=pk;upd()});Q('#g_pk').addEventListener('input',function(){pk=+this.value;upd()});Q('#g_ph').addEventListener('input',function(){ph=+this.value;upd()});
+onRedraw(draw);upd();loop(function(dt){drawP(dt)});
+
+})();</script>

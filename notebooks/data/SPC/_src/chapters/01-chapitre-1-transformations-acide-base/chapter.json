@@ -1,0 +1,35 @@
+{
+  "slug": "01-chapitre-1-transformations-acide-base",
+  "title": "Chapitre 1 — Transformations acide-base",
+  "group": "Thème 1 — Constitution et transformations de la matière",
+  "parent": "",
+  "status": "in_progress",
+  "summary": "Couples acide/base, réaction acido-basique, eau amphotère, pH, sécurité.",
+  "parts": [
+    {
+      "id": "p01-presentation-du-chapitre",
+      "title": "Présentation du chapitre 1",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p02-i-couples-acide-base-the",
+      "title": "I. Couples acide/base (théorie de Brönsted)",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p03-ii-le-ph",
+      "title": "II. Le pH",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p04-le-film-du-chapitre-1",
+      "title": "Le film du chapitre 1",
+      "level": 1,
+      "summary": ""
+    }
+  ],
+  "created_at": "2026-11-06T23:04:41"
+}

@@ -1,0 +1,71 @@
+<section class="section-hero hero-emerald">
+  <div class="nb-shader-bg" data-preset="cells" data-palette="emerald" data-intensity="0.4"></div>
+  <div class="hero-head"><div class="icon-hero"><i class="fas fa-ruler"></i></div>
+    <div style="flex:1 1 260px;min-width:0"><span class="hero-eyebrow">II — Comparer les couples</span><h2>Constante d’acidité d’un couple acido-basique</h2></div></div>
+  <p class="subtitle">K<sub>A</sub> et pK<sub>A</sub> : une échelle pour classer les acides et les bases.</p>
+</section>
+<p style="line-height:1.7;margin:.8rem 0">Les acides faibles réagissent <b>partiellement</b> avec l’eau. À la fin de la réaction, toutes les espèces de l’équation sont présentes : on parle de <b>réaction en équilibre chimique</b>. À tout couple acide faible/base faible est associée une grandeur sans unité, la <span class="def-term" data-term="constante-d’acidité" data-def="Constante d’équilibre K_A de la réaction de l’acide avec l’eau ; elle ne dépend que de la température.">constante d’acidité</span> K<sub>A</sub>, qui ne dépend que de la <b>température</b>.</p>
+<p style="line-height:1.7;margin:.8rem 0">Quand le système est à l’équilibre :</p>
+<div style="max-width:100%;overflow-x:auto;text-align:center;padding:.85rem 1rem;margin:1rem 0;border:1px solid var(--nb-border);border-left:4px solid var(--nb-gold);border-radius:.75rem;background:var(--nb-gold-soft)">\[ \text{HA} + \text{H}_2\text{O} \rightleftharpoons \text{A}^- + \text{H}_3\text{O}^+ \qquad K_A = \frac{[\text{A}^-]_{eq}\,[\text{H}_3\text{O}^+]_{eq}}{[\text{HA}]_{eq}\,C^\circ} \]</div>
+<p style="line-height:1.7;margin:.8rem 0">Les valeurs de K<sub>A</sub> ont des ordres de grandeur très différents : on utilise une <b>échelle logarithmique</b> pour les comparer.</p>
+<div style="max-width:100%;overflow-x:auto;text-align:center;padding:.85rem 1rem;margin:1rem 0;border:1px solid var(--nb-border);border-left:4px solid var(--nb-gold);border-radius:.75rem;background:var(--nb-gold-soft)">\[ pK_A = -\log K_A \qquad\text{ou}\qquad K_A = 10^{-pK_A} \]</div>
+<div class="nb-box exemple"><span class="nb-box-title"><i class="fas fa-lightbulb" style="margin-right:.5rem"></i>Remarques</span>
+<ul style="margin:.8rem 0;padding-left:1.4rem;line-height:1.65"><li style="margin:.25rem 0"><b>0 &lt; pK<sub>A</sub> &lt; 14</b> à 25 °C pour les couples d’acides faibles dans l’eau.</li><li style="margin:.25rem 0">Plus l’acide est <b>fort</b>, plus pK<sub>A</sub> tend vers <b>0</b> et plus K<sub>A</sub> tend vers <b>1</b>.</li></ul>
+
+</div>
+<div class="nbx nb-interactive" id="nbx-pk"><div class="nbx-head"><i class="fas fa-ranking-star"></i><span>L’échelle des pKA : qui réagit avec qui ?</span><span class="nbx-tag">Interactif</span></div><p class="nbx-sub">Choisis un acide et une base : l’échelle te dit si la réaction est favorisée et quelle est sa constante.</p>
+<div class="nbx-row"><div class="nbx-ctl"><label><span>Acide (couple 1)</span></label><select id="k_a"></select></div>
+ <div class="nbx-ctl"><label><span>Base (couple 2)</span></label><select id="k_b"></select></div></div>
+<canvas id="k_c"></canvas>
+<div class="nbx-read" id="k_r"></div><p class="nbx-note" id="k_n"></p>
+<div class="nbx-box"><b>Convertisseur K<sub>A</sub> ↔ pK<sub>A</sub></b><div class="nbx-row"><div class="nbx-ctl" style="flex:2 1 220px"><label><span>pK<sub>A</sub></span><b id="k_pk_v"></b></label><input type="range" id="k_pk" min="0" max="14" step="0.01" value="4.76"></div><span class="nbx-chip">K<sub>A</sub> = 10<sup>−pK<sub>A</sub></sup> = <b id="k_ka"></b></span></div></div>
+</div>
+<script>(function(){var root=document.getElementById("nbx-pk");if(!root||root.dataset.on)return;root.dataset.on="1";
+var _id='nbx-css-v1';if(!document.getElementById(_id)){var _s=document.createElement('style');_s.id=_id;_s.textContent="\n.nbx{--nbx-bg:var(--nb-bg-card,#fff);--nbx-bd:var(--nb-border,#d3c9b8);--nbx-tx:var(--nb-text,#222);--nbx-mu:var(--nb-text-muted,#777);--nbx-gold:var(--nb-gold-ink,#6f5118);\n --nbx-a:var(--nb-accent-blue,#2563eb);--nbx-b:var(--nb-accent-emerald,#059669);--nbx-c:var(--nb-accent-purple,#7c3aed);--nbx-d:var(--nb-accent-amber,#d97706);\n margin:1.5rem 0;padding:1rem 1.1rem 1.1rem;border:1px solid var(--nbx-bd);border-radius:18px;background:var(--nbx-bg);color:var(--nbx-tx);\n box-shadow:0 6px 22px -14px rgba(0,0,0,.45);font-size:14px;line-height:1.45;position:relative;overflow:hidden}\n.nbx *{box-sizing:border-box}\n.nbx-head{display:flex;align-items:center;gap:.6rem;font-weight:800;color:var(--nbx-gold);font-size:.95rem;margin-bottom:.25rem}\n.nbx-head .nbx-tag{margin-left:auto;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--nbx-gold);border-radius:99px;padding:.1rem .55rem;opacity:.85}\n.nbx-sub{color:var(--nbx-mu);font-size:.8rem;margin:0 0 .7rem}\n.nbx-row{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin:.5rem 0}\n.nbx-ctl{display:flex;flex-direction:column;gap:.15rem;min-width:150px;flex:1 1 170px}\n.nbx-ctl label{font-size:.72rem;font-weight:700;color:var(--nbx-mu);display:flex;justify-content:space-between;gap:.5rem}\n.nbx-ctl label b{color:var(--nbx-tx);font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700}\n.nbx input[type=range]{width:100%;accent-color:var(--nbx-gold);cursor:pointer}\n.nbx select,.nbx input[type=number],.nbx input[type=text]{background:transparent;color:var(--nbx-tx);border:1px solid var(--nbx-bd);border-radius:10px;padding:.3rem .5rem;font:inherit;max-width:100%}\n.nbx select option{color:#222}\n.nbx button{cursor:pointer;border:1px solid var(--nbx-gold);color:var(--nbx-gold);background:transparent;border-radius:99px;padding:.3rem .8rem;font:inherit;font-weight:700;font-size:.78rem;transition:background .15s,transform .1s}\n.nbx button:hover{background:rgba(197,160,89,.16)} .nbx button:active{transform:scale(.96)}\n.nbx button.on{background:var(--nbx-gold);color:var(--nbx-bg)}\n.nbx canvas,.nbx svg.nbx-svg{display:block;max-width:100%;border-radius:12px;background:rgba(127,127,127,.07);touch-action:none}\n.nbx-grid>*{min-width:0}.nbx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;align-items:start}\n.nbx-box{border:1px dashed var(--nbx-bd);border-radius:12px;padding:.55rem .8rem}\n.nbx-read{display:flex;flex-wrap:wrap;gap:.4rem .6rem;margin:.5rem 0}\n.nbx-chip{border:1px solid var(--nbx-bd);border-radius:10px;padding:.2rem .6rem;font-size:.78rem;background:rgba(127,127,127,.06)}\n.nbx-chip b{font-family:ui-monospace,Menlo,Consolas,monospace}\n.nbx-ok{color:var(--nbx-b);font-weight:800}.nbx-no{color:#dc2626;font-weight:800}\n.nbx-note{font-size:.76rem;color:var(--nbx-mu);margin:.4rem 0 0}\n.nbx-verdict{font-weight:800;padding:.35rem .7rem;border-radius:10px;display:inline-block;border:1px solid var(--nbx-bd)}\n.nbx sub,.nbx sup{line-height:0}\n.nbx .nbx-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:.2rem 0 .6rem}\n@media (max-width:520px){.nbx{padding:.8rem}.nbx-ctl{min-width:130px}}\n";document.head.appendChild(_s)}
+
+var Q=function(s,r){return (r||root).querySelector(s)},QA=function(s,r){return Array.prototype.slice.call((r||root).querySelectorAll(s))};
+var V=function(n,d){var v=getComputedStyle(root).getPropertyValue(n).trim();return v||d};
+var COL=function(){return {tx:V('--nb-text','#222'),mu:V('--nb-text-muted','#777'),card:V('--nb-bg-card','#fff'),bd:V('--nb-border','#ccc'),gold:V('--nb-gold-ink','#6f5118'),
+ blue:V('--nb-accent-blue','#2563eb'),em:V('--nb-accent-emerald','#059669'),pu:V('--nb-accent-purple','#7c3aed'),am:V('--nb-accent-amber','#d97706'),
+ dark:document.documentElement.classList.contains('dark')}};
+function setup(cv,h){var d=Math.min(window.devicePixelRatio||1,2),w=Math.max(260,Math.round(cv.parentElement.clientWidth||cv.clientWidth||600));
+ cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';cv.style.width=w+'px';var g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return {g:g,w:w,h:h}}
+var vis=true;if('IntersectionObserver' in window){new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(root)}
+function loop(fn){var last=null;(function f(t){if(vis){var dt=last==null?0:Math.min(.05,(t-last)/1000);last=t;fn(dt,t/1000)}else last=null;requestAnimationFrame(f)})(0)}
+var redrawers=[];function onRedraw(f){redrawers.push(f)}
+function redrawAll(){redrawers.forEach(function(f){try{f()}catch(e){console.error(e)}})}
+new MutationObserver(redrawAll).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+if(window.ResizeObserver){var _ro=new ResizeObserver(function(){clearTimeout(_ro._t);_ro._t=setTimeout(redrawAll,80)});_ro.observe(root)}
+function fmt(x,n){n=n==null?3:n;if(x===0)return '0';var a=Math.abs(x);if(a>=1e4||a<1e-2){var e=Math.floor(Math.log10(a)),m=x/Math.pow(10,e);return m.toFixed(n-1).replace('.',',')+'×10<sup>'+e+'</sup>'}return (+x.toPrecision(n)).toString().replace('.',',')}
+function fmtT(x,n){return fmt(x,n).replace(/<sup>(-?\d+)<\/sup>/,function(_,e){return '^'+e}).replace(/<[^>]+>/g,'')}
+function lamRGB(nm){var r=0,g=0,b=0;if(nm>=380&&nm<440){r=-(nm-440)/60;b=1}else if(nm<490){g=(nm-440)/50;b=1}else if(nm<510){g=1;b=-(nm-510)/20}else if(nm<580){r=(nm-510)/70;g=1}else if(nm<645){r=1;g=-(nm-645)/65}else if(nm<=780){r=1}
+ var f=nm<420?.3+.7*(nm-380)/40:nm>700?.3+.7*(780-nm)/80:1;return [Math.round(255*Math.pow(r*f,.8)),Math.round(255*Math.pow(g*f,.8)),Math.round(255*Math.pow(b*f,.8))]}
+
+
+var CP=[{a:'CH<sub>3</sub>COOH',b:'CH<sub>3</sub>COO<sup>−</sup>',pka:4.76,n:'acide éthanoïque'},{a:'H<sub>3</sub>O<sup>+</sup>',b:'H<sub>2</sub>O',pka:0,n:'ion oxonium'},
+ {a:'H<sub>2</sub>O',b:'HO<sup>−</sup>',pka:14,n:'eau (acide)'},{a:'NH<sub>4</sub><sup>+</sup>',b:'NH<sub>3</sub>',pka:9.24,n:'ion ammonium'},{a:'HF',b:'F<sup>−</sup>',pka:3.2,n:'acide fluorhydrique'}];
+
+var ia=0,ib=1,c=Q('#k_c');
+CP.sort(function(a,b){return a.pka-b.pka});ia=CP.findIndex(function(x){return x.pka==4.76});ib=CP.findIndex(function(x){return x.pka==14});
+var plain=function(s){return s.replace(/<sub>/g,'').replace(/<\/sub>/g,'').replace(/<sup>/g,'').replace(/<\/sup>/g,'')};
+Q('#k_a').innerHTML=CP.map(function(x,i){return '<option value="'+i+'">'+plain(x.a)+'  (pKA '+x.pka+')</option>'}).join('');Q('#k_b').innerHTML=CP.map(function(x,i){return '<option value="'+i+'">'+plain(x.b)+'  (pKA '+x.pka+')</option>'}).join('');Q('#k_a').value=ia;Q('#k_b').value=ib;
+function draw(){var S=setup(c,330),g=S.g,w=S.w,h=S.h,C=COL(),cx=w/2,y0=34,y1=h-24,Y=function(p){return y0+(y1-y0)*(1-p/14)};g.clearRect(0,0,w,h);g.font='13px system-ui';g.textBaseline='middle';
+ g.strokeStyle=C.bd;g.lineWidth=2;g.beginPath();g.moveTo(cx,y0-6);g.lineTo(cx,y1+6);g.stroke();g.fillStyle=C.mu;g.textAlign='center';g.font='bold 12px system-ui';g.fillText('pKA',cx,12);
+ g.textAlign='right';g.fillStyle=C.am;g.fillText('acide le moins fort ↑',cx-18,y0-14);g.textAlign='left';g.fillStyle=C.blue;g.fillText('↑ base la plus forte',cx+18,y0-14);
+ g.textAlign='right';g.fillStyle=C.am;g.fillText('↓ acide le plus fort',cx-18,y1+14);g.textAlign='left';g.fillStyle=C.blue;g.fillText('base la moins forte ↓',cx+18,y1+14);g.font='14px system-ui';
+ CP.forEach(function(x,i){var y=Y(x.pka),sa=i==ia,sb=i==ib;g.strokeStyle=C.mu;g.lineWidth=1.5;g.beginPath();g.moveTo(cx-6,y);g.lineTo(cx+6,y);g.stroke();
+  g.textAlign='right';g.fillStyle=sa?C.gold:C.tx;g.font=(sa?'bold ':'')+'14px system-ui';g.fillText(plain(x.a),cx-14,y);g.textAlign='left';g.fillStyle=sb?C.gold:C.tx;g.font=(sb?'bold ':'')+'14px system-ui';g.fillText(plain(x.b),cx+14,y);
+  g.fillStyle=C.mu;g.font='11px system-ui';g.textAlign='center';g.fillText(x.pka,cx,y-10)});
+ var ya=Y(CP[ia].pka),yb=Y(CP[ib].pka),ok=CP[ia].pka<CP[ib].pka,col=ia==ib?C.mu:ok?C.em:'#dc2626';g.strokeStyle=col;g.fillStyle=col;g.lineWidth=3;g.setLineDash(ok?[]:[6,5]);g.beginPath();g.moveTo(cx-w*.2,ya);g.bezierCurveTo(cx-w*.05,ya,cx+w*.05,yb,cx+w*.2,yb);g.stroke();g.setLineDash([]);
+ g.beginPath();g.arc(cx-w*.2,ya,6,0,7);g.fill();g.beginPath();g.arc(cx+w*.2,yb,6,0,7);g.fill();g.textAlign='center';g.font='bold 12px system-ui';g.fillText('H⁺',cx,(ya+yb)/2-14)}
+function upd(){var A=CP[ia],B=CP[ib],r=Q('#k_r'),n=Q('#k_n');
+ if(A===undefined){return}
+ if(ia==ib){r.innerHTML='<span class="nbx-verdict nbx-no">Même couple : pas de réaction</span>';n.textContent='';draw();return}
+ var lk=B.pka-A.pka,K=Math.pow(10,lk),tot=lk>=4;
+ r.innerHTML='<span class="nbx-chip">'+A.a+' + '+B.b+' ⇌ '+A.b+' + '+B.a+'</span><span class="nbx-chip">K = 10<sup>pK<sub>A</sub>(base) − pK<sub>A</sub>(acide)</sup> = <b>'+fmt(K,2)+'</b></span><span class="nbx-verdict '+(lk>0?'nbx-ok':'nbx-no')+'">'+(lk>=4?'Réaction quasi-totale':lk>0?'Réaction favorisée (équilibre déplacé vers la droite)':'Réaction défavorisée (peu d’avancement)')+'</span>';
+ n.innerHTML='Règle de lecture : <b>l’acide le plus fort réagit avec la base la plus forte</b>. Sur l’échelle, la flèche descendante de l’acide vers la base (le proton « monte » de l’acide de pK<sub>A</sub> faible vers la base de pK<sub>A</sub> plus élevé) correspond à une réaction favorable.';draw()}
+Q('#k_a').addEventListener('change',function(){ia=+this.value;upd()});Q('#k_b').addEventListener('change',function(){ib=+this.value;upd()});
+Q('#k_pk').addEventListener('input',function(){var p=+this.value;Q('#k_pk_v').textContent=p.toFixed(2).replace('.',',');Q('#k_ka').innerHTML=fmt(Math.pow(10,-p),3)});Q('#k_pk').dispatchEvent(new Event('input'));
+onRedraw(function(){upd()});upd();
+
+})();</script>

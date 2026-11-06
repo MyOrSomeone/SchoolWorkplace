@@ -1,0 +1,41 @@
+{
+  "slug": "04-chapitre-16a-diffraction-et-interference",
+  "title": "Chapitre 16A — Diffraction et interférences",
+  "group": "Thème 4 — Ondes et signaux",
+  "parent": "",
+  "status": "in_progress",
+  "summary": "Rappels sur les ondes, diffraction (θ = λ/a), interférences, fentes d’Young, lumière blanche.",
+  "parts": [
+    {
+      "id": "p01-presentation-du-chapitre",
+      "title": "Présentation du chapitre 16A",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p02-a-rappels-sur-les-ondes",
+      "title": "A. Rappels sur les ondes",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p03-b-diffraction",
+      "title": "B. Diffraction",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p04-c-interferences",
+      "title": "C. Interférences",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p05-le-film-du-chapitre-16a",
+      "title": "Le film du chapitre 16A",
+      "level": 1,
+      "summary": ""
+    }
+  ],
+  "created_at": "2026-11-06T23:04:41"
+}

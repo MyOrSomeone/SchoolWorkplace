@@ -1,102 +1,157 @@
 [
   {
+    "id": "src003",
+    "type": "image",
+    "filename": "3.jpg",
+    "comment": "",
+    "chapter": "01-chapitre-1-transformations-acide-base",
+    "ordre": 1,
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "Ch.1 · présentation"
+  },
+  {
     "id": "src001",
     "type": "image",
     "filename": "1.jpg",
     "comment": "",
-    "chapter": "",
-    "ordre": 1,
+    "chapter": "01-chapitre-1-transformations-acide-base",
+    "ordre": 2,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "1"
+    "page_label": "Ch.1 · cours I–II"
   },
   {
     "id": "src002",
     "type": "image",
     "filename": "2.jpg",
     "comment": "",
-    "chapter": "",
-    "ordre": 2,
-    "processed": true,
-    "added_at": "2026-11-04T13:34:43",
-    "page_label": "2"
-  },
-  {
-    "id": "src003",
-    "type": "image",
-    "filename": "3.jpg",
-    "comment": "",
-    "chapter": "",
+    "chapter": "01-chapitre-1-transformations-acide-base",
     "ordre": 3,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "1"
+    "page_label": "Ch.1 · exemples"
   },
   {
-    "id": "src004",
+    "id": "src011",
     "type": "image",
-    "filename": "4.jpg",
+    "filename": "PXL_20261029_162919290.jpg",
     "comment": "",
-    "chapter": "",
+    "chapter": "02-chapitre-2-methodes-physiques-danalyse",
     "ordre": 4,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "2"
+    "page_label": "Ch.2 · présentation"
   },
   {
-    "id": "src005",
+    "id": "src012",
     "type": "image",
-    "filename": "5.jpg",
+    "filename": "PXL_20261029_162935716.jpg",
     "comment": "",
-    "chapter": "",
+    "chapter": "02-chapitre-2-methodes-physiques-danalyse",
     "ordre": 5,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "1"
+    "page_label": "Ch.2 · I–II"
+  },
+  {
+    "id": "src013",
+    "type": "image",
+    "filename": "PXL_20261029_162943862.jpg",
+    "comment": "",
+    "chapter": "02-chapitre-2-methodes-physiques-danalyse",
+    "ordre": 6,
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "Ch.2 · Kohlrausch"
+  },
+  {
+    "id": "src014",
+    "type": "image",
+    "filename": "PXL_20261029_162946908.jpg",
+    "comment": "",
+    "chapter": "02-chapitre-2-methodes-physiques-danalyse",
+    "ordre": 7,
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "Ch.2 · III–IV"
+  },
+  {
+    "id": "src015",
+    "type": "image",
+    "filename": "PXL_20261029_162958827.jpg",
+    "comment": "",
+    "chapter": "02-chapitre-2-methodes-physiques-danalyse",
+    "ordre": 8,
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "Ch.2 · quantité de matière"
   },
   {
     "id": "src006",
     "type": "image",
     "filename": "6.jpg",
     "comment": "",
-    "chapter": "",
-    "ordre": 6,
+    "chapter": "03-chapitre-7-force-des-acides-et-des-bases",
+    "ordre": 9,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "2"
+    "page_label": "Ch.7 · présentation + échelle pKA"
+  },
+  {
+    "id": "src004",
+    "type": "image",
+    "filename": "4.jpg",
+    "comment": "",
+    "chapter": "03-chapitre-7-force-des-acides-et-des-bases",
+    "ordre": 10,
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "Ch.7 · I"
+  },
+  {
+    "id": "src005",
+    "type": "image",
+    "filename": "5.jpg",
+    "comment": "",
+    "chapter": "03-chapitre-7-force-des-acides-et-des-bases",
+    "ordre": 11,
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "Ch.7 · II–IV"
   },
   {
     "id": "src007",
     "type": "image",
     "filename": "7.jpg",
     "comment": "",
-    "chapter": "",
-    "ordre": 7,
+    "chapter": "04-chapitre-16a-diffraction-et-interference",
+    "ordre": 12,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "1"
+    "page_label": "Ch.16A · 1/4"
   },
   {
     "id": "src008",
     "type": "image",
     "filename": "8.jpg",
     "comment": "",
-    "chapter": "",
-    "ordre": 8,
+    "chapter": "04-chapitre-16a-diffraction-et-interference",
+    "ordre": 13,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "3"
+    "page_label": "Ch.16A · 2–3/4"
   },
   {
     "id": "src009",
     "type": "image",
     "filename": "9.jpg",
     "comment": "",
-    "chapter": "",
-    "ordre": 9,
+    "chapter": "04-chapitre-16a-diffraction-et-interference",
+    "ordre": 14,
     "processed": true,
     "added_at": "2026-11-04T13:34:43",
-    "page_label": "4"
+    "page_label": "Ch.16A · 4/4"
   },
   {
     "id": "src010",
@@ -104,63 +159,9 @@
     "filename": "PXL_20261029_162849193.jpg",
     "comment": "",
     "chapter": "",
-    "ordre": 10,
-    "processed": true,
-    "added_at": "2026-11-04T13:34:43",
-    "page_label": "Hors-sujet (Mécanique)"
-  },
-  {
-    "id": "src011",
-    "type": "image",
-    "filename": "PXL_20261029_162919290.jpg",
-    "comment": "",
-    "chapter": "",
-    "ordre": 11,
-    "processed": true,
-    "added_at": "2026-11-04T13:34:43",
-    "page_label": "54"
-  },
-  {
-    "id": "src012",
-    "type": "image",
-    "filename": "PXL_20261029_162935716.jpg",
-    "comment": "",
-    "chapter": "",
-    "ordre": 12,
-    "processed": true,
-    "added_at": "2026-11-04T13:34:43",
-    "page_label": "55"
-  },
-  {
-    "id": "src013",
-    "type": "image",
-    "filename": "PXL_20261029_162943862.jpg",
-    "comment": "",
-    "chapter": "",
-    "ordre": 13,
-    "processed": true,
-    "added_at": "2026-11-04T13:34:43",
-    "page_label": "56"
-  },
-  {
-    "id": "src014",
-    "type": "image",
-    "filename": "PXL_20261029_162946908.jpg",
-    "comment": "",
-    "chapter": "",
-    "ordre": 14,
-    "processed": true,
-    "added_at": "2026-11-04T13:34:43",
-    "page_label": "57"
-  },
-  {
-    "id": "src015",
-    "type": "image",
-    "filename": "PXL_20261029_162958827.jpg",
-    "comment": "",
-    "chapter": "",
     "ordre": 15,
-    "processed": false,
-    "added_at": "2026-11-04T13:34:43"
+    "processed": true,
+    "added_at": "2026-11-04T13:34:43",
+    "page_label": "hors-sujet (mécanique)"
   }
 ]

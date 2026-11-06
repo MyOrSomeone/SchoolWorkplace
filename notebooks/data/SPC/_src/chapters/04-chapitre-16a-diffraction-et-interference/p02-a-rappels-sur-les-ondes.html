@@ -1,0 +1,113 @@
+<section class="section-hero hero-violet">
+  <div class="nb-shader-bg" data-preset="waves" data-palette="violet" data-intensity="0.4"></div>
+  <div class="hero-head"><div class="icon-hero"><i class="fas fa-wave-square"></i></div>
+    <div style="flex:1 1 260px;min-width:0"><span class="hero-eyebrow">A — Rappels</span><h2>Rappels sur les ondes</h2></div></div>
+  <p class="subtitle">Une onde progressive sinusoïdale est caractérisée par sa période, sa longueur d’onde et sa célérité.</p>
+</section>
+<div class="nb-box theoreme"><span class="nb-box-title"><i class="fas fa-wave-square" style="margin-right:.5rem"></i>Onde progressive</span>
+<p style="line-height:1.7;margin:.8rem 0">Une <b>onde progressive</b> est le phénomène de propagation d’une perturbation, de proche en proche, <b>sans transport de matière mais avec transport d’énergie</b>. Elle est <b>périodique sinusoïdale</b> si la perturbation est produite de manière périodique par la source émettrice.</p>
+
+</div>
+<h3 class="ink" style="--t:#8b5cf6;display:flex;align-items:center;gap:.7rem;font-size:1.25rem;margin:2.2rem 0 .8rem"><span class="ico-badge" style="width:2.3rem;height:2.3rem;font-size:1rem;margin:0"><i class="fas fa-ruler-combined"></i></span>Propriétés et caractéristiques majeures</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;align-items:start;margin:1.2rem 0">
+<div class="tint-blue" style="margin:0;min-width:0"><div class="ico-badge"><i class="fas fa-clock"></i></div><h4 class="ink" style="margin:.1rem 0 .5rem;font-size:1.05rem">Période T (s)</h4><div style="font-size:.95rem;line-height:1.6"><p style="line-height:1.7;margin:.8rem 0">Durée d’un motif.</p>
+<div style="max-width:100%;overflow-x:auto;text-align:center;padding:.85rem 1rem;margin:1rem 0;border:1px solid var(--nb-border);border-left:4px solid var(--nb-gold);border-radius:.75rem;background:var(--nb-gold-soft)">\[ f = \frac{1}{T} \]</div>
+<p style="line-height:1.7;margin:.8rem 0">La <b>fréquence</b> f (Hz) est <b>indépendante</b> du milieu de propagation.</p>
+</div></div>
+<div class="tint-emerald" style="margin:0;min-width:0"><div class="ico-badge"><i class="fas fa-arrows-left-right"></i></div><h4 class="ink" style="margin:.1rem 0 .5rem;font-size:1.05rem">Longueur d’onde λ (m)</h4><div style="font-size:.95rem;line-height:1.6"><p style="line-height:1.7;margin:.8rem 0">Distance = <b>période spatiale</b> parcourue en une période T.</p>
+</div></div>
+<div class="tint-violet" style="margin:0;min-width:0"><div class="ico-badge"><i class="fas fa-gauge-high"></i></div><h4 class="ink" style="margin:.1rem 0 .5rem;font-size:1.05rem">Célérité v (m·s⁻¹)</h4><div style="font-size:.95rem;line-height:1.6"><div style="max-width:100%;overflow-x:auto;text-align:center;padding:.85rem 1rem;margin:1rem 0;border:1px solid var(--nb-border);border-left:4px solid var(--nb-gold);border-radius:.75rem;background:var(--nb-gold-soft)">\[ v = \frac{\lambda}{T} = \lambda \times f \]</div>
+<p style="line-height:1.7;margin:.8rem 0">La célérité <b>dépend</b> du milieu de propagation.</p>
+<p style="line-height:1.7;margin:.8rem 0">Son (air) : v ≈ 340 m·s⁻¹<br>Onde électromagnétique (vide) : c = 3,00×10⁸ m·s⁻¹</p>
+</div></div>
+</div>
+<div class="nbx nb-interactive" id="nbx-wave"><div class="nbx-head"><i class="fas fa-wave-square"></i><span>Onde progressive sinusoïdale en direct</span><span class="nbx-tag">Interactif</span></div><p class="nbx-sub">Règle la fréquence, l’amplitude et le milieu, puis clique sur une grandeur pour la voir apparaître sur les schémas.</p>
+<div class="nbx-row">
+  <div class="nbx-ctl" style="flex:2 1 230px"><label><span>Onde et milieu de propagation</span></label>
+    <select id="w_med"><option value="sa">Son dans l’air — v ≈ 340 m/s</option><option value="sw">Son dans l’eau — v ≈ 1 500 m/s</option>
+    <option value="lv">Lumière dans le vide — c = 3,00×10⁸ m/s</option><option value="lg">Lumière dans le verre — v ≈ 2,0×10⁸ m/s</option></select></div>
+  <div class="nbx-ctl"><label><span>Amplitude A</span><b id="w_A_v">0,7</b></label><input type="range" id="w_A" min="0.2" max="1" step="0.05" value="0.7"></div>
+  <div class="nbx-ctl"><label><span>Fréquence f</span><b id="w_f_v"></b></label><input type="range" id="w_f" min="0" max="1000" step="1" value="300"></div>
+</div>
+<div class="nbx-tabs" id="w_chips">
+  <button data-h="A">A · amplitude</button><button data-h="lam">λ · longueur d’onde</button><button data-h="T">T · période</button>
+  <button data-h="f">f · fréquence</button><button data-h="v">v · célérité</button><button data-h="" class="on">Tout masquer</button>
+</div>
+<p class="nbx-sub" style="margin:0 0 .3rem"><b>① Photographie de l’onde dans l’espace</b> (à un instant donné) — un capteur <span style="color:#d97706">●</span> mesure en un point fixe</p>
+<canvas id="w_c1"></canvas>
+<p class="nbx-sub" style="margin:.6rem 0 .3rem"><b>② Ce que mesure le capteur au cours du temps</b> (oscilloscope : le présent est à droite)</p>
+<canvas id="w_c2"></canvas>
+<div class="nbx-read" id="w_read"></div>
+<p class="nbx-note" id="w_note"></p>
+</div>
+<script>(function(){var root=document.getElementById("nbx-wave");if(!root||root.dataset.on)return;root.dataset.on="1";
+var _id='nbx-css-v1';if(!document.getElementById(_id)){var _s=document.createElement('style');_s.id=_id;_s.textContent="\n.nbx{--nbx-bg:var(--nb-bg-card,#fff);--nbx-bd:var(--nb-border,#d3c9b8);--nbx-tx:var(--nb-text,#222);--nbx-mu:var(--nb-text-muted,#777);--nbx-gold:var(--nb-gold-ink,#6f5118);\n --nbx-a:var(--nb-accent-blue,#2563eb);--nbx-b:var(--nb-accent-emerald,#059669);--nbx-c:var(--nb-accent-purple,#7c3aed);--nbx-d:var(--nb-accent-amber,#d97706);\n margin:1.5rem 0;padding:1rem 1.1rem 1.1rem;border:1px solid var(--nbx-bd);border-radius:18px;background:var(--nbx-bg);color:var(--nbx-tx);\n box-shadow:0 6px 22px -14px rgba(0,0,0,.45);font-size:14px;line-height:1.45;position:relative;overflow:hidden}\n.nbx *{box-sizing:border-box}\n.nbx-head{display:flex;align-items:center;gap:.6rem;font-weight:800;color:var(--nbx-gold);font-size:.95rem;margin-bottom:.25rem}\n.nbx-head .nbx-tag{margin-left:auto;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--nbx-gold);border-radius:99px;padding:.1rem .55rem;opacity:.85}\n.nbx-sub{color:var(--nbx-mu);font-size:.8rem;margin:0 0 .7rem}\n.nbx-row{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin:.5rem 0}\n.nbx-ctl{display:flex;flex-direction:column;gap:.15rem;min-width:150px;flex:1 1 170px}\n.nbx-ctl label{font-size:.72rem;font-weight:700;color:var(--nbx-mu);display:flex;justify-content:space-between;gap:.5rem}\n.nbx-ctl label b{color:var(--nbx-tx);font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700}\n.nbx input[type=range]{width:100%;accent-color:var(--nbx-gold);cursor:pointer}\n.nbx select,.nbx input[type=number],.nbx input[type=text]{background:transparent;color:var(--nbx-tx);border:1px solid var(--nbx-bd);border-radius:10px;padding:.3rem .5rem;font:inherit;max-width:100%}\n.nbx select option{color:#222}\n.nbx button{cursor:pointer;border:1px solid var(--nbx-gold);color:var(--nbx-gold);background:transparent;border-radius:99px;padding:.3rem .8rem;font:inherit;font-weight:700;font-size:.78rem;transition:background .15s,transform .1s}\n.nbx button:hover{background:rgba(197,160,89,.16)} .nbx button:active{transform:scale(.96)}\n.nbx button.on{background:var(--nbx-gold);color:var(--nbx-bg)}\n.nbx canvas,.nbx svg.nbx-svg{display:block;max-width:100%;border-radius:12px;background:rgba(127,127,127,.07);touch-action:none}\n.nbx-grid>*{min-width:0}.nbx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;align-items:start}\n.nbx-box{border:1px dashed var(--nbx-bd);border-radius:12px;padding:.55rem .8rem}\n.nbx-read{display:flex;flex-wrap:wrap;gap:.4rem .6rem;margin:.5rem 0}\n.nbx-chip{border:1px solid var(--nbx-bd);border-radius:10px;padding:.2rem .6rem;font-size:.78rem;background:rgba(127,127,127,.06)}\n.nbx-chip b{font-family:ui-monospace,Menlo,Consolas,monospace}\n.nbx-ok{color:var(--nbx-b);font-weight:800}.nbx-no{color:#dc2626;font-weight:800}\n.nbx-note{font-size:.76rem;color:var(--nbx-mu);margin:.4rem 0 0}\n.nbx-verdict{font-weight:800;padding:.35rem .7rem;border-radius:10px;display:inline-block;border:1px solid var(--nbx-bd)}\n.nbx sub,.nbx sup{line-height:0}\n.nbx .nbx-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:.2rem 0 .6rem}\n@media (max-width:520px){.nbx{padding:.8rem}.nbx-ctl{min-width:130px}}\n";document.head.appendChild(_s)}
+
+var Q=function(s,r){return (r||root).querySelector(s)},QA=function(s,r){return Array.prototype.slice.call((r||root).querySelectorAll(s))};
+var V=function(n,d){var v=getComputedStyle(root).getPropertyValue(n).trim();return v||d};
+var COL=function(){return {tx:V('--nb-text','#222'),mu:V('--nb-text-muted','#777'),card:V('--nb-bg-card','#fff'),bd:V('--nb-border','#ccc'),gold:V('--nb-gold-ink','#6f5118'),
+ blue:V('--nb-accent-blue','#2563eb'),em:V('--nb-accent-emerald','#059669'),pu:V('--nb-accent-purple','#7c3aed'),am:V('--nb-accent-amber','#d97706'),
+ dark:document.documentElement.classList.contains('dark')}};
+function setup(cv,h){var d=Math.min(window.devicePixelRatio||1,2),w=Math.max(260,Math.round(cv.parentElement.clientWidth||cv.clientWidth||600));
+ cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';cv.style.width=w+'px';var g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return {g:g,w:w,h:h}}
+var vis=true;if('IntersectionObserver' in window){new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(root)}
+function loop(fn){var last=null;(function f(t){if(vis){var dt=last==null?0:Math.min(.05,(t-last)/1000);last=t;fn(dt,t/1000)}else last=null;requestAnimationFrame(f)})(0)}
+var redrawers=[];function onRedraw(f){redrawers.push(f)}
+function redrawAll(){redrawers.forEach(function(f){try{f()}catch(e){console.error(e)}})}
+new MutationObserver(redrawAll).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+if(window.ResizeObserver){var _ro=new ResizeObserver(function(){clearTimeout(_ro._t);_ro._t=setTimeout(redrawAll,80)});_ro.observe(root)}
+function fmt(x,n){n=n==null?3:n;if(x===0)return '0';var a=Math.abs(x);if(a>=1e4||a<1e-2){var e=Math.floor(Math.log10(a)),m=x/Math.pow(10,e);return m.toFixed(n-1).replace('.',',')+'×10<sup>'+e+'</sup>'}return (+x.toPrecision(n)).toString().replace('.',',')}
+function fmtT(x,n){return fmt(x,n).replace(/<sup>(-?\d+)<\/sup>/,function(_,e){return '^'+e}).replace(/<[^>]+>/g,'')}
+function lamRGB(nm){var r=0,g=0,b=0;if(nm>=380&&nm<440){r=-(nm-440)/60;b=1}else if(nm<490){g=(nm-440)/50;b=1}else if(nm<510){g=1;b=-(nm-510)/20}else if(nm<580){r=(nm-510)/70;g=1}else if(nm<645){r=1;g=-(nm-645)/65}else if(nm<=780){r=1}
+ var f=nm<420?.3+.7*(nm-380)/40:nm>700?.3+.7*(780-nm)/80:1;return [Math.round(255*Math.pow(r*f,.8)),Math.round(255*Math.pow(g*f,.8)),Math.round(255*Math.pow(b*f,.8))]}
+
+
+var P={sa:{v:340,fmin:100,fmax:2000,f0:440,win:4,fam:'s',name:'son'},sw:{v:1500,fmin:100,fmax:2000,f0:440,win:4,fam:'s',name:'son'},
+ lv:{v:3e8,fmin:400e12,fmax:750e12,f0:560e12,win:2e-6,fam:'l',name:'lumière'},lg:{v:2e8,fmin:400e12,fmax:750e12,f0:560e12,win:2e-6,fam:'l',name:'lumière'}};
+var med='sa',f=P.sa.f0,A=.7,hl='',TA=2.8,t0=0;
+var c1=Q('#w_c1'),c2=Q('#w_c2');
+function fLen(m){var a=Math.abs(m);return a>=1?fmtT(m,3)+' m':a>=1e-2?fmtT(m*100,3)+' cm':a>=1e-6?fmtT(m*1e6,3)+' µm':fmtT(m*1e9,3)+' nm'}
+function fTime(s){var a=s;return a>=1?fmtT(s,3)+' s':a>=1e-3?fmtT(s*1e3,3)+' ms':a>=1e-6?fmtT(s*1e6,3)+' µs':a>=1e-12?fmtT(s*1e15,3)+' fs':fmtT(s,3)+' s'}
+function fFreq(h){return h>=1e12?fmtT(h/1e12,3)+' THz':h>=1e3?fmtT(h/1e3,3)+' kHz':fmtT(h,3)+' Hz'}
+function setF(){var p=P[med];f=Math.min(p.fmax,Math.max(p.fmin,f));Q('#w_f').value=Math.round((f-p.fmin)/(p.fmax-p.fmin)*1000)}
+function readOut(){var p=P[med],T=1/f,lam=p.v/f;
+ Q('#w_f_v').textContent=fFreq(f);Q('#w_A_v').textContent=A.toFixed(2).replace('.',',');
+ Q('#w_read').innerHTML='<span class="nbx-chip">f = <b>'+fFreq(f)+'</b></span><span class="nbx-chip">T = 1/f = <b>'+fTime(T)+'</b></span><span class="nbx-chip">v = <b>'+fmtT(p.v,3)+' m/s</b></span><span class="nbx-chip">λ = v·T = v/f = <b>'+fLen(lam)+'</b></span>';
+ var n=Q('#w_note');n.innerHTML=(p.fam=='s'?'Change de milieu (air ↔ eau) en gardant f : ':'Change de milieu (vide ↔ verre) en gardant f : ')+'<b>f ne bouge pas</b> (c’est la source qui l’impose), mais <b>v et λ changent</b>.'+(p.fam=='l'?' Pour la lumière, la fenêtre représente 2 µm.':' La fenêtre représente 4 m.')+' Animation au ralenti.'}
+function chipUpd(){QA('#w_chips button').forEach(function(b){b.classList.toggle('on',b.dataset.h===hl)})}
+function arrow(g,x1,y1,x2,y2,col,lw){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=lw||2;g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();var a=Math.atan2(y2-y1,x2-x1);
+ [[x2,y2,a],[x1,y1,a+Math.PI]].forEach(function(e){g.beginPath();g.moveTo(e[0],e[1]);g.lineTo(e[0]-8*Math.cos(e[2]-.4),e[1]-8*Math.sin(e[2]-.4));g.lineTo(e[0]-8*Math.cos(e[2]+.4),e[1]-8*Math.sin(e[2]+.4));g.closePath();g.fill()})}
+function draw(t){var p=P[med],lam=p.v/f,T=1/f,S1=setup(c1,190),g=S1.g,w=S1.w,h=S1.h,C=COL(),ph=(t/TA)%1,mid=h/2,Am=A*h*.36,xs=function(x){return 30+(w-50)*x/p.win};
+ g.clearRect(0,0,w,h);g.font='12px system-ui';g.textBaseline='middle';
+ g.strokeStyle=C.bd;g.lineWidth=1;g.beginPath();g.moveTo(30,mid);g.lineTo(w-14,mid);g.stroke();
+ var nt=p.fam=='s'?4:4;for(var i=0;i<=nt;i++){var xv=p.win*i/nt,X=xs(xv);g.beginPath();g.moveTo(X,mid-4);g.lineTo(X,mid+4);g.stroke();g.fillStyle=C.mu;g.textAlign='center';g.fillText(fLen(xv).replace('0 m','0').replace('0 nm','0'),X,h-8)}
+ g.textAlign='left';g.fillStyle=C.mu;g.fillText('x',w-12,mid-12);
+ var col=p.fam=='l'?'rgb('+lamRGB(Math.max(380,Math.min(780,lam*1e9)))+')':C.blue;if(p.fam=='l'&&C.dark&&false)col=C.blue;
+ g.strokeStyle=col;g.lineWidth=3;g.beginPath();for(var px=0;px<=400;px++){var x=p.win*px/400,y=A*Math.cos(2*Math.PI*(x/lam-ph));var X=xs(x),Y=mid-y*Am*1.0/A*A/A; if(px==0)g.moveTo(X,Y);else g.lineTo(X,Y)}g.stroke();
+ // capteur
+ var xr=p.win*.08,yr=A*Math.cos(2*Math.PI*(xr/lam-ph)),Xr=xs(xr);g.setLineDash([4,4]);g.strokeStyle=C.am;g.beginPath();g.moveTo(Xr,10);g.lineTo(Xr,h-22);g.stroke();g.setLineDash([]);g.fillStyle=C.am;g.beginPath();g.arc(Xr,mid-yr*Am/A*A/A,6,0,7);g.fill();
+ // crêtes
+ var crest=[];for(var k=0;k<40;k++){var xc=lam*(ph+k);if(xc>p.win)break;if(xc>=0)crest.push(xc)}
+ if(hl=='A'&&crest.length){var X=xs(crest[Math.min(1,crest.length-1)]);arrow(g,X,mid,X,mid-Am,C.am,2.5);g.fillStyle=C.am;g.font='bold 14px system-ui';g.fillText(' A',X+4,mid-Am/2);g.setLineDash([3,4]);g.beginPath();g.moveTo(X,mid+Am);g.lineTo(X,mid+Am);g.stroke();g.setLineDash([])}
+ if(hl=='lam'&&crest.length>1){var X1=xs(crest[0]),X2=xs(crest[1]),Y=mid-Am-16;arrow(g,X1,Y,X2,Y,C.em,2.5);g.strokeStyle=C.em;g.setLineDash([3,4]);[X1,X2].forEach(function(X){g.beginPath();g.moveTo(X,Y);g.lineTo(X,mid-Am)});g.stroke();g.setLineDash([]);g.fillStyle=C.em;g.font='bold 13px system-ui';g.textAlign='center';g.fillText('λ = '+fLen(lam),(X1+X2)/2,Y-10);g.textAlign='left'}
+ if(hl=='v'&&crest.length){var X=xs(crest[0]),Y=mid-Am-14;arrow(g,X,Y,X+Math.min(120,(w-40)*.22),Y,C.pu,3);g.fillStyle=C.pu;g.font='bold 13px system-ui';g.fillText('v = '+fmtT(p.v,3)+' m/s  (la crête avance)',X+4,Y-12)}
+ if(hl=='T'||hl=='f'){g.fillStyle=C.mu;g.font='12px system-ui';g.fillText('→ regarde le graphique ②',40,16)}
+ g.font='12px system-ui';
+ // temporel
+ var S2=setup(c2,150),g2=S2.g,w2=S2.w,h2=S2.h,m2=h2/2,Am2=A*h2*.34,Hs=3.2*TA;g2.clearRect(0,0,w2,h2);g2.font='12px system-ui';g2.textBaseline='middle';
+ g2.strokeStyle=C.bd;g2.lineWidth=1;g2.beginPath();g2.moveTo(30,m2);g2.lineTo(w2-14,m2);g2.stroke();
+ var tx=function(tt){return 30+(w2-50)*(1-(t-tt)/Hs)};
+ g2.strokeStyle=col;g2.lineWidth=3;g2.beginPath();for(var q=0;q<=400;q++){var tt=t-Hs+Hs*q/400,y=A*Math.cos(2*Math.PI*(xr/lam-tt/TA));var X=tx(tt),Y=m2-y*Am2/A;if(q==0)g2.moveTo(X,Y);else g2.lineTo(X,Y)}g2.stroke();
+ g2.fillStyle=C.am;g2.beginPath();g2.arc(w2-20,m2-yr*Am2/A,6,0,7);g2.fill();
+ var tc=[];for(var k=-6;k<8;k++){var tt=TA*(xr/lam-k);if(tt>t-Hs&&tt<=t)tc.push(tt)}tc.sort(function(a,b){return a-b});
+ if(hl=='T'&&tc.length>1){var a=tx(tc[tc.length-2]),b=tx(tc[tc.length-1]),Y=m2-Am2-14;arrow(g2,a,Y,b,Y,C.gold,2.5);g2.fillStyle=C.gold;g2.font='bold 13px system-ui';g2.textAlign='center';g2.fillText('T = '+fTime(T),(a+b)/2,Y-11);g2.textAlign='left'}
+ if(hl=='f'){g2.fillStyle=C.gold;tc.forEach(function(tt){g2.beginPath();g2.arc(tx(tt),m2-Am2,5,0,7);g2.fill()});g2.font='bold 13px system-ui';g2.fillText('f = 1/T = '+fFreq(f)+' (nombre de motifs par seconde)',40,14)}
+ if(hl=='A'){g2.fillStyle=C.am;g2.font='bold 13px system-ui';g2.fillText('A : même hauteur de crête',40,14)}
+ g2.fillStyle=C.mu;g2.font='12px system-ui';g2.textAlign='right';g2.fillText('temps →',w2-8,h2-10)}
+Q('#w_med').addEventListener('change',function(){var o=P[med].fam,n=P[this.value].fam;med=this.value;if(o!=n)f=P[med].f0;setF();readOut()});
+Q('#w_f').addEventListener('input',function(){var p=P[med];f=p.fmin+(+this.value/1000)*(p.fmax-p.fmin);readOut()});
+Q('#w_A').addEventListener('input',function(){A=+this.value;readOut()});
+QA('#w_chips button').forEach(function(b){b.addEventListener('click',function(){hl=b.dataset.h;chipUpd()})});
+setF();readOut();chipUpd();loop(function(dt,t){draw(t)});
+
+})();</script>

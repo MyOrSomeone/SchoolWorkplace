@@ -1,0 +1,47 @@
+{
+  "slug": "02-chapitre-2-methodes-physiques-danalyse",
+  "title": "Chapitre 2 — Méthodes physiques d’analyse",
+  "group": "Thème 1 — Constitution et transformations de la matière",
+  "parent": "",
+  "status": "in_progress",
+  "summary": "Étalonnage, conductimétrie (Kohlrausch), gaz parfait, spectroscopie UV-visible (Beer-Lambert) et IR.",
+  "parts": [
+    {
+      "id": "p01-presentation-du-chapitre",
+      "title": "Présentation du chapitre 2",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p02-i-dosage-par-etalonnage",
+      "title": "I. Dosage par étalonnage",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p03-ii-conductimetrie",
+      "title": "II. Conductimétrie",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p04-iii-cas-dun-gaz",
+      "title": "III. Cas d’un gaz",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p05-iv-analyse-spectroscopiq",
+      "title": "IV. Analyse spectroscopique",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p06-le-film-du-chapitre-2",
+      "title": "Le film du chapitre 2",
+      "level": 1,
+      "summary": ""
+    }
+  ],
+  "created_at": "2026-11-06T23:04:41"
+}

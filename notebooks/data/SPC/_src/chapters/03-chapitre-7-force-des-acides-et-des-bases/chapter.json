@@ -1,0 +1,47 @@
+{
+  "slug": "03-chapitre-7-force-des-acides-et-des-bases",
+  "title": "Chapitre 7 — Force des acides et des bases",
+  "group": "Thème 1 — Constitution et transformations de la matière",
+  "parent": "",
+  "status": "in_progress",
+  "summary": "Autoprotolyse, acides forts/faibles, K_A et pK_A, domaines de prédominance, solution tampon.",
+  "parts": [
+    {
+      "id": "p01-presentation-du-chapitre",
+      "title": "Présentation du chapitre 7",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p02-i-differents-acides-et-b",
+      "title": "I. Différents acides et bases",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p03-ii-constante-dacidite-du",
+      "title": "II. Constante d’acidité d’un couple acido-basique",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p04-iii-domaines-de-predomin",
+      "title": "III. Domaines de prédominance",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p05-iv-controle-du-ph",
+      "title": "IV. Contrôle du pH",
+      "level": 1,
+      "summary": ""
+    },
+    {
+      "id": "p06-le-film-de-la-force-des",
+      "title": "Le film de la force des acides et des bases",
+      "level": 1,
+      "summary": ""
+    }
+  ],
+  "created_at": "2026-11-06T23:04:41"
+}
