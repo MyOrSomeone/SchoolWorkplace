@@ -1,0 +1,104 @@
+<!-- SOUS-PARTIE I.C : LA HIÉRARCHIE DES VIES SELON ARISTOTE -->
+<div class="tint-amber p-6 rounded-2xl mb-8 border border-amber-200/50 shadow-sm relative overflow-hidden">
+  <div class="nb-shader-bg" data-preset="aurora" data-palette="amber" data-intensity="0.45"></div>
+  <div class="flex items-center gap-4 mb-3">
+    <div class="ico-badge text-2xl"><i class="fas fa-layer-group"></i></div>
+    <div>
+      <span class="text-xs font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400">Aristote — Éthique à Nicomaque</span>
+      <h3 class="text-xl font-bold ink m-0">I. C. La hiérarchie des formes de vie et l'idéal contemplatif</h3>
+    </div>
+  </div>
+  <p class="text-sm leading-relaxed ink m-0">
+    Pour Aristote, toute activité qui nous permet d'exprime en <span class="def-term" data-term="acte" data-def="Réalisation effective et accomplie d'une faculté (opposer à ce qui n'est qu'en puissance).">acte</span> ce que nous possédons en <span class="def-term" data-term="puissance" data-def="Capacité ou faculté virtuelle qui demande à être réalisée par l'action.">puissance</span> produit du bonheur. Mais toutes les vies ne se valent pas : il existe une échelle du bonheur selon la noblesse de la faculté développée.
+  </p>
+</div>
+
+<!-- CONCEPT CLÉ : DU VIRTUEL À L'ACCOMPLI -->
+<div class="nb-grid mb-8">
+  <div class="tint-gold">
+    <div class="ico-badge"><i class="fas fa-seedling"></i></div>
+    <h4 class="ink text-lg font-bold mb-2">1. Être en puissance</h4>
+    <p class="text-sm ink">
+      C'est le potentiel virtuel contenu dans la nature humaine (ex : la capacité d'apprendre, de raisonner, de nouer des amitiés). La puissance reste incomplète tant qu'elle n'est pas mise en pratique.
+    </p>
+  </div>
+  <div class="tint-emerald">
+    <div class="ico-badge"><i class="fas fa-tree"></i></div>
+    <h4 class="ink text-lg font-bold mb-2">2. Passer en acte</h4>
+    <p class="text-sm ink">
+      C'est l'actualisation concrète de nos facultés morales et intellectuelles. Le véritable bonheur survient lors du passage parfait de la puissance à l'acte.
+    </p>
+  </div>
+</div>
+
+<!-- ACCORDÉON DE DÉTAIL DES TROIS MODES DE VIE -->
+<div class="mb-8">
+  <h4 class="text-lg font-bold ink mb-4"><i class="fas fa-trophy c-amber mr-2"></i>La hiérarchie des 3 formes d'existence</h4>
+
+  <div class="nb-tabs">
+    <div class="nb-tab-buttons">
+      <button class="nb-tab-btn active" onclick="switchTab(event, 'tab-pratique')">
+        <i class="fas fa-hand-holding-heart c-rose mr-1"></i> 1. La vie pratique
+      </button>
+      <button class="nb-tab-btn" onclick="switchTab(event, 'tab-mixte')">
+        <i class="fas fa-balance-scale c-blue mr-1"></i> 2. La vie prudente (mixte)
+      </button>
+      <button class="nb-tab-btn" onclick="switchTab(event, 'tab-contemplative')">
+        <i class="fas fa-crown c-gold mr-1"></i> 3. La vie contemplative
+      </button>
+    </div>
+
+    <!-- TAB 1 -->
+    <div id="tab-pratique" class="nb-tab-panel active">
+      <div class="tint-rose">
+        <div class="ico-badge"><i class="fas fa-running"></i></div>
+        <h4 class="ink font-bold text-base mb-1">L'action politique & sociale courante</h4>
+        <p class="text-sm ink mb-3">
+          Cette vie vise les vertus morales engagées dans le monde. Elle apporte un bonheur réel mais vulnérable.
+        </p>
+        <ul class="text-sm ink space-y-2 list-none p-0 m-0">
+          <li class="flex items-center gap-2"><i class="fas fa-triangle-exclamation text-rose-500"></i> <strong>Limites :</strong> Soumise aux aléas de la fortune, aux obstacles et au désordre des circonstances.</li>
+          <li class="flex items-center gap-2"><i class="fas fa-rotate text-rose-500"></i> <strong>Instabilité :</strong> Le bonheur y est discontinu car la réalité extérieure résiste.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="tab-mixte" class="nb-tab-panel">
+      <div class="tint-blue">
+        <div class="ico-badge"><i class="fas fa-brain"></i></div>
+        <h4 class="ink font-bold text-base mb-1">La vie guidée par la raison pratique (la Phronesis)</h4>
+        <p class="text-sm ink mb-3">
+          Le compromis humain par excellence : associer l'activité pratique au contrôle constant de la réflexion rationnelle.
+        </p>
+        <ul class="text-sm ink space-y-2 list-none p-0 m-0">
+          <li class="flex items-center gap-2"><i class="fas fa-shield-halved text-blue-500"></i> <strong>Maîtrise :</strong> La raison permet d'agir efficacement et de minimiser l'impact du hasard.</li>
+          <li class="flex items-center gap-2"><i class="fas fa-user-check text-blue-500"></i> <strong>Accessibilité :</strong> C'est la vie heureuse réaliste à la portée de l'homme accompli.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="tab-contemplative" class="nb-tab-panel">
+      <div class="tint-gold">
+        <div class="ico-badge"><i class="fas fa-star"></i></div>
+        <h4 class="ink font-bold text-base mb-1">La contemplation rationnelle pure (La Théoria)</h4>
+        <p class="text-sm ink mb-3">
+          L'activité de l'esprit recherchant la vérité pour elle-même. C'est l'activité la plus haute, autonome et divine en l'homme.
+        </p>
+        <ul class="text-sm ink space-y-2 list-none p-0 m-0">
+          <li class="flex items-center gap-2"><i class="fas fa-gem text-amber-500"></i> <strong>Autarchie (Autosuffisance) :</strong> Le sage qui contemple s'en suffit à lui-même, indépendamment des autres.</li>
+          <li class="flex items-center gap-2"><i class="fas fa-infinity text-amber-500"></i> <strong>Béatitude :</strong> Elle procure un bonheur pur, stable, inaltérable et quasi divin.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECAPITULATIF THÉORÈME ARISTOTÉLICIEN -->
+<div class="nb-box theoreme">
+  <span class="nb-box-title"><i class="fas fa-quote-left mr-2"></i>L'idéal du Sage chez Aristote</span>
+  <p class="m-0 text-sm leading-relaxed">
+    « Seule l'activité de l'esprit, étant toute contemplative, semble supérieure en noblesse ; elle ne vise aucun but en dehors d'elle-même et possède un plaisir qui lui est propre. L'autosuffisance, le repos et l'absence de fatigue appartiennent à cette activité. »
+  </p>
+</div>

@@ -1,0 +1,11 @@
+{
+  "model": "qwen3.8:27b",
+  "url": "http://localhost:11434",
+  "api": "ollama",
+  "strength": "medium",
+  "use_for": [
+    "interactive",
+    "visual"
+  ],
+  "fallback": true
+}

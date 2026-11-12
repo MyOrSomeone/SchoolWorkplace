@@ -854,3 +854,18 @@ html.dark :where([class*="border-gray-1"], [class*="border-gray-2"]) { border-co
     background: color-mix(in srgb, var(--nb-bg-card) 78%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--nb-border); }
 @media print { .nb-shader, .nb-shader-bg { display: none; } }
 /* @endblock nb-shader */
+
+/* @block nb-layout */
+.nb-formula{max-width:100%;overflow-x:auto;text-align:center;padding:.85rem 1rem;margin:1rem 0;border:1px solid var(--nb-border);border-left:4px solid var(--nb-gold);border-radius:.75rem;background:var(--nb-gold-soft)}
+.nb-formula .nb-formula-note{font-size:.78rem;color:var(--nb-text-muted);margin-top:.35rem}
+.nb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem;align-items:start;margin:1.2rem 0}
+.nb-grid>*{min-width:0;margin:0}
+.nb-fig{margin:1.4rem 0;padding:1rem;border:1px solid var(--nb-border);border-radius:1rem;background:var(--nb-bg-card);max-width:100%;overflow:hidden}
+.nb-fig .nb-fig-title{font-weight:800;margin-bottom:.4rem}
+.nb-fig .nb-fig-scroll{max-width:100%;overflow-x:auto}
+.nb-fig svg{display:block;width:100%;min-width:560px;height:auto;margin:0 auto;color:var(--nb-text)}
+.nb-fig figcaption{font-size:.82rem;color:var(--nb-text-muted);margin-top:.5rem;line-height:1.5}
+.nb-slot{margin:1rem 0}
+.nb-slot[data-status]:empty::before{content:"✨ Élément en cours de création…";display:block;padding:1rem;border:2px dashed var(--nb-border);border-radius:1rem;color:var(--nb-text-muted);text-align:center;font-size:.9rem}
+.nb-slot-filled{margin:1rem 0}
+/* @endblock nb-layout */
